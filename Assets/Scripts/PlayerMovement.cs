@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private Animator anim;
     private float speed = 3f;
+    [SerializeField] private GameObject blackHolePrefab;
+    [SerializeField] private Transform spawnPosition;
 
     private void Start()
     {
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))        //  if pressed left mouse button
             Attack();
         if (Input.GetMouseButtonDown(1))        //  if pressed right mouse button
+            SpawnBlackHole();
+        if (Input.GetKeyDown(KeyCode.E))
             Die();
     }
 
@@ -36,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         //  move player according to direction
         transform.Translate(transform.right * direction * speed * Time.deltaTime);
         //  flip x if moving left
-        GetComponentInChildren<SpriteRenderer>().flipX = direction > 0;
+        transform.rotation = Quaternion.Euler(0f, (direction > 0 ? 0f : 180f), 0f);
     }
 
     private void Attack()
@@ -50,5 +54,10 @@ public class PlayerMovement : MonoBehaviour
     private void Die()
     {
         anim.SetTrigger("Die");
+    }
+
+    private void SpawnBlackHole()
+    {
+        Instantiate(blackHolePrefab, spawnPosition.position, transform.rotation);
     }
 }
