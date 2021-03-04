@@ -9,36 +9,41 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        //  get animator component
         anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0)   //  if moving to somewhere
             Move();
         else
-            anim.SetBool("Run", false);
-        if (Input.GetMouseButtonDown(0))
+            anim.SetBool("Run", false);         //  if not moving, stop run anim
+        if (Input.GetMouseButtonDown(0))        //  if pressed left mouse button
             Attack();
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))        //  if pressed right mouse button
             Die();
     }
 
     private void Move()
     {
+        //  stop previous animation
         anim.SetBool("Run", false);
+        //  start new
+        anim.SetBool("Run", true);
         //  get direction - left or right
         float direction = Input.GetAxis("Horizontal");
         //  move player according to direction
-        transform.Translate(transform.right * direction*  speed * Time.deltaTime);
+        transform.Translate(transform.right * direction * speed * Time.deltaTime);
         //  flip x if moving left
         GetComponentInChildren<SpriteRenderer>().flipX = direction > 0;
-        anim.SetBool("Run", true);
     }
 
     private void Attack()
     {
+        //  stop previous animation
         anim.SetBool("Attack", false);
+        //  start new
         anim.SetBool("Attack", true);
     }
 
