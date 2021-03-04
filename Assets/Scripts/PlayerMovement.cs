@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") != 0)
             Move();
+        else
+            anim.SetBool("Run", false);
         if (Input.GetMouseButtonDown(0))
             Attack();
         if (Input.GetMouseButtonDown(1))
@@ -24,13 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        anim.SetBool("Run", false);
         //  get direction - left or right
         float direction = Input.GetAxis("Horizontal");
         //  move player according to direction
         transform.Translate(transform.right * direction*  speed * Time.deltaTime);
         //  flip x if moving left
         GetComponentInChildren<SpriteRenderer>().flipX = direction > 0;
-
+        anim.SetBool("Run", true);
     }
 
     private void Attack()
