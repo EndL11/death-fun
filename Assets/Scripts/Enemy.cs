@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     public float hp = 100f;
     private float speed = 3f;
     private Rigidbody2D rb;
     private Animator anim;
-    // Start is called before the first frame update
+
+    private const float timeToChangeDirection = 5f;
+    public float _timeToChangeDirection = timeToChangeDirection;
+
+    public int direction = -1;
+
+    [SerializeField] private Transform checkPlatformEndPoint;
+    public LayerMask whatIsGround;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        transform.rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //if(_timeToChangeDirection > 0f)
+        //{
+        //    _timeToChangeDirection -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    _timeToChangeDirection = timeToChangeDirection;
+        //}
+        if (!isEndPlatform())
+            Move();
+        else
+            ChangeMovementDirection();
     }
 
     public void ApplyDamage(float damage)
@@ -49,5 +67,23 @@ public class Enemy : MonoBehaviour
     private void DestroyEnemy()
     {
         anim.SetTrigger("Die");
+    }
+
+    private void ChangeMovementDirection()
+    {
+        direction = direction == 1 ? -1 : 1;
+        transform.rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+    }
+
+    private bool isEndPlatform()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlatformEndPoint.position, 0.3f, whatIsGround);
+        return colliders.Length == 0;
+    }
+
+    private void Move()
+    {
+        transform.Translate(transform.right * direction * speed * Time.deltaTime);
+        anim.SetBool("Run", true);
     }
 }
