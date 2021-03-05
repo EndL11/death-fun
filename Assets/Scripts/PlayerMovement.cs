@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         
-        if (Input.GetMouseButtonDown(0))        //  if pressed left mouse button
+        if (Input.GetMouseButton(0))        //  if pressed left mouse button
             Attack();
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -42,10 +42,14 @@ public class PlayerMovement : MonoBehaviour
             Move();
         else
             anim.SetBool("Run", false);         //  if not moving, stop run anim
+
     }
 
     private void Move()
     {
+        //if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        //    anim.SetBool("Attack", false);
+
         //  stop previous animation
         anim.SetBool("Run", false);
         //  start new
