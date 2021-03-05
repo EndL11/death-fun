@@ -8,4 +8,9 @@ public class AnimatorFunctions : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("Attack", false);
     }
+
+    public void Attack()
+    {
+        GetComponentInParent<Player>()?.ApplyAttack();
+    }
 }

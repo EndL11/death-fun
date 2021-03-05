@@ -69,6 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2792860823825365592}
+  - component: {fileID: 4663997771933494302}
   - component: {fileID: 2792860823825365607}
   - component: {fileID: 1855108783}
   - component: {fileID: 1855108781}
@@ -96,6 +97,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4663997771933494302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792860823825365593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52642d7c3ff01245b0370d655e4f049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackHolePrefab: {fileID: 5212686204163895737, guid: 52ec6b73edb39d8488772af2c1aea168,
+    type: 3}
+  spawnPosition: {fileID: 406160650}
 --- !u!114 &2792860823825365607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,9 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac291e92b267ad24b8ce1ab6c69d371e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackHolePrefab: {fileID: 5212686204163895737, guid: 52ec6b73edb39d8488772af2c1aea168,
-    type: 3}
-  spawnPosition: {fileID: 406160650}
   groundChecker: {fileID: 1029261704}
   whatIsGround:
     serializedVersion: 2

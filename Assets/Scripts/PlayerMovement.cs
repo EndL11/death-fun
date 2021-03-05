@@ -9,10 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 5f;
     //  force for jump
     private float jumpForce = 10f;
-    //  gameobject to spawn (blackhole)
-    [SerializeField] private GameObject blackHolePrefab;
-    //  position for spawning black holes
-    [SerializeField] private Transform spawnPosition;
+
     //  transform of ground checker
     [SerializeField] private Transform groundChecker;
     //  layermask to set layer for ground
@@ -31,8 +28,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))        //  if pressed left mouse button
             Attack();
-        if (Input.GetMouseButtonDown(1))        //  if pressed right mouse button
-            SpawnBlackHole();
+
         if (Input.GetKeyDown(KeyCode.E))
             Die();
         if (isGrounded() && Input.GetKey(KeyCode.W))
@@ -75,10 +71,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Die");
     }
 
-    private void SpawnBlackHole()
-    {
-        Instantiate(blackHolePrefab, spawnPosition.position, transform.rotation);
-    }
 
     void Jump()
     {
