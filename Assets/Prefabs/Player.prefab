@@ -112,6 +112,9 @@ MonoBehaviour:
   blackHolePrefab: {fileID: 5212686204163895737, guid: 52ec6b73edb39d8488772af2c1aea168,
     type: 3}
   spawnPosition: {fileID: 406160650}
+  enemiesMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &2792860823825365607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +264,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 505f80de61bdcc74981836b2121090df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1

@@ -47,9 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        //if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        //    anim.SetBool("Attack", false);
-
         //  stop previous animation
         anim.SetBool("Run", false);
         //  start new

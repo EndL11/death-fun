@@ -15,4 +15,9 @@ public class AnimatorFunctions : MonoBehaviour
         //  set trigger to start idle animation 
         GetComponent<Animator>().SetTrigger("AttackNull");
     }
+
+    public void Destroy()
+    {
+        Destroy(transform.parent.gameObject);
+    }
 }

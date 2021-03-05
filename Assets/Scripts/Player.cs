@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -33,7 +31,7 @@ public class Player : MonoBehaviour
 
     public void ApplyAttack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition.position, 0.3f, enemiesMask);
+        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.2f, .5f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
         foreach (var enemy in colliders)
         {
             enemy.GetComponent<Enemy>().ApplyDamage(damage);
