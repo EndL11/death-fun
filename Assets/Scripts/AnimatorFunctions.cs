@@ -11,7 +11,7 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void Attack()
     {
-        GetComponentInParent<Player>()?.ApplyAttack();
+        GetComponentInParent<Player>().ApplyAttack();
         //  set trigger to start idle animation 
         GetComponent<Animator>().SetTrigger("AttackNull");
     }
@@ -19,5 +19,11 @@ public class AnimatorFunctions : MonoBehaviour
     public void Destroy()
     {
         Destroy(transform.parent.gameObject);
+    }
+
+    public void EnemyAttack()
+    {
+        GetComponentInParent<Enemy>().Attack();
+        GetComponent<Animator>().SetTrigger("AttackNull");
     }
 }

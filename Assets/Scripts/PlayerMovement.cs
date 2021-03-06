@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     //  force for jump
     private float jumpForce = 10f;
 
+    private Player player;
+
     //  transform of ground checker
     [SerializeField] private Transform groundChecker;
     //  layermask to set layer for ground
@@ -21,16 +23,17 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
     {
-        
+        if (player.Dead)
+            return;
+
         if (Input.GetMouseButton(0))        //  if pressed left mouse button
             Attack();
 
-        if (Input.GetKeyDown(KeyCode.E))
-            Die();
         if (isGrounded() && Input.GetKey(KeyCode.W))
             Jump();
 
@@ -38,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player.Dead)
+            return;
+
         if (Input.GetAxis("Horizontal") != 0)   //  if moving to somewhere
             Move();
         else
@@ -65,11 +71,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("Attack", false);
         //  start new
         anim.SetBool("Attack", true);
-    }
-
-    private void Die()
-    {
-        anim.SetTrigger("Die");
     }
 
 

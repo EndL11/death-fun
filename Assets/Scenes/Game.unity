@@ -211,6 +211,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 406160650, guid: 7f389ff244bc64148934c035611da8bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.64
+      objectReference: {fileID: 0}
     - target: {fileID: 2792860823825365592, guid: 7f389ff244bc64148934c035611da8bc,
         type: 3}
       propertyPath: m_RootOrder
@@ -219,12 +223,12 @@ PrefabInstance:
     - target: {fileID: 2792860823825365592, guid: 7f389ff244bc64148934c035611da8bc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.16
       objectReference: {fileID: 0}
     - target: {fileID: 2792860823825365592, guid: 7f389ff244bc64148934c035611da8bc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.21
       objectReference: {fileID: 0}
     - target: {fileID: 2792860823825365592, guid: 7f389ff244bc64148934c035611da8bc,
         type: 3}
@@ -270,6 +274,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792860823825365593, guid: 7f389ff244bc64148934c035611da8bc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792860823972553503, guid: 7f389ff244bc64148934c035611da8bc,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f389ff244bc64148934c035611da8bc, type: 3}
@@ -930,10 +944,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2121401448, guid: 297f8110251937d4cb3571819d19114a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.54
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_Name
       value: Spider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036301, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
@@ -943,12 +966,12 @@ PrefabInstance:
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.07
+      value: 7.48
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.48
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
