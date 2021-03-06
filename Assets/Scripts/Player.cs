@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private float hp = 100f;
+    [SerializeField]  private float hp = 100f;
+    [SerializeField]  private float maxHP = 100f;
     private float damage = 15f;
     //  gameobject to spawn (blackhole)
     [SerializeField] private GameObject blackHolePrefab;
@@ -14,6 +16,8 @@ public class Player : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D rb;
+
+    public Slider healthBar;
 
     private bool dead = false;
 
@@ -28,8 +32,9 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        healthBar.maxValue = maxHP;
+        healthBar.value = hp;
     }
-
 
     void Update()
     {
@@ -45,7 +50,9 @@ public class Player : MonoBehaviour
     public void ApplyAttack()
     {
         Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.4f, .5f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
-        Vector2 directionToPush = new Vector2(( transform.position.x > spawnPosition.position.x ? transform.position.x - 3f : transform.position.x + 3f), transform.position.y + 3f);
+        Vector2 directionToPush = new Vector2(( transform.position.x > spawnPosition.position.x 
+            ? transform.position.x - 1.5f 
+            : transform.position.x + 1.5f), transform.position.y + 3f);
         foreach (var enemy in colliders)
         {
             enemy.GetComponent<Enemy>().ApplyDamage(damage, directionToPush);
@@ -56,6 +63,7 @@ public class Player : MonoBehaviour
     {
         PushBack(dir);
         hp -= damage;
+        healthBar.value = hp;
         if (hp <= 0)
             DestroyObject();
     }
@@ -78,6 +86,7 @@ public class Player : MonoBehaviour
 
     private void DestroyObject()
     {
+        healthBar.gameObject.SetActive(false);
         dead = true;
         gameObject.layer = 0;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;

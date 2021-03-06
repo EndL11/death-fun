@@ -1,34 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    private float hp = 100f;
+    [SerializeField] private float hp = 100f;
+    [SerializeField] private float maxHP = 100f;
     public float speed = 3f;
+    private int direction = -1;
     public float damage = 25f;
+    private bool dead = false;
+    public float attackDelay = 0.5f;
+
     private Rigidbody2D rb;
     private Animator anim;
 
     private const float timeToChangeDirection = 5f;
     public float _timeToChangeDirection = timeToChangeDirection;
-
-    private int direction = -1;
-
-    private bool dead = false;
-
-    public float attackDelay = 0.5f;
+    
 
     [SerializeField] private Transform checkPlatformEndPoint;
     [SerializeField] private Transform checkPlayerPoint;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
+    [SerializeField] private Slider healthBar;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        transform.rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        healthBar.maxValue = maxHP;
+        healthBar.value = hp;
     }
 
     void Update()
@@ -53,7 +58,6 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("Attack", false);
                 anim.SetBool("Attack", true);
-                speed = anim.GetBool("Attack") ? 0f : 3f;
             }
             attackDelay = 0.5f;
         } 
@@ -62,6 +66,7 @@ public class Enemy : MonoBehaviour
     public void ApplyDamage(float damage, Vector2 dir)
     {
         hp -= damage;
+        healthBar.value = hp;
         if (hp <= 0)
             DestroyEnemy();
         if(!dead)
@@ -87,13 +92,14 @@ public class Enemy : MonoBehaviour
     private void DestroyEnemy()
     {
         dead = true;
+        healthBar.gameObject.SetActive(false);
         anim.SetTrigger("Die");
     }
 
     private void ChangeMovementDirection()
     {
         direction = direction == 1 ? -1 : 1;
-        transform.rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
     }
 
     private bool isEndPlatform()
@@ -121,7 +127,9 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.3f, whatIsPlayer);
-        Vector2 directionToPush = new Vector2((transform.position.x > checkPlayerPoint.position.x ? transform.position.x - 3f : transform.position.x + 3f), transform.position.y + 3f);
+        Vector2 directionToPush = new Vector2((transform.position.x > checkPlayerPoint.position.x 
+            ? transform.position.x - 1.5f 
+            : transform.position.x + 1.5f), transform.position.y + 3f);
         foreach (var enemy in colliders)
         {
             enemy.GetComponent<Player>().ApplyDamage(damage, directionToPush);
