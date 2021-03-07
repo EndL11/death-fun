@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public Slider healthBar;
 
     private bool dead = false;
+    Color c;
 
     public bool Dead
     {
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
+        c = GetComponentInChildren<SpriteRenderer>().material.color;
+
     }
 
     void Update()
@@ -50,9 +53,7 @@ public class Player : MonoBehaviour
     public void ApplyAttack()
     {
         Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.4f, .5f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
-        Vector2 directionToPush = new Vector2(( transform.position.x > spawnPosition.position.x 
-            ? transform.position.x - 1.5f 
-            : transform.position.x + 1.5f), transform.position.y + 3f);
+        Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
         foreach (var enemy in colliders)
         {
             enemy.GetComponent<Enemy>().ApplyDamage(damage, directionToPush);
@@ -78,7 +79,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator HurtAnimation()
     {
-        Color c = GetComponentInChildren<SpriteRenderer>().material.color;
         GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
         yield return new WaitForSeconds(0.2f);
         GetComponentInChildren<SpriteRenderer>().material.color = c;

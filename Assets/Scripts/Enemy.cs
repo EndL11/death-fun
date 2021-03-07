@@ -58,8 +58,8 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("Attack", false);
                 anim.SetBool("Attack", true);
+                attackDelay = 0.5f;
             }
-            attackDelay = 0.5f;
         } 
     }
 
@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        anim.SetBool("Attack", false);
         dead = true;
         healthBar.gameObject.SetActive(false);
         anim.SetTrigger("Die");
@@ -126,10 +127,10 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.3f, whatIsPlayer);
-        Vector2 directionToPush = new Vector2((transform.position.x > checkPlayerPoint.position.x 
-            ? transform.position.x - 1.5f 
-            : transform.position.x + 1.5f), transform.position.y + 3f);
+        if (dead) return;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.5f, whatIsPlayer);
+        Vector2 directionToPush = transform.position.x > checkPlayerPoint.position.x ? Vector2.left : Vector2.right;
         foreach (var enemy in colliders)
         {
             enemy.GetComponent<Player>().ApplyDamage(damage, directionToPush);
