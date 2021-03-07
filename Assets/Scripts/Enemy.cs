@@ -11,14 +11,15 @@ public class Enemy : MonoBehaviour
     private int direction = -1;
     public float damage = 25f;
     private bool dead = false;
-    public float attackDelay = 0.5f;
+    public float attackDelay = 3f;
 
     private Rigidbody2D rb;
     private Animator anim;
 
     private const float timeToChangeDirection = 5f;
     public float _timeToChangeDirection = timeToChangeDirection;
-    
+
+    public ParticleSystem hurtParticles;
 
     [SerializeField] private Transform checkPlatformEndPoint;
     [SerializeField] private Transform checkPlayerPoint;
@@ -58,7 +59,7 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("Attack", false);
                 anim.SetBool("Attack", true);
-                attackDelay = 0.5f;
+                attackDelay = 3f;
             }
         } 
     }
@@ -69,8 +70,11 @@ public class Enemy : MonoBehaviour
         healthBar.value = hp;
         if (hp <= 0)
             DestroyEnemy();
-        if(!dead)
+        if (!dead)
+        {
+            hurtParticles.Play();
             PushBack(dir);
+        }
     }
 
     private void PushBack(Vector2 dir)
