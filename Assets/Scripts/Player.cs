@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     private void SpawnBlackHole()
     {
         //  create gameobject based on 'blackHolePrefab'
-        Instantiate(blackHolePrefab, spawnPosition.position, transform.rotation);
+        Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
     }
 
     public void ApplyAttack()

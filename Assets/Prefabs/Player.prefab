@@ -481,7 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHP: 100
-  blackHolePrefab: {fileID: 5212686204163895737, guid: 52ec6b73edb39d8488772af2c1aea168,
+  blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
     type: 3}
   spawnPosition: {fileID: 406160650}
   enemiesMask:

@@ -37,6 +37,11 @@ public class Enemy : MonoBehaviour
 
     private Color c;
 
+    public bool Dead
+    {
+        get { return dead; }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
