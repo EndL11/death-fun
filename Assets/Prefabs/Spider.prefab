@@ -5341,6 +5341,7 @@ MonoBehaviour:
   hp: 100
   maxHP: 100
   speed: 3
+  direction: -1
   damage: 5
   attackDelay: 0.5
   _timeToChangeDirection: 5

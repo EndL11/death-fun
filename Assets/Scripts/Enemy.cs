@@ -8,10 +8,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hp = 100f;
     [SerializeField] private float maxHP = 100f;
     public float speed = 3f;
-    private int direction = -1;
+    [SerializeField] private int direction = -1;
     public float damage = 25f;
     private bool dead = false;
-    public float attackDelay = 3f;
+    [SerializeField] private float attackDelay = 3f;
+    private float _attackDelay;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
         transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
+        _attackDelay = attackDelay;
     }
 
     void Update()
@@ -44,9 +46,9 @@ public class Enemy : MonoBehaviour
         else if(!dead && isGrounded() && isEndPlatform())
             ChangeMovementDirection();
 
-        if (attackDelay > 0f)
+        if (_attackDelay > 0f)
         {
-            attackDelay -= Time.deltaTime;
+            _attackDelay -= Time.deltaTime;
             if (isPlayerNear())
             {
                 speed = 0f;
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("Attack", false);
                 anim.SetBool("Attack", true);
-                attackDelay = 3f;
+                _attackDelay = attackDelay;
             }
         } 
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject[] prefabs;
     public Transform[] spawnPoints;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,6 @@ public class Spawner : MonoBehaviour
     {
         if (spawnPoints.Length < 0) return;
 
-        Instantiate(prefab, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
+        Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
     }
 }
