@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
         get { return dead; }
     }
 
+    public float MAXHP
+    {
+        get { return maxHP; }
+    }
+
     void Start()
     {
         //  get animator component
@@ -109,5 +114,14 @@ public class Player : MonoBehaviour
         GetComponent<Collider2D>().isTrigger = true;
         //  play die animation
         anim.SetTrigger("Die");
+    }
+
+    public void AddHealth(float value)
+    {
+        hp += value;
+        if (hp > maxHP)
+            hp = maxHP;
+
+        healthBar.value = hp;
     }
 }
