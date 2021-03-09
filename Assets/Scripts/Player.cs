@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private float hp = 100f;
+    [SerializeField]  private float hp = 100f;
+    [SerializeField]  private float maxHP = 100f;
     private float damage = 15f;
+    public float blackHoleDelay = 7f;
+    private float _blackHoleDelay;
     //  gameobject to spawn (blackhole)
     [SerializeField] private GameObject blackHolePrefab;
     //  position for spawning black holes
@@ -15,11 +19,19 @@ public class Player : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
+    public Slider healthBar;
+
     private bool dead = false;
+    Color c;
 
     public bool Dead
     {
         get { return dead; }
+    }
+
+    public float MAXHP
+    {
+        get { return maxHP; }
     }
 
     void Start()
@@ -28,49 +40,77 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        healthBar.maxValue = maxHP;
+        healthBar.value = hp;
+        c = GetComponentInChildren<SpriteRenderer>().material.color;
+        _blackHoleDelay = 0f;
     }
-
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))        //  if pressed right mouse button
-            SpawnBlackHole();
+        if(_blackHoleDelay > 0f)
+        {
+            _blackHoleDelay -= Time.deltaTime;
+        }
+        else
+        {
+            //  if pressed right mouse button
+            if (Input.GetMouseButtonDown(1))
+            {
+                SpawnBlackHole();
+                _blackHoleDelay = blackHoleDelay;
+            }       
+        }
+
     }
 
     private void SpawnBlackHole()
     {
-        Instantiate(blackHolePrefab, spawnPosition.position, transform.rotation);
+        //  create gameobject based on 'blackHolePrefab'
+        Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
     }
 
     public void ApplyAttack()
     {
+        //  get all enemy object
         Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.4f, .5f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
-        Vector2 directionToPush = new Vector2(( transform.position.x > spawnPosition.position.x ? transform.position.x - 3f : transform.position.x + 3f), transform.position.y + 3f);
+        //  calculating push direction
+        Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
         foreach (var enemy in colliders)
         {
+            //  damage each enemy
             enemy.GetComponent<Enemy>().ApplyDamage(damage, directionToPush);
         }
     }
 
     public void ApplyDamage(float damage, Vector2 dir)
     {
-        PushBack(dir);
         hp -= damage;
+        //  update health bar
+        healthBar.value = hp;
         if (hp <= 0)
             DestroyObject();
+        if (!dead)
+        {
+            //  push player back
+            PushBack(dir);
+            //  play hurt animation
+            StartCoroutine(HurtAnimation());
+        }
     }
 
     private void PushBack(Vector2 dir)
     {
+        //  reset velocity
         rb.velocity = Vector2.zero;
-        rb.AddForce(dir, ForceMode2D.Impulse);
-        StartCoroutine(HurtAnimation());
+        //  push player to direction
+        rb.AddForce(dir, ForceMode2D.Impulse);        
     }
 
 
     private IEnumerator HurtAnimation()
     {
-        Color c = GetComponentInChildren<SpriteRenderer>().material.color;
+        //  playing hurt animation
         GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
         yield return new WaitForSeconds(0.2f);
         GetComponentInChildren<SpriteRenderer>().material.color = c;
@@ -78,10 +118,25 @@ public class Player : MonoBehaviour
 
     private void DestroyObject()
     {
+        //  hide health bar
+        healthBar.gameObject.SetActive(false);
         dead = true;
+        //  reset layer from 'player' to default in order not to stop enemies
         gameObject.layer = 0;
+        //  set rigidbody to static - not to fall player down
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        //  set player to not solid object
         GetComponent<Collider2D>().isTrigger = true;
+        //  play die animation
         anim.SetTrigger("Die");
+    }
+
+    public void AddHealth(float value)
+    {
+        hp += value;
+        if (hp > maxHP)
+            hp = maxHP;
+
+        healthBar.value = hp;
     }
 }

@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         //  move player according to direction
         transform.Translate(transform.right * direction * speed * Time.deltaTime);
         //  flip x if moving left
-        transform.rotation = Quaternion.Euler(0f, (direction > 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction > 0 ? 0f : 180f), 0f);
     }
 
     private void Attack()
