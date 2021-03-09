@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac291e92b267ad24b8ce1ab6c69d371e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 10
+  jumpForce: 9
   groundChecker: {fileID: 1029261704}
   whatIsGround:
     serializedVersion: 2
