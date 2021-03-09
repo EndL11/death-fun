@@ -27,6 +27,8 @@ public class CameraMovement : MonoBehaviour
 
     private Vector3 GetNextCameraPosition()
     {
+        if(target == null)
+            return Vector3.zero;
         Vector3 velocity = Vector3.zero;
         Vector3 point = Camera.main.WorldToViewportPoint(target.position);
         Vector3 delta = target.position - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
