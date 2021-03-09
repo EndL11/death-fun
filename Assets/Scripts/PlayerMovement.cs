@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float speed = 5f;
     //  force for jump
-    private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 10f;
 
     private Player player;
 
