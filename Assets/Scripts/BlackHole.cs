@@ -20,10 +20,7 @@ public class BlackHole : MonoBehaviour
         if (collision.CompareTag("EnemyTrigger"))
         {
             if (collision.GetComponentInParent<Enemy>().Dead)
-            {
-                Destroy(gameObject);
                 return;
-            }
 
             Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
             collision.GetComponentInParent<Enemy>().ApplyDamage(damage, pushDirection);

@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]  private float hp = 100f;
     [SerializeField]  private float maxHP = 100f;
     private float damage = 15f;
+    public float blackHoleDelay = 7f;
+    private float _blackHoleDelay;
     //  gameobject to spawn (blackhole)
     [SerializeField] private GameObject blackHolePrefab;
     //  position for spawning black holes
@@ -41,12 +43,25 @@ public class Player : MonoBehaviour
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
         c = GetComponentInChildren<SpriteRenderer>().material.color;
+        _blackHoleDelay = 0f;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))        //  if pressed right mouse button
-            SpawnBlackHole();
+        if(_blackHoleDelay > 0f)
+        {
+            _blackHoleDelay -= Time.deltaTime;
+        }
+        else
+        {
+            //  if pressed right mouse button
+            if (Input.GetMouseButtonDown(1))
+            {
+                SpawnBlackHole();
+                _blackHoleDelay = blackHoleDelay;
+            }       
+        }
+
     }
 
     private void SpawnBlackHole()
