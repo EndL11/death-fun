@@ -26,4 +26,14 @@ public class AnimatorFunctions : MonoBehaviour
         GetComponentInParent<Enemy>().Attack();
         GetComponent<Animator>().SetTrigger("AttackNull");
     }
+
+    public void EnableCollisions()
+    {
+        GetComponentInParent<Collider2D>().enabled = true;
+    }
+
+    public void DisableCollisions()
+    {
+        GetComponentInParent<Collider2D>().enabled = false;
+    }
 }
