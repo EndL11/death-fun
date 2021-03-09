@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
     private bool isGrounded()
     {
         //  return true if enemy is on ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, whatIsGround);
         return colliders.Length > 0;
     }
 
