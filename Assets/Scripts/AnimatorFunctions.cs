@@ -36,4 +36,14 @@ public class AnimatorFunctions : MonoBehaviour
     {
         GetComponentInParent<Collider2D>().enabled = false;
     }
+
+    public void SetIncreasedSawDamage()
+    {
+        GetComponentInParent<Saw>().SetIncreasedValues();
+    }
+
+    public void SetDefaultSawValues()
+    {
+        GetComponentInParent<Saw>().SetStaticValues();
+    }
 }

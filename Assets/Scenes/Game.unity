@@ -266,6 +266,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 519420033}
+    - target: {fileID: 9136774875778108231, guid: d48dd3be2a0d28146ad5bd5d92133159,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
     - target: {fileID: 9136774876126304010, guid: d48dd3be2a0d28146ad5bd5d92133159,
         type: 3}
       propertyPath: m_Pivot.x
@@ -376,6 +382,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PausePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 9136774876126304011, guid: d48dd3be2a0d28146ad5bd5d92133159,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9136774876215607382, guid: d48dd3be2a0d28146ad5bd5d92133159,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -391,6 +402,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 40.215225
       objectReference: {fileID: 0}
+    - target: {fileID: 9136774876706830112, guid: d48dd3be2a0d28146ad5bd5d92133159,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
+    - target: {fileID: 9136774876777800174, guid: d48dd3be2a0d28146ad5bd5d92133159,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48dd3be2a0d28146ad5bd5d92133159, type: 3}
 --- !u!224 &416635391 stripped
@@ -750,7 +773,7 @@ PrefabInstance:
     - target: {fileID: 2792860823825365592, guid: 7f389ff244bc64148934c035611da8bc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2792860823825365592, guid: 7f389ff244bc64148934c035611da8bc,
         type: 3}
@@ -21530,7 +21553,7 @@ Transform:
   - {fileID: 433977502}
   - {fileID: 1980339035}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839590439
 GameObject:
@@ -21747,18 +21770,30 @@ PrefabInstance:
     - target: {fileID: 8186495353879466779, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 138.26839
+      value: 129.97162
       objectReference: {fileID: 0}
     - target: {fileID: 8186495353879466779, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.094772
+      value: -47.201103
       objectReference: {fileID: 0}
     - target: {fileID: 8186495353879466780, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 47467015}
+    - target: {fileID: 8186495354320985320, guid: 82081091952c22b47ac13cda7c1e2ad2,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
+    - target: {fileID: 8186495354412683819, guid: 82081091952c22b47ac13cda7c1e2ad2,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
     - target: {fileID: 8186495354491948931, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_Name
@@ -21881,9 +21916,21 @@ PrefabInstance:
       objectReference: {fileID: 47467015}
     - target: {fileID: 8186495354960694991, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
+    - target: {fileID: 8186495354960694991, guid: 82081091952c22b47ac13cda7c1e2ad2,
+        type: 3}
       propertyPath: m_FontData.m_FontStyle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8186495355020337775, guid: 82081091952c22b47ac13cda7c1e2ad2,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
     - target: {fileID: 8186495355418196198, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -21897,18 +21944,24 @@ PrefabInstance:
     - target: {fileID: 8186495355418196198, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 231.4473
+      value: 217.61937
       objectReference: {fileID: 0}
     - target: {fileID: 8186495355418196198, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.094772
+      value: -47.201103
       objectReference: {fileID: 0}
     - target: {fileID: 8186495355418196199, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 47467015}
+    - target: {fileID: 8186495355833354328, guid: 82081091952c22b47ac13cda7c1e2ad2,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
+        type: 3}
     - target: {fileID: 8186495355899655264, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -21927,12 +21980,12 @@ PrefabInstance:
     - target: {fileID: 8186495355899655295, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 45.089462
+      value: 42.323875
       objectReference: {fileID: 0}
     - target: {fileID: 8186495355899655295, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.094772
+      value: -47.201103
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82081091952c22b47ac13cda7c1e2ad2, type: 3}
