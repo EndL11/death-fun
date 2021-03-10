@@ -443,7 +443,6 @@ GameObject:
   - component: {fileID: 4663997771933494302}
   - component: {fileID: 2792860823825365607}
   - component: {fileID: 1855108783}
-  - component: {fileID: 1855108781}
   - component: {fileID: 863095143}
   m_Layer: 10
   m_Name: Player
@@ -482,7 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHP: 100
-  blackHoleDelay: 7
+  blackHoleDelay: 2
   blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
     type: 3}
   spawnPosition: {fileID: 406160650}
@@ -528,22 +527,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &1855108781
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2792860823825365593}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.48}
-  m_Size: {x: 0.56, y: 1}
-  m_Direction: 0
 --- !u!61 &863095143
 BoxCollider2D:
   m_ObjectHideFlags: 0

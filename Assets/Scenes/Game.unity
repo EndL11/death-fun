@@ -830,11 +830,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4663997771933494302, guid: 7f389ff244bc64148934c035611da8bc,
-        type: 3}
-      propertyPath: blackHoleDelay
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f389ff244bc64148934c035611da8bc, type: 3}
 --- !u!4 &730237038 stripped
@@ -21944,7 +21939,7 @@ PrefabInstance:
     - target: {fileID: 8186495355418196198, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 217.61937
+      value: 217.61938
       objectReference: {fileID: 0}
     - target: {fileID: 8186495355418196198, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
