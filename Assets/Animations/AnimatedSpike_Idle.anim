@@ -19,29 +19,29 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0
+    - time: 0.05
       value: {fileID: 21300000, guid: 6309db60a09f85b4d9658eb601769ef1, type: 3}
-    - time: 0.1
+    - time: 1.0166667
       value: {fileID: 21300000, guid: 1afb43b94cd06f54da215aa2fb428c79, type: 3}
-    - time: 0.18333334
+    - time: 1.0666667
       value: {fileID: 21300000, guid: 473fee67e1700ef4ca3ff69ec5493c6b, type: 3}
-    - time: 0.28333333
+    - time: 1.1166667
       value: {fileID: 21300000, guid: 4cf247145a3a1c84fad392c4a8c6dfe6, type: 3}
-    - time: 0.36666667
+    - time: 1.1666666
       value: {fileID: 21300000, guid: 5e1631acec65f4244afc3ce908337085, type: 3}
-    - time: 0.46666667
+    - time: 1.2166667
       value: {fileID: 21300000, guid: 0b2db78459dd24a49b1e58beb11cef19, type: 3}
-    - time: 0.53333336
+    - time: 1.2666667
       value: {fileID: 21300000, guid: 0f1b240891b98354393e6a5278001c2f, type: 3}
-    - time: 0.6333333
+    - time: 1.9166666
       value: {fileID: 21300000, guid: d80dd79b96cbbf14b99e0ccececd8199, type: 3}
-    - time: 0.71666664
+    - time: 2
       value: {fileID: 21300000, guid: b4351ae6fb4f5ef40bde1db5f5971e66, type: 3}
-    - time: 0.81666666
+    - time: 2.0666666
       value: {fileID: 21300000, guid: 97f569125779f484ca2d08f88ae7a275, type: 3}
-    - time: 0.9
+    - time: 2.15
       value: {fileID: 21300000, guid: 4d2d57644192625449d9d04567a969a1, type: 3}
-    - time: 1
+    - time: 2.25
       value: {fileID: 21300000, guid: 893af8263c4acea469ad292e55a03b1a, type: 3}
     attribute: m_Sprite
     path: 
@@ -79,7 +79,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0166667
+    m_StopTime: 2.2666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -99,14 +99,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.53333336
+  - time: 1.25
     functionName: EnableCollisions
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1
+  - time: 2.1666667
     functionName: DisableCollisions
     data: 
     objectReferenceParameter: {fileID: 0}
