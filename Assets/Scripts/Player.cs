@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]  private float hp = 100f;
-    [SerializeField]  private float maxHP = 100f;
+    [SerializeField] private float hp = 100f;
+    [SerializeField] private float maxHP = 100f;
     private float damage = 15f;
     public float blackHoleDelay = 7f;
     private float _blackHoleDelay;
@@ -34,12 +34,19 @@ public class Player : MonoBehaviour
         get { return maxHP; }
     }
 
+
     void Start()
     {
         //  get animator component
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        if(PlayerPrefs.GetInt("@saved") == 1)
+        {
+            damage = PlayerPrefs.GetFloat("@damage");
+            hp = PlayerPrefs.GetFloat("@hp");
+            maxHP = PlayerPrefs.GetFloat("@maxhp");
+        }
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
         c = GetComponentInChildren<SpriteRenderer>().material.color;
@@ -48,7 +55,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(_blackHoleDelay > 0f)
+        if (_blackHoleDelay > 0f)
         {
             _blackHoleDelay -= Time.deltaTime;
         }
@@ -59,7 +66,7 @@ public class Player : MonoBehaviour
             {
                 SpawnBlackHole();
                 _blackHoleDelay = blackHoleDelay;
-            }       
+            }
         }
 
     }
@@ -104,7 +111,7 @@ public class Player : MonoBehaviour
         //  reset velocity
         rb.velocity = Vector2.zero;
         //  push player to direction
-        rb.AddForce(dir, ForceMode2D.Impulse);        
+        rb.AddForce(dir, ForceMode2D.Impulse);
     }
 
 
@@ -138,5 +145,18 @@ public class Player : MonoBehaviour
             hp = maxHP;
 
         healthBar.value = hp;
+    }
+
+    public void SavePlayerStats()
+    {
+        PlayerPrefs.SetFloat("@hp", hp);
+        PlayerPrefs.SetFloat("@maxhp", maxHP);
+        PlayerPrefs.SetFloat("@damage", damage);
+        PlayerPrefs.SetInt("@saved", 1);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("@saved", 0);
     }
 }

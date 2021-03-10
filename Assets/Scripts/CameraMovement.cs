@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
     public float dampTime = 0.75f;
     public Transform leftBorder;
     public Transform rightBorder;
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     void FixedUpdate()
     {
