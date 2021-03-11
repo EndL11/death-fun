@@ -177,6 +177,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike
       objectReference: {fileID: 0}
+    - target: {fileID: 726028878911590532, guid: 905d1de5304dac24cb64561ed138cd29,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 726028878911590532, guid: 905d1de5304dac24cb64561ed138cd29,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 726028878911590532, guid: 905d1de5304dac24cb64561ed138cd29,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1457639649
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905d1de5304dac24cb64561ed138cd29, type: 3}
 --- !u!4 &6942377559520565545 stripped
