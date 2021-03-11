@@ -404,6 +404,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5152077525123113780, guid: ec90ca73075749a4e82434fb5a86d301,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152077525123113780, guid: ec90ca73075749a4e82434fb5a86d301,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1150565559
+      objectReference: {fileID: 0}
     - target: {fileID: 5152077525123113784, guid: ec90ca73075749a4e82434fb5a86d301,
         type: 3}
       propertyPath: m_Name

@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameProcess : MonoBehaviour
 {
     public GameObject pausePanel;
+    public Transform startPortal;
+    public GameObject player;
+
+    private void Awake()
+    {
+        Instantiate(player, startPortal.position, Quaternion.identity);
+    }
 
     void Start()
     {

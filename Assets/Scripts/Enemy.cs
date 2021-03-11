@@ -113,7 +113,6 @@ public class Enemy : MonoBehaviour
         rb.velocity = Vector2.zero;
         //  push back enemy
         rb.AddForce(dir, ForceMode2D.Impulse);
-
     }
 
 
