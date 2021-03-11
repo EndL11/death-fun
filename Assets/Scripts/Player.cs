@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
 
     private void DestroyObject()
     {
+
         //  hide health bar
         healthBar.gameObject.SetActive(false);
         dead = true;
@@ -136,6 +137,7 @@ public class Player : MonoBehaviour
         GetComponent<Collider2D>().isTrigger = true;
         //  play die animation
         anim.SetTrigger("Die");
+        PlayerPrefs.SetInt("@saved", 0);
     }
 
     public void AddHealth(float value)
@@ -153,10 +155,5 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetFloat("@maxhp", maxHP);
         PlayerPrefs.SetFloat("@damage", damage);
         PlayerPrefs.SetInt("@saved", 1);
-    }
-
-    private void OnDestroy()
-    {
-        PlayerPrefs.SetInt("@saved", 0);
     }
 }
