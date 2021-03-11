@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 693210400607208447}
   - component: {fileID: 693210400607208446}
   - component: {fileID: 693210400607208445}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AnimatedSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}

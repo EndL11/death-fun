@@ -5355,6 +5355,9 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 1024
+  whatAvoid:
+    serializedVersion: 2
+    m_Bits: 2304
   healthBar: {fileID: 1860779903}
 --- !u!1 &7850079579777830136
 GameObject:

@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform checkPlayerPoint;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
+    public LayerMask whatAvoid;
+    
 
     [SerializeField] private Slider healthBar;
 
@@ -201,7 +203,7 @@ public class Enemy : MonoBehaviour
     private bool isWall()
     {
         //  return true if in player check zone at least ground object
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatAvoid);
         return colliders.Length > 0;
     }
 }
