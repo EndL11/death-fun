@@ -59,10 +59,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-
-        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead)
+        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead && !isWall())
             Move();
-        else if(!dead && isGrounded() && isEndPlatform())
+        else if(!dead && isGrounded() && (isEndPlatform() || isWall()))
             ChangeMovementDirection();
 
         //  if delay greater zero
@@ -197,5 +196,12 @@ public class Enemy : MonoBehaviour
         //  return true if in player check zone at least 1 player object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, playerCheckZone, whatIsPlayer);
         return colliders.Length != 0;
+    }
+
+    private bool isWall()
+    {
+        //  return true if in player check zone at least ground object
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatIsGround);
+        return colliders.Length > 0;
     }
 }
