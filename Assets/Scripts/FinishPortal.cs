@@ -10,7 +10,7 @@ public class FinishPortal : MonoBehaviour
         if (collision.CompareTag("PlayerTrigger"))
         {
             collision.GetComponentInParent<Player>().SavePlayerStats();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

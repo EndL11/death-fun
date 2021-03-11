@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
     public void ApplyAttack()
     {
         //  get all enemy object
-        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.4f, .5f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
+        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.2f, .3f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
         //  calculating push direction
         Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
         foreach (var enemy in colliders)

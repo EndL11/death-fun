@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667626502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.05, y: -0.194, z: 0}
+  m_LocalPosition: {x: -0.662, y: -0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7850079579777830119}
@@ -5237,7 +5237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121401447}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.425, y: -0.013999999, z: 0}
+  m_LocalPosition: {x: -0.347, y: 0.239, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7850079579777830119}
@@ -5355,6 +5355,9 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 1024
+  whatAvoid:
+    serializedVersion: 2
+    m_Bits: 2304
   healthBar: {fileID: 1860779903}
 --- !u!1 &7850079579777830136
 GameObject:
