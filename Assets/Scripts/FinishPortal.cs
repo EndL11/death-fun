@@ -9,7 +9,9 @@ public class FinishPortal : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
+            //  saving player stats
             collision.GetComponentInParent<Player>().SavePlayerStats();
+            //  load next scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }

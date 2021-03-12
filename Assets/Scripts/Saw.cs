@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
+    //  damage on static
     public float staticDamage = 10f;
+    //  damage on action saw
     public float increasedDamage = 30f;
+    //  up force on static
     public float staticUpForce = 2f;
+    //  up force on action saw
     public float increasedUpForce = 3.5f;
 
     private float currentDamage;
     private float currentUpForce;
+
     private void Start()
     {
         currentDamage = staticDamage;

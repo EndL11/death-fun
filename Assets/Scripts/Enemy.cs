@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int direction = -1;
     public float damage = 25f;
     private bool dead = false;
+    //  attack delay
     [SerializeField] private float attackDelay = 3f;
     private float _attackDelay;
 
@@ -32,11 +33,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform checkPlayerPoint;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
-    public LayerMask whatAvoid;
-    
+    public LayerMask whatAvoid;    
 
     [SerializeField] private Slider healthBar;
-
+    //  start color
     private Color c;
 
     public bool Dead
@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  setting rotating to sprite based on direction
         transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
-        //  setting masx hp to health bar
+        //  setting max hp to health bar
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
         _attackDelay = attackDelay;
@@ -202,7 +202,7 @@ public class Enemy : MonoBehaviour
 
     private bool isWall()
     {
-        //  return true if in player check zone at least ground object
+        //  return true if in player check zone at least 1 avoid object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatAvoid);
         return colliders.Length > 0;
     }

@@ -11,6 +11,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
+        //  find player on start 
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -19,7 +20,7 @@ public class CameraMovement : MonoBehaviour
         Vector3 pos = GetNextCameraPosition();
         if (target == null || IsOnCameraBorder(pos))
             return;
-
+        //  set height position of start (dont change y coordinate)
         pos.y = transform.position.y;
         transform.position = pos;
     }
@@ -34,6 +35,8 @@ public class CameraMovement : MonoBehaviour
     {
         if(target == null)
             return Vector3.zero;
+
+        //  calculating and returning next smooth pos for camera
         Vector3 velocity = Vector3.zero;
         Vector3 point = Camera.main.WorldToViewportPoint(target.position);
         Vector3 delta = target.position - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));

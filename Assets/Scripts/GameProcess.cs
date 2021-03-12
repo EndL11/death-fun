@@ -11,11 +11,13 @@ public class GameProcess : MonoBehaviour
 
     private void Awake()
     {
+        //  generating player 
         Instantiate(player, startPortal.position, Quaternion.identity);
     }
 
     void Start()
     {
+        //  set timeScale to 1
         Time.timeScale = 1;
         pausePanel.SetActive(false);
     }
@@ -23,6 +25,7 @@ public class GameProcess : MonoBehaviour
 
     void Update()
     {
+        //  if pressed Escape and time not stopped
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
         {
             Pause();

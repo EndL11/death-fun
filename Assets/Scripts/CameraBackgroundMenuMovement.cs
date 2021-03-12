@@ -10,7 +10,9 @@ public class CameraBackgroundMenuMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        //  calculating next camera position
         Vector3 pos = new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, -10f);
+        //  if next to border - change direction
         if (IsOnCameraBorder(pos))
             speed = -speed;
 

@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public Slider healthBar;
 
     private bool dead = false;
+    //  startin color (need for hunt animation)
     Color c;
 
     public bool Dead
@@ -41,15 +42,19 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        //  load saved player stats
         if(PlayerPrefs.GetInt("@saved") == 1)
         {
             damage = PlayerPrefs.GetFloat("@damage");
             hp = PlayerPrefs.GetFloat("@hp");
             maxHP = PlayerPrefs.GetFloat("@maxhp");
         }
+        //  set healthbar start stats
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
+        //  get start color
         c = GetComponentInChildren<SpriteRenderer>().material.color;
+        //  set blackhole de;ay on start game to 0
         _blackHoleDelay = 0f;
     }
 
@@ -145,12 +150,13 @@ public class Player : MonoBehaviour
         hp += value;
         if (hp > maxHP)
             hp = maxHP;
-
+        //  update healthbar 
         healthBar.value = hp;
     }
 
     public void SavePlayerStats()
     {
+        //  save player stats
         PlayerPrefs.SetFloat("@hp", hp);
         PlayerPrefs.SetFloat("@maxhp", maxHP);
         PlayerPrefs.SetFloat("@damage", damage);
