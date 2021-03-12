@@ -5,12 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GameProcess : MonoBehaviour
 {
+    public static GameProcess instance;
     public GameObject pausePanel;
+    private int score = 0;
     public Transform startPortal;
     public GameObject player;
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         //  generating player 
         Instantiate(player, startPortal.position, Quaternion.identity);
     }
@@ -48,5 +58,10 @@ public class GameProcess : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Application.Quit();
+    }
+
+    public void AddScore(int value)
+    {
+        score += value;
     }
 }

@@ -190,6 +190,8 @@ MonoBehaviour:
   attackZone: 0.5
   playerCheckZone: 0.3
   hurtParticles: {fileID: 6376148352118935689}
+  soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
+    type: 3}
   checkPlatformEndPoint: {fileID: 6376148352259219469}
   checkPlayerPoint: {fileID: 6376148352193753618}
   whatIsGround:

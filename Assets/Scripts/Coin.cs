@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private int score = 0;
-    private void OnCollisionEnter2D(Collision2D collision)
+    private int score = 10;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("PlayerTrigger"))
         {
-            //GetComponent<CircleCollider2D>().enabled = false;
-            gameObject.SetActive(false);
-            score++;
-            Debug.Log(score);
+            GameProcess.instance.AddScore(score);
+            Destroy(gameObject);
         }
-    }
-    private int GetScore()
-    {
-        return score;
     }
 }
