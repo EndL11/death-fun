@@ -12092,13 +12092,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136774875778108231, guid: d48dd3be2a0d28146ad5bd5d92133159,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
-        type: 3}
+      objectReference: {fileID: 1016413891}
     - target: {fileID: 9136774876126304010, guid: d48dd3be2a0d28146ad5bd5d92133159,
         type: 3}
       propertyPath: m_Pivot.x
@@ -12209,38 +12203,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PausePanel
       objectReference: {fileID: 0}
-    - target: {fileID: 9136774876126304011, guid: d48dd3be2a0d28146ad5bd5d92133159,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9136774876215607382, guid: d48dd3be2a0d28146ad5bd5d92133159,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1016413891}
     - target: {fileID: 9136774876450127237, guid: d48dd3be2a0d28146ad5bd5d92133159,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136774876450127238, guid: d48dd3be2a0d28146ad5bd5d92133159,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 40.21536
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136774876706830112, guid: d48dd3be2a0d28146ad5bd5d92133159,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
-        type: 3}
-    - target: {fileID: 9136774876777800174, guid: d48dd3be2a0d28146ad5bd5d92133159,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 1d828586b67090d4fbcf74ea99bd5b94,
-        type: 3}
+      objectReference: {fileID: 1016413891}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48dd3be2a0d28146ad5bd5d92133159, type: 3}
 --- !u!224 &416635391 stripped
@@ -38073,16 +38045,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640902594633850041, guid: 9a06a027faf87bc498108ca43bb77e1d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640902594633850041, guid: 9a06a027faf87bc498108ca43bb77e1d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7640902594633850041, guid: 9a06a027faf87bc498108ca43bb77e1d,
         type: 3}
