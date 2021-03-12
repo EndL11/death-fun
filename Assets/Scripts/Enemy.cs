@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     //public float _timeToChangeDirection = timeToChangeDirection;
 
     public ParticleSystem hurtParticles;
+    public GameObject soulPrefab;
 
     [SerializeField] private Transform checkPlatformEndPoint;
     [SerializeField] private Transform checkPlayerPoint;
@@ -93,6 +94,9 @@ public class Enemy : MonoBehaviour
 
     public void ApplyDamage(float damage, Vector2 dir)
     {
+        if (dead)
+            return;
+
         hp -= damage;
         //  update health bar
         healthBar.value = hp;
@@ -135,8 +139,16 @@ public class Enemy : MonoBehaviour
         dead = true;
         //  hide health bar (it's empty)
         healthBar.gameObject.SetActive(false);
+        //  spawn soul
+        SpawnSoul();
         //  show die animation
         anim.SetTrigger("Die");
+    }
+
+    private void SpawnSoul()
+    {
+        GameObject soul = Instantiate(soulPrefab, transform.position, Quaternion.identity);
+        Destroy(soul, 1.5f);
     }
 
     private void ChangeMovementDirection()
