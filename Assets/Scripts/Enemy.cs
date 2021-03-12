@@ -141,6 +141,7 @@ public class Enemy : MonoBehaviour
         healthBar.gameObject.SetActive(false);
         //  spawn soul
         SpawnSoul();
+        GameSaving.instance.EnemyDead();
         //  show die animation
         anim.SetTrigger("Die");
     }

@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
-    private float speed = 5f;
+    [SerializeField] private float speed = 5f;
     //  force for jump
     [SerializeField] private float jumpForce = 10f;
 

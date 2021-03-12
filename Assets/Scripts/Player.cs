@@ -43,11 +43,11 @@ public class Player : MonoBehaviour
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
         //  load saved player stats
-        if(PlayerPrefs.GetInt("@saved") == 1)
+        if(GameSaving.instance.playerStats.damage != 0f)
         {
-            damage = PlayerPrefs.GetFloat("@damage");
-            hp = PlayerPrefs.GetFloat("@hp");
-            maxHP = PlayerPrefs.GetFloat("@maxhp");
+            damage = GameSaving.instance.playerStats.damage;
+            hp = GameSaving.instance.playerStats.hp;
+            maxHP = GameSaving.instance.playerStats.maxHp;
         }
         //  set healthbar start stats
         healthBar.maxValue = maxHP;
@@ -157,9 +157,8 @@ public class Player : MonoBehaviour
     public void SavePlayerStats()
     {
         //  save player stats
-        PlayerPrefs.SetFloat("@hp", hp);
-        PlayerPrefs.SetFloat("@maxhp", maxHP);
-        PlayerPrefs.SetFloat("@damage", damage);
-        PlayerPrefs.SetInt("@saved", 1);
+        GameSaving.instance.playerStats.hp = hp;
+        GameSaving.instance.playerStats.maxHp = maxHP;
+        GameSaving.instance.playerStats.damage = damage;
     }
 }

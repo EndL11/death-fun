@@ -7,6 +7,8 @@ TagManager:
   - PlayerTrigger
   - Sphere
   - EnemyTrigger
+  - Score
+  - Enemies
   layers:
   - Default
   - TransparentFX
