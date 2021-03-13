@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PlayerTrigger
-  - Sphere
-  - EnemyTrigger
-  - Score
-  - Enemies
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -21,8 +16,8 @@ TagManager:
   - Ground
   - Enemy
   - Player
-  - Traps
-  - PostProcessing
+  - 
+  - 
   - 
   - 
   - 
@@ -43,15 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Map
-    uniqueID: 1370641789
-    locked: 0
-  - name: Action objects
-    uniqueID: 1457639649
-    locked: 0
-  - name: Canvas
-    uniqueID: 1150565559
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

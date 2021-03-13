@@ -4,11 +4,9 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float maxHP = 100f;
+    [SerializeField]  private float hp = 100f;
+    [SerializeField]  private float maxHP = 100f;
     private float damage = 15f;
-    public float blackHoleDelay = 7f;
-    private float _blackHoleDelay;
     //  gameobject to spawn (blackhole)
     [SerializeField] private GameObject blackHolePrefab;
     //  position for spawning black holes
@@ -22,19 +20,11 @@ public class Player : MonoBehaviour
     public Slider healthBar;
 
     private bool dead = false;
-    //  startin color (need for hunt animation)
-    Color c;
 
     public bool Dead
     {
         get { return dead; }
     }
-
-    public float MAXHP
-    {
-        get { return maxHP; }
-    }
-
 
     void Start()
     {
@@ -42,87 +32,53 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
-        //  load saved player stats
-        if(GameSaving.instance.playerStats.damage != 0f)
-        {
-            damage = GameSaving.instance.playerStats.damage;
-            hp = GameSaving.instance.playerStats.hp;
-            maxHP = GameSaving.instance.playerStats.maxHp;
-        }
-        //  set healthbar start stats
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
-        //  get start color
-        c = GetComponentInChildren<SpriteRenderer>().material.color;
-        //  set blackhole de;ay on start game to 0
-        _blackHoleDelay = 0f;
     }
 
     void Update()
     {
-        if (_blackHoleDelay > 0f)
-        {
-            _blackHoleDelay -= Time.deltaTime;
-        }
-        else
-        {
-            //  if pressed right mouse button
-            if (Input.GetMouseButtonDown(1))
-            {
-                SpawnBlackHole();
-                _blackHoleDelay = blackHoleDelay;
-            }
-        }
-
+        if (Input.GetMouseButtonDown(1))        //  if pressed right mouse button
+            SpawnBlackHole();
     }
 
     private void SpawnBlackHole()
     {
-        //  create gameobject based on 'blackHolePrefab'
-        Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
+        Instantiate(blackHolePrefab, spawnPosition.position, transform.rotation);
     }
 
     public void ApplyAttack()
     {
-        //  get all enemy object
-        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.2f, .3f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
-        //  calculating push direction
-        Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
+        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.4f, .5f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
+        Vector2 directionToPush = new Vector2(( transform.position.x > spawnPosition.position.x 
+            ? transform.position.x - 1.5f 
+            : transform.position.x + 1.5f), transform.position.y + 3f);
         foreach (var enemy in colliders)
         {
-            //  damage each enemy
             enemy.GetComponent<Enemy>().ApplyDamage(damage, directionToPush);
         }
     }
 
     public void ApplyDamage(float damage, Vector2 dir)
     {
+        PushBack(dir);
         hp -= damage;
-        //  update health bar
         healthBar.value = hp;
         if (hp <= 0)
             DestroyObject();
-        if (!dead)
-        {
-            //  push player back
-            PushBack(dir);
-            //  play hurt animation
-            StartCoroutine(HurtAnimation());
-        }
     }
 
     private void PushBack(Vector2 dir)
     {
-        //  reset velocity
         rb.velocity = Vector2.zero;
-        //  push player to direction
         rb.AddForce(dir, ForceMode2D.Impulse);
+        StartCoroutine(HurtAnimation());
     }
 
 
     private IEnumerator HurtAnimation()
     {
-        //  playing hurt animation
+        Color c = GetComponentInChildren<SpriteRenderer>().material.color;
         GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
         yield return new WaitForSeconds(0.2f);
         GetComponentInChildren<SpriteRenderer>().material.color = c;
@@ -130,35 +86,11 @@ public class Player : MonoBehaviour
 
     private void DestroyObject()
     {
-
-        //  hide health bar
         healthBar.gameObject.SetActive(false);
         dead = true;
-        //  reset layer from 'player' to default in order not to stop enemies
         gameObject.layer = 0;
-        //  set rigidbody to static - not to fall player down
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        //  set player to not solid object
         GetComponent<Collider2D>().isTrigger = true;
-        //  play die animation
         anim.SetTrigger("Die");
-        PlayerPrefs.SetInt("@saved", 0);
-    }
-
-    public void AddHealth(float value)
-    {
-        hp += value;
-        if (hp > maxHP)
-            hp = maxHP;
-        //  update healthbar 
-        healthBar.value = hp;
-    }
-
-    public void SavePlayerStats()
-    {
-        //  save player stats
-        GameSaving.instance.playerStats.hp = hp;
-        GameSaving.instance.playerStats.maxHp = maxHP;
-        GameSaving.instance.playerStats.damage = damage;
     }
 }
