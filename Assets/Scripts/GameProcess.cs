@@ -1,28 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 
 public class GameProcess : MonoBehaviour
 {
-    public static GameProcess instance;
-    public GameObject pausePanel;
-    private int score = 0;
+    public GameObject pausePanel;    
     public Transform startPortal;
     public GameObject player;
 
+    private Text scoreText;
+    private Text enemiesText;
+
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if(GameSaving.instance != null)
+            GameSaving.instance.deadEnemies = 0;
         //  generating player 
         Instantiate(player, startPortal.position, Quaternion.identity);
+        scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+        enemiesText = GameObject.FindGameObjectWithTag("Enemies").GetComponent<Text>();
     }
 
     void Start()
@@ -30,6 +29,12 @@ public class GameProcess : MonoBehaviour
         //  set timeScale to 1
         Time.timeScale = 1;
         pausePanel.SetActive(false);
+
+        GameSaving.instance.OnScoreChanged += UpdateScore;
+        GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
+
+        scoreText.text = GameSaving.instance.score.ToString();
+        enemiesText.text = GameSaving.instance.deadEnemies.ToString();
     }
 
 
@@ -60,8 +65,19 @@ public class GameProcess : MonoBehaviour
         Application.Quit();
     }
 
-    public void AddScore(int value)
+    private void UpdateDeadCounter()
     {
-        score += value;
+        enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+    }
+
+    private void UpdateScore()
+    {
+        scoreText.text = GameSaving.instance.score.ToString();
+    }
+
+    void OnDestroy()
+    {
+        GameSaving.instance.OnScoreChanged -= UpdateScore;
+        GameSaving.instance.OnEnemyDead -= this.UpdateDeadCounter;
     }
 }
