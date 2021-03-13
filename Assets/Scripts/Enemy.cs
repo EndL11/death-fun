@@ -8,44 +8,71 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hp = 100f;
     [SerializeField] private float maxHP = 100f;
     public float speed = 3f;
-    private int direction = -1;
+    private float _speed;
+    //  movement direction - 1 - right, -1 - left
+    [SerializeField] private int direction = -1;
     public float damage = 25f;
     private bool dead = false;
-    public float attackDelay = 0.5f;
+    //  attack delay
+    [SerializeField] private float attackDelay = 3f;
+    private float _attackDelay;
+
+    public float attackZone = 0.5f;
+    public float playerCheckZone = 0.3f;
 
     private Rigidbody2D rb;
     private Animator anim;
 
-    private const float timeToChangeDirection = 5f;
-    public float _timeToChangeDirection = timeToChangeDirection;
-    
+    //  for future AI, to changing movement or staying 
+    //private const float timeToChangeDirection = 5f;
+    //public float _timeToChangeDirection = timeToChangeDirection;
+
+    public ParticleSystem hurtParticles;
+    public GameObject soulPrefab;
 
     [SerializeField] private Transform checkPlatformEndPoint;
     [SerializeField] private Transform checkPlayerPoint;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
+    public LayerMask whatAvoid;    
 
     [SerializeField] private Slider healthBar;
+    //  start color
+    private Color c;
+
+    public bool Dead
+    {
+        get { return dead; }
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        //  setting rotating to sprite based on direction
         transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        //  setting max hp to health bar
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
+        _attackDelay = attackDelay;
+        //  save start color
+        c = GetComponentInChildren<SpriteRenderer>().material.color;
+        _speed = speed;
     }
 
     void Update()
     {
-        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead)
+        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead && !isWall())
             Move();
-        else if(!dead && isGrounded() && isEndPlatform())
+        else if(!dead && isGrounded() && (isEndPlatform() || isWall()))
             ChangeMovementDirection();
 
-        if (attackDelay > 0f)
+        //  if delay greater zero
+        if (_attackDelay > 0f)
         {
-            attackDelay -= Time.deltaTime;
+            //  decrease delay
+            _attackDelay -= Time.deltaTime;
+            //  if player near, stop and wait (show idle anim)
             if (isPlayerNear())
             {
                 speed = 0f;
@@ -54,93 +81,142 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            //  if can attack and player in attack zone
             if (isPlayerNear())
             {
-                anim.SetBool("Attack", false);
+                //  attack
                 anim.SetBool("Attack", true);
+                //  reset attack delay
+                _attackDelay = attackDelay;
             }
-            attackDelay = 0.5f;
         } 
     }
 
     public void ApplyDamage(float damage, Vector2 dir)
     {
+        if (dead)
+            return;
+
         hp -= damage;
+        //  update health bar
         healthBar.value = hp;
         if (hp <= 0)
             DestroyEnemy();
-        if(!dead)
+        if (!dead)
+        {
+            //  show particles
+            hurtParticles.Play();
+            //  push enemy back
             PushBack(dir);
+            //  play hurt animation
+            StartCoroutine(HurtAnimation());
+        }
     }
 
     private void PushBack(Vector2 dir)
     {
+        //  reset velocity
         rb.velocity = Vector2.zero;
+        //  push back enemy
         rb.AddForce(dir, ForceMode2D.Impulse);
-        StartCoroutine(HurtAnimation());
     }
 
 
     private IEnumerator HurtAnimation()
     {
-        Color c = GetComponentInChildren<SpriteRenderer>().material.color;
+        // set sprite color to red         
         GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
+        //  wait 0.2 seconds
         yield return new WaitForSeconds(0.2f);
+        //  set start color
         GetComponentInChildren<SpriteRenderer>().material.color = c;
     }
 
     private void DestroyEnemy()
     {
+        //  stop attack animation
+        anim.SetBool("Attack", false);
         dead = true;
+        //  hide health bar (it's empty)
         healthBar.gameObject.SetActive(false);
+        //  spawn soul
+        SpawnSoul();
+        GameSaving.instance.EnemyDead();
+        //  show die animation
         anim.SetTrigger("Die");
+    }
+
+    private void SpawnSoul()
+    {
+        GameObject soul = Instantiate(soulPrefab, transform.position, Quaternion.identity);
+        Destroy(soul, 1.5f);
     }
 
     private void ChangeMovementDirection()
     {
+        //  set direction to another
         direction = direction == 1 ? -1 : 1;
+        //  rotate sprite according to direction
         transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
     }
 
     private bool isEndPlatform()
     {
+        //  return true if platform is ended
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlatformEndPoint.position, 0.3f, whatIsGround);
         return colliders.Length == 0;
     }
 
     private bool isGrounded()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f, whatIsGround);
+        //  return true if enemy is on ground
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, whatIsGround);
         return colliders.Length > 0;
     }
 
     private void Move()
     {
+        //  if playing attack anim - return
         if (anim.GetBool("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))
             return;
-
-        speed = 3f;
+        //  reset speed to normal
+        speed = _speed;
+        //  start run animation
         anim.SetBool("Run", true);
+        //  move enemy according to direction
         transform.Translate(transform.right * direction * speed * Time.deltaTime);
     }
 
     public void Attack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.3f, whatIsPlayer);
-        Vector2 directionToPush = new Vector2((transform.position.x > checkPlayerPoint.position.x 
-            ? transform.position.x - 1.5f 
-            : transform.position.x + 1.5f), transform.position.y + 3f);
-        foreach (var enemy in colliders)
+        //  do not attack if dead
+        if (dead) return;
+        //  get colliders of all players
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, attackZone, whatIsPlayer);
+        //  calculating push direction
+        Vector2 directionToPush = transform.position.x > checkPlayerPoint.position.x ? Vector2.left : Vector2.right;
+        foreach (var player in colliders)
         {
-            enemy.GetComponent<Player>().ApplyDamage(damage, directionToPush);
+            //  damage all players
+            player.GetComponent<Player>().ApplyDamage(damage, directionToPush);
         }
-        speed = 3f;
+        //  reset speed to normal
+        speed = _speed;
+        //  stop playing attack animation
         anim.SetBool("Attack", false);
     }
 
     private bool isPlayerNear()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.3f, whatIsPlayer);
+        //  return true if in player check zone at least 1 player object
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, playerCheckZone, whatIsPlayer);
         return colliders.Length != 0;
+    }
+
+    private bool isWall()
+    {
+        //  return true if in player check zone at least 1 avoid object
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatAvoid);
+        return colliders.Length > 0;
     }
 }
