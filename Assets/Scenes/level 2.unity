@@ -32669,6 +32669,12 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!20 &1320734581 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2915730770636997089, guid: 1c0b6b783a36330478db657a36210d14,
+    type: 3}
+  m_PrefabInstance: {fileID: 340284547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1328029946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7315819325330615249, guid: c4a319b0aab423940ab0ec4aca499aa7,
@@ -35939,6 +35945,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2757841641637805218, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1320734581}
     - target: {fileID: 2757841641637805245, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_Name
@@ -35998,6 +36009,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HideShopMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018657167227958975, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.5550003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
