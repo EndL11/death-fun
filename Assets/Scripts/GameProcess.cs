@@ -29,12 +29,13 @@ public class GameProcess : MonoBehaviour
 
         if(GameSaving.instance != null)
         {
+            GameSaving.instance.score = PlayerPrefs.GetInt("@coint", GameSaving.instance.score);
             GameSaving.instance.OnScoreChanged += UpdateScore;
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
             scoreText.text = GameSaving.instance.score.ToString();
             enemiesText.text = GameSaving.instance.deadEnemies.ToString();
         }
-        scoreText.text = "0";
+        scoreText.text = GameSaving.instance.score.ToString();
         enemiesText.text = "0";
     }
 
