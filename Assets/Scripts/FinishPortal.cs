@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FinishPortal : MonoBehaviour
 {
@@ -12,9 +11,7 @@ public class FinishPortal : MonoBehaviour
             //  saving player stats
             collision.GetComponentInParent<Player>().SavePlayerStats();
             Destroy(collision.transform.parent.gameObject);
-            StartCoroutine(WaitToEndAnimation());
-            //  load next scene
-            
+            StartCoroutine(WaitToEndAnimation());            
         }
     }
 
@@ -25,6 +22,6 @@ public class FinishPortal : MonoBehaviour
         {
             yield return null;
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Camera.main.GetComponent<Animator>().SetTrigger("Finish");
     }
 }
