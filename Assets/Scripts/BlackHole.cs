@@ -7,7 +7,7 @@ public class BlackHole : MonoBehaviour
     public float damage = 20f;
     public float radius = 1.1f;
     public LayerMask whatIsEnemy;
-    public GameObject boomEffect;
+    public ParticleSystem boomEffect;
     //  list of damaged enemies
     private List<GameObject> enemies = new List<GameObject>();
     void Start()
@@ -30,11 +30,11 @@ public class BlackHole : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+  
     private void OnDestroy()
     {
-        //  spawn boom particles
-        SpawnBoomParticles();
+        //  play boom particles
+        boomEffect.Play();
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
@@ -49,13 +49,5 @@ public class BlackHole : MonoBehaviour
             }
         }
         enemies.Clear();
-    }
-
-    private void SpawnBoomParticles()
-    {
-        //  spawning particles object on blackhole position
-        GameObject boomParticles = Instantiate(boomEffect, transform.position, Quaternion.identity);
-        //  destroy boom effect after 1.5 seconds
-        Destroy(boomParticles, 1.5f);
     }
 }

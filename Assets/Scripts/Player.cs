@@ -153,6 +153,7 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 1)
             PlayerPrefs.SetInt("@coint", GameSaving.instance.score);
 
+        GameSaving.instance.GameOver();
         //  play die animation
         anim.SetTrigger("Die");
     }
