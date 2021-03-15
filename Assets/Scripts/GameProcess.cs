@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameProcess : MonoBehaviour
 {
-    public GameObject pausePanel;    
-    public Transform startPortal;
-    public GameObject player;
+    public GameObject pausePanel;        
 
     private Text scoreText;
     private Text enemiesText;
@@ -18,8 +16,7 @@ public class GameProcess : MonoBehaviour
     {
         if(GameSaving.instance != null)
             GameSaving.instance.deadEnemies = 0;
-        //  generating player 
-        Instantiate(player, startPortal.position, Quaternion.identity);
+
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         enemiesText = GameObject.FindGameObjectWithTag("Enemies").GetComponent<Text>();
     }

@@ -11,8 +11,20 @@ public class FinishPortal : MonoBehaviour
         {
             //  saving player stats
             collision.GetComponentInParent<Player>().SavePlayerStats();
+            Destroy(collision.transform.parent.gameObject);
+            StartCoroutine(WaitToEndAnimation());
             //  load next scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
         }
+    }
+
+    private IEnumerator WaitToEndAnimation()
+    {
+        StartCoroutine(GetComponent<Portal>().EndAnimation());
+        while (transform.localScale.x > 0f)
+        {
+            yield return null;
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
