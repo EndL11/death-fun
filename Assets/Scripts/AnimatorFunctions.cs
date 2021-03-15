@@ -12,7 +12,7 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void Attack()
     {
-        GetComponentInParent<Player>().ApplyAttack();
+        GetComponentInParent<Player>()?.ApplyAttack();
         //  set trigger to start idle animation 
         GetComponent<Animator>().SetTrigger("AttackNull");
     }
