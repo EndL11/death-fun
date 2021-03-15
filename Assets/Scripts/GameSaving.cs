@@ -37,6 +37,7 @@ public class GameSaving : MonoBehaviour
         score += value;
         OnScoreChanged();
     }
+	
 
     public void EnemyDead()
     {
