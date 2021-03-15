@@ -19,7 +19,8 @@ public class Player : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
-    public Slider healthBar;
+    private Slider healthBar;
+    private Slider blackholeDelaySlider;
 
     private bool dead = false;
     //  starting color (need for hunt animation)
@@ -38,12 +39,14 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
+        blackholeDelaySlider = GameObject.FindGameObjectWithTag("BlackHoleDelay").GetComponent<Slider>();
         //  get animator component
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
         //  load saved player stats
-        if(GameSaving.instance.playerStats.damage != 0f)
+        if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
@@ -54,8 +57,10 @@ public class Player : MonoBehaviour
         healthBar.value = hp;
         //  get start color
         c = GetComponentInChildren<SpriteRenderer>().material.color;
-        //  set blackhole de;ay on start game to 0
+        //  set blackhole delay on start game to 0
         _blackHoleDelay = 0f;
+        blackholeDelaySlider.maxValue = blackHoleDelay;
+        blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
     }
 
     void Update()
@@ -66,6 +71,7 @@ public class Player : MonoBehaviour
         if (_blackHoleDelay > 0f)
         {
             _blackHoleDelay -= Time.deltaTime;
+            blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
         }
         else
         {

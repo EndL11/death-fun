@@ -27,11 +27,15 @@ public class GameProcess : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
 
-        GameSaving.instance.OnScoreChanged += UpdateScore;
-        GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
-
-        scoreText.text = GameSaving.instance.score.ToString();
-        enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+        if(GameSaving.instance != null)
+        {
+            GameSaving.instance.OnScoreChanged += UpdateScore;
+            GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
+            scoreText.text = GameSaving.instance.score.ToString();
+            enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+        }
+        scoreText.text = "0";
+        enemiesText.text = "0";
     }
 
 
@@ -74,6 +78,9 @@ public class GameProcess : MonoBehaviour
 
     void OnDestroy()
     {
+        if (GameSaving.instance == null)
+            return;
+
         GameSaving.instance.OnScoreChanged -= UpdateScore;
         GameSaving.instance.OnEnemyDead -= this.UpdateDeadCounter;
     }

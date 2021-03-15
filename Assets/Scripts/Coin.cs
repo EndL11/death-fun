@@ -9,7 +9,8 @@ public class Coin : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            GameSaving.instance.AddScore(score);
+            if(GameSaving.instance != null)
+                GameSaving.instance.AddScore(score);
             Destroy(gameObject);
         }
     }

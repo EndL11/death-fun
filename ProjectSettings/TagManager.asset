@@ -9,6 +9,8 @@ TagManager:
   - EnemyTrigger
   - Score
   - Enemies
+  - HealthBar
+  - BlackHoleDelay
   layers:
   - Default
   - TransparentFX
