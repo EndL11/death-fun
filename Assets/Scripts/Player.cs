@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     //  position for spawning black holes
     [SerializeField] private Transform spawnPosition;
 
+    [SerializeField] private float attackRange = 0.5f;
+
     public LayerMask enemiesMask;
 
     private Animator anim;
@@ -47,7 +49,7 @@ public class Player : MonoBehaviour
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
         //  load saved player stats
-        if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f)
+        if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f && PlayerPrefs.GetInt("@saved", 0) == 1)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
@@ -95,7 +97,7 @@ public class Player : MonoBehaviour
     public void ApplyAttack()
     {
         //  get all enemy object
-        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(spawnPosition.position, new Vector2(0.2f, .3f), CapsuleDirection2D.Vertical, 0f, enemiesMask);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition.position, attackRange, enemiesMask);
         //  calculating push direction
         Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
         foreach (var enemy in colliders)
@@ -153,7 +155,7 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 1)
             PlayerPrefs.SetInt("@coint", GameSaving.instance.score);
 
-        GameSaving.instance.GameOver();
+        PlayerPrefs.GetInt("@saved", 0);
         //  play die animation
         anim.SetTrigger("Die");
     }
@@ -170,6 +172,7 @@ public class Player : MonoBehaviour
     public void SavePlayerStats()
     {
         //  save player stats
+        PlayerPrefs.GetInt("@saved", 1);
         GameSaving.instance.playerStats.hp = hp;
         GameSaving.instance.playerStats.maxHp = maxHP;
         GameSaving.instance.playerStats.damage = damage;

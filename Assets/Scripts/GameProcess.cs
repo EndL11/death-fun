@@ -62,6 +62,7 @@ public class GameProcess : MonoBehaviour
 
     public void Restart()
     {
+        PlayerPrefs.GetInt("@saved", 0);
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -100,7 +101,8 @@ public class GameProcess : MonoBehaviour
 
     public void GameOverRestart()
     {
-        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
+        PlayerPrefs.GetInt("@saved", 0);
+        if (PlayerPrefs.GetString("@mode") == "Hard Mode")
         {
             SceneManager.LoadScene(2);
         }

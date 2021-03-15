@@ -19,6 +19,8 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void Destroy()
     {
+        if(transform.parent.gameObject.CompareTag("Player"))
+            GameSaving.instance.GameOver();
         Destroy(transform.parent.gameObject);
     }
 
