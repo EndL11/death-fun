@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public Slider healthBar;
 
     private bool dead = false;
-    //  startin color (need for hunt animation)
+    //  starting color (need for hunt animation)
     Color c;
 
     public bool Dead
@@ -60,6 +60,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!GetComponent<PlayerMovement>().CanMove)
+            return;
+
         if (_blackHoleDelay > 0f)
         {
             _blackHoleDelay -= Time.deltaTime;
@@ -67,7 +70,7 @@ public class Player : MonoBehaviour
         else
         {
             //  if pressed right mouse button
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !dead)
             {
                 SpawnBlackHole();
                 _blackHoleDelay = blackHoleDelay;

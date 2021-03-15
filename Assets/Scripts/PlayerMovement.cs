@@ -16,6 +16,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundChecker;
     //  layermask to set layer for ground
     public LayerMask whatIsGround;
+    private bool canMove = false;
+    public bool CanMove
+    {
+        get { return canMove; }
+        set { canMove = value; }
+    }
 
     private void Start()
     {
@@ -28,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (player.Dead)
+        if (player.Dead || !canMove)
             return;
 
         if (Input.GetMouseButton(0))        //  if pressed left mouse button
@@ -41,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player.Dead)
+        if (player.Dead || !canMove)
             return;
 
         if (Input.GetAxis("Horizontal") != 0)   //  if moving to somewhere
