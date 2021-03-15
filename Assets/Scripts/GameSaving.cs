@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public struct PlayerStats
 {
@@ -21,7 +21,9 @@ public class GameSaving : MonoBehaviour
     public int deadEnemies = 0;
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        if(SceneManager.GetActiveScene().buildIndex != 1)
+            DontDestroyOnLoad(this);
+
         if (instance == null)
         {
             instance = this;
