@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -149,9 +150,11 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         //  set player to not solid object
         GetComponent<Collider2D>().isTrigger = true;
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+            PlayerPrefs.SetInt("@coint", GameSaving.instance.score);
+
         //  play die animation
         anim.SetTrigger("Die");
-        PlayerPrefs.SetInt("@saved", 0);
     }
 
     public void AddHealth(float value)
