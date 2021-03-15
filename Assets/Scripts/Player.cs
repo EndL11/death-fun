@@ -171,6 +171,14 @@ public class Player : MonoBehaviour
 
     public void SavePlayerStats()
     {
+        //  if it's tutorial level not to save player stats
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            //  saving tutor complete
+            GameSaving.instance.SaveCompleteTutorial();
+            return;
+        }
+
         //  save player stats
         PlayerPrefs.GetInt("@saved", 1);
         GameSaving.instance.playerStats.hp = hp;

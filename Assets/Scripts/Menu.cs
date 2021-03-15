@@ -22,7 +22,10 @@ public class Menu : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (PlayerPrefs.GetInt("@tutor", 0) == 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
     public void Exit()
     {
@@ -35,5 +38,10 @@ public class Menu : MonoBehaviour
         Text modeName = toggleMode.GetComponentInChildren<Text>();
         modeName.text = hardMode ? "Hard Mode" : "Normal Mode";
         PlayerPrefs.SetString("@mode", modeName.text);
+    }
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

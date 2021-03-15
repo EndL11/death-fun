@@ -53,4 +53,9 @@ public class GameSaving : MonoBehaviour
         OnGameOver();
     }
 
+    public void SaveCompleteTutorial()
+    {
+        PlayerPrefs.SetInt("@tutor", 1);
+    }
+
 }
