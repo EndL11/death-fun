@@ -50,6 +50,10 @@ MonoBehaviour:
       type: 3}
     name: 0
     show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 2e68fdbf4bd18aa4a887123013ce9881,
+      type: 3}
+    name: 1
+    show: 0
   ENEMIES:
   - spider
   - snake
