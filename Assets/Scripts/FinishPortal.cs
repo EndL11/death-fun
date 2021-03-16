@@ -10,7 +10,6 @@ public class FinishPortal : MonoBehaviour
         {
             //  saving player stats
             collision.GetComponentInParent<Player>().SavePlayerStats();
-            PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
             Destroy(collision.transform.parent.gameObject);
             StartCoroutine(WaitToEndAnimation());            
         }
