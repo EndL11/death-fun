@@ -13,6 +13,8 @@ public class GameProcess : MonoBehaviour
     private Text scoreText;
     private Text enemiesText;
 
+    public GameObject enemiesStatsParent;
+
     private void Awake()
     {
         if(GameSaving.instance != null)
@@ -31,7 +33,7 @@ public class GameProcess : MonoBehaviour
 
         if (GameSaving.instance != null)
         {
-            GameSaving.instance.score = PlayerPrefs.GetInt("@coint", GameSaving.instance.score);
+            GameSaving.instance.score = PlayerPrefs.GetInt("@coins", GameSaving.instance.score);
 
             GameSaving.instance.OnScoreChanged += UpdateScore;
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
@@ -62,7 +64,9 @@ public class GameProcess : MonoBehaviour
 
     public void Restart()
     {
-        PlayerPrefs.GetInt("@saved", 0);
+        GameSaving.instance.ClearPlayerPrefs();
+  
+        PlayerPrefs.SetInt("@saved", 0);
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -87,6 +91,16 @@ public class GameProcess : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
+
+        List<GameObject> prefabs = GameSaving.instance.GetAnalyticsObjects();
+
+        foreach (var item in prefabs)
+        {
+            GameObject _instance = Instantiate(item, enemiesStatsParent.transform.position, Quaternion.identity, enemiesStatsParent.transform);
+        }
+
+        //  above add dead enemies to game over panel
+        GameSaving.instance.ClearPlayerPrefs();
     }
 
     void OnDestroy()
@@ -101,7 +115,8 @@ public class GameProcess : MonoBehaviour
 
     public void GameOverRestart()
     {
-        PlayerPrefs.GetInt("@saved", 0);
+        PlayerPrefs.SetInt("@saved", 0);
+
         if (PlayerPrefs.GetString("@mode") == "Hard Mode")
         {
             SceneManager.LoadScene(2);

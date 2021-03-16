@@ -34,8 +34,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform checkPlayerPoint;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
-    public LayerMask whatAvoid;    
+    public LayerMask whatAvoid;
 
+    [SerializeField] private EnemyAnalytics.Names _name;
     [SerializeField] private Slider healthBar;
     //  start color
     private Color c;
@@ -142,7 +143,7 @@ public class Enemy : MonoBehaviour
         //  spawn soul
         SpawnSoul();
         if(GameSaving.instance != null)
-            GameSaving.instance.EnemyDead();
+            GameSaving.instance.EnemyDead(_name.ToString());
         //  show die animation
         anim.SetTrigger("Die");
     }
