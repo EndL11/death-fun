@@ -126,6 +126,7 @@ public class GameProcess : MonoBehaviour
 
     public void Menu()
     {
+        GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
     }
 }

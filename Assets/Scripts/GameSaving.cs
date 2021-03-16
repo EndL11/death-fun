@@ -111,9 +111,15 @@ public class GameSaving : MonoBehaviour
         enemiesDeadList.Clear();
         int _score = PlayerPrefs.GetInt("@coins", 0);
 
+        foreach (var item in analiticsPrefabs)
+        {
+            item.show = false;
+        }
+
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("@coins", _score);
         PlayerPrefs.SetInt("@tutor", tutorComplete);
+        LoadDeadEnemies();
     }
 
     private void SetDeadCountToPrefabs()
