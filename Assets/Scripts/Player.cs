@@ -142,7 +142,6 @@ public class Player : MonoBehaviour
 
     private void DestroyObject()
     {
-
         //  hide health bar
         healthBar.gameObject.SetActive(false);
         dead = true;
@@ -153,9 +152,9 @@ public class Player : MonoBehaviour
         //  set player to not solid object
         GetComponent<Collider2D>().isTrigger = true;
         if (SceneManager.GetActiveScene().buildIndex != 1)
-            PlayerPrefs.SetInt("@coint", GameSaving.instance.score);
+            PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
 
-        PlayerPrefs.GetInt("@saved", 0);
+        PlayerPrefs.SetInt("@saved", 0);
         //  play die animation
         anim.SetTrigger("Die");
     }
@@ -180,7 +179,7 @@ public class Player : MonoBehaviour
         }
 
         //  save player stats
-        PlayerPrefs.GetInt("@saved", 1);
+        PlayerPrefs.SetInt("@saved", 1);
         GameSaving.instance.playerStats.hp = hp;
         GameSaving.instance.playerStats.maxHp = maxHP;
         GameSaving.instance.playerStats.damage = damage;
