@@ -15,6 +15,7 @@ public class GameSaving : MonoBehaviour
 {
     public event Action OnScoreChanged = () => { };
     public event Action OnEnemyDead = () => { };
+    public event Action OnGameOver = () => { };
     public static GameSaving instance;
     public PlayerStats playerStats;
     public int score = 0;
@@ -45,6 +46,16 @@ public class GameSaving : MonoBehaviour
     {
         deadEnemies += 1;
         OnEnemyDead();
+    }
+
+    public void GameOver()
+    {
+        OnGameOver();
+    }
+
+    public void SaveCompleteTutorial()
+    {
+        PlayerPrefs.SetInt("@tutor", 1);
     }
 
 }

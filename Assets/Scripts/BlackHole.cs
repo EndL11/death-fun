@@ -10,14 +10,27 @@ public class BlackHole : MonoBehaviour
     public GameObject boomEffect;
     //  list of damaged enemies
     private List<GameObject> enemies = new List<GameObject>();
+    public float destroyDelay = 5f;
+    private bool particlesSpawned = false;
     void Start()
     {
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, destroyDelay);
     }
 
     void Update()
     {
         transform.Translate(Vector2.right * 3f * Time.deltaTime);
+        if(destroyDelay > 0.1f)
+        {
+            destroyDelay -= Time.deltaTime;
+        }
+        else
+        {
+            if(!particlesSpawned)
+                Particles();
+
+            particlesSpawned = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,14 +40,21 @@ public class BlackHole : MonoBehaviour
             if (collision.GetComponentInParent<Enemy>().Dead)
                 return;
 
+            Particles();
             Destroy(gameObject);
         }
     }
 
+    private void Particles()
+    {
+        //  spawn boom particles 
+        GameObject particles = Instantiate(boomEffect, transform.position, Quaternion.identity);
+        Destroy(particles, 1.5f);
+    }
+
     private void OnDestroy()
     {
-        //  spawn boom particles
-        SpawnBoomParticles();
+           
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
@@ -49,13 +69,5 @@ public class BlackHole : MonoBehaviour
             }
         }
         enemies.Clear();
-    }
-
-    private void SpawnBoomParticles()
-    {
-        //  spawning particles object on blackhole position
-        GameObject boomParticles = Instantiate(boomEffect, transform.position, Quaternion.identity);
-        //  destroy boom effect after 1.5 seconds
-        Destroy(boomParticles, 1.5f);
     }
 }

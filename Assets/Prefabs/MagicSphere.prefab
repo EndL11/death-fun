@@ -69,6 +69,7 @@ MonoBehaviour:
     m_Bits: 512
   boomEffect: {fileID: 1784380983712248808, guid: c4694a9c9697aec47bb4adbac2afb733,
     type: 3}
+  destroyDelay: 5
 --- !u!1 &4333714545868418947
 GameObject:
   m_ObjectHideFlags: 0
