@@ -111,6 +111,8 @@ public class GameSaving : MonoBehaviour
         enemiesDeadList.Clear();
         int _score = PlayerPrefs.GetInt("@coins", 0);
 
+        string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
+
         foreach (var item in analiticsPrefabs)
         {
             item.show = false;
@@ -119,6 +121,7 @@ public class GameSaving : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("@coins", _score);
         PlayerPrefs.SetInt("@tutor", tutorComplete);
+        PlayerPrefs.SetString("@mode", mode);
         LoadDeadEnemies();
     }
 
@@ -142,5 +145,11 @@ public class GameSaving : MonoBehaviour
     {
         SetDeadCountToPrefabs();
         return analiticsPrefabs.FindAll(x => x.show && x.prefab != null).ConvertAll(x => x.prefab);
+    }
+
+    public void Buy(int cost)
+    {
+        score -= cost;
+        OnScoreChanged();
     }
 }
