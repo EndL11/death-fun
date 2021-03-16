@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         if (player.Dead || !canMove)
             return;
 
-        if (Input.GetMouseButton(0))        //  if pressed left mouse button
+        if (Input.GetMouseButton(0) && !player.Dead && Time.timeScale == 1)        //  if pressed left mouse button
             Attack();
 
         if (isGrounded() && Input.GetKey(KeyCode.W))
