@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         get { return maxHP; }
     }
 
-
     void Start()
     {
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
@@ -166,6 +165,17 @@ public class Player : MonoBehaviour
             hp = maxHP;
         //  update healthbar 
         healthBar.value = hp;
+    }
+
+    public void AddMaxHP(float value)
+    {
+        maxHP += value;
+        hp += value;
+    }
+
+    public void AddDamage(float value)
+    {
+        damage += value;
     }
 
     public void SavePlayerStats()
