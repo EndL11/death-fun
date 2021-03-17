@@ -11,6 +11,7 @@ TagManager:
   - Enemies
   - HealthBar
   - BlackHoleDelay
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX

@@ -23,10 +23,6 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    //  for future AI, to changing movement or staying 
-    //private const float timeToChangeDirection = 5f;
-    //public float _timeToChangeDirection = timeToChangeDirection;
-
     public ParticleSystem hurtParticles;
     public GameObject soulPrefab;
 
@@ -93,7 +89,7 @@ public class Enemy : MonoBehaviour
         } 
     }
 
-    public void ApplyDamage(float damage, Vector2 dir)
+    public virtual void ApplyDamage(float damage, Vector2 dir)
     {
         if (dead)
             return;
@@ -114,7 +110,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void PushBack(Vector2 dir)
+    protected virtual void PushBack(Vector2 dir)
     {
         //  reset velocity
         rb.velocity = Vector2.zero;

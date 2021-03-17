@@ -95,6 +95,9 @@ public class Player : MonoBehaviour
 
     public void ApplyAttack()
     {
+        if (dead)
+            return;
+
         //  get all enemy object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition.position, attackRange, enemiesMask);
         //  calculating push direction
