@@ -976,7 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 2
+  statsIdentificator: 4
   value: 10
   description: Get 10 to MAXHP
   cost: 190
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 1
+  statsIdentificator: 3
   value: 10
   description: Get 10 to Damage
   cost: 289
@@ -1378,7 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 1
+  statsIdentificator: 3
   value: 5
   description: Get 5 to DAMAGE
   cost: 150

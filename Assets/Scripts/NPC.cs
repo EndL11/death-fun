@@ -75,7 +75,9 @@ public class NPC : MonoBehaviour
 
         if(selected.Identificator == UpgradeItem.STATS.HP)
             player.AddHealth(selected.Value);
-        if (selected.Identificator == UpgradeItem.STATS.HP_FULL)
+        else if (selected.Identificator == UpgradeItem.STATS.HP_HALF)
+            player.AddHealth(player.MAXHP/2);
+        else if (selected.Identificator == UpgradeItem.STATS.HP_FULL)
             player.AddHealth(player.MAXHP);
         else if(selected.Identificator == UpgradeItem.STATS.MAXHP)
             player.AddMaxHP(selected.Value);

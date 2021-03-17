@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float hp = 100f;
     [SerializeField] private float maxHP = 100f;
-    private float damage = 15f;
+    [SerializeField] private float damage = 15f;
     public float blackHoleDelay = 7f;
     private float _blackHoleDelay;
     //  gameobject to spawn (blackhole)
@@ -171,6 +171,9 @@ public class Player : MonoBehaviour
     {
         maxHP += value;
         hp += value;
+        //  update healthbar 
+        healthBar.maxValue = maxHP;
+        healthBar.value = hp;
     }
 
     public void AddDamage(float value)

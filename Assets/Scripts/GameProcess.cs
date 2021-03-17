@@ -42,7 +42,13 @@ public class GameProcess : MonoBehaviour
             scoreText.text = GameSaving.instance.score.ToString();
             enemiesText.text = GameSaving.instance.deadEnemies.ToString();
         }
+        //testing score 
+        GameSaving.instance.score = 999;
         scoreText.text = GameSaving.instance.score.ToString();
+
+
+        //scoreText.text = GameSaving.instance.score.ToString();
+
         enemiesText.text = "0";
     }
 
