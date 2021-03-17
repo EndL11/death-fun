@@ -263,6 +263,7 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
+  _name: 2
   healthBar: {fileID: 1847143980559660257}
 --- !u!61 &1847143980567254528
 BoxCollider2D:

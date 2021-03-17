@@ -178,6 +178,8 @@ public class Player : MonoBehaviour
             return;
         }
 
+        PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
+
         //  save player stats
         PlayerPrefs.SetInt("@saved", 1);
         GameSaving.instance.playerStats.hp = hp;

@@ -16,7 +16,7 @@ public struct PlayerStats
 public class EnemyAnalytics
 {
     public enum Names { spider, snake, scorpion, zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3, knight_4 };
-    public GameObject prefab;
+    public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
 }
@@ -111,9 +111,18 @@ public class GameSaving : MonoBehaviour
         enemiesDeadList.Clear();
         int _score = PlayerPrefs.GetInt("@coins", 0);
 
+        string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
+
+        foreach (var item in analiticsPrefabs)
+        {
+            item.show = false;
+        }
+
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("@coins", _score);
         PlayerPrefs.SetInt("@tutor", tutorComplete);
+        PlayerPrefs.SetString("@mode", mode);
+        LoadDeadEnemies();
     }
 
     private void SetDeadCountToPrefabs()
@@ -124,6 +133,8 @@ public class GameSaving : MonoBehaviour
                 continue;
 
             EnemyAnalytics _tmp = analiticsPrefabs.Find(x => x.name.ToString() == item.Key);
+            if (_tmp?.prefab == null)
+                return;
             GameObject prefab = _tmp.prefab;
             prefab.GetComponentInChildren<Text>().text = $"x{item.Value}";
             _tmp.show = true;
@@ -133,6 +144,12 @@ public class GameSaving : MonoBehaviour
     public List<GameObject> GetAnalyticsObjects()
     {
         SetDeadCountToPrefabs();
-        return analiticsPrefabs.FindAll(x => x.show).ConvertAll(x => x.prefab);
+        return analiticsPrefabs.FindAll(x => x.show && x.prefab != null).ConvertAll(x => x.prefab);
+    }
+
+    public void Buy(int cost)
+    {
+        score -= cost;
+        OnScoreChanged();
     }
 }

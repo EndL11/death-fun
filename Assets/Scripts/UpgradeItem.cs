@@ -7,6 +7,8 @@ public class UpgradeItem : MonoBehaviour
     public enum STATS {HP_SMALL, HP_MEDIUM, HP_FULL};
     [SerializeField] private STATS statsIdentificator;
     [SerializeField] private float value;
+    [SerializeField] private string description = "Get HP $$%";
+    [SerializeField] private int cost = 50;
 
     public STATS Identificator
     {
@@ -16,6 +18,16 @@ public class UpgradeItem : MonoBehaviour
     public float Value
     {
         get { return value; }
+    }
+
+    public int Cost
+    {
+        get { return cost; }
+    }
+
+    public string Description
+    {
+        get { return description; }
     }
 
     private void Start()

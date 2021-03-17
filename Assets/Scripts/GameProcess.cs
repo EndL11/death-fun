@@ -120,12 +120,14 @@ public class GameProcess : MonoBehaviour
         if (PlayerPrefs.GetString("@mode") == "Hard Mode")
         {
             SceneManager.LoadScene(2);
+            return;
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Menu()
     {
+        GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
     }
 }
