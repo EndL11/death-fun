@@ -273,7 +273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hintText: {fileID: 821499343718651016}
-  showMenu: {fileID: 0}
+  shopMenu: {fileID: 0}
+  descriptionText: {fileID: 0}
 --- !u!1 &821499343718651016
 GameObject:
   m_ObjectHideFlags: 0

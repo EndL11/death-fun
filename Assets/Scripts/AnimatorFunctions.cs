@@ -54,4 +54,9 @@ public class AnimatorFunctions : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void DeactivateShopNotification()
+    {
+        gameObject.SetActive(false);
+    }
 }

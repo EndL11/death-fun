@@ -8,7 +8,7 @@ public class NPC : MonoBehaviour
     //  hint text (example 'press E')
     public GameObject hintText;
     //  npc menu
-    public GameObject showMenu;
+    public GameObject shopMenu;
     //  player reference
     private Player player = null;
     //  flag is player near to npc
@@ -20,11 +20,16 @@ public class NPC : MonoBehaviour
     //  description text of selected item
     public Text descriptionText;
 
+    //  notification of not enough money to buy something
+    private GameObject notification;
+
     void Start()
     {
         //  hide hint text and menu
         hintText.SetActive(false);
-        showMenu.SetActive(false);
+        shopMenu.SetActive(false);
+        notification = shopMenu.transform.GetChild(1).gameObject;
+        notification.SetActive(false);
     }
 
     void Update()
@@ -39,7 +44,7 @@ public class NPC : MonoBehaviour
     private void ShowShopMenu()
     {
         //  hiding hint text and showing shop window
-        showMenu.SetActive(true);
+        shopMenu.SetActive(true);
         hintText.SetActive(false);
     }
 
@@ -48,6 +53,13 @@ public class NPC : MonoBehaviour
         //  if player is not near
         if (player == null)
             return;
+
+        if(GameSaving.instance.score < selected.Cost)
+        {
+            //  show notification
+            notification.SetActive(true);
+            return;
+        }
         //  TODO: add switch to check is it adding hp or damage or something else
         player.AddHealth(player.MAXHP * selected.Value);
         GameSaving.instance.Buy(selected.Cost);
@@ -55,7 +67,7 @@ public class NPC : MonoBehaviour
 
     public void HideShopMenu()
     {
-        showMenu.SetActive(false);
+        shopMenu.SetActive(false);
         hintText.SetActive(true);
     }
 
@@ -76,7 +88,7 @@ public class NPC : MonoBehaviour
         {
             //  if player exit from npc collider
             playerInZone = false;
-            showMenu.SetActive(playerInZone);
+            shopMenu.SetActive(playerInZone);
             hintText.SetActive(playerInZone);
             player = null;
         }
