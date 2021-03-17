@@ -51,7 +51,7 @@ public class NPC : MonoBehaviour
     public void ApplyItem()
     {
         //  if player is not near
-        if (player == null)
+        if (player == null || selected == null)
             return;
 
         if(GameSaving.instance.score < selected.Cost)
@@ -69,6 +69,8 @@ public class NPC : MonoBehaviour
     {
         shopMenu.SetActive(false);
         hintText.SetActive(true);
+        descriptionText.text = "";
+        selected = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -88,8 +90,7 @@ public class NPC : MonoBehaviour
         {
             //  if player exit from npc collider
             playerInZone = false;
-            shopMenu.SetActive(playerInZone);
-            hintText.SetActive(playerInZone);
+            HideShopMenu();
             player = null;
         }
     }
