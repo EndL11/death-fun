@@ -15,14 +15,12 @@ public class Spider : Enemy
 
     private void SpawnMiniSpider()
     {
+        GameObject spider = Instantiate(miniSpider, transform.position, Quaternion.identity);
         int rand = UnityEngine.Random.Range(1, 3);
-        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
-        if(rand == 1)
-        {
-            rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
-        GameObject spider = Instantiate(miniSpider, transform.position, rotation);
-        spider.GetComponent<Rigidbody2D>().AddForce(transform.up * 2f, ForceMode2D.Impulse);
+        Enemy spiderEnemy = spider.GetComponent<Enemy>();
+        int direction = spiderEnemy.Direction == -1 ? 1 : -1;
+        spiderEnemy.Direction = direction;
+        spider.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f, ForceMode2D.Impulse);
     }
 
     protected override void PushBack(Vector2 dir)

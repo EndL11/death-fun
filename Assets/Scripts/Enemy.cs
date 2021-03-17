@@ -20,8 +20,8 @@ public class Enemy : MonoBehaviour
     public float attackZone = 0.5f;
     public float playerCheckZone = 0.3f;
 
-    private Rigidbody2D rb;
-    private Animator anim;
+    protected Rigidbody2D rb;
+    protected Animator anim;
 
     public ParticleSystem hurtParticles;
     public GameObject soulPrefab;
@@ -40,6 +40,12 @@ public class Enemy : MonoBehaviour
     public bool Dead
     {
         get { return dead; }
+    }
+
+    public int Direction
+    {
+        get { return direction; }
+        set { direction = value; }
     }
 
     void Start()
@@ -172,7 +178,7 @@ public class Enemy : MonoBehaviour
         return colliders.Length > 0;
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         //  if playing attack anim - return
         if (anim.GetBool("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))
