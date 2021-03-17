@@ -51,6 +51,9 @@ TagManager:
   - name: Action objects
     uniqueID: 1457639649
     locked: 0
+  - name: Traps
+    uniqueID: 3190399507
+    locked: 0
   - name: Canvas
     uniqueID: 1150565559
     locked: 0
