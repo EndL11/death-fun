@@ -219,10 +219,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHP: 100
+  damage: 15
   blackHoleDelay: 2
   blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
     type: 3}
   spawnPosition: {fileID: 406160650}
+  attackRange: 0.5
   enemiesMask:
     serializedVersion: 2
     m_Bits: 512
@@ -355,7 +357,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1457639649
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: fb97a23b66721dc4485d61819c15cf94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

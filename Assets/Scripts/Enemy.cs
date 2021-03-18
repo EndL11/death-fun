@@ -20,12 +20,8 @@ public class Enemy : MonoBehaviour
     public float attackZone = 0.5f;
     public float playerCheckZone = 0.3f;
 
-    private Rigidbody2D rb;
-    private Animator anim;
-
-    //  for future AI, to changing movement or staying 
-    //private const float timeToChangeDirection = 5f;
-    //public float _timeToChangeDirection = timeToChangeDirection;
+    protected Rigidbody2D rb;
+    protected Animator anim;
 
     public ParticleSystem hurtParticles;
     public GameObject soulPrefab;
@@ -44,6 +40,12 @@ public class Enemy : MonoBehaviour
     public bool Dead
     {
         get { return dead; }
+    }
+
+    public int Direction
+    {
+        get { return direction; }
+        set { direction = value; }
     }
 
     void Start()
@@ -93,7 +95,7 @@ public class Enemy : MonoBehaviour
         } 
     }
 
-    public void ApplyDamage(float damage, Vector2 dir)
+    public virtual void ApplyDamage(float damage, Vector2 dir)
     {
         if (dead)
             return;
@@ -114,7 +116,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void PushBack(Vector2 dir)
+    protected virtual void PushBack(Vector2 dir)
     {
         //  reset velocity
         rb.velocity = Vector2.zero;
@@ -176,7 +178,7 @@ public class Enemy : MonoBehaviour
         return colliders.Length > 0;
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         //  if playing attack anim - return
         if (anim.GetBool("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))

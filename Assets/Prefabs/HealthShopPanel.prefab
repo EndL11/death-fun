@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsIdentificator: 0
-  value: 0
+  value: 25
   description: Get 25% of HP
   cost: 50
 --- !u!1 &8513194426213911134

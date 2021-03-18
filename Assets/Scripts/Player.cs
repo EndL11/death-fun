@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float hp = 100f;
     [SerializeField] private float maxHP = 100f;
-    private float damage = 15f;
+    [SerializeField] private float damage = 15f;
     public float blackHoleDelay = 7f;
     private float _blackHoleDelay;
     //  gameobject to spawn (blackhole)
@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
     {
         get { return maxHP; }
     }
-
 
     void Start()
     {
@@ -96,6 +95,9 @@ public class Player : MonoBehaviour
 
     public void ApplyAttack()
     {
+        if (dead)
+            return;
+
         //  get all enemy object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition.position, attackRange, enemiesMask);
         //  calculating push direction
@@ -166,6 +168,20 @@ public class Player : MonoBehaviour
             hp = maxHP;
         //  update healthbar 
         healthBar.value = hp;
+    }
+
+    public void AddMaxHP(float value)
+    {
+        maxHP += value;
+        hp += value;
+        //  update healthbar 
+        healthBar.maxValue = maxHP;
+        healthBar.value = hp;
+    }
+
+    public void AddDamage(float value)
+    {
+        damage += value;
     }
 
     public void SavePlayerStats()

@@ -23,6 +23,9 @@ public class NPC : MonoBehaviour
     //  notification of not enough money to buy something
     private GameObject notification;
 
+    //  if has, play it before opening shop
+    [SerializeField] private bool hasActionAnimation = false;
+
     void Start()
     {
         //  hide hint text and menu
@@ -37,12 +40,21 @@ public class NPC : MonoBehaviour
         //  if pressed E and player near - open shop window
         if(Input.GetKeyDown(KeyCode.E) && playerInZone)
         {
-            ShowShopMenu();
+            StartCoroutine(ShowShopMenu());
         }
     }
 
-    private void ShowShopMenu()
+    private IEnumerator ShowShopMenu()
     {
+        //  play animation if has
+        if (hasActionAnimation)
+        {
+            GetComponentInChildren<Animator>().ResetTrigger("Idle");
+            GetComponentInChildren<Animator>().SetTrigger("Action");
+            yield return new WaitForSeconds(1.8f);
+        }
+        yield return null;
+
         //  hiding hint text and showing shop window
         shopMenu.SetActive(true);
         hintText.SetActive(false);
@@ -60,15 +72,34 @@ public class NPC : MonoBehaviour
             notification.SetActive(true);
             return;
         }
-        //  TODO: add switch to check is it adding hp or damage or something else
-        player.AddHealth(player.MAXHP * selected.Value);
+
+        if(selected.Identificator == UpgradeItem.STATS.HP)
+            player.AddHealth(selected.Value);
+        else if (selected.Identificator == UpgradeItem.STATS.HP_HALF)
+            player.AddHealth(player.MAXHP/2);
+        else if (selected.Identificator == UpgradeItem.STATS.HP_FULL)
+            player.AddHealth(player.MAXHP);
+        else if(selected.Identificator == UpgradeItem.STATS.MAXHP)
+            player.AddMaxHP(selected.Value);
+        else if(selected.Identificator == UpgradeItem.STATS.DAMAGE)
+            player.AddDamage(selected.Value);
+
         GameSaving.instance.Buy(selected.Cost);
     }
 
     public void HideShopMenu()
     {
+        if (hasActionAnimation)
+        {
+            GetComponentInChildren<Animator>().SetTrigger("Idle");
+        }
         shopMenu.SetActive(false);
         hintText.SetActive(true);
+        SetDefaultValues();
+    }
+
+    private void SetDefaultValues()
+    {
         descriptionText.text = "";
         selected = null;
     }
@@ -88,9 +119,15 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
+            if (hasActionAnimation)
+            {
+                GetComponentInChildren<Animator>().SetTrigger("Idle");
+            }
             //  if player exit from npc collider
             playerInZone = false;
-            HideShopMenu();
+            shopMenu.SetActive(false);
+            hintText.SetActive(false);
+            SetDefaultValues();
             player = null;
         }
     }
