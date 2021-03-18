@@ -10,6 +10,9 @@ public struct PlayerStats
     public float damage;
     public float hp;
     public float maxHp;
+    public float blackHoleDelay;
+    public float blackHoleDamage;
+    public float blackHoleRadius;
 }
 
 [System.Serializable]

@@ -57,12 +57,18 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
+        sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
         //  load saved player stats
         if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f && PlayerPrefs.GetInt("@saved", 0) == 1)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
             maxHP = GameSaving.instance.playerStats.maxHp;
+
+            blackHoleDelay = GameSaving.instance.playerStats.blackHoleDelay;
+            sphereDamage = GameSaving.instance.playerStats.blackHoleDamage;
+            sphereRadius = GameSaving.instance.playerStats.blackHoleRadius;
         }
         //  set healthbar start stats
         healthBar.maxValue = maxHP;
@@ -75,8 +81,6 @@ public class Player : MonoBehaviour
         _blackHoleDelay = 0f;
         blackholeDelaySlider.maxValue = blackHoleDelay;
         blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
-        sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
-        sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
     }
 
     void Update()
@@ -236,5 +240,8 @@ public class Player : MonoBehaviour
         GameSaving.instance.playerStats.hp = hp;
         GameSaving.instance.playerStats.maxHp = maxHP;
         GameSaving.instance.playerStats.damage = damage;
+        GameSaving.instance.playerStats.blackHoleDamage = sphereDamage;
+        GameSaving.instance.playerStats.blackHoleDelay = blackHoleDelay;
+        GameSaving.instance.playerStats.blackHoleRadius = sphereRadius;
     }
 }
