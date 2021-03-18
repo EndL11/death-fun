@@ -93,6 +93,7 @@ public class NPC : MonoBehaviour
         {
             GetComponentInChildren<Animator>().SetTrigger("Idle");
         }
+        notification.SetActive(false);
         shopMenu.SetActive(false);
         hintText.SetActive(true);
         SetDefaultValues();
@@ -127,6 +128,7 @@ public class NPC : MonoBehaviour
             playerInZone = false;
             shopMenu.SetActive(false);
             hintText.SetActive(false);
+            notification.SetActive(false);
             SetDefaultValues();
             player = null;
         }

@@ -1958,30 +1958,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2757841641637805217}
     m_Modifications:
-    - target: {fileID: 5340686485653997921, guid: 8bfc2dfe639149245bad9665312a09ce,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.5004883
-      objectReference: {fileID: 0}
-    - target: {fileID: 5340686486604595905, guid: 8bfc2dfe639149245bad9665312a09ce,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5340686486604595905, guid: 8bfc2dfe639149245bad9665312a09ce,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5340686486714325156, guid: 8bfc2dfe639149245bad9665312a09ce,
         type: 3}
       propertyPath: m_Name
       value: PlayerUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5340686486714325156, guid: 8bfc2dfe639149245bad9665312a09ce,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5340686486714325157, guid: 8bfc2dfe639149245bad9665312a09ce,
         type: 3}
@@ -2086,11 +2066,6 @@ PrefabInstance:
     - target: {fileID: 5340686486714325157, guid: 8bfc2dfe639149245bad9665312a09ce,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5340686486957744055, guid: 8bfc2dfe639149245bad9665312a09ce,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
