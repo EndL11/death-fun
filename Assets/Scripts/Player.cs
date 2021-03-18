@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     private Text healthBarHP;
     private Slider blackholeDelaySlider;
 
+    private float sphereDamage;
+    private float sphereRadius;
+
     private bool dead = false;
     //  starting color (need for hunt animation)
     Color c;
@@ -72,6 +75,8 @@ public class Player : MonoBehaviour
         _blackHoleDelay = 0f;
         blackholeDelaySlider.maxValue = blackHoleDelay;
         blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
+        sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
+        sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
     }
 
     void Update()
@@ -99,7 +104,9 @@ public class Player : MonoBehaviour
     private void SpawnBlackHole()
     {
         //  create gameobject based on 'blackHolePrefab'
-        Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
+        GameObject blackHole = Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
+        blackHole.GetComponent<BlackHole>().Damage = sphereDamage;
+        blackHole.GetComponent<BlackHole>().Radius = sphereRadius;
     }
 
     public void ApplyAttack()
@@ -194,6 +201,22 @@ public class Player : MonoBehaviour
     public void AddDamage(float value)
     {
         damage += value;
+    }
+
+    public void DecreaseSphereDelay(float value)
+    {
+        blackHoleDelay -= value;
+        blackholeDelaySlider.maxValue = blackHoleDelay;
+    }
+
+    public void IncreaseSphereDamage(float value)
+    {
+        sphereDamage += value; 
+    }
+
+    public void IncreaseSphereRadius(float value)
+    {
+        sphereRadius += value;
     }
 
     public void SavePlayerStats()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpgradeItem : MonoBehaviour
 {
-    public enum STATS {HP, HP_HALF, HP_FULL, DAMAGE, MAXHP};
+    public enum STATS {HP, HP_HALF, HP_FULL, DAMAGE, MAXHP, SPHERE_DELAY, SPHERE_RADIUS, SPHERE_DAMAGE};
     [SerializeField] private STATS statsIdentificator;
     [SerializeField] private float value;
     [SerializeField] private string description = "Get HP $$%";

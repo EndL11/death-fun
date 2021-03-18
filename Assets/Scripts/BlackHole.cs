@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class BlackHole : MonoBehaviour
 {
-    public float damage = 20f;
-    public float radius = 1.1f;
+    [SerializeField] private float damage = 20f;
+    [SerializeField] private float radius = 1.1f;
     public LayerMask whatIsEnemy;
     public GameObject boomEffect;
     //  list of damaged enemies
     private List<GameObject> enemies = new List<GameObject>();
     public float destroyDelay = 5f;
     private bool particlesSpawned = false;
+
+    public float Damage
+    {
+        set { damage = value; }
+        get { return damage; }
+    }
+
+    public float Radius
+    {
+        set { radius = value; }
+        get { return radius; }
+    }
+
     void Start()
     {
         Destroy(gameObject, destroyDelay);
