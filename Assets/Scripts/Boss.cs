@@ -40,6 +40,7 @@ public class Boss : Enemy
 
     public override void ApplyDamage(float damage, Vector2 dir)
     {
+        SoundMusicManager.instance.DamageBossSoundPlay();
         base.ApplyDamage(damage, dir);
         healthBar.value = hp;
         healthStats.text = $"{hp} / {maxHP}";

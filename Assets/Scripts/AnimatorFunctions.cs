@@ -62,6 +62,6 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void ActivateBlockCollider()
     {
-        transform.GetChild(transform.parent.childCount - 1).GetComponent<Collider2D>().enabled = true;
+        transform.GetChild(transform.parent.childCount).GetComponent<Collider2D>().enabled = true;
     }
 }
