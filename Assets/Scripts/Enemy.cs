@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour
         //  reset speed to normal
         speed = _speed;
         //  stop playing attack animation
-        anim.SetBool("Attack", false);
+        //anim.SetBool("Attack", false);
     }
 
     private bool isPlayerNear()

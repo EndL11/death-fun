@@ -15,7 +15,7 @@ public class Skeleton : Boss
         base.ApplyDamage(damage, dir);
         SpawnSkeleton();
 
-        int rand = UnityEngine.Random.Range(1, 3);
+        int rand = UnityEngine.Random.Range(1, 6);
         if(rand == 1)
         {
             StartCoroutine(Block());

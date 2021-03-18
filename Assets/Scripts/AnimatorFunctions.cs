@@ -8,6 +8,7 @@ public class AnimatorFunctions : MonoBehaviour
     public void StopAttack()
     {
         GetComponent<Animator>().SetBool("Attack", false);
+        GetComponent<Animator>().SetTrigger("AttackNull");
     }
 
     public void Attack()
@@ -27,7 +28,6 @@ public class AnimatorFunctions : MonoBehaviour
     public void EnemyAttack()
     {
         GetComponentInParent<Enemy>().Attack();
-        GetComponent<Animator>().SetTrigger("AttackNull");
     }
 
     public void EnableCollisions()
