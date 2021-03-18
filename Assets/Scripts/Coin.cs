@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private int score = 1;
+    [SerializeField] private int score = 1;
     public GameObject particles;
     private void OnTriggerEnter2D(Collider2D collision)
     {
