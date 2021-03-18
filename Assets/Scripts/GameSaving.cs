@@ -27,6 +27,7 @@ public class GameSaving : MonoBehaviour
     public event Action OnScoreChanged = () => { };
     public event Action OnEnemyDead = () => { };
     public event Action OnGameOver = () => { };
+    public event Action OnBossStart = () => { };
     public PlayerStats playerStats;
     public int score = 0;
     public int deadEnemies = 0;
@@ -151,5 +152,10 @@ public class GameSaving : MonoBehaviour
     {
         score -= cost;
         OnScoreChanged();
+    }
+
+    public void BossStartFight()
+    {
+        OnBossStart();
     }
 }

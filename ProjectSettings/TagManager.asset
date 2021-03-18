@@ -12,6 +12,8 @@ TagManager:
   - HealthBar
   - BlackHoleDelay
   - PlayerAttack
+  - BossUI
+  - BossStart
   layers:
   - Default
   - TransparentFX

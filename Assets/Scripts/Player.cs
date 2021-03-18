@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
 
     private Slider healthBar;
+    private Text healthBarHP;
     private Slider blackholeDelaySlider;
 
     private bool dead = false;
@@ -39,9 +40,15 @@ public class Player : MonoBehaviour
         get { return maxHP; }
     }
 
+    public float HP
+    {
+        get { return hp; }
+    }
+
     void Start()
     {
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
+        healthBarHP = healthBar.GetComponentInChildren<Text>();
         blackholeDelaySlider = GameObject.FindGameObjectWithTag("BlackHoleDelay").GetComponent<Slider>();
         //  get animator component
         anim = GetComponentInChildren<Animator>();
@@ -57,6 +64,8 @@ public class Player : MonoBehaviour
         //  set healthbar start stats
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
+
+        healthBarHP.text = $"{hp} / {maxHP}";
         //  get start color
         c = GetComponentInChildren<SpriteRenderer>().material.color;
         //  set blackhole delay on start game to 0
@@ -114,6 +123,7 @@ public class Player : MonoBehaviour
         hp -= damage;
         //  update health bar
         healthBar.value = hp;
+        healthBarHP.text = $"{hp} / {maxHP}";
         if (hp <= 0)
             DestroyObject();
         if (!dead)
@@ -168,6 +178,7 @@ public class Player : MonoBehaviour
             hp = maxHP;
         //  update healthbar 
         healthBar.value = hp;
+        healthBarHP.text = $"{hp} / {maxHP}";
     }
 
     public void AddMaxHP(float value)
@@ -177,6 +188,7 @@ public class Player : MonoBehaviour
         //  update healthbar 
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
+        healthBarHP.text = $"{hp} / {maxHP}";
     }
 
     public void AddDamage(float value)
