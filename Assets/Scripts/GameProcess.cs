@@ -129,6 +129,12 @@ public class GameProcess : MonoBehaviour
     {
         PlayerPrefs.SetInt("@saved", 0);
 
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
+        }
+
         if (PlayerPrefs.GetString("@mode") == "Hard Mode")
         {
             SceneManager.LoadScene(2);
