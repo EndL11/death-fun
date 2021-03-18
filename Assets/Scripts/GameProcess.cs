@@ -15,6 +15,8 @@ public class GameProcess : MonoBehaviour
 
     public GameObject enemiesStatsParent;
 
+    public GameObject bossUI;
+
     private void Awake()
     {
         if(GameSaving.instance != null)
@@ -24,7 +26,7 @@ public class GameProcess : MonoBehaviour
         enemiesText = GameObject.FindGameObjectWithTag("Enemies").GetComponent<Text>();
     }
 
-    void Start()
+    private void Start()
     {
         //  set timeScale to 1
         Time.timeScale = 1;
@@ -38,6 +40,8 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.OnScoreChanged += UpdateScore;
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
             GameSaving.instance.OnGameOver += GameOverHandler;
+            GameSaving.instance.OnBossStart += OnBossStartHandler;
+
 
             scoreText.text = GameSaving.instance.score.ToString();
             enemiesText.text = GameSaving.instance.deadEnemies.ToString();
@@ -52,8 +56,7 @@ public class GameProcess : MonoBehaviour
         enemiesText.text = "0";
     }
 
-
-    void Update()
+    private void Update()
     {
         //  if pressed Escape and time not stopped
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
@@ -95,6 +98,7 @@ public class GameProcess : MonoBehaviour
 
     private void GameOverHandler()
     {
+        bossUI.SetActive(false);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
 
@@ -109,7 +113,7 @@ public class GameProcess : MonoBehaviour
         GameSaving.instance.ClearPlayerPrefs();
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (GameSaving.instance == null)
             return;
@@ -117,6 +121,7 @@ public class GameProcess : MonoBehaviour
         GameSaving.instance.OnScoreChanged -= UpdateScore;
         GameSaving.instance.OnEnemyDead -=  UpdateDeadCounter;
         GameSaving.instance.OnGameOver -= GameOverHandler;
+        GameSaving.instance.OnBossStart -= OnBossStartHandler;
     }
 
     public void GameOverRestart()
@@ -135,5 +140,10 @@ public class GameProcess : MonoBehaviour
     {
         GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
+    }
+
+    private void OnBossStartHandler()
+    {
+        bossUI.SetActive(true);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spider : Enemy
+public class Spider : Boss
 {
     public GameObject miniSpider;
     public override void ApplyDamage(float damage, Vector2 dir)
@@ -23,8 +23,4 @@ public class Spider : Enemy
         spider.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f, ForceMode2D.Impulse);
     }
 
-    protected override void PushBack(Vector2 dir)
-    {
-
-    }
 }

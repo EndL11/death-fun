@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skeleton : Enemy
+public class Skeleton : Boss
 {
     private bool isBlocking = false;
     [SerializeField] private float blockTime = 5f;
@@ -20,7 +20,6 @@ public class Skeleton : Enemy
         {
             StartCoroutine(Block());
         }
-
     }
 
     private IEnumerator Block()
@@ -45,10 +44,6 @@ public class Skeleton : Enemy
         skeleton.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f, ForceMode2D.Impulse);
     }
 
-    protected override void PushBack(Vector2 dir)
-    {
-
-    }
 
     protected override void Move()
     {

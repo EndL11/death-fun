@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float maxHP = 100f;
+    [SerializeField] protected float hp = 100f;
+    [SerializeField] protected float maxHP = 100f;
     public float speed = 3f;
     private float _speed;
     //  movement direction - 1 - right, -1 - left
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     public LayerMask whatAvoid;
 
     [SerializeField] private EnemyAnalytics.Names _name;
-    [SerializeField] private Slider healthBar;
+    [HideInInspector] public Slider healthBar = null;
     //  start color
     private Color c;
 
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         set { direction = value; }
     }
 
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
