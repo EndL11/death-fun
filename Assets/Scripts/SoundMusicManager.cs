@@ -7,6 +7,7 @@ public class SoundMusicManager : MonoBehaviour
     public static SoundMusicManager instance;
     public AudioSource triggerBoss;
     public AudioSource damageBoss;
+    public AudioSource coin;
 
     private void Awake()
     {
@@ -21,17 +22,6 @@ public class SoundMusicManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
-
     public void TriggerBossSoundPlay()
     {
         triggerBoss.Play();
@@ -40,5 +30,10 @@ public class SoundMusicManager : MonoBehaviour
     public void DamageBossSoundPlay()
     {
         damageBoss.Play();
+    }
+
+    public void TakeCoinSoundPlay()
+    {
+        coin.Play();
     }
 }

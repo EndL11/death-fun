@@ -14,6 +14,7 @@ public class Coin : MonoBehaviour
                 GameSaving.instance.AddScore(score);
             GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
             Destroy(spawnedParticles, 1.5f);
+            SoundMusicManager.instance.TakeCoinSoundPlay();
             Destroy(gameObject);
         }
     }

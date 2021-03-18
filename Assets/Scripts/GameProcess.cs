@@ -15,7 +15,7 @@ public class GameProcess : MonoBehaviour
 
     public GameObject enemiesStatsParent;
 
-    public GameObject bossUI;
+    public GameObject bossUI = null;
 
     private void Awake()
     {
@@ -98,7 +98,8 @@ public class GameProcess : MonoBehaviour
 
     private void GameOverHandler()
     {
-        bossUI.SetActive(false);
+        if(bossUI != null)
+            bossUI.SetActive(false);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
 
