@@ -707,7 +707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1666349915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1007,7 +1007,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1457,6 +1457,7 @@ MonoBehaviour:
   pausePanel: {fileID: 6379782131234319302}
   gameOverPanel: {fileID: 1500923775}
   enemiesStatsParent: {fileID: 1910314017}
+  bossUI: {fileID: 0}
 --- !u!95 &982383070
 Animator:
   serializedVersion: 3
@@ -1915,7 +1916,7 @@ PrefabInstance:
     - target: {fileID: 988601293301496358, guid: 5899fc3e517e2ee41a00e477b6c55317,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 511.99988
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 2133641434158384609, guid: 5899fc3e517e2ee41a00e477b6c55317,
         type: 3}
@@ -2130,7 +2131,7 @@ PrefabInstance:
     - target: {fileID: 2853615970958351061, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 511.99988
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 3759628630591853298, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
@@ -2745,12 +2746,12 @@ PrefabInstance:
     - target: {fileID: 6588034760944799574, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.867302
+      value: 4.8673134
       objectReference: {fileID: 0}
     - target: {fileID: 6588034760944799574, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.1000061
+      value: -1.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 6588034761488739316, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
