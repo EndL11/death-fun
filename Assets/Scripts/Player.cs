@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     private Text healthBarHP;
     private Slider blackholeDelaySlider;
 
+    private float sphereDamage;
+    private float sphereRadius;
+
     private bool dead = false;
     //  starting color (need for hunt animation)
     Color c;
@@ -54,12 +57,18 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+        sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
+        sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
         //  load saved player stats
         if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f && PlayerPrefs.GetInt("@saved", 0) == 1)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
             maxHP = GameSaving.instance.playerStats.maxHp;
+
+            blackHoleDelay = GameSaving.instance.playerStats.blackHoleDelay;
+            sphereDamage = GameSaving.instance.playerStats.blackHoleDamage;
+            sphereRadius = GameSaving.instance.playerStats.blackHoleRadius;
         }
         //  set healthbar start stats
         healthBar.maxValue = maxHP;
@@ -99,7 +108,9 @@ public class Player : MonoBehaviour
     private void SpawnBlackHole()
     {
         //  create gameobject based on 'blackHolePrefab'
-        Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
+        GameObject blackHole = Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
+        blackHole.GetComponent<BlackHole>().Damage = sphereDamage;
+        blackHole.GetComponent<BlackHole>().Radius = sphereRadius;
     }
 
     public void ApplyAttack()
@@ -196,6 +207,22 @@ public class Player : MonoBehaviour
         damage += value;
     }
 
+    public void DecreaseSphereDelay(float value)
+    {
+        blackHoleDelay -= value;
+        blackholeDelaySlider.maxValue = blackHoleDelay;
+    }
+
+    public void IncreaseSphereDamage(float value)
+    {
+        sphereDamage += value; 
+    }
+
+    public void IncreaseSphereRadius(float value)
+    {
+        sphereRadius += value;
+    }
+
     public void SavePlayerStats()
     {
         //  if it's tutorial level not to save player stats
@@ -213,5 +240,8 @@ public class Player : MonoBehaviour
         GameSaving.instance.playerStats.hp = hp;
         GameSaving.instance.playerStats.maxHp = maxHP;
         GameSaving.instance.playerStats.damage = damage;
+        GameSaving.instance.playerStats.blackHoleDamage = sphereDamage;
+        GameSaving.instance.playerStats.blackHoleDelay = blackHoleDelay;
+        GameSaving.instance.playerStats.blackHoleRadius = sphereRadius;
     }
 }

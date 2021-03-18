@@ -84,6 +84,13 @@ public class NPC : MonoBehaviour
         else if(selected.Identificator == UpgradeItem.STATS.DAMAGE)
             player.AddDamage(selected.Value);
 
+        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DAMAGE)
+            player.IncreaseSphereDamage(selected.Value);
+        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY)
+            player.DecreaseSphereDelay(selected.Value);
+        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
+            player.IncreaseSphereRadius(selected.Value);
+
         GameSaving.instance.Buy(selected.Cost);
     }
 
