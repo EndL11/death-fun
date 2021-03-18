@@ -50,7 +50,14 @@ public class BlackHole : MonoBehaviour
     {
         if (collision.CompareTag("EnemyTrigger"))
         {
-            if (collision.GetComponentInParent<Enemy>().Dead)
+            Enemy enemy = collision.GetComponentInParent<Enemy>();
+            if (enemy == null)
+            {
+                Witch witch = collision.GetComponentInParent<Witch>();
+                if (witch.Dead)
+                    return;
+            }
+            else if (enemy.Dead)
                 return;
 
             Particles();
@@ -67,7 +74,6 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
-           
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
@@ -78,7 +84,13 @@ public class BlackHole : MonoBehaviour
             if (!enemies.Contains(enemy.gameObject) && !enemy.isTrigger)
             {
                 enemies.Add(enemy.gameObject);
-                enemy.GetComponent<Enemy>().ApplyDamage(damage, pushDirection);
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                if(enemyScript == null)
+                {
+                    enemy.GetComponent<Witch>().ApplyDamage(damage);
+                    continue;
+                }
+                enemyScript.ApplyDamage(damage, pushDirection);
             }
         }
         enemies.Clear();
