@@ -124,6 +124,12 @@ public class Player : MonoBehaviour
         Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
         foreach (var enemy in colliders)
         {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if(enemyScript == null)
+            {
+                enemy.GetComponent<Witch>().ApplyDamage(damage);
+                continue;
+            }
             //  damage each enemy
             enemy.GetComponent<Enemy>().ApplyDamage(damage, directionToPush);
         }
