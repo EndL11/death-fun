@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 463045951368222506}
   - component: {fileID: 463045951368222507}
   - component: {fileID: 463045951368222504}
-  - component: {fileID: 463045951368222505}
+  - component: {fileID: 4167441189318893324}
   m_Layer: 0
   m_Name: Chest_2
   m_TagString: Untagged
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5d616aaf4a55e4692bcc88ee6575de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 500
+  score: 150
   scoreText: {fileID: 463045950123673775}
 --- !u!50 &463045951368222504
 Rigidbody2D:
@@ -324,7 +324,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &463045951368222505
+--- !u!95 &4167441189318893324
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ Animator:
   m_GameObject: {fileID: 463045951368222508}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 82480503a26205d43be394450791e8f3, type: 2}
+  m_Controller: {fileID: 22100000, guid: 5fda7c3abb6d5d14daf111911006b043, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
