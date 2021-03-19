@@ -54,7 +54,11 @@ public class BlackHole : MonoBehaviour
             if (enemy == null)
             {
                 Witch witch = collision.GetComponentInParent<Witch>();
-                if (witch.Dead)
+                if(witch == null)
+                {
+                    Destroy(collision.transform.parent.gameObject);
+                }
+                else if (witch.Dead)
                     return;
             }
             else if (enemy.Dead)

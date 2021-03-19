@@ -230,10 +230,8 @@ MonoBehaviour:
   maxHP: 20
   speed: 5
   spawnDelay: 3
-  spawningPrefabs:
-  - {fileID: 1847143980567254533, guid: 3e697126807f663468e3c1541dafea89, type: 3}
-  - {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a, type: 3}
-  - {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b, type: 3}
+  bomberManPrefab: {fileID: 586821772844481444, guid: 6a7d23373aced6c4a83ae531182eaf37,
+    type: 3}
   healthBar: {fileID: 5384802442746769661}
   leftPoint: {fileID: 0}
   rightPoint: {fileID: 0}
