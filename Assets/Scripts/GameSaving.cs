@@ -117,6 +117,9 @@ public class GameSaving : MonoBehaviour
 
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
 
+        int music = PlayerPrefs.GetInt("@music", 1);
+        int sound = PlayerPrefs.GetInt("@sounds", 1);
+
         foreach (var item in analiticsPrefabs)
         {
             item.show = false;
@@ -125,6 +128,8 @@ public class GameSaving : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("@coins", _score);
         PlayerPrefs.SetInt("@tutor", tutorComplete);
+        PlayerPrefs.SetInt("@music", music);
+        PlayerPrefs.SetInt("@sounds", sound);
         PlayerPrefs.SetString("@mode", mode);
         LoadDeadEnemies();
     }

@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public Toggle toggleMode;
+    public Toggle toggleMusic;
+    public Toggle toggleSound;
     public GameObject mainPanel;
     public GameObject optionsPanel;
 
@@ -23,9 +25,11 @@ public class Menu : MonoBehaviour
             mode = "Normal Mode";
             PlayerPrefs.SetString("@mode", mode);
         }
-        Text modeName = toggleMode.GetComponentInChildren<Text>();
-        modeName.text = mode;
         toggleMode.isOn = mode == "Hard Mode";
+
+        toggleMusic.isOn = SoundMusicManager.instance.Music;
+        toggleSound.isOn = SoundMusicManager.instance.Sound;
+
     }
     private IEnumerator WaitForAnimation()
     {
@@ -67,14 +71,26 @@ public class Menu : MonoBehaviour
 
     public void ChangeMode()
     {
-        bool hardMode = toggleMode.isOn;
-        Text modeName = toggleMode.GetComponentInChildren<Text>();
-        modeName.text = hardMode ? "Hard Mode" : "Normal Mode";
-        PlayerPrefs.SetString("@mode", modeName.text);
+        bool isOn = toggleMode.isOn;
+        string modeName = !isOn ? "Hard Mode" : "Normal Mode";
+        PlayerPrefs.SetString("@mode", modeName);
+        toggleMode.isOn = !isOn;
     }
 
     public void LoadTutorial()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ToggleMusic()
+    {
+        toggleMusic.isOn = !toggleMusic.isOn;
+        SoundMusicManager.instance.Music = toggleMusic.isOn;
+    }
+
+    public void ToggleSound()
+    {
+        toggleSound.isOn = !toggleSound.isOn;
+        SoundMusicManager.instance.Sound = toggleSound.isOn;
     }
 }
