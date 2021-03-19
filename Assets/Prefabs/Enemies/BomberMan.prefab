@@ -97,6 +97,7 @@ MonoBehaviour:
     m_Bits: 2304
   direction: -1
   checkGroundInFront: {fileID: 586821774572119332}
+  _name: 19
 --- !u!1 &586821774545717204
 GameObject:
   m_ObjectHideFlags: 0

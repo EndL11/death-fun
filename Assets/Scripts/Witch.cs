@@ -33,6 +33,8 @@ public class Witch : MonoBehaviour
 
     private bool isSpawning = false;
 
+    public EnemyAnalytics.Names _name;
+
     public bool Dead
     {
         get { return dead; }
@@ -94,6 +96,7 @@ public class Witch : MonoBehaviour
         dead = true;
         anim.SetTrigger("Die");
         rb.bodyType = RigidbodyType2D.Dynamic;
+        GameSaving.instance.EnemyDead(_name.ToString());
     }
 
     private void Move()
