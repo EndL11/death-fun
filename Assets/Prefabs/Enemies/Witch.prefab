@@ -236,6 +236,7 @@ MonoBehaviour:
   leftPoint: {fileID: 0}
   rightPoint: {fileID: 0}
   hurtParticles: {fileID: 6687151484848158847}
+  _name: 18
 --- !u!1001 &992325172748808773
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class BomberMan : MonoBehaviour
 
     public Transform checkGroundInFront;
 
+    public EnemyAnalytics.Names _name;
+
     public int Direction
     {
         get { return direction; }
@@ -48,6 +50,7 @@ public class BomberMan : MonoBehaviour
             Vector2 directionToPush = transform.position.x > colliders[0].transform.position.x ? Vector2.left : Vector2.right;
             colliders[0].GetComponent<Player>().ApplyDamage(damage, directionToPush);
         }
+        GameSaving.instance.EnemyDead(_name.ToString());
     }
 
     private void ChangeMovementDirection()
