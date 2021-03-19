@@ -13,7 +13,8 @@ public class GameProcess : MonoBehaviour
     private Text scoreText;
     private Text enemiesText;
 
-    public GameObject enemiesStatsParent;
+    public Transform enemiesStatsParent;
+    public Transform enemiesStatsParent2;
 
     public GameObject bossUI = null;
 
@@ -104,10 +105,16 @@ public class GameProcess : MonoBehaviour
         Time.timeScale = 0;
 
         List<GameObject> prefabs = GameSaving.instance.GetAnalyticsObjects();
-
+        Transform parent = enemiesStatsParent;
+        int counter = 0;
         foreach (var item in prefabs)
         {
-            GameObject _instance = Instantiate(item, enemiesStatsParent.transform.position, Quaternion.identity, enemiesStatsParent.transform);
+            if(counter == 12)
+            {
+                parent = enemiesStatsParent2;
+            }
+            GameObject _instance = Instantiate(item, parent.position, Quaternion.identity, parent);
+            counter += 1;
         }
 
         //  above add dead enemies to game over panel

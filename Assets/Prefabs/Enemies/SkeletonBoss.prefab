@@ -213,7 +213,7 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 0
+  _name: 16
   healthBar: {fileID: 0}
   healthBarObject: {fileID: 0}
   blockTime: 5

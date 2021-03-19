@@ -13,7 +13,7 @@ public class Witch : MonoBehaviour
     public float spawnDelay = 3f;
     private float _spawnDelay;
 
-    [SerializeField] private List<GameObject> spawningPrefabs;
+    [SerializeField] private GameObject bomberManPrefab;
 
     [SerializeField] private Slider healthBar;
 
@@ -30,6 +30,8 @@ public class Witch : MonoBehaviour
     private Color c;
 
     [SerializeField] private ParticleSystem hurtParticles;
+
+    private bool isSpawning = false;
 
     public bool Dead
     {
@@ -54,7 +56,7 @@ public class Witch : MonoBehaviour
         if (dead)
             return;
 
-        if(_spawnDelay > 0f)
+        if (_spawnDelay > 0f)
         {
             _spawnDelay -= Time.deltaTime;
         }
@@ -65,7 +67,7 @@ public class Witch : MonoBehaviour
             _spawnDelay = spawnDelay;
         }
 
-        if(!dead)
+        if (!dead && !isSpawning)
             Move();
     }
 
@@ -98,7 +100,7 @@ public class Witch : MonoBehaviour
     {
         anim.SetBool("Fly", true);
         transform.Translate(transform.right * direction * Time.deltaTime * speed);
-        if((direction == 1 && transform.position.x > rightPoint.position.x) || (direction == -1 && transform.position.x < leftPoint.position.x))
+        if ((direction == 1 && transform.position.x > rightPoint.position.x) || (direction == -1 && transform.position.x < leftPoint.position.x))
         {
             ChangeMovementDirection();
         }
@@ -106,19 +108,15 @@ public class Witch : MonoBehaviour
 
     private IEnumerator SpawnRandomEnemy()
     {
-
-        if (spawningPrefabs.Count == 0 || dead)
-            yield return null;
-        else
-        {
-            anim.SetBool("Fly", false);
-            yield return new WaitForSeconds(0.3f);
-            GameObject enemy = Instantiate(spawningPrefabs[Random.Range(0, spawningPrefabs.Count - 1)], transform.position, Quaternion.identity);
-            int rand = UnityEngine.Random.Range(1, 3);
-            Enemy enemyScript = enemy.GetComponent<Enemy>();
-            int direction = enemyScript.Direction == -1 ? 1 : -1;
-            enemyScript.Direction = direction;
-        }        
+        isSpawning = true;
+        anim.SetBool("Fly", false);
+        yield return new WaitForSeconds(0.3f);
+        GameObject enemy = Instantiate(bomberManPrefab, transform.position, Quaternion.identity);
+        int rand = UnityEngine.Random.Range(1, 3);
+        BomberMan bomber = enemy.GetComponent<BomberMan>();
+        int direction = bomber.Direction == -1 ? 1 : -1;
+        bomber.Direction = direction;
+        isSpawning = false;
     }
 
     private void ChangeMovementDirection()

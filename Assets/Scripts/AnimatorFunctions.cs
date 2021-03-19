@@ -64,4 +64,19 @@ public class AnimatorFunctions : MonoBehaviour
     {
         transform.GetChild(transform.parent.childCount).GetComponent<Collider2D>().enabled = true;
     }
+
+    public void BomberManDetonate()
+    {
+        GetComponentInParent<BomberMan>().Detonate();
+    }
+
+    public void StartRunBomber()
+    {
+        GetComponentInParent<Animator>().SetTrigger("Run");
+    }
+
+    public void StartBlickingBomber()
+    {
+        GetComponentInParent<Animator>().SetTrigger("Blick");
+    }
 }

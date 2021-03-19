@@ -18,7 +18,9 @@ public struct PlayerStats
 [System.Serializable]
 public class EnemyAnalytics
 {
-    public enum Names { spider, snake, scorpion, zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3, knight_4 };
+    public enum Names { spider, snake, scorpion,
+        zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3,
+        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, bomberMan };
     public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
@@ -117,6 +119,9 @@ public class GameSaving : MonoBehaviour
 
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
 
+        int music = PlayerPrefs.GetInt("@music", 1);
+        int sound = PlayerPrefs.GetInt("@sounds", 1);
+
         foreach (var item in analiticsPrefabs)
         {
             item.show = false;
@@ -125,6 +130,8 @@ public class GameSaving : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("@coins", _score);
         PlayerPrefs.SetInt("@tutor", tutorComplete);
+        PlayerPrefs.SetInt("@music", music);
+        PlayerPrefs.SetInt("@sounds", sound);
         PlayerPrefs.SetString("@mode", mode);
         LoadDeadEnemies();
     }
