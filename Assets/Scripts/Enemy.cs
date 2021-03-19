@@ -27,13 +27,13 @@ public class Enemy : MonoBehaviour
     public GameObject soulPrefab;
 
     [SerializeField] private Transform checkPlatformEndPoint;
-    [SerializeField] private Transform checkPlayerPoint;
+    [SerializeField] protected Transform checkPlayerPoint;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
     public LayerMask whatAvoid;
 
     [SerializeField] private EnemyAnalytics.Names _name;
-    [HideInInspector] public Slider healthBar = null;
+    public Slider healthBar = null;
     //  start color
     private Color c;
 
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         _speed = speed;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead && !isWall())
             Move();
@@ -191,7 +191,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(transform.right * direction * speed * Time.deltaTime);
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         //  do not attack if dead
         if (dead) return;
