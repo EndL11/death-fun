@@ -58,6 +58,74 @@ MonoBehaviour:
       type: 3}
     name: 2
     show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 304691bedbd15cb42a106283277b106f,
+      type: 3}
+    name: 3
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 011d4257c3d839847a7e1eecab111675,
+      type: 3}
+    name: 4
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 832d24dd5d55b354290d4454d5a37b74,
+      type: 3}
+    name: 5
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 8e0b66c81ddb29741ad5bd6ba517bf07,
+      type: 3}
+    name: 6
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 0abe63ccfc264ec48b45cefa370e0a1d,
+      type: 3}
+    name: 7
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 751d8d3647b8b814fbd8a5093bd0d8ad,
+      type: 3}
+    name: 8
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 34b2f4875fab63642a21c089277e6887,
+      type: 3}
+    name: 9
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 073563b7000c30c47a00cbe15afdf9e7,
+      type: 3}
+    name: 10
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 93e41add73fdcc74b88a8bf99f1ccec8,
+      type: 3}
+    name: 16
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: d8f93dcc39dedd54a82e12b27cb5c550,
+      type: 3}
+    name: 17
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 0ce123bd0a692db4a83c300838f63090,
+      type: 3}
+    name: 18
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 012736a49ab1d7643b6e6006ecd481f3,
+      type: 3}
+    name: 19
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: fa4f565ee93c7ed408f8bf0fc6e14116,
+      type: 3}
+    name: 11
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: d2a4d544a23aadf4aa5c89467f06cdd1,
+      type: 3}
+    name: 12
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 77fc17bb8c4e0534298b7bea8788c05c,
+      type: 3}
+    name: 13
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 5d4aced2e8611b44b8bfe2ed13283e41,
+      type: 3}
+    name: 14
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 8cf069adb4e0e2c4dafc97d709b36f10,
+      type: 3}
+    name: 15
+    show: 0
   ENEMIES:
   - spider
   - snake

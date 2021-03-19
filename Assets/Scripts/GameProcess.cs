@@ -109,7 +109,7 @@ public class GameProcess : MonoBehaviour
         int counter = 0;
         foreach (var item in prefabs)
         {
-            if(counter == 12)
+            if(counter == 1)
             {
                 parent = enemiesStatsParent2;
             }
