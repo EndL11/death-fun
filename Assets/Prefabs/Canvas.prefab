@@ -2494,7 +2494,7 @@ PrefabInstance:
     - target: {fileID: 8186495355899655264, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyItem
+      value: onPressItem
       objectReference: {fileID: 0}
     - target: {fileID: 8186495355899655267, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
@@ -2854,7 +2854,7 @@ PrefabInstance:
     - target: {fileID: 6588034760944799574, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.8673096
+      value: 4.8673058
       objectReference: {fileID: 0}
     - target: {fileID: 6588034760944799574, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
