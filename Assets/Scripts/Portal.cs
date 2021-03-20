@@ -11,6 +11,12 @@ public class Portal : MonoBehaviour
         StartCoroutine(StartAnimation());
     }
 
+    private void OnEnable()
+    {
+        if(playerPrefab == null)
+            StartCoroutine(StartAnimation());
+    }
+
     private IEnumerator StartAnimation()
     {
         GameObject player = null;

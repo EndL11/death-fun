@@ -96,7 +96,7 @@ public class Witch : MonoBehaviour
         dead = true;
         anim.SetTrigger("Die");
         rb.bodyType = RigidbodyType2D.Dynamic;
-        GameSaving.instance.EnemyDead(_name.ToString());
+        GameSaving.instance.EnemyDead(gameObject);
     }
 
     private void Move()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 using UnityEngine.SceneManagement;
 
 public struct PlayerStats
@@ -33,14 +34,19 @@ public class GameSaving : MonoBehaviour
     public event Action OnEnemyDead = () => { };
     public event Action OnGameOver = () => { };
     public event Action OnBossStart = () => { };
+    public event Action OnBossDie = () => { };
+    public event Action OnEndLevel = () => { };
     public PlayerStats playerStats;
     public int score = 0;
     public int deadEnemies = 0;
+    public int enemiesCount = 0;
+    private List<GameObject> enemies = new List<GameObject>();
     private Dictionary<string, int> enemiesDeadList = new Dictionary<string, int>();
     [SerializeField] private List<EnemyAnalytics> analiticsPrefabs;
 
     [HideInInspector]
     public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
+
     void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex != 1)
@@ -54,6 +60,9 @@ public class GameSaving : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        enemies = GameObject.FindGameObjectsWithTag("Enemies").ToList();
+        enemiesCount = enemies.Count;
+        deadEnemies = 0;
     }
 
     private void Start()
@@ -67,12 +76,31 @@ public class GameSaving : MonoBehaviour
         OnScoreChanged();
     }
 
-
-    public void EnemyDead(string name)
+    public void EnemyDead(GameObject enemy)
     {
-        deadEnemies += 1;
-        OnEnemyDead();
+        string name;
+        Enemy script = enemy.GetComponent<Enemy>();
+        if (script == null)
+        {
+            Witch witch = enemy.GetComponent<Witch>();
+            if (witch == null)
+            {
+                return;
+            }
+            name = witch._name.ToString();
+        }
+        else
+            name = script._name.ToString();
 
+        bool deleted = enemies.Remove(enemy);
+        if(deleted && name != "bomberMan")
+                deadEnemies += 1;
+
+        OnEnemyDead();
+        if (deadEnemies == enemiesCount)
+        {
+            OnEndLevel();
+        }
         if (SceneManager.GetActiveScene().buildIndex == 1)
             return;
 
@@ -91,6 +119,7 @@ public class GameSaving : MonoBehaviour
 
     public void SaveCompleteTutorial()
     {
+        //  add saving history telling
         PlayerPrefs.SetInt("@tutor", 1);
     }
 
@@ -167,5 +196,10 @@ public class GameSaving : MonoBehaviour
     public void BossStartFight()
     {
         OnBossStart();
+    }
+
+    public void BossEndFight()
+    {
+        OnBossDie();
     }
 }

@@ -62,4 +62,10 @@ public class Boss : Enemy
     {
         GameSaving.instance.OnBossStart -= StartFight;
     }
+
+    protected override void DestroyEnemy()
+    {
+        base.DestroyEnemy();
+        GameSaving.instance.BossEndFight();
+    }
 } 
