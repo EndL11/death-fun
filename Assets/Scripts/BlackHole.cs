@@ -50,23 +50,7 @@ public class BlackHole : MonoBehaviour
     {
         if (collision.CompareTag("EnemyTrigger"))
         {
-            Enemy enemy = collision.GetComponentInParent<Enemy>();
-            if (enemy == null)
-            {
-                Witch witch = collision.GetComponentInParent<Witch>();
-                if(witch == null)
-                {
-                    collision.transform.parent.gameObject.GetComponent<BomberMan>().Detonate();
-                    //Destroy(collision.transform.parent.gameObject);
-                }
-                else if (witch.Dead)
-                    return;
-            }
-            else if (enemy.Dead)
-                return;
-
-            Particles();
-            Destroy(gameObject);
+            Collision(collision.gameObject);
         }
     }
 
@@ -108,5 +92,27 @@ public class BlackHole : MonoBehaviour
             }
         }
         enemies.Clear();
+    }
+
+    public void Collision(GameObject collision)
+    {
+        Enemy enemy = collision.GetComponentInParent<Enemy>();
+        if (enemy == null)
+        {
+            Witch witch = collision.GetComponentInParent<Witch>();
+            if (witch == null)
+            {
+                BomberMan bomber = collision.transform.parent.gameObject.GetComponent<BomberMan>();
+                if(bomber != null)
+                    bomber.Detonate();
+            }
+            else if (witch.Dead)
+                return;
+        }
+        else if (enemy.Dead)
+            return;
+
+        Particles();
+        Destroy(gameObject);
     }
 }
