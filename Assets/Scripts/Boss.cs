@@ -7,7 +7,7 @@ public class Boss : Enemy
 {
     [SerializeField] protected GameObject healthBarObject;
     protected Text healthStats;
-    private bool canMove = false;
+    protected bool canMove = false;
     protected void Awake()
     {
         healthBar = healthBarObject.GetComponentInChildren<Slider>();
