@@ -19940,6 +19940,10 @@ PrefabInstance:
       propertyPath: bossUI
       value: 
       objectReference: {fileID: 1666349914}
+    - target: {fileID: 1500923775, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1519082868, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.5

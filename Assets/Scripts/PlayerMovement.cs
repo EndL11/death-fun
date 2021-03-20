@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (player.Dead || !canMove)
             return;
         //  if pressed left mouse button,, player not dead and not interact with UI
-        if (Input.GetMouseButton(0) && !player.Dead && EventSystem.current.currentSelectedGameObject == null)        
+        if (Input.GetKey(KeyCode.Comma) && !player.Dead && EventSystem.current.currentSelectedGameObject == null)        
             Attack();
 
         if (isGrounded() && Input.GetKey(KeyCode.W))

@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         else
         {
             //  if pressed right mouse button
-            if (Input.GetMouseButtonDown(1) && !dead)
+            if (Input.GetKeyDown(KeyCode.Period) && !dead)
             {
                 SpawnBlackHole();
                 _blackHoleDelay = blackHoleDelay;
