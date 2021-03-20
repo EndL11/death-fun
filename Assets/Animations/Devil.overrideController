@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Devil
+  m_Controller: {fileID: 9100000, guid: 94d26d79771bf224cb25181ed2e0266e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 845e66f3b1e435c47b49c48d6bcd0279, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: efc885e3e48d85d459fe2ffbe2b615be, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5713eff52826ce649b5dcbbab94f35df, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 077e6d209f70da44e96519fe909bbff0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1a6898ccd75d4e5449adcc6af4d52547, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 82140c9b2cb56334282e8a3481e9db23, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6d20a64d3401df24ca5b39e728e0f126, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 623040c45c48d4e459bb363df31e94cd, type: 2}

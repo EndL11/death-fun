@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8893762963071294565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8893762963071294564}
+  - component: {fileID: 8893762963071294567}
+  m_Layer: 0
+  m_Name: GameSaving
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8893762963071294564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893762963071294565}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 69.460304, y: -1.935318, z: -0.79296875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8893762963071294567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893762963071294565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359f02a91e92dc24ba590f8b8abc628a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  deadEnemies: 0
+  analiticsPrefabs:
+  - prefab: {fileID: 7989043304102008344, guid: a926d7ac1cc20294f83c894e39491d08,
+      type: 3}
+    name: 0
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 2e68fdbf4bd18aa4a887123013ce9881,
+      type: 3}
+    name: 1
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 46f023f1f514ba1479a897633dcc2ad0,
+      type: 3}
+    name: 2
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 304691bedbd15cb42a106283277b106f,
+      type: 3}
+    name: 3
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 011d4257c3d839847a7e1eecab111675,
+      type: 3}
+    name: 4
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 832d24dd5d55b354290d4454d5a37b74,
+      type: 3}
+    name: 5
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 8e0b66c81ddb29741ad5bd6ba517bf07,
+      type: 3}
+    name: 6
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 0abe63ccfc264ec48b45cefa370e0a1d,
+      type: 3}
+    name: 7
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 751d8d3647b8b814fbd8a5093bd0d8ad,
+      type: 3}
+    name: 8
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 34b2f4875fab63642a21c089277e6887,
+      type: 3}
+    name: 9
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 073563b7000c30c47a00cbe15afdf9e7,
+      type: 3}
+    name: 10
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 93e41add73fdcc74b88a8bf99f1ccec8,
+      type: 3}
+    name: 16
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: d8f93dcc39dedd54a82e12b27cb5c550,
+      type: 3}
+    name: 17
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 0ce123bd0a692db4a83c300838f63090,
+      type: 3}
+    name: 18
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 012736a49ab1d7643b6e6006ecd481f3,
+      type: 3}
+    name: 19
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: fa4f565ee93c7ed408f8bf0fc6e14116,
+      type: 3}
+    name: 11
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: d2a4d544a23aadf4aa5c89467f06cdd1,
+      type: 3}
+    name: 12
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 77fc17bb8c4e0534298b7bea8788c05c,
+      type: 3}
+    name: 13
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 5d4aced2e8611b44b8bfe2ed13283e41,
+      type: 3}
+    name: 14
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 8cf069adb4e0e2c4dafc97d709b36f10,
+      type: 3}
+    name: 15
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 80378d0ee02377f4a931e0e6f7a4aeac,
+      type: 3}
+    name: 20
+    show: 0
+  ENEMIES:
+  - spider
+  - snake
+  - scorpion
+  - zombie_1
+  - zombie_2
+  - zombie_3
+  - zombie_4
+  - knight_1
+  - knight_2
+  - knight_3
+  - knight_4

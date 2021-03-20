@@ -9,6 +9,11 @@ TagManager:
   - EnemyTrigger
   - Score
   - Enemies
+  - HealthBar
+  - BlackHoleDelay
+  - PlayerAttack
+  - BossUI
+  - BossStart
   layers:
   - Default
   - TransparentFX
@@ -23,8 +28,8 @@ TagManager:
   - Player
   - Traps
   - PostProcessing
-  - 
-  - 
+  - EnemyBlock
+  - BomberMan
   - 
   - 
   - 
@@ -48,6 +53,9 @@ TagManager:
     locked: 0
   - name: Action objects
     uniqueID: 1457639649
+    locked: 0
+  - name: Traps
+    uniqueID: 3190399507
     locked: 0
   - name: Canvas
     uniqueID: 1150565559

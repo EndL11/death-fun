@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FinishPortal : MonoBehaviour
 {
@@ -11,8 +10,18 @@ public class FinishPortal : MonoBehaviour
         {
             //  saving player stats
             collision.GetComponentInParent<Player>().SavePlayerStats();
-            //  load next scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Destroy(collision.transform.parent.gameObject);
+            StartCoroutine(WaitToEndAnimation());            
         }
+    }
+
+    private IEnumerator WaitToEndAnimation()
+    {
+        StartCoroutine(GetComponent<Portal>().EndAnimation());
+        while (transform.localScale.x > 0f)
+        {
+            yield return null;
+        }
+        Camera.main.GetComponent<Animator>().SetTrigger("Finish");
     }
 }

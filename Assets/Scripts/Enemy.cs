@@ -5,38 +5,36 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float maxHP = 100f;
+    [SerializeField] protected float hp = 100f;
+    [SerializeField] protected float maxHP = 100f;
     public float speed = 3f;
-    private float _speed;
+    protected float _speed;
     //  movement direction - 1 - right, -1 - left
     [SerializeField] private int direction = -1;
     public float damage = 25f;
     private bool dead = false;
     //  attack delay
-    [SerializeField] private float attackDelay = 3f;
-    private float _attackDelay;
+    [SerializeField] protected float attackDelay = 3f;
+    protected float _attackDelay;
 
     public float attackZone = 0.5f;
     public float playerCheckZone = 0.3f;
 
-    private Rigidbody2D rb;
-    private Animator anim;
-
-    //  for future AI, to changing movement or staying 
-    //private const float timeToChangeDirection = 5f;
-    //public float _timeToChangeDirection = timeToChangeDirection;
+    protected Rigidbody2D rb;
+    protected Animator anim;
 
     public ParticleSystem hurtParticles;
     public GameObject soulPrefab;
 
     [SerializeField] private Transform checkPlatformEndPoint;
-    [SerializeField] private Transform checkPlayerPoint;
+    [SerializeField] protected Transform checkPlayerPoint;
+
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
-    public LayerMask whatAvoid;    
+    public LayerMask whatAvoid;
 
-    [SerializeField] private Slider healthBar;
+    [SerializeField] private EnemyAnalytics.Names _name;
+    public Slider healthBar = null;
     //  start color
     private Color c;
 
@@ -45,7 +43,13 @@ public class Enemy : MonoBehaviour
         get { return dead; }
     }
 
-    void Start()
+    public int Direction
+    {
+        get { return direction; }
+        set { direction = value; }
+    }
+
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -60,7 +64,7 @@ public class Enemy : MonoBehaviour
         _speed = speed;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead && !isWall())
             Move();
@@ -92,7 +96,7 @@ public class Enemy : MonoBehaviour
         } 
     }
 
-    public void ApplyDamage(float damage, Vector2 dir)
+    public virtual void ApplyDamage(float damage, Vector2 dir)
     {
         if (dead)
             return;
@@ -113,7 +117,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void PushBack(Vector2 dir)
+    protected virtual void PushBack(Vector2 dir)
     {
         //  reset velocity
         rb.velocity = Vector2.zero;
@@ -141,7 +145,8 @@ public class Enemy : MonoBehaviour
         healthBar.gameObject.SetActive(false);
         //  spawn soul
         SpawnSoul();
-        GameSaving.instance.EnemyDead();
+        if(GameSaving.instance != null)
+            GameSaving.instance.EnemyDead(_name.ToString());
         //  show die animation
         anim.SetTrigger("Die");
     }
@@ -152,7 +157,7 @@ public class Enemy : MonoBehaviour
         Destroy(soul, 1.5f);
     }
 
-    private void ChangeMovementDirection()
+    protected void ChangeMovementDirection()
     {
         //  set direction to another
         direction = direction == 1 ? -1 : 1;
@@ -160,21 +165,21 @@ public class Enemy : MonoBehaviour
         transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
     }
 
-    private bool isEndPlatform()
+    protected bool isEndPlatform()
     {
         //  return true if platform is ended
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlatformEndPoint.position, 0.3f, whatIsGround);
         return colliders.Length == 0;
     }
 
-    private bool isGrounded()
+    protected bool isGrounded()
     {
         //  return true if enemy is on ground
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, whatIsGround);
         return colliders.Length > 0;
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         //  if playing attack anim - return
         if (anim.GetBool("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))
@@ -187,7 +192,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(transform.right * direction * speed * Time.deltaTime);
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         //  do not attack if dead
         if (dead) return;
@@ -203,17 +208,17 @@ public class Enemy : MonoBehaviour
         //  reset speed to normal
         speed = _speed;
         //  stop playing attack animation
-        anim.SetBool("Attack", false);
+        //anim.SetBool("Attack", false);
     }
 
-    private bool isPlayerNear()
+    protected bool isPlayerNear()
     {
         //  return true if in player check zone at least 1 player object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, playerCheckZone, whatIsPlayer);
         return colliders.Length != 0;
     }
 
-    private bool isWall()
+    protected bool isWall()
     {
         //  return true if in player check zone at least 1 avoid object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatAvoid);

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +18,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundChecker;
     //  layermask to set layer for ground
     public LayerMask whatIsGround;
+    private bool canMove = false;
+    public bool CanMove
+    {
+        get { return canMove; }
+        set { canMove = value; }
+    }
 
     private void Start()
     {
@@ -28,10 +36,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (player.Dead)
+        if (player.Dead || !canMove)
             return;
-
-        if (Input.GetMouseButton(0))        //  if pressed left mouse button
+        //  if pressed left mouse button,, player not dead and not interact with UI
+        if (Input.GetKey(KeyCode.Comma) && !player.Dead && EventSystem.current.currentSelectedGameObject == null)        
             Attack();
 
         if (isGrounded() && Input.GetKey(KeyCode.W))
@@ -41,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player.Dead)
+        if (player.Dead || !canMove)
             return;
 
         if (Input.GetAxis("Horizontal") != 0)   //  if moving to somewhere

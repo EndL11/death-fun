@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class UpgradeItem : MonoBehaviour
 {
-    public enum STATS {HP_SMALL, HP_MEDIUM, HP_FULL};
+    public enum STATS {HP, HP_HALF, HP_FULL, DAMAGE, MAXHP, SPHERE_DELAY, SPHERE_RADIUS, SPHERE_DAMAGE};
     [SerializeField] private STATS statsIdentificator;
     [SerializeField] private float value;
+    [SerializeField] private string description = "Get HP $$%";
+    [SerializeField] private int cost = 50;
 
     public STATS Identificator
     {
@@ -18,22 +20,13 @@ public class UpgradeItem : MonoBehaviour
         get { return value; }
     }
 
-    private void Start()
+    public int Cost
     {
-        //  recover 25% of max hp
-        if(statsIdentificator == STATS.HP_SMALL)
-        {
-            value = .25f;
-        }
-        //  recover 50% of max hp
-        else if (statsIdentificator == STATS.HP_MEDIUM)
-        {
-            value = .5f;
-        }
-        //  recover 100% of max hp
-        else if (statsIdentificator == STATS.HP_FULL)
-        {
-            value = 1f;
-        }
+        get { return cost; }
+    }
+
+    public string Description
+    {
+        get { return description; }
     }
 }

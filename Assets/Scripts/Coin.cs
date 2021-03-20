@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private int score = 10;
+    [SerializeField] private int score = 1;
+    public GameObject particles;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            GameSaving.instance.AddScore(score);
+            if(GameSaving.instance != null)
+                GameSaving.instance.AddScore(score);
+            GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
+            Destroy(spawnedParticles, 1.5f);
+            SoundMusicManager.instance.TakeCoinSoundPlay();
             Destroy(gameObject);
         }
     }

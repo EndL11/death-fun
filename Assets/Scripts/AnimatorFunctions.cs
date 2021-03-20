@@ -1,30 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AnimatorFunctions : MonoBehaviour
 {
     public void StopAttack()
     {
         GetComponent<Animator>().SetBool("Attack", false);
+        GetComponent<Animator>().SetTrigger("AttackNull");
     }
 
     public void Attack()
     {
-        GetComponentInParent<Player>().ApplyAttack();
+        GetComponentInParent<Player>()?.ApplyAttack();
         //  set trigger to start idle animation 
         GetComponent<Animator>().SetTrigger("AttackNull");
     }
 
     public void Destroy()
     {
+        if(transform.parent.gameObject.CompareTag("Player"))
+            GameSaving.instance.GameOver();
         Destroy(transform.parent.gameObject);
     }
 
     public void EnemyAttack()
     {
         GetComponentInParent<Enemy>().Attack();
-        GetComponent<Animator>().SetTrigger("AttackNull");
     }
 
     public void EnableCollisions()
@@ -45,5 +48,35 @@ public class AnimatorFunctions : MonoBehaviour
     public void SetDefaultSawValues()
     {
         GetComponentInParent<Saw>().SetStaticValues();
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void DeactivateShopNotification()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ActivateBlockCollider()
+    {
+        transform.GetChild(transform.parent.childCount).GetComponent<Collider2D>().enabled = true;
+    }
+
+    public void BomberManDetonate()
+    {
+        GetComponentInParent<BomberMan>().Detonate();
+    }
+
+    public void StartRunBomber()
+    {
+        GetComponentInParent<Animator>().SetTrigger("Run");
+    }
+
+    public void StartBlickingBomber()
+    {
+        GetComponentInParent<Animator>().SetTrigger("Blick");
     }
 }

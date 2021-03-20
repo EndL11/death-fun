@@ -62,13 +62,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31dc3d010a9f7f84c9b9be9afd61a3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
-  radius: 3
+  damage: 20
+  radius: 1.1
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   boomEffect: {fileID: 1784380983712248808, guid: c4694a9c9697aec47bb4adbac2afb733,
     type: 3}
+  destroyDelay: 5
 --- !u!1 &4333714545868418947
 GameObject:
   m_ObjectHideFlags: 0
