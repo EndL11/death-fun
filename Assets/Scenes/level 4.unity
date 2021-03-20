@@ -381,7 +381,7 @@ Transform:
   - {fileID: 881420930}
   - {fileID: 460823330}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &41057333 stripped
 Transform:
@@ -9406,7 +9406,7 @@ Transform:
   - {fileID: 1481190350}
   - {fileID: 638994549}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &592916661 stripped
 Transform:
@@ -28968,7 +28968,7 @@ Transform:
   - {fileID: 592916661}
   - {fileID: 1745010681}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &972713879 stripped
 Transform:
@@ -31841,7 +31841,7 @@ Transform:
   - {fileID: 844038713}
   - {fileID: 767108382}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1534032667 stripped
 Transform:
