@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4795782588670981508}
   - component: {fileID: 5485861285723468458}
   - component: {fileID: 8926585719524232693}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collider
   m_TagString: Fireball
   m_Icon: {fileID: 0}

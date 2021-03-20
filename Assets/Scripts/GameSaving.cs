@@ -58,6 +58,7 @@ public class GameSaving : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(111);
         LoadDeadEnemies();        
     }
 
@@ -70,6 +71,9 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(string name)
     {
+        if (name == "bomberMan")
+            return;
+
         deadEnemies += 1;
         OnEnemyDead();
 

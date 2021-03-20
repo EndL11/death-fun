@@ -18,6 +18,8 @@ public class GameProcess : MonoBehaviour
 
     public GameObject bossUI = null;
 
+    private int enemiesCount = 0;
+
     private void Awake()
     {
         if(GameSaving.instance != null)
@@ -25,6 +27,7 @@ public class GameProcess : MonoBehaviour
 
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         enemiesText = GameObject.FindGameObjectWithTag("Enemies").GetComponent<Text>();
+        enemiesCount = GameObject.FindObjectsOfType<Enemy>().Length;
     }
 
     private void Start()
@@ -45,7 +48,8 @@ public class GameProcess : MonoBehaviour
 
 
             scoreText.text = GameSaving.instance.score.ToString();
-            enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+            //enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+            enemiesText.text = $"{GameSaving.instance.deadEnemies} / {enemiesCount}";
         }
         //testing score 
         GameSaving.instance.score = 999;
@@ -89,7 +93,7 @@ public class GameProcess : MonoBehaviour
 
     private void UpdateDeadCounter()
     {
-        enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {enemiesCount}";
     }
 
     private void UpdateScore()
@@ -159,5 +163,10 @@ public class GameProcess : MonoBehaviour
     private void OnBossStartHandler()
     {
         bossUI.SetActive(true);
+    }
+
+    private void CalculateEnemiesList()
+    {
+
     }
 }
