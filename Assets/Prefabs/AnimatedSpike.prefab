@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 693210400098370842}
   - component: {fileID: 693210400098370841}
   - component: {fileID: 693210400098370840}
+  - component: {fileID: 5757202745905400043}
   m_Layer: 0
   m_Name: AnimatedSpikeSprite
   m_TagString: Untagged
@@ -114,6 +115,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f1bda566704cf4487f519acb7e5f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5757202745905400043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693210400098370836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &693210400607208441
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +139,7 @@ GameObject:
   - component: {fileID: 693210400607208447}
   - component: {fileID: 693210400607208446}
   - component: {fileID: 693210400607208445}
+  - component: {fileID: 4901372979417124690}
   m_Layer: 11
   m_Name: AnimatedSpike
   m_TagString: Untagged
@@ -210,6 +224,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4901372979417124690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693210400607208441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6764005274213342315
 GameObject:
   m_ObjectHideFlags: 0

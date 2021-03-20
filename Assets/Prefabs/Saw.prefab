@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7315819325330615248}
   - component: {fileID: 7315819325330615251}
   - component: {fileID: 7315819325330615250}
+  - component: {fileID: 8611117507487867502}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -87,6 +88,18 @@ MonoBehaviour:
   increasedDamage: 30
   staticUpForce: 2
   increasedUpForce: 6
+--- !u!114 &8611117507487867502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7315819325330615254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7315819325799187384
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +112,6 @@ GameObject:
   - component: {fileID: 7315819325799187386}
   - component: {fileID: 7315819325799187333}
   - component: {fileID: 7315819325799187332}
-  - component: {fileID: 2374186977780326363}
   m_Layer: 0
   m_Name: SawSprite
   m_TagString: Untagged
@@ -200,17 +212,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48f1bda566704cf4487f519acb7e5f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2374186977780326363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7315819325799187384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

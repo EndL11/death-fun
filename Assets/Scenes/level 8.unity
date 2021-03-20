@@ -6218,6 +6218,7 @@ GameObject:
   - component: {fileID: 923950971}
   - component: {fileID: 923950970}
   - component: {fileID: 923950969}
+  - component: {fileID: 923950972}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -11935,6 +11936,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &923950972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923950965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &934491121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24844,6 +24857,7 @@ GameObject:
   - component: {fileID: 1043185993}
   - component: {fileID: 1043185992}
   - component: {fileID: 1043185991}
+  - component: {fileID: 1043185994}
   m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
@@ -35306,6 +35320,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1043185994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043185987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047471766
 GameObject:
   m_ObjectHideFlags: 0
@@ -38680,6 +38706,7 @@ GameObject:
   - component: {fileID: 1588498859}
   - component: {fileID: 1588498858}
   - component: {fileID: 1588498857}
+  - component: {fileID: 1588498860}
   m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
@@ -40772,6 +40799,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1588498860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588498853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1590802279
 PrefabInstance:
   m_ObjectHideFlags: 0
