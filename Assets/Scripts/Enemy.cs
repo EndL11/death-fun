@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     public LayerMask whatIsPlayer;
     public LayerMask whatAvoid;
 
-    [SerializeField] private EnemyAnalytics.Names _name;
+    public EnemyAnalytics.Names _name;
     public Slider healthBar = null;
     //  start color
     private Color c;
@@ -66,6 +66,9 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (dead)
+            return;
+
         if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead && !isWall())
             Move();
         else if(!dead && isGrounded() && (isEndPlatform() || isWall()))
@@ -136,7 +139,7 @@ public class Enemy : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().material.color = c;
     }
 
-    private void DestroyEnemy()
+    protected virtual void DestroyEnemy()
     {
         //  stop attack animation
         anim.SetBool("Attack", false);
@@ -146,7 +149,7 @@ public class Enemy : MonoBehaviour
         //  spawn soul
         SpawnSoul();
         if(GameSaving.instance != null)
-            GameSaving.instance.EnemyDead(_name.ToString());
+            GameSaving.instance.EnemyDead(gameObject);
         //  show die animation
         anim.SetTrigger("Die");
     }

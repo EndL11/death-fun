@@ -15,6 +15,7 @@ TagManager:
   - BossUI
   - BossStart
   - Fireball
+  - EnemiesText
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,8 @@ public class GameProcess : MonoBehaviour
 
     public GameObject bossUI = null;
 
-    private int enemiesCount = 0;
+    public GameObject finishPortal;
+    public GameObject stairs;
 
     private void Awake()
     {
@@ -26,8 +27,10 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.deadEnemies = 0;
 
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-        enemiesText = GameObject.FindGameObjectWithTag("Enemies").GetComponent<Text>();
-        enemiesCount = GameObject.FindObjectsOfType<Enemy>().Length;
+        enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
+        finishPortal.SetActive(false);
+        if(stairs != null)
+            stairs.SetActive(false);
     }
 
     private void Start()
@@ -45,20 +48,12 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
             GameSaving.instance.OnGameOver += GameOverHandler;
             GameSaving.instance.OnBossStart += OnBossStartHandler;
+            GameSaving.instance.OnBossDie += OnBossEndHandler;
+            GameSaving.instance.OnEndLevel += OnEndLevelHandler;
 
-
-            scoreText.text = GameSaving.instance.score.ToString();
-            //enemiesText.text = GameSaving.instance.deadEnemies.ToString();
-            enemiesText.text = $"{GameSaving.instance.deadEnemies} / {enemiesCount}";
+            enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         }
-        //testing score 
-        GameSaving.instance.score = 999;
         scoreText.text = GameSaving.instance.score.ToString();
-
-
-        //scoreText.text = GameSaving.instance.score.ToString();
-
-        enemiesText.text = "0";
     }
 
     private void Update()
@@ -93,7 +88,7 @@ public class GameProcess : MonoBehaviour
 
     private void UpdateDeadCounter()
     {
-        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {enemiesCount}";
+        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
     }
 
     private void UpdateScore()
@@ -134,6 +129,8 @@ public class GameProcess : MonoBehaviour
         GameSaving.instance.OnEnemyDead -=  UpdateDeadCounter;
         GameSaving.instance.OnGameOver -= GameOverHandler;
         GameSaving.instance.OnBossStart -= OnBossStartHandler;
+        GameSaving.instance.OnBossDie -= OnBossEndHandler;
+        GameSaving.instance.OnEndLevel -= OnEndLevelHandler;
     }
 
     public void GameOverRestart()
@@ -165,8 +162,14 @@ public class GameProcess : MonoBehaviour
         bossUI.SetActive(true);
     }
 
-    private void CalculateEnemiesList()
+    private void OnEndLevelHandler()
     {
+        finishPortal.SetActive(true);
+    }
 
+    private void OnBossEndHandler()
+    {
+        if (stairs != null)
+            stairs.SetActive(true);
     }
 }
