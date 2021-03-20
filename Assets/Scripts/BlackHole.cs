@@ -56,7 +56,8 @@ public class BlackHole : MonoBehaviour
                 Witch witch = collision.GetComponentInParent<Witch>();
                 if(witch == null)
                 {
-                    Destroy(collision.transform.parent.gameObject);
+                    collision.transform.parent.gameObject.GetComponent<BomberMan>().Detonate();
+                    //Destroy(collision.transform.parent.gameObject);
                 }
                 else if (witch.Dead)
                     return;
@@ -91,10 +92,19 @@ public class BlackHole : MonoBehaviour
                 Enemy enemyScript = enemy.GetComponent<Enemy>();
                 if(enemyScript == null)
                 {
-                    enemy.GetComponent<Witch>().ApplyDamage(damage);
+                    Witch witch = enemy.GetComponent<Witch>();
+                    if (witch == null)
+                    {
+                        enemy.GetComponent<BomberMan>().Detonate();
+                    }
+                    else if (witch.Dead)
+                        return;
+                    else
+                        enemy.GetComponent<Witch>().ApplyDamage(damage);
                     continue;
                 }
-                enemyScript.ApplyDamage(damage, pushDirection);
+                else
+                    enemyScript.ApplyDamage(damage, pushDirection);
             }
         }
         enemies.Clear();

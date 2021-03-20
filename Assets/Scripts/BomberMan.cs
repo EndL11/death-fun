@@ -18,6 +18,8 @@ public class BomberMan : MonoBehaviour
 
     public EnemyAnalytics.Names _name;
 
+    private bool detonating = false;
+
     public int Direction
     {
         get { return direction; }
@@ -40,6 +42,10 @@ public class BomberMan : MonoBehaviour
 
     public void Detonate()
     {
+        if (detonating)
+            return;
+
+        detonating = true;
         speed = 0f;
         GetComponentInChildren<Animator>().SetTrigger("Boom");
         Vector2 point = new Vector2(transform.position.x, transform.position.y + .3f);

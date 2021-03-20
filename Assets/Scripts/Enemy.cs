@@ -8,14 +8,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float hp = 100f;
     [SerializeField] protected float maxHP = 100f;
     public float speed = 3f;
-    private float _speed;
+    protected float _speed;
     //  movement direction - 1 - right, -1 - left
     [SerializeField] private int direction = -1;
     public float damage = 25f;
     private bool dead = false;
     //  attack delay
-    [SerializeField] private float attackDelay = 3f;
-    private float _attackDelay;
+    [SerializeField] protected float attackDelay = 3f;
+    protected float _attackDelay;
 
     public float attackZone = 0.5f;
     public float playerCheckZone = 0.3f;
@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Transform checkPlatformEndPoint;
     [SerializeField] protected Transform checkPlayerPoint;
+
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
     public LayerMask whatAvoid;
@@ -156,7 +157,7 @@ public class Enemy : MonoBehaviour
         Destroy(soul, 1.5f);
     }
 
-    private void ChangeMovementDirection()
+    protected void ChangeMovementDirection()
     {
         //  set direction to another
         direction = direction == 1 ? -1 : 1;
@@ -164,14 +165,14 @@ public class Enemy : MonoBehaviour
         transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
     }
 
-    private bool isEndPlatform()
+    protected bool isEndPlatform()
     {
         //  return true if platform is ended
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlatformEndPoint.position, 0.3f, whatIsGround);
         return colliders.Length == 0;
     }
 
-    private bool isGrounded()
+    protected bool isGrounded()
     {
         //  return true if enemy is on ground
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, whatIsGround);
@@ -210,14 +211,14 @@ public class Enemy : MonoBehaviour
         //anim.SetBool("Attack", false);
     }
 
-    private bool isPlayerNear()
+    protected bool isPlayerNear()
     {
         //  return true if in player check zone at least 1 player object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, playerCheckZone, whatIsPlayer);
         return colliders.Length != 0;
     }
 
-    private bool isWall()
+    protected bool isWall()
     {
         //  return true if in player check zone at least 1 avoid object
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatAvoid);

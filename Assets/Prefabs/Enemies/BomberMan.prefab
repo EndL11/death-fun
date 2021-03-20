@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 586821772844481466}
   - component: {fileID: 586821772844481467}
   - component: {fileID: 586821772844481464}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BomberMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
-  radius: 1
+  radius: 1.5
   speed: 4
   whatIsPlayer:
     serializedVersion: 2

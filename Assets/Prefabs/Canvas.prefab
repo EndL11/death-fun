@@ -552,7 +552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1500923776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2009,7 +2009,7 @@ PrefabInstance:
     - target: {fileID: 988601293301496358, guid: 5899fc3e517e2ee41a00e477b6c55317,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 511.99997
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 2133641434158384609, guid: 5899fc3e517e2ee41a00e477b6c55317,
         type: 3}
@@ -2224,7 +2224,7 @@ PrefabInstance:
     - target: {fileID: 2853615970958351061, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 511.99997
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 3759628630591853298, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
@@ -2494,7 +2494,7 @@ PrefabInstance:
     - target: {fileID: 8186495355899655264, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyItem
+      value: onPressItem
       objectReference: {fileID: 0}
     - target: {fileID: 8186495355899655267, guid: 82081091952c22b47ac13cda7c1e2ad2,
         type: 3}
@@ -2854,12 +2854,12 @@ PrefabInstance:
     - target: {fileID: 6588034760944799574, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.8673077
+      value: 4.8673058
       objectReference: {fileID: 0}
     - target: {fileID: 6588034760944799574, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.1000004
+      value: -1.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 6588034761488739316, guid: e768067631f90f047b846adc99b2eca4,
         type: 3}
