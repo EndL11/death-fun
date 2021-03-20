@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 322813932}
   - component: {fileID: 322813931}
   - component: {fileID: 322813930}
+  - component: {fileID: 322813935}
   m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
@@ -801,7 +802,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322813928}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -813,7 +814,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!483693784 &322813933
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -6669,6 +6670,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &322813935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322813928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &351499755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6956,6 +6969,7 @@ GameObject:
   - component: {fileID: 522667302}
   - component: {fileID: 522667301}
   - component: {fileID: 522667300}
+  - component: {fileID: 522667305}
   m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
@@ -7316,6 +7330,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &522667305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522667298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &584656846
 GameObject:
   m_ObjectHideFlags: 0
@@ -14428,6 +14454,7 @@ GameObject:
   - component: {fileID: 793562799}
   - component: {fileID: 793562798}
   - component: {fileID: 793562797}
+  - component: {fileID: 793562800}
   - component: {fileID: 793562796}
   - component: {fileID: 793562795}
   m_Layer: 0
@@ -17741,6 +17768,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &793562800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793562793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &797447848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2273420444550373081, guid: 430cbd9724fdab240ae4ddf64be8181d,

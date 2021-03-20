@@ -11,7 +11,6 @@ public class Devil : Boss
     {
         //  do not attack if dead
         if (Dead) return;
-        //SpawnFireball();
         //  reset speed to normal
         speed = _speed;
     }
@@ -71,7 +70,5 @@ public class Devil : Boss
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPointBack.position, playerCheckZone, whatIsPlayer);
         return colliders.Length != 0;
     }
-
-
 
 }
