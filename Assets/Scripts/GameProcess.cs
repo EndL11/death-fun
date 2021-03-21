@@ -21,6 +21,8 @@ public class GameProcess : MonoBehaviour
     public GameObject finishPortal;
     public GameObject stairs;
 
+    public GameObject flagpole;
+
     private void Awake()
     {
         if(GameSaving.instance != null)
@@ -28,8 +30,13 @@ public class GameProcess : MonoBehaviour
 
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
-        finishPortal.SetActive(false);
-        if(stairs != null)
+        if (finishPortal != null)
+            finishPortal.SetActive(false);
+        if (flagpole != null)
+            flagpole.SetActive(true);
+        if (bossUI != null)
+            bossUI.SetActive(false);
+        if (stairs != null)
             stairs.SetActive(false);
     }
 
@@ -108,7 +115,7 @@ public class GameProcess : MonoBehaviour
         int counter = 0;
         foreach (var item in prefabs)
         {
-            if(counter == 1)
+            if(counter == 12)
             {
                 parent = enemiesStatsParent2;
             }
@@ -164,7 +171,11 @@ public class GameProcess : MonoBehaviour
 
     private void OnEndLevelHandler()
     {
-        finishPortal.SetActive(true);
+        if(finishPortal != null)
+            finishPortal.SetActive(true);
+
+        if(flagpole != null)
+            flagpole.SetActive(false);
     }
 
     private void OnBossEndHandler()
