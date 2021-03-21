@@ -79,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("Attack", false);
         //  start new
         anim.SetBool("Attack", true);
+		
     }
 
 
