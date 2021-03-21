@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7315819325330615248}
   - component: {fileID: 7315819325330615251}
   - component: {fileID: 7315819325330615250}
-  - component: {fileID: 8611117507487867502}
+  - component: {fileID: 4574462724161149073}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -88,7 +88,7 @@ MonoBehaviour:
   increasedDamage: 30
   staticUpForce: 2
   increasedUpForce: 6
---- !u!114 &8611117507487867502
+--- !u!114 &4574462724161149073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
