@@ -8,15 +8,14 @@ public class Boss : Enemy
     [SerializeField] protected GameObject healthBarObject;
     protected Text healthStats;
     protected bool canMove = false;
+    [SerializeField] private GameObject chest = null;
+
     protected void Awake()
     {
         healthBar = healthBarObject.GetComponentInChildren<Slider>();
         healthStats = healthBar.GetComponentInChildren<Text>();
         healthBarObject.SetActive(false);
         healthStats.text = $"{hp} / {maxHP}";
-
-        //  for testing
-        //healthBarObject.SetActive(true);
     }
 
     protected override void Start()
@@ -67,5 +66,7 @@ public class Boss : Enemy
     {
         base.DestroyEnemy();
         GameSaving.instance.BossEndFight();
+        if(chest != null)
+            Instantiate(chest, transform.position, Quaternion.identity);
     }
 } 
