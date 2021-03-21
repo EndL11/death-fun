@@ -8,7 +8,12 @@ public class SoundMusicManager : MonoBehaviour
     public AudioSource triggerBoss;
     public AudioSource damageBoss;
     public AudioSource coin;
-
+	public AudioSource sphere;
+	public AudioSource wooah;
+	public AudioSource punch;
+	public AudioSource flameBoss;
+	public AudioSource damagePlayer;
+	
     private bool enableMusic = true;
     private bool enableSounds = true;
 
@@ -54,7 +59,32 @@ public class SoundMusicManager : MonoBehaviour
     {
         coin.Play();
     }
-
+	
+	public void SpawnBlackHolePlay()
+    {
+        sphere.Play();
+    }
+	
+	public void WooahPlay()
+	{
+		wooah.Play();
+	}
+	
+	public void FlameBossPlay()
+	{
+		flameBoss.Play();
+	}
+	
+	public void PunchPlay()
+	{
+		punch.Play();
+	}
+	
+	public void ApplyDamagePlayerPlay()
+	{
+		damagePlayer.Play();
+	}
+	
     private void OnDestroy()
     {
         PlayerPrefs.SetInt("@music", enableMusic ? 1 : 0);

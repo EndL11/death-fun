@@ -105,6 +105,7 @@ public class Enemy : MonoBehaviour
             return;
 
         hp -= damage;
+		SoundMusicManager.instance.PunchPlay();
         //  update health bar
         healthBar.value = hp;
         if (hp <= 0)

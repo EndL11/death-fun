@@ -17,6 +17,7 @@ public class Devil : Boss
 
     private void SpawnFireball()
     {
+		SoundMusicManager.instance.FlameBossPlay();
         GameObject fireball = Instantiate(fireballPrefab, checkPlayerPoint.position, transform.GetChild(0).rotation);
         fireball.GetComponent<Fireball>().Damage = damage;
     }
