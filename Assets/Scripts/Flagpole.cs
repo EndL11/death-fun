@@ -9,13 +9,10 @@ public class Flagpole : Shaman
     {
         int diff = GameSaving.instance.enemiesCount - GameSaving.instance.deadEnemies;
         Text hint = hintText.GetComponent<Text>();
-        hint.text = "You have to kill ";
-        if (diff > 1)
-            hint.text += $"{diff} enemies";
-        else if (diff == 1)
-            hint.text += $"{diff} enemy";
+        if (diff > 0)
+            hint.text = "You must kill all enemies!";
         else
-            hint.text = "Requirements complete!";
+            hint.text = "Good luck in the next level!";
         base.OnTriggerEnter2D(collision);
     }
 }
