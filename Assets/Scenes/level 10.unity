@@ -46757,6 +46757,10 @@ PrefabInstance:
       propertyPath: finishPortal
       value: 
       objectReference: {fileID: 339683973}
+    - target: {fileID: 1519082868, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.24099731
+      objectReference: {fileID: 0}
     - target: {fileID: 1855708534, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -46897,7 +46901,7 @@ PrefabInstance:
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.867304
+      value: 4.867302
       objectReference: {fileID: 0}
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
