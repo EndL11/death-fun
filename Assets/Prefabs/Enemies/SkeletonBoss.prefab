@@ -216,6 +216,7 @@ MonoBehaviour:
   _name: 16
   healthBar: {fileID: 0}
   healthBarObject: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: d71aeca2ea3f8f844972dd34e69c9f62, type: 3}
   blockTime: 5
   block: {fileID: 4673626874491143608}
   skeletonPrefab: {fileID: 186586810464884135, guid: 4bedeafabed69c54b8183d2cb9da2695,

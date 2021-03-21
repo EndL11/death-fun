@@ -79,4 +79,5 @@ public class AnimatorFunctions : MonoBehaviour
     {
         GetComponentInParent<Animator>().SetTrigger("Blick");
     }
+
 }
