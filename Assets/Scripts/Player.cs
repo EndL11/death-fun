@@ -215,6 +215,8 @@ public class Player : MonoBehaviour
 
     public void DecreaseSphereDelay(float value)
     {
+        if (blackHoleDelay <= 2f)
+            return;
         blackHoleDelay -= value;
         blackholeDelaySlider.maxValue = blackHoleDelay;
     }

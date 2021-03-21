@@ -30,8 +30,12 @@ public class GameProcess : MonoBehaviour
 
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
-        finishPortal.SetActive(false);
-        flagpole.SetActive(true);
+        if (finishPortal != null)
+            finishPortal.SetActive(false);
+        if (flagpole != null)
+            flagpole.SetActive(true);
+        if (bossUI != null)
+            bossUI.SetActive(false);
         if (stairs != null)
             stairs.SetActive(false);
     }
@@ -167,8 +171,11 @@ public class GameProcess : MonoBehaviour
 
     private void OnEndLevelHandler()
     {
-        finishPortal.SetActive(true);
-        flagpole.SetActive(false);
+        if(finishPortal != null)
+            finishPortal.SetActive(true);
+
+        if(flagpole != null)
+            flagpole.SetActive(false);
     }
 
     private void OnBossEndHandler()

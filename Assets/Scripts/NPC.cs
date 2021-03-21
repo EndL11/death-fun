@@ -86,7 +86,7 @@ public class NPC : MonoBehaviour
 
         else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DAMAGE)
             player.IncreaseSphereDamage(selected.Value);
-        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY)
+        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && player.blackHoleDelay > 2f)
             player.DecreaseSphereDelay(selected.Value);
         else if (selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
             player.IncreaseSphereRadius(selected.Value);

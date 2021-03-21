@@ -220,7 +220,7 @@ MonoBehaviour:
   hp: 100
   maxHP: 100
   damage: 30
-  blackHoleDelay: 2
+  blackHoleDelay: 8
   blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
     type: 3}
   spawnPosition: {fileID: 406160650}
