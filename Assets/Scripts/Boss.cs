@@ -8,7 +8,7 @@ public class Boss : Enemy
     [SerializeField] protected GameObject healthBarObject;
     protected Text healthStats;
     protected bool canMove = false;
-    [SerializeField] private GameObject chest = null;
+    [SerializeField] private GameObject chest;
 
     protected void Awake()
     {
