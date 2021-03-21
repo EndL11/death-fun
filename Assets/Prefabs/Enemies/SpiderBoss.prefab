@@ -4991,6 +4991,7 @@ MonoBehaviour:
   _name: 0
   healthBar: {fileID: 0}
   healthBarObject: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: bf65503a539b32147ab6313587bacbde, type: 3}
   miniSpider: {fileID: 7850079578593036288, guid: 48cc58efb1bd5f144a5fef3da64a55bf,
     type: 3}
 --- !u!1 &7850079579777830136

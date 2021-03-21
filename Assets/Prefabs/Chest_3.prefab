@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5d616aaf4a55e4692bcc88ee6575de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 250
+  score: 500
   scoreText: {fileID: 463045950123673775}
 --- !u!50 &463045951368222504
 Rigidbody2D:

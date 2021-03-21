@@ -206,6 +206,7 @@ MonoBehaviour:
   _name: 20
   healthBar: {fileID: 0}
   healthBarObject: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: 2c57fac90204e59469850c26f8905ea3, type: 3}
   bloodLust: 100
   healingParticles: {fileID: 4477204539045977518}
   vampirePrefab: {fileID: 4448612712767379925, guid: f5e39fc37b3530a43abb0ee035854c4c,

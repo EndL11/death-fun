@@ -101,7 +101,7 @@ MonoBehaviour:
   soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
     type: 3}
   bossUI: {fileID: 0}
-  chest: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: df87c2758613a1e4189aa60101b1717f, type: 3}
 --- !u!61 &3476316450218467966
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 3476316451159596903}
   - component: {fileID: 3476316451159596901}
   - component: {fileID: 3476316451159596900}
-  - component: {fileID: 3476316451159596898}
+  - component: {fileID: 1142732630719443786}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: EnemyTrigger
@@ -261,8 +261,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &3476316451159596898
-CircleCollider2D:
+--- !u!70 &1142732630719443786
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -274,9 +274,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.31}
-  serializedVersion: 2
-  m_Radius: 0.91
+  m_Offset: {x: 0, y: 0.3}
+  m_Size: {x: 0.98, y: 2.04}
+  m_Direction: 0
 --- !u!1001 &3476316450986315217
 PrefabInstance:
   m_ObjectHideFlags: 0
