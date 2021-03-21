@@ -79,7 +79,11 @@ public class BlackHole : MonoBehaviour
                     Witch witch = enemy.GetComponent<Witch>();
                     if (witch == null)
                     {
-                        enemy.GetComponent<BomberMan>().Detonate();
+                        BomberMan bomber = enemy.GetComponent<BomberMan>();
+                        if (bomber == null)
+                            enemy.GetComponent<AngrySkull>().ApplyDamage(damage);
+                        else
+                            bomber.Detonate();
                     }
                     else if (witch.Dead)
                         return;

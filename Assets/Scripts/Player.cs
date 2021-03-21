@@ -129,6 +129,12 @@ public class Player : MonoBehaviour
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             if(enemyScript == null)
             {
+                Witch witch = enemy.GetComponent<Witch>();
+                if(witch == null)
+                {
+                    enemy.GetComponent<AngrySkull>().ApplyDamage(damage);
+                    continue;
+                }
                 enemy.GetComponent<Witch>().ApplyDamage(damage);
                 continue;
             }

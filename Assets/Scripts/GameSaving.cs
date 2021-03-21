@@ -78,16 +78,13 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(GameObject enemy)
     {
-        string name;
+        string name = "";
         Enemy script = enemy.GetComponent<Enemy>();
         if (script == null)
         {
             Witch witch = enemy.GetComponent<Witch>();
-            if (witch == null)
-            {
-                return;
-            }
-            name = witch._name.ToString();
+            if (witch != null)
+                name = witch._name.ToString();
         }
         else
             name = script._name.ToString();
@@ -109,7 +106,8 @@ public class GameSaving : MonoBehaviour
             enemiesDeadList[name] += 1;
             return;
         }
-        enemiesDeadList.Add(name, 1);
+        if(name != "")
+            enemiesDeadList.Add(name, 1);
     }
 
     public void GameOver()

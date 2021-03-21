@@ -13,7 +13,10 @@ public class SoundMusicManager : MonoBehaviour
 	public AudioSource punch;
 	public AudioSource flameBoss;
 	public AudioSource damagePlayer;
+<<<<<<< HEAD
 	public AudioSource background;
+=======
+>>>>>>> f40d24fdad8520c2802d1778d4e45fd7c3cd370a
 	
     private bool enableMusic = true;
     private bool enableSounds = true;
@@ -81,11 +84,14 @@ public class SoundMusicManager : MonoBehaviour
 		punch.Play();
 	}
 	
+<<<<<<< HEAD
 	public void backgroundPlay()
 	{
 		background.Play();
 	}
 	
+=======
+>>>>>>> f40d24fdad8520c2802d1778d4e45fd7c3cd370a
 	public void ApplyDamagePlayerPlay()
 	{
 		damagePlayer.Play();
