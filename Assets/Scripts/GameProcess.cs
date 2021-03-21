@@ -42,6 +42,7 @@ public class GameProcess : MonoBehaviour
 
     private void Start()
     {
+		SoundMusicManager.instance.backgroundPlay();
         //  set timeScale to 1
         Time.timeScale = 1;
         pausePanel.SetActive(false);

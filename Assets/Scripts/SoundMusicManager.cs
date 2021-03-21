@@ -13,6 +13,7 @@ public class SoundMusicManager : MonoBehaviour
 	public AudioSource punch;
 	public AudioSource flameBoss;
 	public AudioSource damagePlayer;
+	public AudioSource background;
 	
     private bool enableMusic = true;
     private bool enableSounds = true;
@@ -78,6 +79,11 @@ public class SoundMusicManager : MonoBehaviour
 	public void PunchPlay()
 	{
 		punch.Play();
+	}
+	
+	public void backgroundPlay()
+	{
+		background.Play();
 	}
 	
 	public void ApplyDamagePlayerPlay()
