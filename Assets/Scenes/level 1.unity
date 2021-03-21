@@ -337,10 +337,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 888101263, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
-      propertyPath: finishPortal
-      value: 
-      objectReference: {fileID: 1672952963}
+    - target: {fileID: 1666349915, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.2999878
+      objectReference: {fileID: 0}
     - target: {fileID: 2419372801349344153, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -464,7 +464,12 @@ PrefabInstance:
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.8673058
+      value: 4.8673077
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.1000004
       objectReference: {fileID: 0}
     - target: {fileID: 2757841642144129603, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
@@ -2191,6 +2196,7 @@ GameObject:
   - component: {fileID: 322813932}
   - component: {fileID: 322813931}
   - component: {fileID: 322813930}
+  - component: {fileID: 322813935}
   m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
@@ -13409,6 +13415,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &322813935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322813928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &324372933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4654543821129789949, guid: bfcf17a074951d8478b69fa845d22171,
@@ -14879,6 +14897,7 @@ GameObject:
   - component: {fileID: 522667302}
   - component: {fileID: 522667301}
   - component: {fileID: 522667300}
+  - component: {fileID: 522667305}
   m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
@@ -16541,6 +16560,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &522667305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522667298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &537996819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3381495899918247755, guid: 073203333b5089b4bb9082e5747f888a,
@@ -30201,6 +30232,7 @@ GameObject:
   - component: {fileID: 793562797}
   - component: {fileID: 793562796}
   - component: {fileID: 793562795}
+  - component: {fileID: 793562800}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -38457,6 +38489,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &793562800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793562793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &796352545
 PrefabInstance:
   m_ObjectHideFlags: 0
