@@ -55,7 +55,12 @@ public class Vampire : Boss
         GameObject vampire = Instantiate(vampirePrefab, transform.position, Quaternion.identity);
         Enemy vampireEnemy = vampire.GetComponent<Enemy>();
         int rand = UnityEngine.Random.Range(1, 3);
-        int direction = vampireEnemy.Direction == -1 ? 1 : -1;
+        int direction = vampireEnemy.Direction;
+        if (rand == 1)
+            direction = -1;
+        else
+            direction = 1;
+
         vampireEnemy.Direction = direction;
     }
 

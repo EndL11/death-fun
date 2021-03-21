@@ -39,7 +39,12 @@ public class Skeleton : Boss
         GameObject skeleton = Instantiate(skeletonPrefab, transform.position, Quaternion.identity);
         int rand = UnityEngine.Random.Range(1, 3);
         Enemy skeletonEnemy = skeleton.GetComponent<Enemy>();
-        int direction = skeletonEnemy.Direction == -1 ? 1 : -1;
+        int direction = skeletonEnemy.Direction;
+        if (rand == 1)
+            direction = -1;
+        else
+            direction = 1;
+
         skeletonEnemy.Direction = direction;
         skeleton.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f, ForceMode2D.Impulse);
     }
