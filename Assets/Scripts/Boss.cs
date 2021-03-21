@@ -24,10 +24,7 @@ public class Boss : Enemy
         GameSaving.instance.OnBossStart += StartFight;        
     }
 
-    protected override void PushBack(Vector2 dir)
-    {
-
-    }
+    protected override void PushBack(Vector2 dir) { }
 
     protected override void Move()
     {

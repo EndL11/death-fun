@@ -6,7 +6,7 @@ public class Devil : Boss
 {
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] protected Transform checkPlayerPointBack;
-
+    public GameObject cage;
     public override void Attack()
     {
         //  do not attack if dead
@@ -72,4 +72,9 @@ public class Devil : Boss
         return colliders.Length != 0;
     }
 
+    protected override void DestroyEnemy()
+    {
+        base.DestroyEnemy();
+        cage.SetActive(false);
+    }
 }
