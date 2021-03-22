@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 public class GameProcess : MonoBehaviour
@@ -25,9 +26,6 @@ public class GameProcess : MonoBehaviour
 
     private void Awake()
     {
-        if(GameSaving.instance != null)
-            GameSaving.instance.deadEnemies = 0;
-
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
         if (finishPortal != null)
@@ -58,8 +56,11 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.OnBossDie += OnBossEndHandler;
             GameSaving.instance.OnEndLevel += OnEndLevelHandler;
 
-            enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
+            GameSaving.instance.enemies = GameObject.FindGameObjectsWithTag("Enemies").ToList();
+            GameSaving.instance.enemiesCount = GameSaving.instance.enemies.Count;
+            GameSaving.instance.deadEnemies = 0;
         }
+        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
     }
 

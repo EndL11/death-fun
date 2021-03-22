@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Linq;
 using UnityEngine.SceneManagement;
 
 public struct PlayerStats
@@ -40,7 +39,7 @@ public class GameSaving : MonoBehaviour
     public int score = 0;
     public int deadEnemies = 0;
     public int enemiesCount = 0;
-    private List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
     private Dictionary<string, int> enemiesDeadList = new Dictionary<string, int>();
     [SerializeField] private List<EnemyAnalytics> analiticsPrefabs;
 
@@ -60,9 +59,6 @@ public class GameSaving : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        enemies = GameObject.FindGameObjectsWithTag("Enemies").ToList();
-        enemiesCount = enemies.Count;
-        deadEnemies = 0;
     }
 
     private void Start()
