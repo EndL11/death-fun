@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d047275954d7647a3ef5a2aa285daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 600
-  maxHP: 600
+  hp: 350
+  maxHP: 350
   spawnEnemyDelay: 15
   enemyPrefabs:
   - {fileID: 186586810464884135, guid: 88d0e33f413e8144b94dcbe78bd91a62, type: 3}

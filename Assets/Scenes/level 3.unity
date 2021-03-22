@@ -566,7 +566,7 @@ PrefabInstance:
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.1000004
+      value: -1.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 2757841642144129603, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
@@ -42312,6 +42312,7 @@ GameObject:
   - component: {fileID: 2080672334}
   - component: {fileID: 2080672333}
   - component: {fileID: 2080672332}
+  - component: {fileID: 2080672335}
   m_Layer: 8
   m_Name: Stairs
   m_TagString: Untagged
@@ -42602,6 +42603,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2080672335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080672328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd95c359a11ecd42bd6b8683b78c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2081934941
 GameObject:
   m_ObjectHideFlags: 0
