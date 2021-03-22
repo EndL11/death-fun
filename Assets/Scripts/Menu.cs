@@ -46,7 +46,6 @@ public class Menu : MonoBehaviour
     public void Play()
     {
 		SoundMusicManager.instance.backgroundMenuMusicStop();
-		SoundMusicManager.instance.backgroundMusicPlay();
         StartCoroutine(WaitForAnimation());
     }
 
