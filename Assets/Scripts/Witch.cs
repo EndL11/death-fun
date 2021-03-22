@@ -25,7 +25,7 @@ public class Witch : MonoBehaviour
     [SerializeField] private Transform leftPoint;
     [SerializeField] private Transform rightPoint;
 
-    private int direction = -1;
+    [SerializeField] private int direction = -1;
 
     private Color c;
 
