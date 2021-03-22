@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+		SoundMusicManager.instance.backgroundMenuMusicPlay();
         Time.timeScale = 1;
         string mode = PlayerPrefs.GetString("@mode", "");
         if (mode == "")
@@ -44,6 +45,7 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
+		SoundMusicManager.instance.backgroundMenuMusicStop();
         StartCoroutine(WaitForAnimation());
     }
 

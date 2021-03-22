@@ -63,6 +63,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
+		SoundMusicManager.instance.SquahPlay();
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
