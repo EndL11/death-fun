@@ -79,8 +79,6 @@ public class DialogSystem : MonoBehaviour
             else
                 dialogText.text = "";
         }
-
-        
     }
 
     public void DisplayNextSentense()

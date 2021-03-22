@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.21052566}
   m_AnchorMax: {x: 1, y: 0.6462885}
-  m_AnchoredPosition: {x: -0.000030517578, y: -0.000036716}
+  m_AnchoredPosition: {x: -0.000030517578, y: -0.000034332275}
   m_SizeDelta: {x: 0, y: -0.00005340576}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &8648231
@@ -549,10 +549,10 @@ MonoBehaviour:
   dialogText: {fileID: 1545782176}
   dialogPanel: {fileID: 0}
   sentences:
-  - I said I would come back for you
-  - 'You finally came!  '
-  - 'Let''s run faster! '
-  - Finally we got out of there. Come on into my world.
+  - 'I   said   I   would   come   back   for   you  '
+  - 'You   finally   came!  '
+  - 'Let''s   run   faster!   '
+  - 'Finally   we   got   out   of   there.   Come   on   into   my   world.  '
   dialogs:
   - panel: {fileID: 1676620507}
     needTransition: 0
@@ -694,7 +694,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.786, y: 0.0193445}
   m_AnchorMax: {x: 0.96731234, y: 0.38048327}
-  m_AnchoredPosition: {x: -0.5, y: 3.4251099}
+  m_AnchoredPosition: {x: -0.5, y: 3.4252014}
   m_SizeDelta: {x: -100.34098, y: -114.781105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774453825
@@ -1535,8 +1535,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405293832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1362, y: 0, z: -10}
-  m_LocalScale: {x: 1550, y: 1550, z: 52.249954}
+  m_LocalPosition: {x: 5579, y: 0, z: -10}
+  m_LocalScale: {x: 5000, y: 5000, z: 52.249954}
   m_Children: []
   m_Father: {fileID: 719930241}
   m_RootOrder: 8
@@ -1873,7 +1873,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 20
+    m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2794,7 +2794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.21052566}
   m_AnchorMax: {x: 1, y: 0.6462885}
-  m_AnchoredPosition: {x: -0.000030517578, y: -8.2162}
+  m_AnchoredPosition: {x: -0.000030517578, y: -8.216204}
   m_SizeDelta: {x: 0, y: 11.418999}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2128770536
