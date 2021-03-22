@@ -40,6 +40,7 @@ public class DialogSystem : MonoBehaviour
 
     public void LoadMenu()
     {
+        SoundMusicManager.instance.backgroundMusicStop();
         SceneManager.LoadScene(0);
     }
 
