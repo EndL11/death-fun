@@ -782,7 +782,7 @@ MonoBehaviour:
   statsIdentificator: 1
   value: 0
   description: Get HALF of HP
-  cost: 150
+  cost: 49
 --- !u!1 &8186495354340026253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   statsIdentificator: 0
   value: 25
   description: Get 25% of HP
-  cost: 50
+  cost: 24
 --- !u!1 &8513194426213911134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,7 +1492,7 @@ MonoBehaviour:
   statsIdentificator: 2
   value: 0
   description: Get FULL HP
-  cost: 289
+  cost: 99
 --- !u!1 &8893006270349796545
 GameObject:
   m_ObjectHideFlags: 0
