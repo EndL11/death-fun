@@ -36,6 +36,8 @@ public class Menu : MonoBehaviour
         yield return new WaitForSeconds(playerAttackLength);
         if (PlayerPrefs.GetInt("@tutor", 0) == 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else if (PlayerPrefs.GetInt("@history", 0) == 0)
+            SceneManager.LoadScene(14);
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
