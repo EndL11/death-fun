@@ -145,6 +145,7 @@ public class Enemy : MonoBehaviour
         //  stop attack animation
         anim.SetBool("Attack", false);
         dead = true;
+		SoundMusicManager.instance.DeathPlay();
         //  hide health bar (it's empty)
         healthBar.gameObject.SetActive(false);
         //  spawn soul

@@ -6,13 +6,18 @@ public class SoundMusicManager : MonoBehaviour
 {
     public static SoundMusicManager instance;
     public AudioSource triggerBoss;
-    public AudioSource damageBoss;
     public AudioSource coin;
 	public AudioSource sphere;
 	public AudioSource wooah;
 	public AudioSource punch;
 	public AudioSource flameBoss;
 	public AudioSource damagePlayer;
+	public AudioSource portal;
+	public AudioSource explosion;
+	public AudioSource death;
+	public AudioSource squash;
+	public AudioSource backgroundMusic;
+	public AudioSource backgroundMenuMusic;
 	
     private bool enableMusic = true;
     private bool enableSounds = true;
@@ -50,11 +55,6 @@ public class SoundMusicManager : MonoBehaviour
         triggerBoss.Play();
     }
 
-    public void DamageBossSoundPlay()
-    {
-        damageBoss.Play();
-    }
-
     public void TakeCoinSoundPlay()
     {
         coin.Play();
@@ -84,7 +84,49 @@ public class SoundMusicManager : MonoBehaviour
 	{
 		damagePlayer.Play();
 	}
+		
+	public void PortalPlay()
+	{
+		portal.Play();
+	}
 	
+	public void ExplosionPlay()
+	{
+		explosion.Play();
+	}
+	
+	public void DeathPlay()
+	{
+		death.Play();
+	}
+	
+	public void SquahPlay()
+	{
+		squash.Play();
+	}
+	
+	public void backgroundMenuMusicPlay()
+	{
+		backgroundMenuMusic.Play();
+	}
+	
+	public void backgroundMusicPlay()
+	{
+		backgroundMusic.Play();
+	}
+	
+	public void backgroundMenuMusicStop()
+	{
+		backgroundMenuMusic.Stop();
+	}
+	
+	public void backgroundMusicStop()
+	{
+		backgroundMusic.Stop();
+	}
+	
+	
+	//SoundMusicManager.instance.backgroundMenuMusicPlay());
     private void OnDestroy()
     {
         PlayerPrefs.SetInt("@music", enableMusic ? 1 : 0);

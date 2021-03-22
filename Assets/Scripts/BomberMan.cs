@@ -44,7 +44,7 @@ public class BomberMan : MonoBehaviour
     {
         if (detonating)
             return;
-
+		SoundMusicManager.instance.ExplosionPlay();
         detonating = true;
         speed = 0f;
         GetComponentInChildren<Animator>().SetTrigger("Boom");
@@ -56,6 +56,7 @@ public class BomberMan : MonoBehaviour
             Vector2 directionToPush = transform.position.x > colliders[0].transform.position.x ? Vector2.left : Vector2.right;
             colliders[0].GetComponent<Player>().ApplyDamage(damage, directionToPush);
         }
+		
         GameSaving.instance.EnemyDead(gameObject);
     }
 

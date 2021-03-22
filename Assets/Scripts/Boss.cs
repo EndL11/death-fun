@@ -38,8 +38,6 @@ public class Boss : Enemy
     {
         if (Dead)
             return;
-
-        SoundMusicManager.instance.DamageBossSoundPlay();
         base.ApplyDamage(damage, dir);
         healthBar.value = hp;
         healthStats.text = $"{hp} / {maxHP}";
