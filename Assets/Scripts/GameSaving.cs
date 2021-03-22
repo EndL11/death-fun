@@ -148,6 +148,7 @@ public class GameSaving : MonoBehaviour
 
         int music = PlayerPrefs.GetInt("@music", 1);
         int sound = PlayerPrefs.GetInt("@sounds", 1);
+        int history = PlayerPrefs.GetInt("@history", 0);
 
         foreach (var item in analiticsPrefabs)
         {
@@ -160,6 +161,7 @@ public class GameSaving : MonoBehaviour
         PlayerPrefs.SetInt("@music", music);
         PlayerPrefs.SetInt("@sounds", sound);
         PlayerPrefs.SetString("@mode", mode);
+        PlayerPrefs.SetInt("@history", history);
         LoadDeadEnemies();
     }
 
