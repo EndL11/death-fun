@@ -34,6 +34,9 @@ public class Vampire : Boss
     }
     protected override void Update()
     {
+        if (Dead)
+            return;
+
         base.Update();
 
         if(_spawnDelay > 0f)
