@@ -25,8 +25,11 @@ public class DialogSystem : MonoBehaviour
     public GameObject titlesBackground;
     public GameObject titles;
 
+    private Animator anim;
+
     private void Start()
     {
+        anim = GetComponent<Animator>();
         Time.timeScale = 1;
         if (titles != null)
             titles.SetActive(false);
@@ -50,22 +53,39 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
-    public void DisplayNextSentence()
+    private IEnumerator DisplayNextSentenceIEnum()
     {
-        if (current + 1 == dialogs.Length)
+        if (current == dialogs.Length - 1)
         {
             EndDialog();
-            return;
+            yield return null;
+        }
+        else
+        {
+            Dialog currentDialog = dialogs[current];
+            current += 1;
+
+            Dialog dialog = dialogs[current];
+            if (dialog.needTransition && anim != null)
+            {
+                anim.SetTrigger("Transition");
+                yield return new WaitForSeconds(.9f);
+            }
+            currentDialog.panel.SetActive(false);
+            dialog.panel.SetActive(true);
+            StopCoroutine(TypeSentence(sentences[current - 1]));
+            if (current != sentences.Length)
+                StartCoroutine(TypeSentence(sentences[current]));
+            else
+                dialogText.text = "";
         }
 
-        dialogs[current].panel.SetActive(false);
-        current += 1;
-        dialogs[current].panel.SetActive(true);
-        StopAllCoroutines();
-        if(current != sentences.Length)
-            StartCoroutine(TypeSentence(sentences[current]));
-        else
-            dialogText.text = "";
+        
+    }
+
+    public void DisplayNextSentense()
+    {
+        StartCoroutine(DisplayNextSentenceIEnum());
     }
 
     protected void EndDialog()
