@@ -45356,12 +45356,12 @@ PrefabInstance:
     - target: {fileID: 4422602073943598040, guid: 471c43fe74b43ff458615b62ec8c839f,
         type: 3}
       propertyPath: hp
-      value: 3
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 4422602073943598040, guid: 471c43fe74b43ff458615b62ec8c839f,
         type: 3}
       propertyPath: maxHP
-      value: 3
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 4422602073943598040, guid: 471c43fe74b43ff458615b62ec8c839f,
         type: 3}

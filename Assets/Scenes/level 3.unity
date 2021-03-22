@@ -37548,11 +37548,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1132368393, guid: 41ec80932476afb43825841c6f4a4806, type: 3}
       propertyPath: hp
-      value: 3
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1132368393, guid: 41ec80932476afb43825841c6f4a4806, type: 3}
       propertyPath: maxHP
-      value: 3
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1132368393, guid: 41ec80932476afb43825841c6f4a4806, type: 3}
       propertyPath: healthBarObject
