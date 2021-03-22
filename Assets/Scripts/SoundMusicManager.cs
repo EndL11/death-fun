@@ -25,13 +25,23 @@ public class SoundMusicManager : MonoBehaviour
     public bool Music
     {
         get { return enableMusic; }
-        set { enableMusic = value; }
+        set {
+            enableMusic = value;
+            if (enableMusic)
+            {
+                backgroundMenuMusic.Play();
+            }
+            else
+            {
+                backgroundMenuMusic.Stop();
+            }
+        }
     }
 
     public bool Sound
     {
         get { return enableSounds; }
-        set { enableSounds = value; }
+        set { enableSounds = value;  }
     }
 
     private void Awake()
@@ -52,77 +62,78 @@ public class SoundMusicManager : MonoBehaviour
 
     public void TriggerBossSoundPlay()
     {
-        triggerBoss.Play();
+        if(enableSounds)
+            triggerBoss.Play();
     }
 
     public void TakeCoinSoundPlay()
     {
-        coin.Play();
+        if (enableSounds) coin.Play();
     }
 	
 	public void SpawnBlackHolePlay()
     {
-        sphere.Play();
+        if (enableSounds) sphere.Play();
     }
 	
 	public void WooahPlay()
 	{
-		wooah.Play();
+        if (enableSounds) wooah.Play();
 	}
 	
 	public void FlameBossPlay()
 	{
-		flameBoss.Play();
+        if (enableSounds) flameBoss.Play();
 	}
 	
 	public void PunchPlay()
 	{
-		punch.Play();
+        if (enableSounds) punch.Play();
 	}
 	
 	public void ApplyDamagePlayerPlay()
 	{
-		damagePlayer.Play();
+        if (enableSounds) damagePlayer.Play();
 	}
 		
 	public void PortalPlay()
 	{
-		portal.Play();
+        if (enableSounds) portal.Play();
 	}
 	
 	public void ExplosionPlay()
 	{
-		explosion.Play();
+        if (enableSounds) explosion.Play();
 	}
 	
 	public void DeathPlay()
 	{
-		death.Play();
+        if (enableSounds) death.Play();
 	}
 	
 	public void SquahPlay()
 	{
-		squash.Play();
+        if (enableSounds) squash.Play();
 	}
 	
 	public void backgroundMenuMusicPlay()
 	{
-		backgroundMenuMusic.Play();
+        if (enableMusic) backgroundMenuMusic.Play();
 	}
 	
 	public void backgroundMusicPlay()
 	{
-		backgroundMusic.Play();
+        if (enableMusic) backgroundMusic.Play();
 	}
 	
 	public void backgroundMenuMusicStop()
 	{
-		backgroundMenuMusic.Stop();
+        if (enableMusic) backgroundMenuMusic.Stop();
 	}
 	
 	public void backgroundMusicStop()
 	{
-		backgroundMusic.Stop();
+        if (enableMusic) backgroundMusic.Stop();
 	}
 	
 	

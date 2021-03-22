@@ -165,6 +165,7 @@ public class GameProcess : MonoBehaviour
     {
         GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
+        SoundMusicManager.instance.backgroundMusicStop();
     }
 
     private void OnBossStartHandler()
