@@ -206,8 +206,8 @@ PrefabInstance:
     - target: {fileID: 8960970777966036653, guid: 82cc8277700d06544a522448b58df528,
         type: 3}
       propertyPath: m_Text
-      value: "Left- click   to   attack   or    right- click   for   an   alternate    
-        attack. \nTo    destroy    these    spiders."
+      value: "Press '<'   to   attack   or    '>'   for   an   alternate     attack.
+        \nDestroy   all    enemies."
       objectReference: {fileID: 0}
     - target: {fileID: 8960970777966036653, guid: 82cc8277700d06544a522448b58df528,
         type: 3}
