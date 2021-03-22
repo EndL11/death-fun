@@ -107,8 +107,8 @@ public class Player : MonoBehaviour
 
     private void SpawnBlackHole()
     {
-        //  create gameobject based on 'blackHolePrefab'
-		SoundMusicManager.instance.SpawnBlackHolePlay();
+        SoundMusicManager.instance.SpawnBlackHolePlay();
+		//  create gameobject based on 'blackHolePrefab'
         GameObject blackHole = Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
         blackHole.GetComponent<BlackHole>().Damage = sphereDamage;
         blackHole.GetComponent<BlackHole>().Radius = sphereRadius;
