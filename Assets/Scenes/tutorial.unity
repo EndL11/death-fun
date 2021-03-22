@@ -19988,10 +19988,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 888101263, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
-      propertyPath: stairs
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 888101263, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
       propertyPath: flagpole
       value: 
       objectReference: {fileID: 1748417041}
@@ -19999,24 +19995,11 @@ PrefabInstance:
       propertyPath: finishPortal
       value: 
       objectReference: {fileID: 1492213785}
-    - target: {fileID: 1519082868, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.24099731
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666349915, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.3299866
-      objectReference: {fileID: 0}
     - target: {fileID: 1416238288642197941, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 380473772}
-    - target: {fileID: 2419372801349344153, guid: 01b76115880def64ba79e4cb2f02b13b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 511.99985
-      objectReference: {fileID: 0}
     - target: {fileID: 2757841641637805217, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -20132,15 +20115,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
+    - target: {fileID: 2757841641939650665, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0.0099738985
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757841641939650665, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.8673134
-      objectReference: {fileID: 0}
-    - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -1.1000061
+      value: 0.08999634
       objectReference: {fileID: 0}
     - target: {fileID: 2757841642144129603, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
@@ -20167,11 +20150,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 47467015}
-    - target: {fileID: 2757841643690236320, guid: 01b76115880def64ba79e4cb2f02b13b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3110041266620538138, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -20207,11 +20185,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 47467015}
-    - target: {fileID: 8089451060002147574, guid: 01b76115880def64ba79e4cb2f02b13b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 511.99985
-      objectReference: {fileID: 0}
     - target: {fileID: 8616797873683133740, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -20227,11 +20200,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 380473772}
-    - target: {fileID: 9018657167227958975, guid: 01b76115880def64ba79e4cb2f02b13b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.9002075
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01b76115880def64ba79e4cb2f02b13b, type: 3}
 --- !u!114 &3125842018974993784 stripped
