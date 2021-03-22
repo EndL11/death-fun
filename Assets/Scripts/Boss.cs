@@ -61,9 +61,9 @@ public class Boss : Enemy
 
     protected override void DestroyEnemy()
     {
-        base.DestroyEnemy();
-        GameSaving.instance.BossEndFight();
         if(chest != null)
             Instantiate(chest, transform.position, Quaternion.identity);
+        base.DestroyEnemy();
+        GameSaving.instance.BossEndFight();
     }
 } 

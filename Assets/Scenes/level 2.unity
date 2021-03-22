@@ -846,6 +846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1391,6 +1396,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1484,75 +1494,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 351346458}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &269992444
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 69.460304
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.935318
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.79296875
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294564, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893762963071294565, guid: 138f2dd5eaf1cb24da7560b72908cd01,
-        type: 3}
-      propertyPath: m_Name
-      value: GameSaving
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 138f2dd5eaf1cb24da7560b72908cd01, type: 3}
 --- !u!4 &270535638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4654543821129789949, guid: bfcf17a074951d8478b69fa845d22171,
@@ -2967,6 +2908,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
 --- !u!1 &520780768
@@ -3641,6 +3587,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie2
       objectReference: {fileID: 0}
+    - target: {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
 --- !u!4 &610671167 stripped
@@ -3875,6 +3826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448612712767379925, guid: 7709438a49041fe47b198f32592d7752,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7709438a49041fe47b198f32592d7752, type: 3}
@@ -24831,6 +24787,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scorpion
       objectReference: {fileID: 0}
+    - target: {fileID: 1847143980567254533, guid: 3e697126807f663468e3c1541dafea89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e697126807f663468e3c1541dafea89, type: 3}
 --- !u!1 &981499405
@@ -24980,6 +24941,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448612712767379925, guid: 7709438a49041fe47b198f32592d7752,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7709438a49041fe47b198f32592d7752, type: 3}
@@ -36786,6 +36752,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 4448612712767379925, guid: 7709438a49041fe47b198f32592d7752,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7709438a49041fe47b198f32592d7752, type: 3}
 --- !u!1001 &1086053545
@@ -36864,6 +36835,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448612712767379925, guid: 7709438a49041fe47b198f32592d7752,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7709438a49041fe47b198f32592d7752, type: 3}
@@ -37173,6 +37149,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scorpion (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1847143980567254533, guid: 3e697126807f663468e3c1541dafea89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e697126807f663468e3c1541dafea89, type: 3}
 --- !u!4 &1115762304 stripped
@@ -37224,6 +37205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Snake (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: d4f6c276da99c9f449d80e6c9010f52b,
         type: 3}
@@ -38333,6 +38319,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snake (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: d4f6c276da99c9f449d80e6c9010f52b,
         type: 3}
       propertyPath: m_RootOrder
@@ -38645,6 +38636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_RootOrder
@@ -38865,6 +38861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
@@ -39165,6 +39166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448612712767379925, guid: 7709438a49041fe47b198f32592d7752,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7709438a49041fe47b198f32592d7752, type: 3}
@@ -39692,6 +39698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448612712767379925, guid: 7709438a49041fe47b198f32592d7752,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7709438a49041fe47b198f32592d7752, type: 3}
@@ -40702,6 +40713,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
       propertyPath: m_RootOrder
@@ -40870,6 +40886,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scorpion (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1847143980567254533, guid: 3e697126807f663468e3c1541dafea89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e697126807f663468e3c1541dafea89, type: 3}
 --- !u!4 &1518963086 stripped
@@ -40932,6 +40953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spider (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
@@ -41298,6 +41324,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
 --- !u!4 &1582900121 stripped
@@ -41331,6 +41362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spider (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: 297f8110251937d4cb3571819d19114a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: 297f8110251937d4cb3571819d19114a,
         type: 3}
@@ -43813,6 +43849,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snake
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: d4f6c276da99c9f449d80e6c9010f52b,
         type: 3}
       propertyPath: m_RootOrder
@@ -43964,6 +44005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Snake (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: d4f6c276da99c9f449d80e6c9010f52b,
         type: 3}
@@ -44312,12 +44358,12 @@ PrefabInstance:
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.8673
+      value: 4.867298
       objectReference: {fileID: 0}
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.1000004
+      value: -1.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 2757841642144129602, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
@@ -46043,6 +46089,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
 --- !u!1001 &1836760279
@@ -47660,6 +47711,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
 --- !u!1 &2003089224
@@ -48070,6 +48126,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snake (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: d4f6c276da99c9f449d80e6c9010f52b,
         type: 3}
       propertyPath: m_RootOrder
@@ -48474,6 +48535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Snake (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850079578593036288, guid: d4f6c276da99c9f449d80e6c9010f52b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7850079578593036303, guid: d4f6c276da99c9f449d80e6c9010f52b,
         type: 3}
