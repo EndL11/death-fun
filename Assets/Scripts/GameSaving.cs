@@ -33,14 +33,19 @@ public class GameSaving : MonoBehaviour
     public event Action OnEnemyDead = () => { };
     public event Action OnGameOver = () => { };
     public event Action OnBossStart = () => { };
+    public event Action OnBossDie = () => { };
+    public event Action OnEndLevel = () => { };
     public PlayerStats playerStats;
     public int score = 0;
     public int deadEnemies = 0;
+    public int enemiesCount = 0;
+    public List<GameObject> enemies = new List<GameObject>();
     private Dictionary<string, int> enemiesDeadList = new Dictionary<string, int>();
     [SerializeField] private List<EnemyAnalytics> analiticsPrefabs;
 
     [HideInInspector]
     public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
+
     void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex != 1)
@@ -67,12 +72,28 @@ public class GameSaving : MonoBehaviour
         OnScoreChanged();
     }
 
-
-    public void EnemyDead(string name)
+    public void EnemyDead(GameObject enemy)
     {
-        deadEnemies += 1;
-        OnEnemyDead();
+        string name = "";
+        Enemy script = enemy.GetComponent<Enemy>();
+        if (script == null)
+        {
+            Witch witch = enemy.GetComponent<Witch>();
+            if (witch != null)
+                name = witch._name.ToString();
+        }
+        else
+            name = script._name.ToString();
 
+        bool deleted = enemies.Remove(enemy);
+        if(deleted && name != "bomberMan")
+                deadEnemies += 1;
+
+        OnEnemyDead();
+        if (deadEnemies == enemiesCount)
+        {
+            OnEndLevel();
+        }
         if (SceneManager.GetActiveScene().buildIndex == 1)
             return;
 
@@ -81,7 +102,8 @@ public class GameSaving : MonoBehaviour
             enemiesDeadList[name] += 1;
             return;
         }
-        enemiesDeadList.Add(name, 1);
+        if(name != "")
+            enemiesDeadList.Add(name, 1);
     }
 
     public void GameOver()
@@ -91,6 +113,7 @@ public class GameSaving : MonoBehaviour
 
     public void SaveCompleteTutorial()
     {
+        //  add saving history telling
         PlayerPrefs.SetInt("@tutor", 1);
     }
 
@@ -121,6 +144,7 @@ public class GameSaving : MonoBehaviour
 
         int music = PlayerPrefs.GetInt("@music", 1);
         int sound = PlayerPrefs.GetInt("@sounds", 1);
+        int history = PlayerPrefs.GetInt("@history", 0);
 
         foreach (var item in analiticsPrefabs)
         {
@@ -133,6 +157,7 @@ public class GameSaving : MonoBehaviour
         PlayerPrefs.SetInt("@music", music);
         PlayerPrefs.SetInt("@sounds", sound);
         PlayerPrefs.SetString("@mode", mode);
+        PlayerPrefs.SetInt("@history", history);
         LoadDeadEnemies();
     }
 
@@ -167,5 +192,10 @@ public class GameSaving : MonoBehaviour
     public void BossStartFight()
     {
         OnBossStart();
+    }
+
+    public void BossEndFight()
+    {
+        OnBossDie();
     }
 }

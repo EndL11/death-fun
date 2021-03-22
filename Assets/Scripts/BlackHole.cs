@@ -50,23 +50,7 @@ public class BlackHole : MonoBehaviour
     {
         if (collision.CompareTag("EnemyTrigger"))
         {
-            Enemy enemy = collision.GetComponentInParent<Enemy>();
-            if (enemy == null)
-            {
-                Witch witch = collision.GetComponentInParent<Witch>();
-                if(witch == null)
-                {
-                    collision.transform.parent.gameObject.GetComponent<BomberMan>().Detonate();
-                    //Destroy(collision.transform.parent.gameObject);
-                }
-                else if (witch.Dead)
-                    return;
-            }
-            else if (enemy.Dead)
-                return;
-
-            Particles();
-            Destroy(gameObject);
+            Collision(collision.gameObject);
         }
     }
 
@@ -79,6 +63,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
+		SoundMusicManager.instance.SquahPlay();
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
@@ -95,7 +80,11 @@ public class BlackHole : MonoBehaviour
                     Witch witch = enemy.GetComponent<Witch>();
                     if (witch == null)
                     {
-                        enemy.GetComponent<BomberMan>().Detonate();
+                        BomberMan bomber = enemy.GetComponent<BomberMan>();
+                        if (bomber == null)
+                            enemy.GetComponent<AngrySkull>().ApplyDamage(damage);
+                        else
+                            bomber.Detonate();
                     }
                     else if (witch.Dead)
                         return;
@@ -108,5 +97,27 @@ public class BlackHole : MonoBehaviour
             }
         }
         enemies.Clear();
+    }
+
+    public void Collision(GameObject collision)
+    {
+        Enemy enemy = collision.GetComponentInParent<Enemy>();
+        if (enemy == null)
+        {
+            Witch witch = collision.GetComponentInParent<Witch>();
+            if (witch == null)
+            {
+                BomberMan bomber = collision.transform.parent.gameObject.GetComponent<BomberMan>();
+                if(bomber != null)
+                    bomber.Detonate();
+            }
+            else if (witch.Dead)
+                return;
+        }
+        else if (enemy.Dead)
+            return;
+
+        Particles();
+        Destroy(gameObject);
     }
 }

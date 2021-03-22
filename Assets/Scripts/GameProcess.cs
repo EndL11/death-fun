@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 public class GameProcess : MonoBehaviour
@@ -18,17 +19,29 @@ public class GameProcess : MonoBehaviour
 
     public GameObject bossUI = null;
 
+    public GameObject finishPortal;
+    public GameObject stairs;
+
+    public GameObject flagpole;
+
     private void Awake()
     {
-        if(GameSaving.instance != null)
-            GameSaving.instance.deadEnemies = 0;
-
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-        enemiesText = GameObject.FindGameObjectWithTag("Enemies").GetComponent<Text>();
+        enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
+        if (finishPortal != null)
+            finishPortal.SetActive(false);
+        if (flagpole != null)
+            flagpole.SetActive(true);
+        if (bossUI != null)
+            bossUI.SetActive(false);
+        if (stairs != null)
+            stairs.SetActive(false);
     }
 
     private void Start()
     {
+		SoundMusicManager.instance.backgroundMusicPlay();
+		SoundMusicManager.instance.PortalPlay();
         //  set timeScale to 1
         Time.timeScale = 1;
         pausePanel.SetActive(false);
@@ -42,19 +55,15 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
             GameSaving.instance.OnGameOver += GameOverHandler;
             GameSaving.instance.OnBossStart += OnBossStartHandler;
+            GameSaving.instance.OnBossDie += OnBossEndHandler;
+            GameSaving.instance.OnEndLevel += OnEndLevelHandler;
 
-
-            scoreText.text = GameSaving.instance.score.ToString();
-            enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+            GameSaving.instance.enemies = GameObject.FindGameObjectsWithTag("Enemies").ToList();
+            GameSaving.instance.enemiesCount = GameSaving.instance.enemies.Count;
+            GameSaving.instance.deadEnemies = 0;
         }
-        //testing score 
-        GameSaving.instance.score = 999;
+        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
-
-
-        //scoreText.text = GameSaving.instance.score.ToString();
-
-        enemiesText.text = "0";
     }
 
     private void Update()
@@ -89,7 +98,7 @@ public class GameProcess : MonoBehaviour
 
     private void UpdateDeadCounter()
     {
-        enemiesText.text = GameSaving.instance.deadEnemies.ToString();
+        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
     }
 
     private void UpdateScore()
@@ -109,7 +118,7 @@ public class GameProcess : MonoBehaviour
         int counter = 0;
         foreach (var item in prefabs)
         {
-            if(counter == 1)
+            if(counter == 12)
             {
                 parent = enemiesStatsParent2;
             }
@@ -130,6 +139,8 @@ public class GameProcess : MonoBehaviour
         GameSaving.instance.OnEnemyDead -=  UpdateDeadCounter;
         GameSaving.instance.OnGameOver -= GameOverHandler;
         GameSaving.instance.OnBossStart -= OnBossStartHandler;
+        GameSaving.instance.OnBossDie -= OnBossEndHandler;
+        GameSaving.instance.OnEndLevel -= OnEndLevelHandler;
     }
 
     public void GameOverRestart()
@@ -154,10 +165,26 @@ public class GameProcess : MonoBehaviour
     {
         GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
+        SoundMusicManager.instance.backgroundMusicStop();
     }
 
     private void OnBossStartHandler()
     {
         bossUI.SetActive(true);
+    }
+
+    private void OnEndLevelHandler()
+    {
+        if(finishPortal != null)
+            finishPortal.SetActive(true);
+
+        if(flagpole != null)
+            flagpole.SetActive(false);
+    }
+
+    private void OnBossEndHandler()
+    {
+        if (stairs != null)
+            stairs.SetActive(true);
     }
 }

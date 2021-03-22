@@ -6,18 +6,18 @@ public class Devil : Boss
 {
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] protected Transform checkPlayerPointBack;
-
+    public GameObject cage;
     public override void Attack()
     {
         //  do not attack if dead
         if (Dead) return;
-        //SpawnFireball();
         //  reset speed to normal
         speed = _speed;
     }
 
     private void SpawnFireball()
     {
+		SoundMusicManager.instance.FlameBossPlay();
         GameObject fireball = Instantiate(fireballPrefab, checkPlayerPoint.position, transform.GetChild(0).rotation);
         fireball.GetComponent<Fireball>().Damage = damage;
     }
@@ -72,6 +72,9 @@ public class Devil : Boss
         return colliders.Length != 0;
     }
 
-
-
+    protected override void DestroyEnemy()
+    {
+        base.DestroyEnemy();
+        cage.SetActive(false);
+    }
 }

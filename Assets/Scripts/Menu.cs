@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+		SoundMusicManager.instance.backgroundMenuMusicPlay();
         Time.timeScale = 1;
         string mode = PlayerPrefs.GetString("@mode", "");
         if (mode == "")
@@ -34,7 +35,9 @@ public class Menu : MonoBehaviour
     private IEnumerator WaitForAnimation()
     {
         yield return new WaitForSeconds(playerAttackLength);
-        if (PlayerPrefs.GetInt("@tutor", 0) == 0)
+        if (PlayerPrefs.GetInt("@history", 0) == 0)
+            SceneManager.LoadScene(14);
+        else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
@@ -42,6 +45,7 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
+		SoundMusicManager.instance.backgroundMenuMusicStop();
         StartCoroutine(WaitForAnimation());
     }
 

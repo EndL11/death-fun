@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1457639649
   m_SortingLayer: -3
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5fb5d41b3a396c04aba0ea4793ab7077, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -124,7 +124,7 @@ Animator:
   m_GameObject: {fileID: 4448612712625043965}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 1ca5f55c614240c4ea9d052bf30c74f7, type: 2}
+  m_Controller: {fileID: 22100000, guid: 2a77a83a954d7e549a678f3baa2d632d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4448612712767379921}
   m_Layer: 9
   m_Name: Vampire
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   _name: 20
   healthBar: {fileID: 0}
   healthBarObject: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: 2c57fac90204e59469850c26f8905ea3, type: 3}
   bloodLust: 100
   healingParticles: {fileID: 4477204539045977518}
   vampirePrefab: {fileID: 4448612712767379925, guid: f5e39fc37b3530a43abb0ee035854c4c,

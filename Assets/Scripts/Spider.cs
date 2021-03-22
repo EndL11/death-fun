@@ -18,7 +18,12 @@ public class Spider : Boss
         GameObject spider = Instantiate(miniSpider, transform.position, Quaternion.identity);
         int rand = UnityEngine.Random.Range(1, 3);
         Enemy spiderEnemy = spider.GetComponent<Enemy>();
-        int direction = spiderEnemy.Direction == -1 ? 1 : -1;
+        int direction = spiderEnemy.Direction;
+        if (rand == 1)
+            direction = -1;
+        else
+            direction = 1;
+
         spiderEnemy.Direction = direction;
         spider.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f, ForceMode2D.Impulse);
     }

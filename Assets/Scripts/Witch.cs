@@ -25,7 +25,7 @@ public class Witch : MonoBehaviour
     [SerializeField] private Transform leftPoint;
     [SerializeField] private Transform rightPoint;
 
-    private int direction = -1;
+    [SerializeField] private int direction = -1;
 
     private Color c;
 
@@ -96,7 +96,7 @@ public class Witch : MonoBehaviour
         dead = true;
         anim.SetTrigger("Die");
         rb.bodyType = RigidbodyType2D.Dynamic;
-        GameSaving.instance.EnemyDead(_name.ToString());
+        GameSaving.instance.EnemyDead(gameObject);
     }
 
     private void Move()

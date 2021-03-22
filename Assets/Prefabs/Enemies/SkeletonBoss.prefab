@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1457639649
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 573ef35bb4a2e4c46b83be4ab46c2416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 186586810464884131}
   m_Layer: 9
   m_Name: SkeletonBoss
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,6 +216,7 @@ MonoBehaviour:
   _name: 16
   healthBar: {fileID: 0}
   healthBarObject: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: d71aeca2ea3f8f844972dd34e69c9f62, type: 3}
   blockTime: 5
   block: {fileID: 4673626874491143608}
   skeletonPrefab: {fileID: 186586810464884135, guid: 4bedeafabed69c54b8183d2cb9da2695,

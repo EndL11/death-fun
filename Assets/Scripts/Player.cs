@@ -107,7 +107,8 @@ public class Player : MonoBehaviour
 
     private void SpawnBlackHole()
     {
-        //  create gameobject based on 'blackHolePrefab'
+        SoundMusicManager.instance.SpawnBlackHolePlay();
+		//  create gameobject based on 'blackHolePrefab'
         GameObject blackHole = Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
         blackHole.GetComponent<BlackHole>().Damage = sphereDamage;
         blackHole.GetComponent<BlackHole>().Radius = sphereRadius;
@@ -122,11 +123,18 @@ public class Player : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition.position, attackRange, enemiesMask);
         //  calculating push direction
         Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
+		SoundMusicManager.instance.WooahPlay();
         foreach (var enemy in colliders)
         {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             if(enemyScript == null)
             {
+                Witch witch = enemy.GetComponent<Witch>();
+                if(witch == null)
+                {
+                    enemy.GetComponent<AngrySkull>().ApplyDamage(damage);
+                    continue;
+                }
                 enemy.GetComponent<Witch>().ApplyDamage(damage);
                 continue;
             }
@@ -138,6 +146,7 @@ public class Player : MonoBehaviour
     public void ApplyDamage(float damage, Vector2 dir)
     {
         hp -= damage;
+		SoundMusicManager.instance.ApplyDamagePlayerPlay();
         //  update health bar
         healthBar.value = hp;
         healthBarHP.text = $"{hp} / {maxHP}";
@@ -215,6 +224,8 @@ public class Player : MonoBehaviour
 
     public void DecreaseSphereDelay(float value)
     {
+        if (blackHoleDelay <= 2f)
+            return;
         blackHoleDelay -= value;
         blackholeDelaySlider.maxValue = blackHoleDelay;
     }

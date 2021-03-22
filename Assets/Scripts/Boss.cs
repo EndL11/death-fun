@@ -8,15 +8,14 @@ public class Boss : Enemy
     [SerializeField] protected GameObject healthBarObject;
     protected Text healthStats;
     protected bool canMove = false;
+    [SerializeField] private GameObject chest;
+
     protected void Awake()
     {
         healthBar = healthBarObject.GetComponentInChildren<Slider>();
         healthStats = healthBar.GetComponentInChildren<Text>();
         healthBarObject.SetActive(false);
         healthStats.text = $"{hp} / {maxHP}";
-
-        //  for testing
-        //healthBarObject.SetActive(true);
     }
 
     protected override void Start()
@@ -25,10 +24,7 @@ public class Boss : Enemy
         GameSaving.instance.OnBossStart += StartFight;        
     }
 
-    protected override void PushBack(Vector2 dir)
-    {
-
-    }
+    protected override void PushBack(Vector2 dir) { }
 
     protected override void Move()
     {
@@ -42,8 +38,6 @@ public class Boss : Enemy
     {
         if (Dead)
             return;
-
-        SoundMusicManager.instance.DamageBossSoundPlay();
         base.ApplyDamage(damage, dir);
         healthBar.value = hp;
         healthStats.text = $"{hp} / {maxHP}";
@@ -61,5 +55,13 @@ public class Boss : Enemy
     private void OnDestroy()
     {
         GameSaving.instance.OnBossStart -= StartFight;
+    }
+
+    protected override void DestroyEnemy()
+    {
+        if(chest != null)
+            Instantiate(chest, transform.position, Quaternion.identity);
+        base.DestroyEnemy();
+        GameSaving.instance.BossEndFight();
     }
 } 
