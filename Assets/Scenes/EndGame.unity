@@ -567,6 +567,7 @@ MonoBehaviour:
   isEnd: 1
   titlesBackground: {fileID: 241285266}
   titles: {fileID: 1317229634}
+  continueButton: {fileID: 938204844}
 --- !u!95 &719930243
 Animator:
   serializedVersion: 3
@@ -694,7 +695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.786, y: 0.0193445}
   m_AnchorMax: {x: 0.96731234, y: 0.38048327}
-  m_AnchoredPosition: {x: -0.5, y: 3.4252014}
+  m_AnchoredPosition: {x: -0.5, y: 3.4252472}
   m_SizeDelta: {x: -100.34098, y: -114.781105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774453825

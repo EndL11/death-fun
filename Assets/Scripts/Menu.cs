@@ -30,8 +30,8 @@ public class Menu : MonoBehaviour
 
         toggleMusic.isOn = SoundMusicManager.instance.Music;
         toggleSound.isOn = SoundMusicManager.instance.Sound;
-
     }
+
     private IEnumerator WaitForAnimation()
     {
         yield return new WaitForSeconds(playerAttackLength);
@@ -83,6 +83,7 @@ public class Menu : MonoBehaviour
 
     public void LoadTutorial()
     {
+        SoundMusicManager.instance.backgroundMenuMusicStop();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

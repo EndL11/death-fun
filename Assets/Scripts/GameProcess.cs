@@ -163,9 +163,9 @@ public class GameProcess : MonoBehaviour
 
     public void Menu()
     {
+        SoundMusicManager.instance.backgroundMusicStop();
         GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
-        SoundMusicManager.instance.backgroundMusicStop();
     }
 
     private void OnBossStartHandler()
