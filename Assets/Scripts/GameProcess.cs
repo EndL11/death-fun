@@ -40,7 +40,8 @@ public class GameProcess : MonoBehaviour
 
     private void Start()
     {
-		SoundMusicManager.instance.backgroundMusicPlay();
+        if(!SoundMusicManager.instance.backgroundMusic.isPlaying)
+		    SoundMusicManager.instance.backgroundMusicPlay();
 		SoundMusicManager.instance.PortalPlay();
         //  set timeScale to 1
         Time.timeScale = 1;
