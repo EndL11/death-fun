@@ -48,12 +48,12 @@ public class GameSaving : MonoBehaviour
 
     void Awake()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            DontDestroyOnLoad(this);
 
         if (instance == null)
         {
             instance = this;
+            if (SceneManager.GetActiveScene().buildIndex != 1)
+                DontDestroyOnLoad(this);
         }
         else
         {

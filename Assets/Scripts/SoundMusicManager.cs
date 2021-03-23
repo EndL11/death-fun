@@ -49,12 +49,12 @@ public class SoundMusicManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
 
         enableMusic = PlayerPrefs.GetInt("@music", 1) == 1 ? true : false;
         enableSounds = PlayerPrefs.GetInt("@sounds", 1) == 1 ? true : false;
@@ -128,16 +128,15 @@ public class SoundMusicManager : MonoBehaviour
 	
 	public void backgroundMenuMusicStop()
 	{
-        if (enableMusic) backgroundMenuMusic.Stop();
+        if (enableMusic) backgroundMenuMusic.Pause();
 	}
 	
 	public void backgroundMusicStop()
 	{
-        if (enableMusic) backgroundMusic.Stop();
+        if (enableMusic) backgroundMusic.Pause();
 	}
 	
 	
-	//SoundMusicManager.instance.backgroundMenuMusicPlay());
     private void OnDestroy()
     {
         PlayerPrefs.SetInt("@music", enableMusic ? 1 : 0);

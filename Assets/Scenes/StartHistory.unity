@@ -1585,6 +1585,7 @@ MonoBehaviour:
   isEnd: 0
   titlesBackground: {fileID: 0}
   titles: {fileID: 0}
+  continueButton: {fileID: 938204844}
 --- !u!95 &719930243
 Animator:
   serializedVersion: 3
