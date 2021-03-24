@@ -20,7 +20,7 @@ public class EnemyAnalytics
 {
     public enum Names { spider, snake, scorpion,
         zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3,
-        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire };
+        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, angry_skull };
     public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
@@ -80,7 +80,15 @@ public class GameSaving : MonoBehaviour
         {
             Witch witch = enemy.GetComponent<Witch>();
             if (witch != null)
+            {
                 name = witch._name.ToString();
+            }
+            else
+            {
+                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
+                if (angrySkull != null)
+                    name = angrySkull._name.ToString();
+            }
         }
         else
             name = script._name.ToString();
@@ -152,7 +160,9 @@ public class GameSaving : MonoBehaviour
         }
 
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("@coins", _score);
+        if(mode != "Hard Mode")
+            PlayerPrefs.SetInt("@coins", _score);
+
         PlayerPrefs.SetInt("@tutor", tutorComplete);
         PlayerPrefs.SetInt("@music", music);
         PlayerPrefs.SetInt("@sounds", sound);

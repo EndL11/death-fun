@@ -39,6 +39,8 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(14);
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else if (PlayerPrefs.GetInt("@level", 1) != 1)
+            SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }

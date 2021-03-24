@@ -65,6 +65,7 @@ public class GameProcess : MonoBehaviour
         }
         enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
+        PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update()
@@ -83,16 +84,14 @@ public class GameProcess : MonoBehaviour
     }
 
     public void Restart()
-    {
-        GameSaving.instance.ClearPlayerPrefs();
-  
-        PlayerPrefs.SetInt("@saved", 0);
+    {  
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Exit()
     {
+        GameSaving.instance.ClearPlayerPrefs();
         pausePanel.SetActive(false);
         Application.Quit();
     }
@@ -127,8 +126,11 @@ public class GameProcess : MonoBehaviour
             counter += 1;
         }
 
-        //  above add dead enemies to game over panel
-        GameSaving.instance.ClearPlayerPrefs();
+        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
+        {
+            GameSaving.instance.ClearPlayerPrefs();
+            PlayerPrefs.SetInt("@saved", 0);
+        }
     }
 
     private void OnDestroy()
@@ -146,8 +148,6 @@ public class GameProcess : MonoBehaviour
 
     public void GameOverRestart()
     {
-        PlayerPrefs.SetInt("@saved", 0);
-
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -165,7 +165,6 @@ public class GameProcess : MonoBehaviour
     public void Menu()
     {
         SoundMusicManager.instance.backgroundMusicStop();
-        GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
     }
 

@@ -534,7 +534,7 @@ MonoBehaviour:
   attackDelay: 0.5
   attackZone: 0.5
   playerCheckZone: 0.3
-  hurtParticles: {fileID: 0}
+  hurtParticles: {fileID: 7013418330516687436}
   soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
     type: 3}
   checkPlatformEndPoint: {fileID: 667626503}
@@ -755,6 +755,12 @@ PrefabInstance:
 --- !u!4 &7013418330516687438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5839192502435269176, guid: 3e1ed3a55f064c84fa5d98745f21fb3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3484748674472231030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7013418330516687436 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5839192502435269178, guid: 3e1ed3a55f064c84fa5d98745f21fb3b,
     type: 3}
   m_PrefabInstance: {fileID: 3484748674472231030}
   m_PrefabAsset: {fileID: 0}

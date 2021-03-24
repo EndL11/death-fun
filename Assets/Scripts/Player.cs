@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
         sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
         //  load saved player stats
-        if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f && PlayerPrefs.GetInt("@saved", 0) == 1)
+        if(GameSaving.instance != null && GameSaving.instance.playerStats.damage != 0 && PlayerPrefs.GetInt("@saved", 0) == 1)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
             sphereDamage = GameSaving.instance.playerStats.blackHoleDamage;
             sphereRadius = GameSaving.instance.playerStats.blackHoleRadius;
         }
+
         //  set healthbar start stats
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
@@ -192,7 +193,9 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 1)
             PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
 
-        PlayerPrefs.SetInt("@saved", 0);
+        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
+            PlayerPrefs.SetInt("@saved", 0);
+
         //  play die animation
         anim.SetTrigger("Die");
     }
