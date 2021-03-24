@@ -190,8 +190,6 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         //  set player to not solid object
         GetComponent<Collider2D>().isTrigger = true;
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
 
         if(PlayerPrefs.GetString("@mode") == "Hard Mode")
             PlayerPrefs.SetInt("@saved", 0);

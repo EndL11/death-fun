@@ -12,6 +12,8 @@ public class Menu : MonoBehaviour
     public GameObject mainPanel;
     public GameObject optionsPanel;
 
+    public GameObject loadTutorialButton;
+
     public GameObject playerMainMenu;
 
     private float playerAttackLength = 0.6f;
@@ -30,6 +32,10 @@ public class Menu : MonoBehaviour
 
         toggleMusic.isOn = SoundMusicManager.instance.Music;
         toggleSound.isOn = SoundMusicManager.instance.Sound;
+        loadTutorialButton.SetActive(false);
+
+        if (PlayerPrefs.GetInt("@history", 0) == 1)
+            loadTutorialButton.SetActive(true);
     }
 
     private IEnumerator WaitForAnimation()

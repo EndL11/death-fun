@@ -50,7 +50,7 @@ public class GameProcess : MonoBehaviour
 
         if (GameSaving.instance != null)
         {
-            GameSaving.instance.score = PlayerPrefs.GetInt("@coins", GameSaving.instance.score);
+            GameSaving.instance.score = PlayerPrefs.GetInt("@coins", 0);
 
             GameSaving.instance.OnScoreChanged += UpdateScore;
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
@@ -65,7 +65,8 @@ public class GameProcess : MonoBehaviour
         }
         enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
-        PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
+        if(PlayerPrefs.GetString("@mode") == "Normal Mode")
+            PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update()
@@ -84,7 +85,8 @@ public class GameProcess : MonoBehaviour
     }
 
     public void Restart()
-    {  
+    {
+        DontSaveStatsByMode();
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -125,12 +127,7 @@ public class GameProcess : MonoBehaviour
             GameObject _instance = Instantiate(item, parent.position, Quaternion.identity, parent);
             counter += 1;
         }
-
-        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
-        {
-            GameSaving.instance.ClearPlayerPrefs();
-            PlayerPrefs.SetInt("@saved", 0);
-        }
+        DontSaveStatsByMode();
     }
 
     private void OnDestroy()
@@ -148,7 +145,7 @@ public class GameProcess : MonoBehaviour
 
     public void GameOverRestart()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             return;
@@ -162,8 +159,19 @@ public class GameProcess : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    private void DontSaveStatsByMode()
+    {
+        if (PlayerPrefs.GetString("@mode") == "Hard Mode")
+        {
+            GameSaving.instance.ClearPlayerPrefs();
+            PlayerPrefs.SetInt("@saved", 0);
+        }
+    }
+
     public void Menu()
     {
+        PlayerPrefs.DeleteKey("@level");
+        DontSaveStatsByMode();
         SoundMusicManager.instance.backgroundMusicStop();
         SceneManager.LoadScene(0);
     }

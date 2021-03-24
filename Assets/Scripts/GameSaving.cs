@@ -116,6 +116,12 @@ public class GameSaving : MonoBehaviour
 
     public void GameOver()
     {
+        enemiesDeadList.Clear();
+        foreach (var item in analiticsPrefabs)
+        {
+            item.show = false;
+        }
+
         OnGameOver();
     }
 
