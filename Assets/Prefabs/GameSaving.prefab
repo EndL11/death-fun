@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   deadEnemies: 0
+  enemiesCount: 0
+  enemies: []
   analiticsPrefabs:
   - prefab: {fileID: 7989043304102008344, guid: a926d7ac1cc20294f83c894e39491d08,
       type: 3}
@@ -102,7 +104,7 @@ MonoBehaviour:
       type: 3}
     name: 18
     show: 0
-  - prefab: {fileID: 7989043304102008344, guid: 012736a49ab1d7643b6e6006ecd481f3,
+  - prefab: {fileID: 7989043304102008344, guid: 80378d0ee02377f4a931e0e6f7a4aeac,
       type: 3}
     name: 19
     show: 0
@@ -125,10 +127,6 @@ MonoBehaviour:
   - prefab: {fileID: 7989043304102008344, guid: 8cf069adb4e0e2c4dafc97d709b36f10,
       type: 3}
     name: 15
-    show: 0
-  - prefab: {fileID: 7989043304102008344, guid: 80378d0ee02377f4a931e0e6f7a4aeac,
-      type: 3}
-    name: 20
     show: 0
   ENEMIES:
   - spider
