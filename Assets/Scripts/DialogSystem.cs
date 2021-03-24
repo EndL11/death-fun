@@ -27,6 +27,8 @@ public class DialogSystem : MonoBehaviour
 
     private Animator anim;
 
+    public GameObject continueButton;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -35,6 +37,7 @@ public class DialogSystem : MonoBehaviour
             titles.SetActive(false);
 
         dialogs[current].panel.SetActive(true);
+        continueButton.SetActive(false);
         StartCoroutine(TypeSentence(sentences[current]));
     }
 
@@ -50,8 +53,9 @@ public class DialogSystem : MonoBehaviour
         foreach (var letter in sentence.ToCharArray())
         {
             dialogText.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(0.015f);
         }
+        continueButton.SetActive(true);
     }
 
     private IEnumerator DisplayNextSentenceIEnum()
@@ -59,22 +63,23 @@ public class DialogSystem : MonoBehaviour
         if (current == dialogs.Length - 1)
         {
             EndDialog();
-            yield return null;
         }
         else
         {
+            if(current != dialogs.Length - 2)
+            continueButton.SetActive(false);
+
             Dialog currentDialog = dialogs[current];
             current += 1;
 
-            Dialog dialog = dialogs[current];
-            if (dialog.needTransition && anim != null)
+            Dialog nextDialog = dialogs[current];
+            if (nextDialog.needTransition && anim != null)
             {
                 anim.SetTrigger("Transition");
-                yield return new WaitForSeconds(.9f);
+                yield return new WaitForSeconds(1.3f);
             }
             currentDialog.panel.SetActive(false);
-            dialog.panel.SetActive(true);
-            StopCoroutine(TypeSentence(sentences[current - 1]));
+            nextDialog.panel.SetActive(true);
             if (current != sentences.Length)
                 StartCoroutine(TypeSentence(sentences[current]));
             else

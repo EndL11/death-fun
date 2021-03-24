@@ -12,6 +12,8 @@ public class Menu : MonoBehaviour
     public GameObject mainPanel;
     public GameObject optionsPanel;
 
+    public GameObject loadTutorialButton;
+
     public GameObject playerMainMenu;
 
     private float playerAttackLength = 0.6f;
@@ -30,8 +32,12 @@ public class Menu : MonoBehaviour
 
         toggleMusic.isOn = SoundMusicManager.instance.Music;
         toggleSound.isOn = SoundMusicManager.instance.Sound;
+        loadTutorialButton.SetActive(false);
 
+        if (PlayerPrefs.GetInt("@history", 0) == 1)
+            loadTutorialButton.SetActive(true);
     }
+
     private IEnumerator WaitForAnimation()
     {
         yield return new WaitForSeconds(playerAttackLength);
@@ -39,6 +45,8 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(14);
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else if (PlayerPrefs.GetInt("@level", 1) != 1)
+            SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
@@ -83,6 +91,7 @@ public class Menu : MonoBehaviour
 
     public void LoadTutorial()
     {
+        SoundMusicManager.instance.backgroundMenuMusicStop();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

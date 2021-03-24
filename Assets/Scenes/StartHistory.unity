@@ -1536,11 +1536,10 @@ MonoBehaviour:
   - "I   don\u2019t   mind   if   your   dad   doesn\u2019t."
   - "Come   on,   he   won\u2019t   know   anything."
   - Hey,   Louis,   how   are   you?   Nice   forest.
-  - "Sorry   friend   I   didn\u2019t   mean   to,   but   I. I   don\u2019t   like  
+  - "Sorry   friend   I   didn\u2019t   mean   to,   but   I   don\u2019t   like  
     who   you   are.   You\u2019re   dating   ...   that\u2019s   why   I\u2019m  
     all  "
-  - "Now   I   know   why   you\u2019re   here.   I\u2019ve   disappeared   so  
-    often.  "
+  - Now   I   understand   everything!   Why   you   so   often   disappeared.
   - "No,   Father,   you\u2019ve   got   it   all   wrong."
   - "All   right!   I\u2019m   taking   you   home.   I\u2019m   taking   you   home!  "
   - "I\u2019ll   come   for   you!  "
@@ -1585,6 +1584,7 @@ MonoBehaviour:
   isEnd: 0
   titlesBackground: {fileID: 0}
   titles: {fileID: 0}
+  continueButton: {fileID: 938204844}
 --- !u!95 &719930243
 Animator:
   serializedVersion: 3
@@ -2284,6 +2284,7 @@ GameObject:
   - component: {fileID: 938204847}
   - component: {fileID: 938204846}
   - component: {fileID: 938204848}
+  - component: {fileID: 938204849}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2323,7 +2324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2342,7 +2343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue >>
+  m_Text: Continue
 --- !u!222 &938204847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2405,6 +2406,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &938204849
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938204844}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af0f326488d08f847a5200d62c92c6f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &938733756
 GameObject:
   m_ObjectHideFlags: 0

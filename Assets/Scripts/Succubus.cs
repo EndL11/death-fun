@@ -8,6 +8,7 @@ public class Succubus : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
+            PlayerPrefs.DeleteKey("@level");
             Camera.main.GetComponent<Animator>().SetTrigger("Finish");
         }
     }
