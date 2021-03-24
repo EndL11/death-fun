@@ -41975,7 +41975,7 @@ GameObject:
   - component: {fileID: 1559712724}
   - component: {fileID: 1559712723}
   - component: {fileID: 1559712728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
