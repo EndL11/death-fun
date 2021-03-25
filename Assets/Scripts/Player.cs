@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -28,6 +27,8 @@ public class Player : MonoBehaviour
 
     private float sphereDamage;
     private float sphereRadius;
+
+    public ParticleSystem hurtPatricles;
 
     private bool dead = false;
     //  starting color (need for hunt animation)
@@ -155,6 +156,7 @@ public class Player : MonoBehaviour
             DestroyObject();
         if (!dead)
         {
+            hurtPatricles.Play();
             //  push player back
             PushBack(dir);
             //  play hurt animation
@@ -243,16 +245,6 @@ public class Player : MonoBehaviour
 
     public void SavePlayerStats()
     {
-        //  if it's tutorial level not to save player stats
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            //  saving tutor complete
-            GameSaving.instance.SaveCompleteTutorial();
-            return;
-        }
-
-        PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
-
         //  save player stats
         PlayerPrefs.SetInt("@saved", 1);
         GameSaving.instance.playerStats.hp = hp;
