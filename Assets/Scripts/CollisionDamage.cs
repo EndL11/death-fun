@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxePendulum : MonoBehaviour
+public class CollisionDamage : MonoBehaviour
 {
-    public float damage = 15f;
-    public float upForce = 5f;
+    public float damage = 5f;
+    public float upForce = 2.5f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

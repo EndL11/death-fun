@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8269605472228530537}
   - component: {fileID: 8269605472228530538}
   - component: {fileID: 8269605472228530539}
-  - component: {fileID: 8269605472228530535}
   - component: {fileID: 8269605472228530536}
+  - component: {fileID: 5592522667304841157}
   - component: {fileID: 5685930801385074416}
   m_Layer: 0
   m_Name: Axe Pendulum
@@ -104,20 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8269605472228530535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8269605472228530540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e59e4595e29da41a3239654092453e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  upForce: 5
 --- !u!68 &8269605472228530536
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -149,6 +135,20 @@ EdgeCollider2D:
   - {x: 0.23566356, y: -1.8968078}
   - {x: -0.31438667, y: -1.8480173}
   - {x: -0.63192725, y: -1.5681493}
+--- !u!114 &5592522667304841157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8269605472228530540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ade0efdd5766a4a84c1bf1a1edcd97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  upForce: 5
 --- !u!114 &5685930801385074416
 MonoBehaviour:
   m_ObjectHideFlags: 0
