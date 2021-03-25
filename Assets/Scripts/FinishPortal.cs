@@ -10,19 +10,21 @@ public class FinishPortal : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            //  saving player stats
-            collision.GetComponentInParent<Player>().SavePlayerStats();
-            Destroy(collision.transform.parent.gameObject);
-            StartCoroutine(WaitToEndAnimation());            
             //  if it's tutorial level not to save player stats
-            if (SceneManager.GetActiveScene().buildIndex == 1)
+            if (SceneManager.GetActiveScene().buildIndex != 1)
+            {
+                //  saving player stats
+                collision.GetComponentInParent<Player>().SavePlayerStats();
+                PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
+            }
+            else
             {
                 //  saving tutor complete
                 GameSaving.instance.SaveCompleteTutorial();
-                return;
+                SceneManager.LoadScene(0);
             }
-
-            PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
+            Destroy(collision.transform.parent.gameObject);
+            StartCoroutine(WaitToEndAnimation());            
         }
     }
 

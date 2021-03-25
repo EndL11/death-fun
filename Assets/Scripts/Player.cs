@@ -260,5 +260,16 @@ public class Player : MonoBehaviour
         GameSaving.instance.playerStats.blackHoleDamage = sphereDamage;
         GameSaving.instance.playerStats.blackHoleDelay = blackHoleDelay;
         GameSaving.instance.playerStats.blackHoleRadius = sphereRadius;
+        SaveToPlayerPrefs();
+    }
+
+    private void SaveToPlayerPrefs()
+    {
+        PlayerPrefs.SetFloat("@hp", hp);
+        PlayerPrefs.SetFloat("@maxhp", maxHP);
+        PlayerPrefs.SetFloat("@damage", damage);
+        PlayerPrefs.SetFloat("@spheredamage", sphereDamage);
+        PlayerPrefs.SetFloat("@spheredelay", blackHoleDelay);
+        PlayerPrefs.SetFloat("@sphereradius", sphereRadius);
     }
 }

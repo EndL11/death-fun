@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
 
     public GameObject playerMainMenu;
 
+    public GameObject continueButton;
+
     private float playerAttackLength = 0.6f;
 
     private void Start()
@@ -33,6 +35,10 @@ public class Menu : MonoBehaviour
         toggleMusic.isOn = SoundMusicManager.instance.Music;
         toggleSound.isOn = SoundMusicManager.instance.Sound;
         loadTutorialButton.SetActive(false);
+        continueButton.SetActive(false);
+
+        if (PlayerPrefs.GetInt("@level", 1) != 1)
+            continueButton.SetActive(true);
 
         if (PlayerPrefs.GetInt("@history", 0) == 1)
             loadTutorialButton.SetActive(true);
@@ -45,14 +51,15 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(14);
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        else if (PlayerPrefs.GetInt("@level", 1) != 1)
-            SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 
     public void Play()
     {
+        PlayerPrefs.DeleteKey("@level");
+        PlayerPrefs.SetInt("@saved", 0);
+        PlayerPrefs.DeleteKey("@coins");
 		SoundMusicManager.instance.backgroundMenuMusicStop();
         StartCoroutine(WaitForAnimation());
     }
@@ -87,6 +94,12 @@ public class Menu : MonoBehaviour
         string modeName = !isOn ? "Hard Mode" : "Normal Mode";
         PlayerPrefs.SetString("@mode", modeName);
         toggleMode.isOn = !isOn;
+        if(modeName == "Hard Mode")
+        {
+            PlayerPrefs.DeleteKey("@level");
+            PlayerPrefs.DeleteKey("@complete");
+            PlayerPrefs.DeleteKey("@saved");
+        }
     }
 
     public void LoadTutorial()
@@ -105,5 +118,11 @@ public class Menu : MonoBehaviour
     {
         toggleSound.isOn = !toggleSound.isOn;
         SoundMusicManager.instance.Sound = toggleSound.isOn;
+    }
+
+    public void ContinueClick()
+    {
+        PlayerPrefs.SetInt("@complete", 1);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
     }
 }
