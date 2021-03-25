@@ -86,7 +86,7 @@ public class GameProcess : MonoBehaviour
 
     public void Restart()
     {
-        DontSaveStatsByMode();
+        ClearStatsByMode();
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -127,7 +127,7 @@ public class GameProcess : MonoBehaviour
             GameObject _instance = Instantiate(item, parent.position, Quaternion.identity, parent);
             counter += 1;
         }
-        DontSaveStatsByMode();
+        ClearStatsByMode();
     }
 
     private void OnDestroy()
@@ -159,7 +159,7 @@ public class GameProcess : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void DontSaveStatsByMode()
+    private void ClearStatsByMode()
     {
         if (PlayerPrefs.GetString("@mode") == "Hard Mode")
         {
@@ -170,8 +170,9 @@ public class GameProcess : MonoBehaviour
 
     public void Menu()
     {
-        PlayerPrefs.DeleteKey("@level");
-        DontSaveStatsByMode();
+        if(gameOverPanel.activeSelf)
+            PlayerPrefs.DeleteKey("@level");
+        ClearStatsByMode();
         SoundMusicManager.instance.backgroundMusicStop();
         SceneManager.LoadScene(0);
     }

@@ -4,34 +4,37 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Stats")]
     [SerializeField] private float hp = 100f;
     [SerializeField] private float maxHP = 100f;
     [SerializeField] private float damage = 15f;
+    [SerializeField] private float attackRange = 0.5f;
+    //  sphere stats
     public float blackHoleDelay = 7f;
     private float _blackHoleDelay;
+    private float sphereDamage;
+    private float sphereRadius;
+    [Space]
     //  gameobject to spawn (blackhole)
     [SerializeField] private GameObject blackHolePrefab;
     //  position for spawning black holes
     [SerializeField] private Transform spawnPosition;
 
-    [SerializeField] private float attackRange = 0.5f;
-
     public LayerMask enemiesMask;
 
     private Animator anim;
     private Rigidbody2D rb;
-
+    //  player UI
     private Slider healthBar;
     private Text healthBarHP;
     private Slider blackholeDelaySlider;
 
-    private float sphereDamage;
-    private float sphereRadius;
+    private PlayerMovement playerMovement;
 
     public ParticleSystem hurtPatricles;
 
     private bool dead = false;
-    //  starting color (need for hunt animation)
+    //  starting color (need for hurt animation)
     Color c;
 
     public bool Dead
@@ -58,10 +61,13 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+
+        playerMovement = GetComponent<PlayerMovement>();
+        //  set standard sphere stats
         sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
         sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
         //  load saved player stats
-        if(GameSaving.instance != null && GameSaving.instance.playerStats.damage != 0 && PlayerPrefs.GetInt("@saved", 0) == 1)
+        if(GameSaving.instance != null && GameSaving.instance.playerStats.hp != 0 && PlayerPrefs.GetInt("@saved", 0) == 1)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
@@ -81,13 +87,14 @@ public class Player : MonoBehaviour
         c = GetComponentInChildren<SpriteRenderer>().material.color;
         //  set blackhole delay on start game to 0
         _blackHoleDelay = 0f;
+        //  setting sphere delay for slider
         blackholeDelaySlider.maxValue = blackHoleDelay;
         blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
     }
 
     void Update()
     {
-        if (!GetComponent<PlayerMovement>().CanMove)
+        if (!playerMovement.CanMove)
             return;
 
         if (_blackHoleDelay > 0f)

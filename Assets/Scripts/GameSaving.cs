@@ -74,34 +74,19 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(GameObject enemy)
     {
-        string name = "";
-        Enemy script = enemy.GetComponent<Enemy>();
-        if (script == null)
-        {
-            Witch witch = enemy.GetComponent<Witch>();
-            if (witch != null)
-            {
-                name = witch._name.ToString();
-            }
-            else
-            {
-                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
-                if (angrySkull != null)
-                    name = angrySkull._name.ToString();
-            }
-        }
-        else
-            name = script._name.ToString();
+        string name = GetEnemyName(enemy);
 
         bool deleted = enemies.Remove(enemy);
         if(deleted && name != "")
                 deadEnemies += 1;
 
         OnEnemyDead();
+
         if (deadEnemies == enemiesCount)
         {
             OnEndLevel();
         }
+        //  do not save analytics on tutorial
         if (SceneManager.GetActiveScene().buildIndex == 1)
             return;
 
@@ -213,5 +198,29 @@ public class GameSaving : MonoBehaviour
     public void BossEndFight()
     {
         OnBossDie();
+    }
+
+    private string GetEnemyName(GameObject enemy)
+    {
+        string name = "";
+        Enemy script = enemy.GetComponent<Enemy>();
+        if (script == null)
+        {
+            Witch witch = enemy.GetComponent<Witch>();
+            if (witch != null)
+            {
+                name = witch._name.ToString();
+            }
+            else
+            {
+                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
+                if (angrySkull != null)
+                    name = angrySkull._name.ToString();
+            }
+        }
+        else
+            name = script._name.ToString();
+
+        return name;
     }
 }
