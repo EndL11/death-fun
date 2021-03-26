@@ -19,6 +19,7 @@ public class FinishPortal : MonoBehaviour
             }
             else
             {
+                SoundMusicManager.instance.backgroundMusicStop();
                 //  saving tutor complete
                 GameSaving.instance.SaveCompleteTutorial();
                 SceneManager.LoadScene(0);
