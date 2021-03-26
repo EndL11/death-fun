@@ -13,10 +13,15 @@ public class Menu : MonoBehaviour
     public GameObject optionsPanel;
 
     public GameObject loadTutorialButton;
+    public GameObject continueButton;
 
     public GameObject playerMainMenu;
 
-    public GameObject continueButton;
+    public GameObject normalModeAward;
+    public GameObject hardModeAward;
+
+    public Sprite normalModeSprite;
+    public Sprite hardModeSprite;
 
     private float playerAttackLength = 0.6f;
 
@@ -42,6 +47,21 @@ public class Menu : MonoBehaviour
 
         if (PlayerPrefs.GetInt("@history", 0) == 1)
             loadTutorialButton.SetActive(true);
+
+        //  setting awards
+        float hardModeTime = PlayerPrefs.GetFloat("@awardHard", 0f);
+        float normalModeTime = PlayerPrefs.GetFloat("@awardNormal", 0f);
+        if (hardModeTime != 0f)
+        {
+            hardModeAward.GetComponentInChildren<Image>().sprite = hardModeSprite;
+            hardModeAward.GetComponentInChildren<Text>().text = ConvertGameTimeToString(hardModeTime);
+        }
+
+        if (normalModeTime != 0f)
+        {
+            normalModeAward.GetComponentInChildren<Image>().sprite = normalModeSprite;
+            normalModeAward.GetComponentInChildren<Text>().text = ConvertGameTimeToString(normalModeTime);
+        }
     }
 
     private IEnumerator WaitForAnimation()
@@ -124,5 +144,22 @@ public class Menu : MonoBehaviour
     {
         PlayerPrefs.SetInt("@complete", 1);
         SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
+    }
+
+    private string ConvertGameTimeToString(float gameTime)
+    {
+        if (gameTime <= 0f)
+            return "00:00:00";
+
+        string time = "";
+        int hours = System.Convert.ToInt16(gameTime / 3600);
+        time += hours > 10 ? $"{hours}:" : $"0{hours}:";
+        gameTime -= hours * 3600;
+        int minutes = System.Convert.ToInt16(gameTime / 60);
+        time += minutes > 10 ? $"{minutes}:" : $"0{minutes}:";
+        gameTime -= minutes * 60;
+        int seconds = System.Convert.ToInt16(gameTime);
+        time += seconds > 10 ? $"{seconds}" : $"0{seconds}";
+        return time;
     }
 }

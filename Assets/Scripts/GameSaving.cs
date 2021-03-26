@@ -46,6 +46,13 @@ public class GameSaving : MonoBehaviour
     [HideInInspector]
     public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
 
+    public float gameTime;
+
+    public string GameTimer
+    {
+        get { return ConvertGameTimeToString(gameTime); }
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -69,6 +76,11 @@ public class GameSaving : MonoBehaviour
     private void Start()
     {
         LoadDeadEnemies();        
+    }
+
+    private void Update()
+    {
+        gameTime += Time.deltaTime;
     }
 
     public void AddScore(int value)
@@ -231,5 +243,22 @@ public class GameSaving : MonoBehaviour
         playerStats.blackHoleDamage = PlayerPrefs.GetFloat("@spheredamage", 0);
         playerStats.blackHoleDelay = PlayerPrefs.GetFloat("@spheredelay", 0);
         playerStats.blackHoleRadius = PlayerPrefs.GetFloat("@sphereradius", 0);
+    }
+
+    private string ConvertGameTimeToString(float gameTime)
+    {
+        if (gameTime <= 0f)
+            return "00:00:00";
+
+        string time = "";
+        int hours = System.Convert.ToInt16(gameTime / 3600);
+        time += hours > 10 ? $"{hours}:" : $"0{hours}:";
+        gameTime -= hours * 3600;
+        int minutes = System.Convert.ToInt16(gameTime / 60);
+        time += minutes > 10 ? $"{minutes}:" : $"0{minutes}:";
+        gameTime -= minutes * 60;
+        int seconds = System.Convert.ToInt16(gameTime);
+        time += seconds > 10 ? $"{seconds}" : $"0{seconds}";
+        return time;
     }
 }

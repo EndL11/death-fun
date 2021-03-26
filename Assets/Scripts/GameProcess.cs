@@ -24,6 +24,8 @@ public class GameProcess : MonoBehaviour
 
     public GameObject flagpole;
 
+    public Text timerText;
+
     private void Awake()
     {
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
@@ -76,6 +78,8 @@ public class GameProcess : MonoBehaviour
         {
             Pause();
         }
+
+        timerText.text = GameSaving.instance.GameTimer;
     }
 
     public void Pause()
