@@ -9833,7 +9833,7 @@ MonoBehaviour:
   toggleSound: {fileID: 1561773545}
   mainPanel: {fileID: 1600038933}
   optionsPanel: {fileID: 2107560767}
-  loadTutorialButton: {fileID: 582503610}
+  loadTutorialButton: {fileID: 756209457}
   playerMainMenu: {fileID: 1825665101}
   continueButton: {fileID: 936289183}
 --- !u!4 &471438492
