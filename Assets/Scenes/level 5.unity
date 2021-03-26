@@ -2185,6 +2185,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3919314712748211447, guid: 2b9c298c73d581d4d95b508c90870db9,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 6002403210468214991, guid: 2b9c298c73d581d4d95b508c90870db9,
         type: 3}
       propertyPath: m_Name
@@ -49314,7 +49319,7 @@ GameObject:
   - component: {fileID: 1457166131}
   - component: {fileID: 1457166135}
   - component: {fileID: 1457166134}
-  - component: {fileID: 1457166136}
+  - component: {fileID: 1457166137}
   m_Layer: 0
   m_Name: Magma
   m_TagString: Untagged
@@ -49452,7 +49457,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1457166136
+--- !u!114 &1457166137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49461,7 +49466,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1457166130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f88002f62ebf224f814d191f8526d00, type: 3}
+  m_Script: {fileID: 11500000, guid: 95ade0efdd5766a4a84c1bf1a1edcd97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
@@ -51328,7 +51333,7 @@ PrefabInstance:
     - target: {fileID: 2757841641981639704, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.016000748
+      value: -0.01599884
       objectReference: {fileID: 0}
     - target: {fileID: 2757841642144129603, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}

@@ -50,7 +50,7 @@ public class GameProcess : MonoBehaviour
 
         if (GameSaving.instance != null)
         {
-            GameSaving.instance.score = PlayerPrefs.GetInt("@coins", GameSaving.instance.score);
+            GameSaving.instance.score = PlayerPrefs.GetInt("@coins", 0);
 
             GameSaving.instance.OnScoreChanged += UpdateScore;
             GameSaving.instance.OnEnemyDead += UpdateDeadCounter;
@@ -65,6 +65,8 @@ public class GameProcess : MonoBehaviour
         }
         enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
+        if(PlayerPrefs.GetString("@mode") == "Normal Mode")
+            PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update()
@@ -84,15 +86,14 @@ public class GameProcess : MonoBehaviour
 
     public void Restart()
     {
-        GameSaving.instance.ClearPlayerPrefs();
-  
-        PlayerPrefs.SetInt("@saved", 0);
+        ClearStatsByMode();
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Exit()
     {
+        GameSaving.instance.ClearPlayerPrefs();
         pausePanel.SetActive(false);
         Application.Quit();
     }
@@ -126,9 +127,7 @@ public class GameProcess : MonoBehaviour
             GameObject _instance = Instantiate(item, parent.position, Quaternion.identity, parent);
             counter += 1;
         }
-
-        //  above add dead enemies to game over panel
-        GameSaving.instance.ClearPlayerPrefs();
+        ClearStatsByMode();
     }
 
     private void OnDestroy()
@@ -146,9 +145,7 @@ public class GameProcess : MonoBehaviour
 
     public void GameOverRestart()
     {
-        PlayerPrefs.SetInt("@saved", 0);
-
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             return;
@@ -162,10 +159,21 @@ public class GameProcess : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    private void ClearStatsByMode()
+    {
+        if (PlayerPrefs.GetString("@mode") == "Hard Mode")
+        {
+            GameSaving.instance.ClearPlayerPrefs();
+            PlayerPrefs.SetInt("@saved", 0);
+        }
+    }
+
     public void Menu()
     {
+        if(gameOverPanel.activeSelf)
+            PlayerPrefs.DeleteKey("@level");
+        ClearStatsByMode();
         SoundMusicManager.instance.backgroundMusicStop();
-        GameSaving.instance.ClearPlayerPrefs();
         SceneManager.LoadScene(0);
     }
 

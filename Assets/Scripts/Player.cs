@@ -1,36 +1,40 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Stats")]
     [SerializeField] private float hp = 100f;
     [SerializeField] private float maxHP = 100f;
     [SerializeField] private float damage = 15f;
+    [SerializeField] private float attackRange = 0.5f;
+    //  sphere stats
     public float blackHoleDelay = 7f;
     private float _blackHoleDelay;
+    private float sphereDamage;
+    private float sphereRadius;
+    [Space]
     //  gameobject to spawn (blackhole)
     [SerializeField] private GameObject blackHolePrefab;
     //  position for spawning black holes
     [SerializeField] private Transform spawnPosition;
 
-    [SerializeField] private float attackRange = 0.5f;
-
     public LayerMask enemiesMask;
 
     private Animator anim;
     private Rigidbody2D rb;
-
+    //  player UI
     private Slider healthBar;
     private Text healthBarHP;
     private Slider blackholeDelaySlider;
 
-    private float sphereDamage;
-    private float sphereRadius;
+    private PlayerMovement playerMovement;
+
+    public ParticleSystem hurtPatricles;
 
     private bool dead = false;
-    //  starting color (need for hunt animation)
+    //  starting color (need for hurt animation)
     Color c;
 
     public bool Dead
@@ -57,10 +61,13 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         rb = GetComponent<Rigidbody2D>();
+
+        playerMovement = GetComponent<PlayerMovement>();
+        //  set standard sphere stats
         sphereRadius = blackHolePrefab.GetComponent<BlackHole>().Radius;
         sphereDamage = blackHolePrefab.GetComponent<BlackHole>().Damage;
         //  load saved player stats
-        if(GameSaving.instance != null && GameSaving.instance?.playerStats.damage != 0f && PlayerPrefs.GetInt("@saved", 0) == 1)
+        if(GameSaving.instance != null && GameSaving.instance.playerStats.hp != 0 && PlayerPrefs.GetInt("@saved", 0) == 1)
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;
@@ -70,6 +77,7 @@ public class Player : MonoBehaviour
             sphereDamage = GameSaving.instance.playerStats.blackHoleDamage;
             sphereRadius = GameSaving.instance.playerStats.blackHoleRadius;
         }
+
         //  set healthbar start stats
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
@@ -79,13 +87,14 @@ public class Player : MonoBehaviour
         c = GetComponentInChildren<SpriteRenderer>().material.color;
         //  set blackhole delay on start game to 0
         _blackHoleDelay = 0f;
+        //  setting sphere delay for slider
         blackholeDelaySlider.maxValue = blackHoleDelay;
         blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
     }
 
     void Update()
     {
-        if (!GetComponent<PlayerMovement>().CanMove)
+        if (!playerMovement.CanMove)
             return;
 
         if (_blackHoleDelay > 0f)
@@ -154,6 +163,7 @@ public class Player : MonoBehaviour
             DestroyObject();
         if (!dead)
         {
+            hurtPatricles.Play();
             //  push player back
             PushBack(dir);
             //  play hurt animation
@@ -189,10 +199,10 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         //  set player to not solid object
         GetComponent<Collider2D>().isTrigger = true;
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
 
-        PlayerPrefs.SetInt("@saved", 0);
+        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
+            PlayerPrefs.SetInt("@saved", 0);
+
         //  play die animation
         anim.SetTrigger("Die");
     }
@@ -242,16 +252,6 @@ public class Player : MonoBehaviour
 
     public void SavePlayerStats()
     {
-        //  if it's tutorial level not to save player stats
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            //  saving tutor complete
-            GameSaving.instance.SaveCompleteTutorial();
-            return;
-        }
-
-        PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
-
         //  save player stats
         PlayerPrefs.SetInt("@saved", 1);
         GameSaving.instance.playerStats.hp = hp;
@@ -260,5 +260,16 @@ public class Player : MonoBehaviour
         GameSaving.instance.playerStats.blackHoleDamage = sphereDamage;
         GameSaving.instance.playerStats.blackHoleDelay = blackHoleDelay;
         GameSaving.instance.playerStats.blackHoleRadius = sphereRadius;
+        SaveToPlayerPrefs();
+    }
+
+    private void SaveToPlayerPrefs()
+    {
+        PlayerPrefs.SetFloat("@hp", hp);
+        PlayerPrefs.SetFloat("@maxhp", maxHP);
+        PlayerPrefs.SetFloat("@damage", damage);
+        PlayerPrefs.SetFloat("@spheredamage", sphereDamage);
+        PlayerPrefs.SetFloat("@spheredelay", blackHoleDelay);
+        PlayerPrefs.SetFloat("@sphereradius", sphereRadius);
     }
 }

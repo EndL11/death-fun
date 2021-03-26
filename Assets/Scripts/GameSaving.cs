@@ -20,7 +20,7 @@ public class EnemyAnalytics
 {
     public enum Names { spider, snake, scorpion,
         zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3,
-        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire };
+        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, angry_skull };
     public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
@@ -48,7 +48,6 @@ public class GameSaving : MonoBehaviour
 
     void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -58,6 +57,12 @@ public class GameSaving : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        if(SceneManager.GetActiveScene().buildIndex != 1 && PlayerPrefs.GetInt("@complete", 0) == 1 && PlayerPrefs.GetInt("@level", 1) != 1)
+        {
+            LoadStats();
+            PlayerPrefs.SetInt("@complete", 0);
         }
     }
 
@@ -74,26 +79,19 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(GameObject enemy)
     {
-        string name = "";
-        Enemy script = enemy.GetComponent<Enemy>();
-        if (script == null)
-        {
-            Witch witch = enemy.GetComponent<Witch>();
-            if (witch != null)
-                name = witch._name.ToString();
-        }
-        else
-            name = script._name.ToString();
+        string name = GetEnemyName(enemy);
 
         bool deleted = enemies.Remove(enemy);
         if(deleted && name != "")
                 deadEnemies += 1;
 
         OnEnemyDead();
+
         if (deadEnemies == enemiesCount)
         {
             OnEndLevel();
         }
+        //  do not save analytics on tutorial
         if (SceneManager.GetActiveScene().buildIndex == 1)
             return;
 
@@ -108,6 +106,12 @@ public class GameSaving : MonoBehaviour
 
     public void GameOver()
     {
+        enemiesDeadList.Clear();
+        foreach (var item in analiticsPrefabs)
+        {
+            item.show = false;
+        }
+
         OnGameOver();
     }
 
@@ -136,12 +140,9 @@ public class GameSaving : MonoBehaviour
 
     public void ClearPlayerPrefs()
     {
-        int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         enemiesDeadList.Clear();
-        int _score = PlayerPrefs.GetInt("@coins", 0);
-
+        int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
-
         int music = PlayerPrefs.GetInt("@music", 1);
         int sound = PlayerPrefs.GetInt("@sounds", 1);
         int history = PlayerPrefs.GetInt("@history", 0);
@@ -152,12 +153,11 @@ public class GameSaving : MonoBehaviour
         }
 
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("@coins", _score);
         PlayerPrefs.SetInt("@tutor", tutorComplete);
         PlayerPrefs.SetInt("@music", music);
         PlayerPrefs.SetInt("@sounds", sound);
-        PlayerPrefs.SetString("@mode", mode);
         PlayerPrefs.SetInt("@history", history);
+        PlayerPrefs.SetString("@mode", mode);
         LoadDeadEnemies();
     }
 
@@ -197,5 +197,39 @@ public class GameSaving : MonoBehaviour
     public void BossEndFight()
     {
         OnBossDie();
+    }
+
+    private string GetEnemyName(GameObject enemy)
+    {
+        string name = "";
+        Enemy script = enemy.GetComponent<Enemy>();
+        if (script == null)
+        {
+            Witch witch = enemy.GetComponent<Witch>();
+            if (witch != null)
+            {
+                name = witch._name.ToString();
+            }
+            else
+            {
+                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
+                if (angrySkull != null)
+                    name = angrySkull._name.ToString();
+            }
+        }
+        else
+            name = script._name.ToString();
+
+        return name;
+    }
+
+    private void LoadStats()
+    {
+        playerStats.hp = PlayerPrefs.GetFloat("@hp", 0);
+        playerStats.maxHp = PlayerPrefs.GetFloat("@maxhp", 0);
+        playerStats.damage = PlayerPrefs.GetFloat("@damage", 0);
+        playerStats.blackHoleDamage = PlayerPrefs.GetFloat("@spheredamage", 0);
+        playerStats.blackHoleDelay = PlayerPrefs.GetFloat("@spheredelay", 0);
+        playerStats.blackHoleRadius = PlayerPrefs.GetFloat("@sphereradius", 0);
     }
 }

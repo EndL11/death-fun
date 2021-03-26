@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class FinishPortal : MonoBehaviour
 {
@@ -8,8 +10,20 @@ public class FinishPortal : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            //  saving player stats
-            collision.GetComponentInParent<Player>().SavePlayerStats();
+            //  if it's tutorial level not to save player stats
+            if (SceneManager.GetActiveScene().buildIndex != 1)
+            {
+                //  saving player stats
+                collision.GetComponentInParent<Player>().SavePlayerStats();
+                PlayerPrefs.SetInt("@coins", GameSaving.instance.score);
+            }
+            else
+            {
+                SoundMusicManager.instance.backgroundMusicStop();
+                //  saving tutor complete
+                GameSaving.instance.SaveCompleteTutorial();
+                SceneManager.LoadScene(0);
+            }
             Destroy(collision.transform.parent.gameObject);
             StartCoroutine(WaitToEndAnimation());            
         }

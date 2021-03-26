@@ -32,6 +32,8 @@ public class AngrySkull : MonoBehaviour
 
     public GameObject chest;
 
+    public EnemyAnalytics.Names _name;
+
     public float HP
     {
         get { return hp; }
@@ -147,6 +149,7 @@ public class AngrySkull : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         hp -= damage;
+        SoundMusicManager.instance.PunchPlay();
         if (hp - damage <= 0f)
             healthBar.value -= hp;
         else

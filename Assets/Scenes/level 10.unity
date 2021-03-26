@@ -39751,7 +39751,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1457166130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f88002f62ebf224f814d191f8526d00, type: 3}
+  m_Script: {fileID: 11500000, guid: 95ade0efdd5766a4a84c1bf1a1edcd97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
@@ -47678,7 +47678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711042044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13, y: -0.41, z: -27.987198}
+  m_LocalPosition: {x: -14.13, y: -0.41, z: -27.987198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52720,16 +52720,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AngrySkull
-      objectReference: {fileID: 0}
-    - target: {fileID: 3476316450218467967, guid: 2e3a2abbb8585af40ae65c76fec6410a,
-        type: 3}
-      propertyPath: hp
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 3476316450218467967, guid: 2e3a2abbb8585af40ae65c76fec6410a,
-        type: 3}
-      propertyPath: maxHP
-      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 3476316450218467967, guid: 2e3a2abbb8585af40ae65c76fec6410a,
         type: 3}
