@@ -46,6 +46,13 @@ public class GameSaving : MonoBehaviour
     [HideInInspector]
     public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
 
+    public float gameTime;
+
+    public string GameTimer
+    {
+        get { return ConvertGameTimeToString(gameTime); }
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -69,6 +76,11 @@ public class GameSaving : MonoBehaviour
     private void Start()
     {
         LoadDeadEnemies();        
+    }
+
+    private void Update()
+    {
+        gameTime += Time.deltaTime;
     }
 
     public void AddScore(int value)
@@ -146,6 +158,8 @@ public class GameSaving : MonoBehaviour
         int music = PlayerPrefs.GetInt("@music", 1);
         int sound = PlayerPrefs.GetInt("@sounds", 1);
         int history = PlayerPrefs.GetInt("@history", 0);
+        float hardModeTime = PlayerPrefs.GetFloat("@awardHard", 0f);
+        float normalModeTime = PlayerPrefs.GetFloat("@awardNormal", 0f);
 
         foreach (var item in analiticsPrefabs)
         {
@@ -157,6 +171,10 @@ public class GameSaving : MonoBehaviour
         PlayerPrefs.SetInt("@music", music);
         PlayerPrefs.SetInt("@sounds", sound);
         PlayerPrefs.SetInt("@history", history);
+
+        PlayerPrefs.SetFloat("@awardHard", hardModeTime);
+        PlayerPrefs.SetFloat("@awardNormal", normalModeTime);
+
         PlayerPrefs.SetString("@mode", mode);
         LoadDeadEnemies();
     }
@@ -231,5 +249,22 @@ public class GameSaving : MonoBehaviour
         playerStats.blackHoleDamage = PlayerPrefs.GetFloat("@spheredamage", 0);
         playerStats.blackHoleDelay = PlayerPrefs.GetFloat("@spheredelay", 0);
         playerStats.blackHoleRadius = PlayerPrefs.GetFloat("@sphereradius", 0);
+    }
+
+    private string ConvertGameTimeToString(float gameTime)
+    {
+        if (gameTime <= 0f)
+            return "00:00:00";
+        int timeValue = (int)gameTime;
+        string time = "";
+        int hours = timeValue / 3600;
+        time += hours > 10 ? $"{hours}:" : $"0{hours}:";
+        timeValue -= hours * 3600;
+        int minutes = timeValue / 60;
+        time += minutes > 10 ? $"{minutes}:" : $"0{minutes}:";
+        timeValue -= minutes * 60;
+        int seconds = timeValue;
+        time += seconds > 0 ? seconds > 10 ? $"{seconds}" : $"0{seconds}" : "00";
+        return time;
     }
 }

@@ -1538,6 +1538,7 @@ MonoBehaviour:
   finishPortal: {fileID: 0}
   stairs: {fileID: 0}
   flagpole: {fileID: 0}
+  timerText: {fileID: 4426780625973749832}
 --- !u!95 &982383070
 Animator:
   serializedVersion: 3
@@ -1786,6 +1787,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2757841642242440397}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4426780625973749832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1957596730872353925, guid: d48dd3be2a0d28146ad5bd5d92133159,
+    type: 3}
+  m_PrefabInstance: {fileID: 2757841642242440397}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2757841643400690153
 PrefabInstance:
   m_ObjectHideFlags: 0
