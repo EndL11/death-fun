@@ -80,6 +80,7 @@ public class GameProcess : MonoBehaviour
         }
 
         timerText.text = GameSaving.instance.GameTimer;
+        Debug.Log(GameSaving.instance.gameTime);
     }
 
     public void Pause()
@@ -176,7 +177,10 @@ public class GameProcess : MonoBehaviour
     {
         if(gameOverPanel.activeSelf)
             PlayerPrefs.DeleteKey("@level");
-        ClearStatsByMode();
+
+        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
+            ClearStatsByMode();
+
         SoundMusicManager.instance.backgroundMusicStop();
         SceneManager.LoadScene(0);
     }

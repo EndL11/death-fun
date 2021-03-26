@@ -10,12 +10,16 @@ public class Succubus : MonoBehaviour
         {
             if(PlayerPrefs.GetString("@mode") == "Normal Mode")
             {
-                if (PlayerPrefs.GetFloat("@awardNormal", 0f) > GameSaving.instance.gameTime)
+                if (PlayerPrefs.GetFloat("@awardNormal", 0f) == 0f)
+                    PlayerPrefs.SetFloat("@awardNormal", GameSaving.instance.gameTime);
+                else if (PlayerPrefs.GetFloat("@awardNormal") > GameSaving.instance.gameTime)
                     PlayerPrefs.SetFloat("@awardNormal", GameSaving.instance.gameTime);
             }
             else
             {
-                if (PlayerPrefs.GetFloat("@awardHard", 0f) > GameSaving.instance.gameTime)
+                if(PlayerPrefs.GetFloat("@awardHard", 0f) == 0f)
+                    PlayerPrefs.SetFloat("@awardHard", GameSaving.instance.gameTime);
+                else if (PlayerPrefs.GetFloat("@awardHard") > GameSaving.instance.gameTime)
                     PlayerPrefs.SetFloat("@awardHard", GameSaving.instance.gameTime);
             }
                 

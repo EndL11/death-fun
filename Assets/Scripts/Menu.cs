@@ -151,15 +151,16 @@ public class Menu : MonoBehaviour
         if (gameTime <= 0f)
             return "00:00:00";
 
+        int timeValue = (int)gameTime;
         string time = "";
-        int hours = System.Convert.ToInt16(gameTime / 3600);
+        int hours = timeValue / 3600;
         time += hours > 10 ? $"{hours}:" : $"0{hours}:";
-        gameTime -= hours * 3600;
-        int minutes = System.Convert.ToInt16(gameTime / 60);
+        timeValue -= hours * 3600;
+        int minutes = timeValue / 60;
         time += minutes > 10 ? $"{minutes}:" : $"0{minutes}:";
-        gameTime -= minutes * 60;
-        int seconds = System.Convert.ToInt16(gameTime);
-        time += seconds > 10 ? $"{seconds}" : $"0{seconds}";
+        timeValue -= minutes * 60;
+        int seconds = timeValue;
+        time += seconds > 0 ? seconds > 10 ? $"{seconds}" : $"0{seconds}" : "00";
         return time;
     }
 }
