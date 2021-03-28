@@ -80,7 +80,8 @@ public class Menu : MonoBehaviour
         PlayerPrefs.DeleteKey("@level");
         PlayerPrefs.SetInt("@saved", 0);
         PlayerPrefs.DeleteKey("@coins");
-		SoundMusicManager.instance.backgroundMenuMusicStop();
+        PlayerPrefs.DeleteKey("@currentGameTime");
+        SoundMusicManager.instance.backgroundMenuMusicStop();
         StartCoroutine(WaitForAnimation());
     }
 
@@ -119,6 +120,7 @@ public class Menu : MonoBehaviour
             PlayerPrefs.DeleteKey("@level");
             PlayerPrefs.DeleteKey("@complete");
             PlayerPrefs.DeleteKey("@saved");
+            PlayerPrefs.DeleteKey("@currentGameTime");
         }
     }
 
@@ -154,13 +156,13 @@ public class Menu : MonoBehaviour
         int timeValue = (int)gameTime;
         string time = "";
         int hours = timeValue / 3600;
-        time += hours > 10 ? $"{hours}:" : $"0{hours}:";
+        time += hours >= 10 ? $"{hours}:" : $"0{hours}:";
         timeValue -= hours * 3600;
         int minutes = timeValue / 60;
-        time += minutes > 10 ? $"{minutes}:" : $"0{minutes}:";
+        time += minutes >= 10 ? $"{minutes}:" : $"0{minutes}:";
         timeValue -= minutes * 60;
         int seconds = timeValue;
-        time += seconds > 0 ? seconds > 10 ? $"{seconds}" : $"0{seconds}" : "00";
+        time += seconds > 0 ? seconds >= 10 ? $"{seconds}" : $"0{seconds}" : "00";
         return time;
     }
 }

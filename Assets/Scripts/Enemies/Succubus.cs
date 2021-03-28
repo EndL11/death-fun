@@ -8,21 +8,22 @@ public class Succubus : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            if(PlayerPrefs.GetString("@mode") == "Normal Mode")
+            float gameTime = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameProcess>().currectGameTime;
+            if (PlayerPrefs.GetString("@mode") == "Normal Mode")
             {
                 if (PlayerPrefs.GetFloat("@awardNormal", 0f) == 0f)
-                    PlayerPrefs.SetFloat("@awardNormal", GameSaving.instance.gameTime);
-                else if (PlayerPrefs.GetFloat("@awardNormal") > GameSaving.instance.gameTime)
-                    PlayerPrefs.SetFloat("@awardNormal", GameSaving.instance.gameTime);
+                    PlayerPrefs.SetFloat("@awardNormal", gameTime);
+                else if (PlayerPrefs.GetFloat("@awardNormal") > gameTime)
+                    PlayerPrefs.SetFloat("@awardNormal", gameTime);
             }
             else
             {
                 if(PlayerPrefs.GetFloat("@awardHard", 0f) == 0f)
-                    PlayerPrefs.SetFloat("@awardHard", GameSaving.instance.gameTime);
-                else if (PlayerPrefs.GetFloat("@awardHard") > GameSaving.instance.gameTime)
-                    PlayerPrefs.SetFloat("@awardHard", GameSaving.instance.gameTime);
+                    PlayerPrefs.SetFloat("@awardHard", gameTime);
+                else if (PlayerPrefs.GetFloat("@awardHard") > gameTime)
+                    PlayerPrefs.SetFloat("@awardHard", gameTime);
             }
-                
+            PlayerPrefs.DeleteKey("@currentGameTime");
             PlayerPrefs.DeleteKey("@level");
             Camera.main.GetComponent<Animator>().SetTrigger("Finish");
         }
