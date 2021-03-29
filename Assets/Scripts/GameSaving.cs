@@ -46,18 +46,24 @@ public class GameSaving : MonoBehaviour
     [HideInInspector]
     public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
 
+
     void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
-            if (SceneManager.GetActiveScene().buildIndex != 1)
+            if (SceneManager.GetActiveScene().name != "Tutorial")
                 DontDestroyOnLoad(this);
         }
         else
         {
             Destroy(gameObject);
+        }
+
+        if(SceneManager.GetActiveScene().name != "Tutorial" && PlayerPrefs.GetInt("@complete", 0) == 1 && PlayerPrefs.GetInt("@level", 1) != 1)
+        {
+            LoadStats();
+            PlayerPrefs.SetInt("@complete", 0);
         }
     }
 
@@ -74,35 +80,20 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(GameObject enemy)
     {
-        string name = "";
-        Enemy script = enemy.GetComponent<Enemy>();
-        if (script == null)
-        {
-            Witch witch = enemy.GetComponent<Witch>();
-            if (witch != null)
-            {
-                name = witch._name.ToString();
-            }
-            else
-            {
-                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
-                if (angrySkull != null)
-                    name = angrySkull._name.ToString();
-            }
-        }
-        else
-            name = script._name.ToString();
+        string name = GetEnemyName(enemy);
 
         bool deleted = enemies.Remove(enemy);
         if(deleted && name != "")
                 deadEnemies += 1;
 
         OnEnemyDead();
+
         if (deadEnemies == enemiesCount)
         {
             OnEndLevel();
         }
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        //  do not save analytics on tutorial
+        if (SceneManager.GetActiveScene().name == "Tutorial")
             return;
 
         if (enemiesDeadList.ContainsKey(name))
@@ -150,15 +141,14 @@ public class GameSaving : MonoBehaviour
 
     public void ClearPlayerPrefs()
     {
-        int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         enemiesDeadList.Clear();
-        int _score = PlayerPrefs.GetInt("@coins", 0);
-
+        int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
-
         int music = PlayerPrefs.GetInt("@music", 1);
         int sound = PlayerPrefs.GetInt("@sounds", 1);
         int history = PlayerPrefs.GetInt("@history", 0);
+        float hardModeTime = PlayerPrefs.GetFloat("@awardHard", 0f);
+        float normalModeTime = PlayerPrefs.GetFloat("@awardNormal", 0f);
 
         foreach (var item in analiticsPrefabs)
         {
@@ -166,14 +156,15 @@ public class GameSaving : MonoBehaviour
         }
 
         PlayerPrefs.DeleteAll();
-        if(mode != "Hard Mode")
-            PlayerPrefs.SetInt("@coins", _score);
-
         PlayerPrefs.SetInt("@tutor", tutorComplete);
         PlayerPrefs.SetInt("@music", music);
         PlayerPrefs.SetInt("@sounds", sound);
-        PlayerPrefs.SetString("@mode", mode);
         PlayerPrefs.SetInt("@history", history);
+
+        PlayerPrefs.SetFloat("@awardHard", hardModeTime);
+        PlayerPrefs.SetFloat("@awardNormal", normalModeTime);
+
+        PlayerPrefs.SetString("@mode", mode);
         LoadDeadEnemies();
     }
 
@@ -213,5 +204,61 @@ public class GameSaving : MonoBehaviour
     public void BossEndFight()
     {
         OnBossDie();
+    }
+
+    private string GetEnemyName(GameObject enemy)
+    {
+        string name = "";
+        Enemy script = enemy.GetComponent<Enemy>();
+        if (script == null)
+        {
+            Witch witch = enemy.GetComponent<Witch>();
+            if (witch != null)
+            {
+                name = witch._name.ToString();
+            }
+            else
+            {
+                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
+                if (angrySkull != null)
+                    name = angrySkull._name.ToString();
+            }
+        }
+        else
+            name = script._name.ToString();
+
+        return name;
+    }
+
+    private void LoadStats()
+    {
+        playerStats.hp = PlayerPrefs.GetFloat("@hp", 0);
+        playerStats.maxHp = PlayerPrefs.GetFloat("@maxhp", 0);
+        playerStats.damage = PlayerPrefs.GetFloat("@damage", 0);
+        playerStats.blackHoleDamage = PlayerPrefs.GetFloat("@spheredamage", 0);
+        playerStats.blackHoleDelay = PlayerPrefs.GetFloat("@spheredelay", 0);
+        playerStats.blackHoleRadius = PlayerPrefs.GetFloat("@sphereradius", 0);
+    }
+
+    public string ConvertGameTimeToString(float gameTime)
+    {
+        if (gameTime <= 0f)
+            return "00:00:00";
+        int timeValue = (int)gameTime;
+        string time = "";
+        int hours = timeValue / 3600;
+        time += hours >= 10 ? $"{hours}:" : $"0{hours}:";
+        timeValue -= hours * 3600;
+        int minutes = timeValue / 60;
+        time += minutes >= 10 ? $"{minutes}:" : $"0{minutes}:";
+        timeValue -= minutes * 60;
+        int seconds = timeValue;
+        time += seconds > 0 ? seconds >= 10 ? $"{seconds}" : $"0{seconds}" : "00";
+        return time;
+    }
+
+    public bool IsTutorial()
+    {
+        return SceneManager.GetActiveScene().name == "Tutorial";
     }
 }

@@ -40322,7 +40322,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1457166130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f88002f62ebf224f814d191f8526d00, type: 3}
+  m_Script: {fileID: 11500000, guid: 95ade0efdd5766a4a84c1bf1a1edcd97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
@@ -43842,7 +43842,7 @@ PrefabInstance:
     - target: {fileID: 2419372801349344153, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 511.9998
+      value: 511.99976
       objectReference: {fileID: 0}
     - target: {fileID: 2757841641637805217, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
@@ -44062,7 +44062,7 @@ PrefabInstance:
     - target: {fileID: 8089451060002147574, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 511.9998
+      value: 511.99976
       objectReference: {fileID: 0}
     - target: {fileID: 8616797873683133740, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}

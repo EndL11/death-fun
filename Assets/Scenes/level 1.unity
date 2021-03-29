@@ -42766,7 +42766,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1473421973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f88002f62ebf224f814d191f8526d00, type: 3}
+  m_Script: {fileID: 11500000, guid: 95ade0efdd5766a4a84c1bf1a1edcd97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
@@ -44613,6 +44613,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1777585295, guid: 9a06a027faf87bc498108ca43bb77e1d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7640902594633850023, guid: 9a06a027faf87bc498108ca43bb77e1d,
         type: 3}
       propertyPath: m_Name
