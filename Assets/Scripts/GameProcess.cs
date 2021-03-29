@@ -25,6 +25,7 @@ public class GameProcess : MonoBehaviour
     public GameObject flagpole;
 
     public Text timerText;
+    public float currectGameTime;
 
     private void Awake()
     {
@@ -38,6 +39,8 @@ public class GameProcess : MonoBehaviour
             bossUI.SetActive(false);
         if (stairs != null)
             stairs.SetActive(false);
+
+        currectGameTime = PlayerPrefs.GetFloat("@currentGameTime", 0f);
     }
 
     private void Start()
@@ -79,8 +82,11 @@ public class GameProcess : MonoBehaviour
             Pause();
         }
 
-        timerText.text = GameSaving.instance.GameTimer;
-        Debug.Log(GameSaving.instance.gameTime);
+        if(SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            currectGameTime += Time.deltaTime;
+            timerText.text = GameSaving.instance.ConvertGameTimeToString(currectGameTime);
+        }
     }
 
     public void Pause()
@@ -98,7 +104,9 @@ public class GameProcess : MonoBehaviour
 
     public void Exit()
     {
-        GameSaving.instance.ClearPlayerPrefs();
+        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
+            GameSaving.instance.ClearPlayerPrefs();
+
         pausePanel.SetActive(false);
         Application.Quit();
     }
@@ -146,6 +154,7 @@ public class GameProcess : MonoBehaviour
         GameSaving.instance.OnBossStart -= OnBossStartHandler;
         GameSaving.instance.OnBossDie -= OnBossEndHandler;
         GameSaving.instance.OnEndLevel -= OnEndLevelHandler;
+        PlayerPrefs.SetFloat("@currentGameTime", currectGameTime);
     }
 
     public void GameOverRestart()
