@@ -76,8 +76,8 @@ public class GameProcess : MonoBehaviour
 
     private void Update()
     {
-        //  if pressed Escape and time not stopped
-        if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
+        //  make pause or unpause
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
         }
