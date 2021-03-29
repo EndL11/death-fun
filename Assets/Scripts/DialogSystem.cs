@@ -44,7 +44,7 @@ public class DialogSystem : MonoBehaviour
     public void LoadMenu()
     {
         SoundMusicManager.instance.backgroundMusicStop();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 
     private IEnumerator TypeSentence(string sentence)
@@ -102,7 +102,7 @@ public class DialogSystem : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("@history", 1);
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("Tutorial");
         }
     }
 }

@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         sphereRadius = blackHolePrefab.GetComponent<BlackHole>().radius;
         sphereDamage = blackHolePrefab.GetComponent<BlackHole>().damage;
         //  load saved player stats
-        if(GameSaving.instance != null && GameSaving.instance.playerStats.hp != 0 && PlayerPrefs.GetInt("@saved", 0) == 1)
+        if(GameSaving.instance.playerStats.hp != 0 && PlayerPrefs.GetInt("@saved", 0) == 1 && !GameSaving.instance.IsTutorial())
         {
             damage = GameSaving.instance.playerStats.damage;
             hp = GameSaving.instance.playerStats.hp;

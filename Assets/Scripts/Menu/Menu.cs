@@ -25,14 +25,8 @@ public class Menu : MonoBehaviour
 
     private float playerAttackLength = 0.6f;
 
-    private IEnumerator Start()
+    private void Start()
     {
-        if(GameSaving.instance == null && SoundMusicManager.instance.showPreloader)
-            yield return new WaitForSeconds(3.8f);
-
-        yield return null;
-
-        SoundMusicManager.instance.showPreloader = false;
         SoundMusicManager.instance.backgroundMenuMusicPlay();
         Time.timeScale = 1;
         string mode = PlayerPrefs.GetString("@mode", "");
@@ -74,11 +68,11 @@ public class Menu : MonoBehaviour
     {
         yield return new WaitForSeconds(playerAttackLength);
         if (PlayerPrefs.GetInt("@history", 0) == 0)
-            SceneManager.LoadScene(14);
+            SceneManager.LoadScene("StartHistory");
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Tutorial");
         else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            SceneManager.LoadScene("level 1");
     }
 
     public void Play()
@@ -131,7 +125,7 @@ public class Menu : MonoBehaviour
     public void LoadTutorial()
     {
         SoundMusicManager.instance.backgroundMenuMusicStop();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void ToggleMusic()
