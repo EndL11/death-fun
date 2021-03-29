@@ -67,7 +67,7 @@ public class DialogSystem : MonoBehaviour
         else
         {
             if(current != dialogs.Length - 2)
-            continueButton.SetActive(false);
+                continueButton.SetActive(false);
 
             Dialog currentDialog = dialogs[current];
             current += 1;

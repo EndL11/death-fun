@@ -144,6 +144,7 @@ public class Menu : MonoBehaviour
 
     public void ContinueClick()
     {
+        SoundMusicManager.instance.backgroundMenuMusicStop();
         PlayerPrefs.SetInt("@complete", 1);
         SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
     }
