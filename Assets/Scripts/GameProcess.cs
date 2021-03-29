@@ -41,6 +41,11 @@ public class GameProcess : MonoBehaviour
             stairs.SetActive(false);
 
         currectGameTime = PlayerPrefs.GetFloat("@currentGameTime", 0f);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            timerText.gameObject.SetActive(false);
+        else
+            timerText.gameObject.SetActive(true);
+
     }
 
     private void Start()
@@ -70,7 +75,7 @@ public class GameProcess : MonoBehaviour
         }
         enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
-        if(PlayerPrefs.GetString("@mode") == "Normal Mode")
+        if(PlayerPrefs.GetString("@mode") == "Normal Mode" && SceneManager.GetActiveScene().buildIndex != 1)
             PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
     }
 

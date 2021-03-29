@@ -27,9 +27,12 @@ public class Menu : MonoBehaviour
 
     private IEnumerator Start()
     {
-        if(GameSaving.instance == null)
+        if(GameSaving.instance == null && SoundMusicManager.instance.showPreloader)
             yield return new WaitForSeconds(3.8f);
 
+        yield return null;
+
+        SoundMusicManager.instance.showPreloader = false;
         SoundMusicManager.instance.backgroundMenuMusicPlay();
         Time.timeScale = 1;
         string mode = PlayerPrefs.GetString("@mode", "");
@@ -45,7 +48,7 @@ public class Menu : MonoBehaviour
         loadTutorialButton.SetActive(false);
         continueButton.SetActive(false);
 
-        if (PlayerPrefs.GetInt("@level", 1) != 1)
+        if (PlayerPrefs.HasKey("@level"))
             continueButton.SetActive(true);
 
         if (PlayerPrefs.GetInt("@history", 0) == 1)

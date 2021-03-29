@@ -18,6 +18,8 @@ public class SoundMusicManager : MonoBehaviour
 	public AudioSource squash;
 	public AudioSource backgroundMusic;
 	public AudioSource backgroundMenuMusic;
+
+    public bool showPreloader = true;
 	
     private bool enableMusic = true;
     private bool enableSounds = true;
