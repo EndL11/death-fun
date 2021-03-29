@@ -25,9 +25,12 @@ public class Menu : MonoBehaviour
 
     private float playerAttackLength = 0.6f;
 
-    private void Start()
+    private IEnumerator Start()
     {
-		SoundMusicManager.instance.backgroundMenuMusicPlay();
+        if(GameSaving.instance == null)
+            yield return new WaitForSeconds(3.8f);
+
+        SoundMusicManager.instance.backgroundMenuMusicPlay();
         Time.timeScale = 1;
         string mode = PlayerPrefs.GetString("@mode", "");
         if (mode == "")
@@ -115,13 +118,11 @@ public class Menu : MonoBehaviour
         string modeName = !isOn ? "Hard Mode" : "Normal Mode";
         PlayerPrefs.SetString("@mode", modeName);
         toggleMode.isOn = !isOn;
-        if(modeName == "Hard Mode")
-        {
-            PlayerPrefs.DeleteKey("@level");
-            PlayerPrefs.DeleteKey("@complete");
-            PlayerPrefs.DeleteKey("@saved");
-            PlayerPrefs.DeleteKey("@currentGameTime");
-        }
+        continueButton.SetActive(false);
+        PlayerPrefs.DeleteKey("@level");
+        PlayerPrefs.DeleteKey("@complete");
+        PlayerPrefs.DeleteKey("@saved");
+        PlayerPrefs.DeleteKey("@currentGameTime");
     }
 
     public void LoadTutorial()

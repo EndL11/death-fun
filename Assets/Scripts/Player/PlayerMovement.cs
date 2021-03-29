@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         //  zeroing velocity (physics)
-        rb.velocity = Vector2.zero;
+        //rb.velocity = Vector2.zero;
         //  jumping by impulse player up
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
