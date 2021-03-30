@@ -27,7 +27,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
-		SoundMusicManager.instance.backgroundMenuMusicPlay();
+        SoundMusicManager.instance.backgroundMenuMusicPlay();
         Time.timeScale = 1;
         string mode = PlayerPrefs.GetString("@mode", "");
         if (mode == "")
@@ -42,7 +42,7 @@ public class Menu : MonoBehaviour
         loadTutorialButton.SetActive(false);
         continueButton.SetActive(false);
 
-        if (PlayerPrefs.GetInt("@level", 1) != 1)
+        if (PlayerPrefs.HasKey("@level"))
             continueButton.SetActive(true);
 
         if (PlayerPrefs.GetInt("@history", 0) == 1)
@@ -68,11 +68,11 @@ public class Menu : MonoBehaviour
     {
         yield return new WaitForSeconds(playerAttackLength);
         if (PlayerPrefs.GetInt("@history", 0) == 0)
-            SceneManager.LoadScene(14);
+            SceneManager.LoadScene("StartHistory");
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Tutorial");
         else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            SceneManager.LoadScene("level 1");
     }
 
     public void Play()
@@ -115,19 +115,17 @@ public class Menu : MonoBehaviour
         string modeName = !isOn ? "Hard Mode" : "Normal Mode";
         PlayerPrefs.SetString("@mode", modeName);
         toggleMode.isOn = !isOn;
-        if(modeName == "Hard Mode")
-        {
-            PlayerPrefs.DeleteKey("@level");
-            PlayerPrefs.DeleteKey("@complete");
-            PlayerPrefs.DeleteKey("@saved");
-            PlayerPrefs.DeleteKey("@currentGameTime");
-        }
+        continueButton.SetActive(false);
+        PlayerPrefs.DeleteKey("@level");
+        PlayerPrefs.DeleteKey("@complete");
+        PlayerPrefs.DeleteKey("@saved");
+        PlayerPrefs.DeleteKey("@currentGameTime");
     }
 
     public void LoadTutorial()
     {
         SoundMusicManager.instance.backgroundMenuMusicStop();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void ToggleMusic()
@@ -144,6 +142,7 @@ public class Menu : MonoBehaviour
 
     public void ContinueClick()
     {
+        SoundMusicManager.instance.backgroundMenuMusicStop();
         PlayerPrefs.SetInt("@complete", 1);
         SceneManager.LoadScene(PlayerPrefs.GetInt("@level"));
     }

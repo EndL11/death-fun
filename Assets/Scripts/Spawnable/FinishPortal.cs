@@ -11,7 +11,7 @@ public class FinishPortal : MonoBehaviour
         if (collision.CompareTag("PlayerTrigger"))
         {
             //  if it's tutorial level not to save player stats
-            if (SceneManager.GetActiveScene().buildIndex != 1)
+            if (SceneManager.GetActiveScene().name != "Tutorial")
             {
                 //  saving player stats
                 collision.GetComponentInParent<Player>().SavePlayerStats();
@@ -22,7 +22,7 @@ public class FinishPortal : MonoBehaviour
                 SoundMusicManager.instance.backgroundMusicStop();
                 //  saving tutor complete
                 GameSaving.instance.SaveCompleteTutorial();
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("Menu");
             }
             Destroy(collision.transform.parent.gameObject);
             StartCoroutine(WaitToEndAnimation());            

@@ -52,7 +52,7 @@ public class GameSaving : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            if (SceneManager.GetActiveScene().buildIndex != 1)
+            if (SceneManager.GetActiveScene().name != "Tutorial")
                 DontDestroyOnLoad(this);
         }
         else
@@ -60,7 +60,7 @@ public class GameSaving : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(SceneManager.GetActiveScene().buildIndex != 1 && PlayerPrefs.GetInt("@complete", 0) == 1 && PlayerPrefs.GetInt("@level", 1) != 1)
+        if(SceneManager.GetActiveScene().name != "Tutorial" && PlayerPrefs.GetInt("@complete", 0) == 1 && PlayerPrefs.GetInt("@level", 1) != 1)
         {
             LoadStats();
             PlayerPrefs.SetInt("@complete", 0);
@@ -93,7 +93,7 @@ public class GameSaving : MonoBehaviour
             OnEndLevel();
         }
         //  do not save analytics on tutorial
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().name == "Tutorial")
             return;
 
         if (enemiesDeadList.ContainsKey(name))
@@ -107,13 +107,13 @@ public class GameSaving : MonoBehaviour
 
     public void GameOver()
     {
-        enemiesDeadList.Clear();
         foreach (var item in analiticsPrefabs)
         {
             item.show = false;
         }
 
         OnGameOver();
+        enemiesDeadList.Clear();
     }
 
     public void SaveCompleteTutorial()
@@ -255,5 +255,10 @@ public class GameSaving : MonoBehaviour
         int seconds = timeValue;
         time += seconds > 0 ? seconds >= 10 ? $"{seconds}" : $"0{seconds}" : "00";
         return time;
+    }
+
+    public bool IsTutorial()
+    {
+        return SceneManager.GetActiveScene().name == "Tutorial";
     }
 }

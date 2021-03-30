@@ -42,7 +42,11 @@ public class BomberMan : MonoBehaviour
     {
         if (detonating)
             return;
-		SoundMusicManager.instance.ExplosionPlay();
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.velocity = Vector3.zero;
+        SoundMusicManager.instance.ExplosionPlay();
         detonating = true;
         speed = 0f;
         GetComponentInChildren<Animator>().SetTrigger("Boom");

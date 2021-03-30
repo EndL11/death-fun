@@ -41,6 +41,11 @@ public class GameProcess : MonoBehaviour
             stairs.SetActive(false);
 
         currectGameTime = PlayerPrefs.GetFloat("@currentGameTime", 0f);
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+            timerText.gameObject.SetActive(false);
+        else
+            timerText.gameObject.SetActive(true);
+
     }
 
     private void Start()
@@ -70,23 +75,28 @@ public class GameProcess : MonoBehaviour
         }
         enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         scoreText.text = GameSaving.instance.score.ToString();
-        if(PlayerPrefs.GetString("@mode") == "Normal Mode")
+        if(PlayerPrefs.GetString("@mode") == "Normal Mode" && SceneManager.GetActiveScene().name != "Tutorial")
             PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
+
+        if (SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            InvokeRepeating("UpdateTimerText", 0f, .5f);
+        }
     }
 
     private void Update()
     {
-        //  if pressed Escape and time not stopped
-        if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
+        //  make pause or unpause
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
         }
+        currectGameTime += Time.deltaTime;
+    }
 
-        if(SceneManager.GetActiveScene().buildIndex != 1)
-        {
-            currectGameTime += Time.deltaTime;
-            timerText.text = GameSaving.instance.ConvertGameTimeToString(currectGameTime);
-        }
+    private void UpdateTimerText()
+    {
+        timerText.text = GameSaving.instance.ConvertGameTimeToString(currectGameTime);
     }
 
     public void Pause()
@@ -99,7 +109,15 @@ public class GameProcess : MonoBehaviour
     {
         ClearStatsByMode();
         pausePanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if(PlayerPrefs.GetString("@mode") == "Normal Mode")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
+        }
+
+        currectGameTime = 0f;
+        PlayerPrefs.DeleteKey("@currentGameTime");
+        SceneManager.LoadScene("level 1");
     }
 
     public void Exit()
@@ -154,20 +172,16 @@ public class GameProcess : MonoBehaviour
         GameSaving.instance.OnBossStart -= OnBossStartHandler;
         GameSaving.instance.OnBossDie -= OnBossEndHandler;
         GameSaving.instance.OnEndLevel -= OnEndLevelHandler;
-        PlayerPrefs.SetFloat("@currentGameTime", currectGameTime);
+
+        if(SceneManager.GetActiveScene().name != "Tutorial")
+            PlayerPrefs.SetFloat("@currentGameTime", currectGameTime);
     }
 
     public void GameOverRestart()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            return;
-        }
-
         if (PlayerPrefs.GetString("@mode") == "Hard Mode")
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("level 1");
             return;
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -191,7 +205,7 @@ public class GameProcess : MonoBehaviour
             ClearStatsByMode();
 
         SoundMusicManager.instance.backgroundMusicStop();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 
     private void OnBossStartHandler()
