@@ -226,17 +226,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f92ccf5096c704484e7b353ab8d41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
-  maxHP: 20
-  speed: 5
+  _hp: 100
+  _maxHP: 100
+  _speed: 5
   spawnDelay: 3
   bomberManPrefab: {fileID: 586821772844481444, guid: 6a7d23373aced6c4a83ae531182eaf37,
     type: 3}
   healthBar: {fileID: 5384802442746769661}
   leftPoint: {fileID: 0}
   rightPoint: {fileID: 0}
+  _direction: -1
   hurtParticles: {fileID: 6687151484848158847}
-  _name: 18
+  enemyName: 18
 --- !u!1001 &992325172748808773
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Vampire : Boss
 {
-    [SerializeField] private float bloodLust = 100f;
+    [SerializeField] private float _bloodLust = 100f;
     public ParticleSystem healingParticles;
     public GameObject vampirePrefab;
 
-    [SerializeField] private float spawnDelay = 10f;
+    public float spawnDelay = 10f;
     private float _spawnDelay;
 
     protected override void Start()
@@ -23,12 +23,12 @@ public class Vampire : Boss
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, attackZone, whatIsPlayer);
         if(colliders.Length > 0)
         {
-            hp += bloodLust;
-            if (hp > maxHP)
-                hp = maxHP;
+            _hp += _bloodLust;
+            if (_hp > _maxHP)
+                _hp = _maxHP;
 
-            healthBar.value = hp;
-            healthStats.text = $"{hp} / {maxHP}";
+            healthBar.value = _hp;
+            _healthStats.text = $"{_hp} / {_maxHP}";
             healingParticles.Play();
         }
     }
@@ -45,7 +45,7 @@ public class Vampire : Boss
         }
         else
         {
-            if (canMove)
+            if (_canMove)
             {
                 SpawnVampireClone();
                 _spawnDelay = spawnDelay;

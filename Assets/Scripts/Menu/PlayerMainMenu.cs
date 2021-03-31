@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerMainMenu : MonoBehaviour
 {
-    private Animator anim;
+    private Animator _anim;
 
     void Start()
     {
         //  get animator component
-        anim = GetComponentInChildren<Animator>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
 
@@ -22,8 +22,8 @@ public class PlayerMainMenu : MonoBehaviour
     private void Attack()
     {
         //  stop previous animation
-        anim.SetBool("Attack", false);
+        _anim.SetBool("Attack", false);
         //  start new
-        anim.SetBool("Attack", true);
+        _anim.SetBool("Attack", true);
     }
 }

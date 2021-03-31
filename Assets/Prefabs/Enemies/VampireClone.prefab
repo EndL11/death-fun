@@ -228,10 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fac56d266fdf40a4335524572bbe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 90
-  maxHP: 90
+  _hp: 100
+  _maxHP: 100
   speed: 7
-  direction: -1
+  _direction: -1
   damage: 15
   attackDelay: 3
   attackZone: 0.5
@@ -250,7 +250,7 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 20
+  enemyName: 19
   healthBar: {fileID: 4448612712758213425}
 --- !u!1 &4448612712825659442
 GameObject:
