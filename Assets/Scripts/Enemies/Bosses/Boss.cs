@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class Boss : Enemy
 {
-    [SerializeField] protected GameObject healthBarObject;
-    protected Text healthStats;
-    protected bool canMove = false;
-    [SerializeField] private GameObject chest;
+    [SerializeField] protected GameObject _healthBarObject;
+    protected Text _healthStats;
+    protected bool _canMove = false;
+    [SerializeField] private GameObject _chest;
 
     protected void Awake()
     {
-        healthBar = healthBarObject.GetComponentInChildren<Slider>();
-        healthStats = healthBar.GetComponentInChildren<Text>();
-        healthBarObject.SetActive(false);
-        healthStats.text = $"{hp} / {maxHP}";
+        healthBar = _healthBarObject.GetComponentInChildren<Slider>();
+        _healthStats = healthBar.GetComponentInChildren<Text>();
+        _healthBarObject.SetActive(false);
+        _healthStats.text = $"{_hp} / {_maxHP}";
     }
 
     protected override void Start()
@@ -28,7 +28,7 @@ public class Boss : Enemy
 
     protected override void Move()
     {
-        if (!canMove)
+        if (!_canMove)
             return;
 
         base.Move();
@@ -39,17 +39,17 @@ public class Boss : Enemy
         if (Dead)
             return;
         base.ApplyDamage(damage, dir);
-        healthBar.value = hp;
-        healthStats.text = $"{hp} / {maxHP}";
-        if (hp <= 0f)
+        healthBar.value = _hp;
+        _healthStats.text = $"{_hp} / {_maxHP}";
+        if (_hp <= 0f)
         {
-            healthBarObject.SetActive(false);
+            _healthBarObject.SetActive(false);
         }
     }
 
     private void StartFight()
     {
-        canMove = true;
+        _canMove = true;
     }
 
     private void OnDestroy()
@@ -59,8 +59,8 @@ public class Boss : Enemy
 
     protected override void DestroyEnemy()
     {
-        if(chest != null)
-            Instantiate(chest, transform.position, Quaternion.identity);
+        if(_chest != null)
+            Instantiate(_chest, transform.position, Quaternion.identity);
         base.DestroyEnemy();
         GameSaving.instance.BossEndFight();
     }

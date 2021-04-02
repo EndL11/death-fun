@@ -181,10 +181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947cf54fd9f3c1147b05581d172c6771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1500
-  maxHP: 1500
+  _hp: 100
+  _maxHP: 100
   speed: 5
-  direction: -1
+  _direction: -1
   damage: 10
   attackDelay: 3
   attackZone: 1
@@ -203,11 +203,11 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 20
+  enemyName: 19
   healthBar: {fileID: 0}
-  healthBarObject: {fileID: 0}
-  chest: {fileID: 463045951368222508, guid: 2c57fac90204e59469850c26f8905ea3, type: 3}
-  bloodLust: 100
+  _healthBarObject: {fileID: 0}
+  _chest: {fileID: 0}
+  _bloodLust: 100
   healingParticles: {fileID: 4477204539045977518}
   vampirePrefab: {fileID: 4448612712767379925, guid: f5e39fc37b3530a43abb0ee035854c4c,
     type: 3}

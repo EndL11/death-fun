@@ -238,10 +238,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6990a3f1d11759046808891a034e523c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3000
-  maxHP: 3000
+  _hp: 100
+  _maxHP: 100
   speed: 3
-  direction: -1
+  _direction: -1
   damage: 25
   attackDelay: 1
   attackZone: 0.5
@@ -260,12 +260,14 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 0
+  enemyName: 20
   healthBar: {fileID: 0}
-  healthBarObject: {fileID: 0}
+  _healthBarObject: {fileID: 0}
+  _chest: {fileID: 0}
   fireballPrefab: {fileID: 7909662612946652072, guid: 1fda7b1d9a1dab54ab6c63717fc0afe1,
     type: 3}
   checkPlayerPointBack: {fileID: 5869884398085198035}
+  cage: {fileID: 0}
 --- !u!1 &186586811123811278
 GameObject:
   m_ObjectHideFlags: 0

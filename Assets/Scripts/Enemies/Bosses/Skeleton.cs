@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Skeleton : Boss
 {
-    private bool isBlocking = false;
-    [SerializeField] private float blockTime = 5f;
+    private bool _isBlocking = false;
+    [SerializeField] private float _blockTime = 5f;
     public Collider2D block;
     public GameObject skeletonPrefab;
     public override void ApplyDamage(float damage, Vector2 dir)
     {
-        if (Dead || isBlocking)
+        if (Dead || _isBlocking)
             return;
         base.ApplyDamage(damage, dir);
         SpawnSkeleton();
@@ -24,14 +24,14 @@ public class Skeleton : Boss
 
     private IEnumerator Block()
     {
-        isBlocking = true;
-        anim.SetBool("Block", true);
-        rb.bodyType = RigidbodyType2D.Static;
-        yield return new WaitForSeconds(blockTime);
-        anim.SetBool("Block", false);
-        isBlocking = false;
+        _isBlocking = true;
+        _anim.SetBool("Block", true);
+        _rb.bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(_blockTime);
+        _anim.SetBool("Block", false);
+        _isBlocking = false;
         block.enabled = false;
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     private void SpawnSkeleton()
@@ -52,7 +52,7 @@ public class Skeleton : Boss
 
     protected override void Move()
     {
-        if (isBlocking)
+        if (_isBlocking)
             return;
         base.Move();
     }

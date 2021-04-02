@@ -5,7 +5,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     public GameObject playerPrefab;
-    private PlayerMovement playerMovement;
+    private PlayerMovement _playerMovement;
     void Awake()
     {
         StartCoroutine(StartAnimation());
@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour
         if(player != null)
         {
             StartCoroutine(EndAnimation());
-            playerMovement = player.GetComponent<PlayerMovement>();
+            _playerMovement = player.GetComponent<PlayerMovement>();
         }
     }
 
@@ -46,8 +46,8 @@ public class Portal : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime, transform.localScale.y - Time.deltaTime, transform.localScale.z);
             yield return null;
         }
-        if(playerMovement != null)
-            playerMovement.CanMove = true;
+        if(_playerMovement != null)
+            _playerMovement.CanMove = true;
         Destroy(gameObject);
     }
 }

@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    #region Toggles
     public Toggle toggleMode;
     public Toggle toggleMusic;
     public Toggle toggleSound;
+    #endregion
     public GameObject mainPanel;
     public GameObject optionsPanel;
 
@@ -23,7 +25,7 @@ public class Menu : MonoBehaviour
     public Sprite normalModeSprite;
     public Sprite hardModeSprite;
 
-    private float playerAttackLength = 0.6f;
+    private float _playerAttackLength = 0.6f;
 
     private void Start()
     {
@@ -66,7 +68,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator WaitForAnimation()
     {
-        yield return new WaitForSeconds(playerAttackLength);
+        yield return new WaitForSeconds(_playerAttackLength);
         if (PlayerPrefs.GetInt("@history", 0) == 0)
             SceneManager.LoadScene("StartHistory");
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
@@ -87,7 +89,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator ExitWithAnimnation()
     {
-        yield return new WaitForSeconds(playerAttackLength);
+        yield return new WaitForSeconds(_playerAttackLength);
         Application.Quit();
 
     }
@@ -98,7 +100,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator OptionsWithAnimation()
     {
-        yield return new WaitForSeconds(playerAttackLength);
+        yield return new WaitForSeconds(_playerAttackLength);
         optionsPanel.SetActive(true);
         mainPanel.SetActive(false);
         playerMainMenu.SetActive(false);

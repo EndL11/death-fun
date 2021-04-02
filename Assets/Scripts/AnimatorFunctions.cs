@@ -5,17 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class AnimatorFunctions : MonoBehaviour
 {
+    private Animator _anim;
+
+    private void Start()
+    {
+        _anim = GetComponent<Animator>();
+    }
+
     public void StopAttack()
     {
-        GetComponent<Animator>().SetBool("Attack", false);
-        GetComponent<Animator>().SetTrigger("AttackNull");
+        _anim.SetBool("Attack", false);
+        _anim.SetTrigger("AttackNull");
     }
 
     public void Attack()
     {
         GetComponentInParent<Player>()?.ApplyAttack();
         //  set trigger to start idle animation 
-        GetComponent<Animator>().SetTrigger("AttackNull");
+        _anim.SetTrigger("AttackNull");
     }
 
     public void Destroy()

@@ -191,10 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffe13d0d618e7a44a7744cc4369f754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1500
-  maxHP: 1500
+  _hp: 100
+  _maxHP: 100
   speed: 3
-  direction: -1
+  _direction: -1
   damage: 35
   attackDelay: 1.5
   attackZone: 0.8
@@ -213,11 +213,11 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 16
+  enemyName: 16
   healthBar: {fileID: 0}
-  healthBarObject: {fileID: 0}
-  chest: {fileID: 463045951368222508, guid: d71aeca2ea3f8f844972dd34e69c9f62, type: 3}
-  blockTime: 5
+  _healthBarObject: {fileID: 0}
+  _chest: {fileID: 0}
+  _blockTime: 5
   block: {fileID: 4673626874491143608}
   skeletonPrefab: {fileID: 186586810464884135, guid: 4bedeafabed69c54b8183d2cb9da2695,
     type: 3}

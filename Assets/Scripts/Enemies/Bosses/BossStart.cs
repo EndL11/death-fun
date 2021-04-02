@@ -8,8 +8,8 @@ public class BossStart : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            GameSaving.instance.BossStartFight();
             SoundMusicManager.instance.TriggerBossSoundPlay();
+            GameSaving.instance.BossStartFight();
             Destroy(gameObject);
         }
     }

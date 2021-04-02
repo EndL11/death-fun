@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Devil : Boss
 {
-    [SerializeField] private GameObject fireballPrefab;
-    [SerializeField] protected Transform checkPlayerPointBack;
+    public GameObject fireballPrefab;
+    public Transform checkPlayerPointBack;
     public GameObject cage;
     public override void Attack()
     {
@@ -24,7 +24,7 @@ public class Devil : Boss
 
     protected override void Update()
     {
-        if (!canMove || Dead)
+        if (!_canMove || Dead)
             return;
         if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !Dead && !isWall() && !isPlayerBack())
             Move();
@@ -40,14 +40,14 @@ public class Devil : Boss
             if (isPlayerNear())
             {
                 speed = 0f;
-                anim.SetBool("Run", false);
+                _anim.SetBool("Run", false);
             }
         }
         else
         {
             StartCoroutine(SpawnLineFireballs());
             //  attack
-            anim.SetBool("Attack", true);
+            _anim.SetBool("Attack", true);
             //  reset attack delay
             _attackDelay = attackDelay;
         }
@@ -56,14 +56,14 @@ public class Devil : Boss
     private IEnumerator SpawnLineFireballs()
     {
         speed = 0f;
-        anim.SetBool("Run", false);
+        _anim.SetBool("Run", false);
         for (int i = 0; i < 3; i++)
         {
             SpawnFireball();
             yield return new WaitForSeconds(0.3f);
         }
         speed = _speed;
-        anim.SetBool("Run", true);
+        _anim.SetBool("Run", true);
     }
 
     protected bool isPlayerBack()

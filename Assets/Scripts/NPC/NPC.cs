@@ -10,35 +10,35 @@ public class NPC : MonoBehaviour
     //  npc menu
     public GameObject shopMenu;
     //  player reference
-    private Player player = null;
+    private Player _player = null;
     //  flag is player near to npc
-    private bool playerInZone = false;
+    private bool _playerInZone = false;
 
     //  current selected item
-    private UpgradeItem selected = null;
+    private UpgradeItem _selected = null;
 
     //  description text of selected item
     public Text descriptionText;
 
     //  notification of not enough money to buy something
-    private GameObject notification;
+    private GameObject _notification;
 
     //  if has, play it before opening shop
-    [SerializeField] private bool hasActionAnimation = false;
+    [SerializeField] private bool _hasActionAnimation = false;
 
     void Start()
     {
         //  hide hint text and menu
         hintText.SetActive(false);
         shopMenu.SetActive(false);
-        notification = shopMenu.transform.GetChild(1).gameObject;
-        notification.SetActive(false);
+        _notification = shopMenu.transform.GetChild(1).gameObject;
+        _notification.SetActive(false);
     }
 
     void Update()
     {
         //  if pressed E and player near - open shop window
-        if(Input.GetKeyDown(KeyCode.E) && playerInZone)
+        if(Input.GetKeyDown(KeyCode.E) && _playerInZone)
         {
             StartCoroutine(ShowShopMenu());
         }
@@ -47,7 +47,7 @@ public class NPC : MonoBehaviour
     private IEnumerator ShowShopMenu()
     {
         //  play animation if has
-        if (hasActionAnimation)
+        if (_hasActionAnimation)
         {
             GetComponentInChildren<Animator>().ResetTrigger("Idle");
             GetComponentInChildren<Animator>().SetTrigger("Action");
@@ -63,44 +63,44 @@ public class NPC : MonoBehaviour
     public void ApplyItem()
     {
         //  if player is not near
-        if (player == null || selected == null)
+        if (_player == null || _selected == null)
             return;
 
-        if(GameSaving.instance.score < selected.Cost)
+        if(GameSaving.instance.score < _selected.Cost)
         {
             //  show notification
-            notification.SetActive(true);
+            _notification.SetActive(true);
             return;
         }
 
-        if(selected.Identificator == UpgradeItem.STATS.HP)
-            player.AddHealth(selected.Value);
-        else if (selected.Identificator == UpgradeItem.STATS.HP_HALF)
-            player.AddHealth(player.MAXHP/2);
-        else if (selected.Identificator == UpgradeItem.STATS.HP_FULL)
-            player.AddHealth(player.MAXHP);
-        else if(selected.Identificator == UpgradeItem.STATS.MAXHP)
-            player.AddMaxHP(selected.Value);
-        else if(selected.Identificator == UpgradeItem.STATS.DAMAGE)
-            player.AddDamage(selected.Value);
+        if(_selected.Identificator == UpgradeItem.STATS.HP)
+            _player.AddHealth(_selected.Value);
+        else if (_selected.Identificator == UpgradeItem.STATS.HP_HALF)
+            _player.AddHealth(_player.MAXHP/2);
+        else if (_selected.Identificator == UpgradeItem.STATS.HP_FULL)
+            _player.AddHealth(_player.MAXHP);
+        else if(_selected.Identificator == UpgradeItem.STATS.MAXHP)
+            _player.AddMaxHP(_selected.Value);
+        else if(_selected.Identificator == UpgradeItem.STATS.DAMAGE)
+            _player.AddDamage(_selected.Value);
 
-        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DAMAGE)
-            player.IncreaseSphereDamage(selected.Value);
-        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && player.blackHoleDelay > 2f)
-            player.DecreaseSphereDelay(selected.Value);
-        else if (selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
-            player.IncreaseSphereRadius(selected.Value);
+        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DAMAGE)
+            _player.IncreaseSphereDamage(_selected.Value);
+        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && _player.blackHoleDelay > 2f)
+            _player.DecreaseSphereDelay(_selected.Value);
+        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
+            _player.IncreaseSphereRadius(_selected.Value);
 
-        GameSaving.instance.Buy(selected.Cost);
+        GameSaving.instance.Buy(_selected.Cost);
     }
 
     public void HideShopMenu()
     {
-        if (hasActionAnimation)
+        if (_hasActionAnimation)
         {
             GetComponentInChildren<Animator>().SetTrigger("Idle");
         }
-        notification.SetActive(false);
+        _notification.SetActive(false);
         shopMenu.SetActive(false);
         hintText.SetActive(true);
         SetDefaultValues();
@@ -109,7 +109,7 @@ public class NPC : MonoBehaviour
     private void SetDefaultValues()
     {
         descriptionText.text = "";
-        selected = null;
+        _selected = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -117,9 +117,9 @@ public class NPC : MonoBehaviour
         if (collision.CompareTag("PlayerTrigger"))
         {
             //  if player enter to npc collider 
-            playerInZone = true;
-            hintText.SetActive(playerInZone);
-            player = collision.GetComponentInParent<Player>();
+            _playerInZone = true;
+            hintText.SetActive(_playerInZone);
+            _player = collision.GetComponentInParent<Player>();
         }
     }
 
@@ -127,23 +127,23 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            if (hasActionAnimation)
+            if (_hasActionAnimation)
             {
                 GetComponentInChildren<Animator>().SetTrigger("Idle");
             }
             //  if player exit from npc collider
-            playerInZone = false;
+            _playerInZone = false;
             shopMenu.SetActive(false);
             hintText.SetActive(false);
-            notification.SetActive(false);
+            _notification.SetActive(false);
             SetDefaultValues();
-            player = null;
+            _player = null;
         }
     }
 
     public void onPressItem(UpgradeItem item)
     {
-        selected = item;
+        _selected = item;
         descriptionText.text = $"{item.Description} - {item.Cost}$";
     }
 }

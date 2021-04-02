@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d047275954d7647a3ef5a2aa285daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 350
-  maxHP: 350
+  _hp: 100
+  _maxHP: 100
   spawnEnemyDelay: 13
   enemyPrefabs:
   - {fileID: 186586810464884135, guid: 88d0e33f413e8144b94dcbe78bd91a62, type: 3}
@@ -90,9 +90,9 @@ MonoBehaviour:
   - {fileID: 6376148351984372724, guid: 3902c329fa9d30e4189d0aeccf9b49ba, type: 3}
   - {fileID: 6376148351984372724, guid: b392c45ffebf5a54b8b5333a04558d8a, type: 3}
   - {fileID: 6376148351984372724, guid: 7a039c04cbade9b46883da397b1ac9cb, type: 3}
-  pushForce: 7
-  direction: -1
-  speed: 2
+  _pushForce: 10
+  _direction: -1
+  _speed: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -102,7 +102,7 @@ MonoBehaviour:
     type: 3}
   bossUI: {fileID: 0}
   chest: {fileID: 463045951368222508, guid: df87c2758613a1e4189aa60101b1717f, type: 3}
-  _name: 20
+  enemyName: 20
 --- !u!61 &3476316450218467966
 BoxCollider2D:
   m_ObjectHideFlags: 0

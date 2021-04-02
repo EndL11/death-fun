@@ -5,57 +5,57 @@ using UnityEngine.UI;
 
 public class Witch : MonoBehaviour
 {
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float maxHP = 100f;
+    [SerializeField] private float _hp = 100f;
+    [SerializeField] private float _maxHP = 100f;
 
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float _speed = 5f;
 
     public float spawnDelay = 3f;
     private float _spawnDelay;
 
-    [SerializeField] private GameObject bomberManPrefab;
+    public GameObject bomberManPrefab;
 
-    [SerializeField] private Slider healthBar;
+    public Slider healthBar;
 
-    private bool dead = false;
+    private bool _dead = false;
 
-    private Animator anim;
-    private Rigidbody2D rb;
+    private Animator _anim;
+    private Rigidbody2D _rb;
 
-    [SerializeField] private Transform leftPoint;
-    [SerializeField] private Transform rightPoint;
+    public Transform leftPoint;
+    public Transform rightPoint;
 
-    [SerializeField] private int direction = -1;
+    [SerializeField] private int _direction = -1;
 
-    private Color c;
+    private Color _color;
 
-    [SerializeField] private ParticleSystem hurtParticles;
+    public ParticleSystem hurtParticles;
 
-    private bool isSpawning = false;
+    private bool _isSpawning = false;
 
-    public EnemyAnalytics.Names _name;
+    public EnemyAnalytics.Names enemyName;
 
     public bool Dead
     {
-        get { return dead; }
+        get { return _dead; }
     }
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        healthBar.maxValue = maxHP;
-        healthBar.value = hp;
+        _anim = GetComponentInChildren<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        healthBar.maxValue = _maxHP;
+        healthBar.value = _hp;
 
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
         _spawnDelay = spawnDelay;
 
-        c = GetComponentInChildren<SpriteRenderer>().material.color;
+        _color = GetComponentInChildren<SpriteRenderer>().material.color;
     }
 
     private void Update()
     {
-        if (dead)
+        if (_dead)
             return;
 
         if (_spawnDelay > 0f)
@@ -69,20 +69,20 @@ public class Witch : MonoBehaviour
             _spawnDelay = spawnDelay;
         }
 
-        if (!dead && !isSpawning)
+        if (!_dead && !_isSpawning)
             Move();
     }
 
     public void ApplyDamage(float damage)
     {
-        if (dead)
+        if (_dead)
             return;
 
-        hp -= damage;
-        healthBar.value = hp;
-        if (hp <= 0f)
+        _hp -= damage;
+        healthBar.value = _hp;
+        if (_hp <= 0f)
             DestroyWitch();
-        if (!dead)
+        if (!_dead)
         {
             StartCoroutine(HurtAnimation());
             hurtParticles.Play();
@@ -91,19 +91,19 @@ public class Witch : MonoBehaviour
 
     private void DestroyWitch()
     {
-        anim.SetBool("Fly", false);
+        _anim.SetBool("Fly", false);
         healthBar.gameObject.SetActive(false);
-        dead = true;
-        anim.SetTrigger("Die");
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        _dead = true;
+        _anim.SetTrigger("Die");
+        _rb.bodyType = RigidbodyType2D.Dynamic;
         GameSaving.instance.EnemyDead(gameObject);
     }
 
     private void Move()
     {
-        anim.SetBool("Fly", true);
-        transform.Translate(transform.right * direction * Time.deltaTime * speed);
-        if ((direction == 1 && transform.position.x > rightPoint.position.x) || (direction == -1 && transform.position.x < leftPoint.position.x))
+        _anim.SetBool("Fly", true);
+        transform.Translate(transform.right * _direction * Time.deltaTime * _speed);
+        if ((_direction == 1 && transform.position.x > rightPoint.position.x) || (_direction == -1 && transform.position.x < leftPoint.position.x))
         {
             ChangeMovementDirection();
         }
@@ -111,23 +111,23 @@ public class Witch : MonoBehaviour
 
     private IEnumerator SpawnRandomEnemy()
     {
-        isSpawning = true;
-        anim.SetBool("Fly", false);
+        _isSpawning = true;
+        _anim.SetBool("Fly", false);
         yield return new WaitForSeconds(0.3f);
         GameObject enemy = Instantiate(bomberManPrefab, transform.position, Quaternion.identity);
         int rand = UnityEngine.Random.Range(1, 3);
         BomberMan bomber = enemy.GetComponent<BomberMan>();
         int direction = bomber.Direction == -1 ? 1 : -1;
         bomber.Direction = direction;
-        isSpawning = false;
+        _isSpawning = false;
     }
 
     private void ChangeMovementDirection()
     {
         //  set direction to another
-        direction = direction == 1 ? -1 : 1;
+        _direction = _direction == 1 ? -1 : 1;
         //  rotate sprite according to direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
     }
 
     private IEnumerator HurtAnimation()
@@ -137,6 +137,6 @@ public class Witch : MonoBehaviour
         //  wait 0.2 seconds
         yield return new WaitForSeconds(0.2f);
         //  set start color
-        GetComponentInChildren<SpriteRenderer>().material.color = c;
+        GetComponentInChildren<SpriteRenderer>().material.color = _color;
     }
 }

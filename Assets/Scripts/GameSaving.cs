@@ -40,11 +40,11 @@ public class GameSaving : MonoBehaviour
     public int deadEnemies = 0;
     public int enemiesCount = 0;
     public List<GameObject> enemies = new List<GameObject>();
-    private Dictionary<string, int> enemiesDeadList = new Dictionary<string, int>();
-    [SerializeField] private List<EnemyAnalytics> analiticsPrefabs;
+    private Dictionary<string, int> _enemiesDeadList = new Dictionary<string, int>();
+    [SerializeField] private List<EnemyAnalytics> _analiticsPrefabs;
 
     [HideInInspector]
-    public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
+    public string[] _enemiesNames = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
 
 
     void Awake()
@@ -96,24 +96,24 @@ public class GameSaving : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Tutorial")
             return;
 
-        if (enemiesDeadList.ContainsKey(name))
+        if (_enemiesDeadList.ContainsKey(name))
         {
-            enemiesDeadList[name] += 1;
+            _enemiesDeadList[name] += 1;
             return;
         }
         if(name != "")
-            enemiesDeadList.Add(name, 1);
+            _enemiesDeadList.Add(name, 1);
     }
 
     public void GameOver()
     {
-        foreach (var item in analiticsPrefabs)
+        foreach (var item in _analiticsPrefabs)
         {
             item.show = false;
         }
 
         OnGameOver();
-        enemiesDeadList.Clear();
+        _enemiesDeadList.Clear();
     }
 
     public void SaveCompleteTutorial()
@@ -124,7 +124,7 @@ public class GameSaving : MonoBehaviour
 
     public void SaveDeadEnemies()
     {
-        foreach (var item in enemiesDeadList)
+        foreach (var item in _enemiesDeadList)
         {
             if (item.Value > 0)
                 PlayerPrefs.SetInt($"@{item.Key}", item.Value);
@@ -133,15 +133,15 @@ public class GameSaving : MonoBehaviour
 
     private void LoadDeadEnemies()
     {
-        foreach (string name in ENEMIES)
+        foreach (string name in _enemiesNames)
         {
-            enemiesDeadList.Add(name, PlayerPrefs.GetInt($"@{name}", 0));
+            _enemiesDeadList.Add(name, PlayerPrefs.GetInt($"@{name}", 0));
         }
     }
 
     public void ClearPlayerPrefs()
     {
-        enemiesDeadList.Clear();
+        _enemiesDeadList.Clear();
         int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
         int music = PlayerPrefs.GetInt("@music", 1);
@@ -150,7 +150,7 @@ public class GameSaving : MonoBehaviour
         float hardModeTime = PlayerPrefs.GetFloat("@awardHard", 0f);
         float normalModeTime = PlayerPrefs.GetFloat("@awardNormal", 0f);
 
-        foreach (var item in analiticsPrefabs)
+        foreach (var item in _analiticsPrefabs)
         {
             item.show = false;
         }
@@ -170,12 +170,12 @@ public class GameSaving : MonoBehaviour
 
     private void SetDeadCountToPrefabs()
     {
-        foreach (var item in enemiesDeadList)
+        foreach (var item in _enemiesDeadList)
         {
             if (item.Value == 0)
                 continue;
 
-            EnemyAnalytics _tmp = analiticsPrefabs.Find(x => x.name.ToString() == item.Key);
+            EnemyAnalytics _tmp = _analiticsPrefabs.Find(x => x.name.ToString() == item.Key);
             if (_tmp?.prefab == null)
                 return;
             GameObject prefab = _tmp.prefab;
@@ -187,7 +187,7 @@ public class GameSaving : MonoBehaviour
     public List<GameObject> GetAnalyticsObjects()
     {
         SetDeadCountToPrefabs();
-        return analiticsPrefabs.FindAll(x => x.show && x.prefab != null).ConvertAll(x => x.prefab);
+        return _analiticsPrefabs.FindAll(x => x.show && x.prefab != null).ConvertAll(x => x.prefab);
     }
 
     public void Buy(int cost)
@@ -215,17 +215,17 @@ public class GameSaving : MonoBehaviour
             Witch witch = enemy.GetComponent<Witch>();
             if (witch != null)
             {
-                name = witch._name.ToString();
+                name = witch.enemyName.ToString();
             }
             else
             {
                 AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
                 if (angrySkull != null)
-                    name = angrySkull._name.ToString();
+                    name = angrySkull.enemyName.ToString();
             }
         }
         else
-            name = script._name.ToString();
+            name = script.enemyName.ToString();
 
         return name;
     }

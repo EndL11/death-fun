@@ -181,10 +181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fac56d266fdf40a4335524572bbe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
+  _hp: 100
+  _maxHP: 100
   speed: 3
-  direction: -1
+  _direction: -1
   damage: 15
   attackDelay: 2
   attackZone: 0.5
@@ -203,7 +203,7 @@ MonoBehaviour:
   whatAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 4
+  enemyName: 4
   healthBar: {fileID: 6376148351994079504}
 --- !u!61 &6376148351984372721
 BoxCollider2D:

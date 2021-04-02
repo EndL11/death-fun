@@ -15,30 +15,31 @@ public class DialogSystem : MonoBehaviour
 {
     public Text dialogText;
     public GameObject dialogPanel;
+    public GameObject continueButton;
 
     public string[] sentences;
-    private int current = 0;
-
+    private int _current = 0;
     public Dialog[] dialogs;
 
+    #region EndHistorySettings
     public bool isEnd = true;
     public GameObject titlesBackground;
     public GameObject titles;
+    #endregion
 
-    private Animator anim;
-
-    public GameObject continueButton;
+    private Animator _anim;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
         Time.timeScale = 1;
+
         if (titles != null)
             titles.SetActive(false);
 
-        dialogs[current].panel.SetActive(true);
+        dialogs[_current].panel.SetActive(true);
         continueButton.SetActive(false);
-        StartCoroutine(TypeSentence(sentences[current]));
+        StartCoroutine(TypeSentence(sentences[_current]));
     }
 
     public void LoadMenu()
@@ -60,28 +61,29 @@ public class DialogSystem : MonoBehaviour
 
     private IEnumerator DisplayNextSentenceIEnum()
     {
-        if (current == dialogs.Length - 1)
+        if (_current == dialogs.Length - 1)
         {
             EndDialog();
         }
         else
         {
-            if(current != dialogs.Length - 2)
+            if(_current != dialogs.Length - 2)
                 continueButton.SetActive(false);
 
-            Dialog currentDialog = dialogs[current];
-            current += 1;
+            Dialog currentDialog = dialogs[_current];
+            _current += 1;
 
-            Dialog nextDialog = dialogs[current];
-            if (nextDialog.needTransition && anim != null)
+            Dialog nextDialog = dialogs[_current];
+            if (nextDialog.needTransition && _anim != null)
             {
-                anim.SetTrigger("Transition");
+                _anim.SetTrigger("Transition");
                 yield return new WaitForSeconds(1.3f);
             }
             currentDialog.panel.SetActive(false);
             nextDialog.panel.SetActive(true);
-            if (current != sentences.Length)
-                StartCoroutine(TypeSentence(sentences[current]));
+
+            if (_current != sentences.Length)
+                StartCoroutine(TypeSentence(sentences[_current]));
             else
                 dialogText.text = "";
         }

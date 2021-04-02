@@ -11,8 +11,8 @@ public class GameProcess : MonoBehaviour
     public GameObject pausePanel;        
     public GameObject gameOverPanel;
 
-    private Text scoreText;
-    private Text enemiesText;
+    private Text _scoreText;
+    private Text _enemiesText;
 
     public Transform enemiesStatsParent;
     public Transform enemiesStatsParent2;
@@ -29,8 +29,8 @@ public class GameProcess : MonoBehaviour
 
     private void Awake()
     {
-        scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-        enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
+        _scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+        _enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
         if (finishPortal != null)
             finishPortal.SetActive(false);
         if (flagpole != null)
@@ -73,8 +73,8 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.enemiesCount = GameSaving.instance.enemies.Count;
             GameSaving.instance.deadEnemies = 0;
         }
-        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
-        scoreText.text = GameSaving.instance.score.ToString();
+        _enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
+        _scoreText.text = GameSaving.instance.score.ToString();
         if(PlayerPrefs.GetString("@mode") == "Normal Mode" && SceneManager.GetActiveScene().name != "Tutorial")
             PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
 
@@ -131,12 +131,12 @@ public class GameProcess : MonoBehaviour
 
     private void UpdateDeadCounter()
     {
-        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
+        _enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
     }
 
     private void UpdateScore()
     {
-        scoreText.text = GameSaving.instance.score.ToString();
+        _scoreText.text = GameSaving.instance.score.ToString();
     }
 
     private void GameOverHandler()

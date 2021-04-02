@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected float hp = 100f;
-    [SerializeField] protected float maxHP = 100f;
+    [SerializeField] protected float _hp = 100f;
+    [SerializeField] protected float _maxHP = 100f;
     public float speed = 3f;
     protected float _speed;
     //  movement direction - 1 - right, -1 - left
-    [SerializeField] private int direction = -1;
+    [SerializeField] private int _direction = -1;
     public float damage = 25f;
-    private bool dead = false;
+    private bool _dead = false;
     //  attack delay
-    [SerializeField] protected float attackDelay = 3f;
+    public float attackDelay = 3f;
     protected float _attackDelay;
 
     public float attackZone = 0.5f;
     public float playerCheckZone = 0.3f;
 
-    protected Rigidbody2D rb;
-    protected Animator anim;
+    protected Rigidbody2D _rb;
+    protected Animator _anim;
 
     public ParticleSystem hurtParticles;
     public GameObject soulPrefab;
@@ -33,45 +33,45 @@ public class Enemy : MonoBehaviour
     public LayerMask whatIsPlayer;
     public LayerMask whatAvoid;
 
-    public EnemyAnalytics.Names _name;
+    public EnemyAnalytics.Names enemyName;
     public Slider healthBar = null;
     //  start color
-    private Color c;
+    private Color _color;
 
     public bool Dead
     {
-        get { return dead; }
+        get { return _dead; }
     }
 
     public int Direction
     {
-        get { return direction; }
-        set { direction = value; }
+        get { return _direction; }
+        set { _direction = value; }
     }
 
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponentInChildren<Animator>();
         //  setting rotating to sprite based on direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
         //  setting max hp to health bar
-        healthBar.maxValue = maxHP;
-        healthBar.value = hp;
+        healthBar.maxValue = _maxHP;
+        healthBar.value = _hp;
         _attackDelay = attackDelay;
         //  save start color
-        c = GetComponentInChildren<SpriteRenderer>().material.color;
+        _color = GetComponentInChildren<SpriteRenderer>().material.color;
         _speed = speed;
     }
 
     protected virtual void Update()
     {
-        if (dead)
+        if (_dead)
             return;
 
-        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !dead && !isWall())
+        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !_dead && !isWall())
             Move();
-        else if(!dead && isGrounded() && (isEndPlatform() || isWall()))
+        else if(!_dead && isGrounded() && (isEndPlatform() || isWall()))
             ChangeMovementDirection();
 
         //  if delay greater zero
@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
             if (isPlayerNear())
             {
                 speed = 0f;
-                anim.SetBool("Run", false);
+                _anim.SetBool("Run", false);
             }
         }
         else
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
             if (isPlayerNear())
             {
                 //  attack
-                anim.SetBool("Attack", true);
+                _anim.SetBool("Attack", true);
                 //  reset attack delay
                 _attackDelay = attackDelay;
             }
@@ -101,16 +101,16 @@ public class Enemy : MonoBehaviour
 
     public virtual void ApplyDamage(float damage, Vector2 dir)
     {
-        if (dead)
+        if (_dead)
             return;
 
-        hp -= damage;
+        _hp -= damage;
 		SoundMusicManager.instance.PunchPlay();
         //  update health bar
-        healthBar.value = hp;
-        if (hp <= 0)
+        healthBar.value = _hp;
+        if (_hp <= 0)
             DestroyEnemy();
-        if (!dead)
+        if (!_dead)
         {
             //  show particles
             hurtParticles.Play();
@@ -124,9 +124,9 @@ public class Enemy : MonoBehaviour
     protected virtual void PushBack(Vector2 dir)
     {
         //  reset velocity
-        rb.velocity = Vector2.zero;
+        _rb.velocity = Vector2.zero;
         //  push back enemy
-        rb.AddForce(dir, ForceMode2D.Impulse);
+        _rb.AddForce(dir, ForceMode2D.Impulse);
     }
 
 
@@ -137,14 +137,14 @@ public class Enemy : MonoBehaviour
         //  wait 0.2 seconds
         yield return new WaitForSeconds(0.2f);
         //  set start color
-        GetComponentInChildren<SpriteRenderer>().material.color = c;
+        GetComponentInChildren<SpriteRenderer>().material.color = _color;
     }
 
     protected virtual void DestroyEnemy()
     {
         //  stop attack animation
-        anim.SetBool("Attack", false);
-        dead = true;
+        _anim.SetBool("Attack", false);
+        _dead = true;
 		SoundMusicManager.instance.DeathPlay();
         //  hide health bar (it's empty)
         healthBar.gameObject.SetActive(false);
@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
         if(GameSaving.instance != null)
             GameSaving.instance.EnemyDead(gameObject);
         //  show die animation
-        anim.SetTrigger("Die");
+        _anim.SetTrigger("Die");
     }
 
     private void SpawnSoul()
@@ -165,9 +165,9 @@ public class Enemy : MonoBehaviour
     protected void ChangeMovementDirection()
     {
         //  set direction to another
-        direction = direction == 1 ? -1 : 1;
+        _direction = _direction == 1 ? -1 : 1;
         //  rotate sprite according to direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
     }
 
     protected bool isEndPlatform()
@@ -187,20 +187,20 @@ public class Enemy : MonoBehaviour
     protected virtual void Move()
     {
         //  if playing attack anim - return
-        if (anim.GetBool("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))
+        if (_anim.GetBool("Attack") || _anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))
             return;
         //  reset speed to normal
         speed = _speed;
         //  start run animation
-        anim.SetBool("Run", true);
+        _anim.SetBool("Run", true);
         //  move enemy according to direction
-        transform.Translate(transform.right * direction * speed * Time.deltaTime);
+        transform.Translate(transform.right * _direction * speed * Time.deltaTime);
     }
 
     public virtual void Attack()
     {
         //  do not attack if dead
-        if (dead) return;
+        if (_dead) return;
         //  get colliders of all players
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, attackZone, whatIsPlayer);
         //  calculating push direction
