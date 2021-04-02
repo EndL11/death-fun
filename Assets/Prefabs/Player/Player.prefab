@@ -4920,14 +4920,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52642d7c3ff01245b0370d655e4f049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
-  damage: 30
+  _hp: 100
+  _maxHP: 100
+  _damage: 30
+  _attackRange: 0.5
   blackHoleDelay: 8
   blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
     type: 3}
   spawnPosition: {fileID: 406160650}
-  attackRange: 0.5
   enemiesMask:
     serializedVersion: 2
     m_Bits: 512
@@ -4944,8 +4944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac291e92b267ad24b8ce1ab6c69d371e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 9
+  _speed: 5
+  _jumpForce: 10
   groundChecker: {fileID: 1029261704}
   whatIsGround:
     serializedVersion: 2
