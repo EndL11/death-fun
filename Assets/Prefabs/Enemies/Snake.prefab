@@ -526,12 +526,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fac56d266fdf40a4335524572bbe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  _maxHP: 100
+  _hp: 30
+  _maxHP: 30
   speed: 3
   _direction: -1
-  damage: 5
-  attackDelay: 0.5
+  damage: 1
+  attackDelay: 0.7
   attackZone: 0.5
   playerCheckZone: 0.3
   hurtParticles: {fileID: 8057392460533073061}
