@@ -43,11 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359f02a91e92dc24ba590f8b8abc628a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats:
+    damage: 0
+    hp: 0
+    maxHp: 0
+    blackHoleStats:
+      delay: 0
+      damage: 0
+      radius: 0
   score: 0
   deadEnemies: 0
   enemiesCount: 0
   enemies: []
-  analiticsPrefabs:
+  _analiticsPrefabs:
   - prefab: {fileID: 7989043304102008344, guid: a926d7ac1cc20294f83c894e39491d08,
       type: 3}
     name: 0
@@ -92,22 +100,6 @@ MonoBehaviour:
       type: 3}
     name: 10
     show: 0
-  - prefab: {fileID: 7989043304102008344, guid: 93e41add73fdcc74b88a8bf99f1ccec8,
-      type: 3}
-    name: 16
-    show: 0
-  - prefab: {fileID: 7989043304102008344, guid: d8f93dcc39dedd54a82e12b27cb5c550,
-      type: 3}
-    name: 17
-    show: 0
-  - prefab: {fileID: 7989043304102008344, guid: 0ce123bd0a692db4a83c300838f63090,
-      type: 3}
-    name: 18
-    show: 0
-  - prefab: {fileID: 7989043304102008344, guid: 80378d0ee02377f4a931e0e6f7a4aeac,
-      type: 3}
-    name: 19
-    show: 0
   - prefab: {fileID: 7989043304102008344, guid: fa4f565ee93c7ed408f8bf0fc6e14116,
       type: 3}
     name: 11
@@ -128,7 +120,23 @@ MonoBehaviour:
       type: 3}
     name: 15
     show: 0
-  ENEMIES:
+  - prefab: {fileID: 7989043304102008344, guid: 93e41add73fdcc74b88a8bf99f1ccec8,
+      type: 3}
+    name: 16
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: d8f93dcc39dedd54a82e12b27cb5c550,
+      type: 3}
+    name: 17
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 0ce123bd0a692db4a83c300838f63090,
+      type: 3}
+    name: 18
+    show: 0
+  - prefab: {fileID: 7989043304102008344, guid: 80378d0ee02377f4a931e0e6f7a4aeac,
+      type: 3}
+    name: 19
+    show: 0
+  _enemiesNames:
   - spider
   - snake
   - scorpion
@@ -140,3 +148,13 @@ MonoBehaviour:
   - knight_2
   - knight_3
   - knight_4
+  - ninja_1
+  - ninja_2
+  - ninja_3
+  - ninja_4
+  - ninja_5
+  - skeleton
+  - barbarian
+  - witch
+  - vampire
+  - none
