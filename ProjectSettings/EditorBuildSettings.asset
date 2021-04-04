@@ -15,8 +15,38 @@ EditorBuildSettings:
     path: Assets/Scenes/StartHistory.unity
     guid: 0e48688fc59a3ff43822eedfd2a337cb
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
+    path: Assets/Scenes/tutorial.unity
     guid: dcc6aaa9fef141b4f96d0ad62ce1befb
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 1.unity
+    guid: 5acef885d0dab194ab9c27b8ddfc3014
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 2.unity
+    guid: 398aba1740b2ad04c9fa02d9ee5f87dd
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 3.unity
+    guid: 3b6cb7bc8ce3aa74f967b727578b96f3
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 4.unity
+    guid: a7c424aec74a2ca4ea98acf8cecda67c
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 5.unity
+    guid: ce0607aec779cb64ab2f2b7f27722676
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 6.unity
+    guid: cf10cf40e1c923443a2e87c04f2cd539
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 7.unity
+    guid: 5512338dc8ace414293d5046b7d3deea
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 8.unity
+    guid: ac75ebb80b86a344da20ce18dd5ad367
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(e)level 9.unity
+    guid: 6c6ecd20159526c41b16db078d9dff80
+  - enabled: 1
+    path: Assets/Scenes/EasyLevels/(eB)level 10.unity
+    guid: bbdd979f5a00ede4a9449fd01144d21e
   - enabled: 1
     path: Assets/Scenes/level 1.unity
     guid: 8d21281bf041ce440b724d72f5cc6ea4

@@ -185,7 +185,7 @@ MonoBehaviour:
   _maxHP: 100
   speed: 3
   _direction: -1
-  damage: 7
+  damage: 6
   attackDelay: 2
   attackZone: 0.5
   playerCheckZone: 0.3
