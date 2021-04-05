@@ -2,6 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct GameSound{
+    
+    public enum SoundType {coin, triggerBoss, damagePlayer, spawnSphere, destroySphere, 
+    playerAttack, damageEnemy, portal, bomberManExplosion, fireball, enemyDeath};
+    public GameObject soundPrefab;  //  prefab with audioSource
+}
+
+[System.Serializable]
+public struct GameMusic{
+    
+    public enum MusicType {gameMusic, menuMusic };
+    public GameObject soundPrefab;  //  prefab with audioSource
+}
+
 public class SoundMusicManager : MonoBehaviour
 {
     public static SoundMusicManager instance;

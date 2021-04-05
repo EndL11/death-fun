@@ -3,182 +3,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AngrySkull : MonoBehaviour
+public class AangrySkull : Boss
 {
-    [SerializeField] private float _hp = 100f;
-    [SerializeField] private float _maxHP = 100f;
-
-    public float spawnEnemyDelay = 10f;
-    private float _spawnDelay;
     public List<GameObject> enemyPrefabs = new List<GameObject>();
-    [SerializeField] private float _pushForce = 10f;
-    private bool _dead = false;
-    [SerializeField] private int _direction = -1;
-    [SerializeField] private float _speed = 5f;
+    public float pushForce = 10f;
 
-    public LayerMask whatIsGround;
 
-    public Transform checkPlatformEndPoint;
-
-    private Animator _anim;
-    private Color _color;
-
-    public ParticleSystem hurtParticles;
-    public GameObject soulPrefab;
-
-    public GameObject bossUI;
-    private Slider _healthBar;
-    private Text _healthStats;
-
-    public GameObject chest;
-
-    public EnemyAnalytics.Names enemyName;
-
-    public float HP
-    {
-        get { return _hp; }
-    }
-
-    public float MaxHP
-    {
-        get { return _maxHP; }
-    }
-
-    void Start()
+    protected override void SpawnEnemyOnTakingDamage() { }
+    protected override void Start()
     {
         _anim = GetComponentInChildren<Animator>();
-        _spawnDelay = spawnEnemyDelay;
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
-        _healthBar = bossUI.GetComponentInChildren<Slider>();
-        _healthStats = bossUI.transform.GetChild(1).GetComponentInChildren<Text>();
+        _rb = GetComponent<Rigidbody2D>();
+        _speed = speed;
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, ((int)_direction < 0 ? 0f : 180f), 0f);
 
-        _color = GetComponentInChildren<SpriteRenderer>().material.color;
+        _healthManager.hp *= GameSaving.instance.difficultyCoefficient;
+        _healthManager.maxHP = _healthManager.hp;
 
-        _healthBar.maxValue += _maxHP;
-        _healthBar.value += _hp;
+        _healthManager.healthBar = bossUI.GetComponentInChildren<Slider>();
+        _healthStatsText = _healthManager.healthBar.GetComponentInChildren<Text>();
 
-        _healthStats.text = $"{_healthBar.value} / {_healthBar.maxValue}";
+        _healthManager.healthBar.maxValue += _healthManager.maxHP;
+        _healthManager.healthBar.value += _healthManager.hp;
 
-        bossUI.SetActive(true);
+        _attackDelay = attackDelay;
+        _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
+        GameSaving.instance.OnBossStart += StartFight;
     }
 
-    void Update()
+    protected override void Update()
     {
-        if (_dead)
+        if (IsDead())
             return;
 
-        if(_spawnDelay > 0f)
+        if (_attackDelay > 0f)
         {
-            _spawnDelay -= Time.deltaTime;
+            _attackDelay -= Time.deltaTime;
         }
         else
         {
             StartCoroutine(SpawnEnemies());
-            _spawnDelay = spawnEnemyDelay;
+            _attackDelay = attackDelay;
         }
 
-        if (!isEndPlatform() && isGrounded())
+        if (!IsEndPlatform() && IsGrounded())
             Move();
-        else if(isGrounded() && isEndPlatform())
+        else if (NeedToTurnAround())
             ChangeMovementDirection();
     }
 
-    private IEnumerator SpawnEnemies()
+    public override void PlayDieAnimation() { }
+    public override void PlayRunAnimation() { }
+    public override void StopRunAnimation() { }
+    public override void StopAttackAnimation() { }
+
+    protected override void Move()
     {
-        _anim.SetTrigger("Spawn");
-        yield return new WaitForSeconds(.3f);
-        Vector2 leftSpawnPoint = new Vector2(transform.position.x - 0.3f, transform.position.y);
-        Vector2 rightSpawnPoint = new Vector2(transform.position.x + 0.3f, transform.position.y);
-        Vector2 pushDirection = new Vector2(1f, .3f);
-
-        GameObject leftEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], leftSpawnPoint, Quaternion.identity);
-        leftEnemy.GetComponent<Rigidbody2D>().AddForce(-pushDirection * _pushForce, ForceMode2D.Impulse);
-
-        GameObject rightEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], rightSpawnPoint, Quaternion.identity);
-        rightEnemy.GetComponent<Rigidbody2D>().AddForce(pushDirection * _pushForce, ForceMode2D.Impulse);
-
-        GameObject centerEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], transform.position, Quaternion.identity);
-        centerEnemy.GetComponent<Rigidbody2D>().AddForce(transform.up * _pushForce, ForceMode2D.Impulse);
-
-        leftEnemy = RandomDirection(leftEnemy);
-        centerEnemy = RandomDirection(centerEnemy);
-        rightEnemy = RandomDirection(rightEnemy);
+        transform.Translate(transform.right * (int)_direction * _speed * Time.deltaTime);
     }
-
-    private GameObject RandomDirection(GameObject enemy)
+    protected override void OnDead()
     {
-        int rand = Random.Range(1, 3);
-        Enemy enemyScript = enemy.GetComponent<Enemy>();
-        int direction = enemyScript.Direction;
-        if (rand == 1)
-            direction = -1;
-        else
-            direction = 1;
-
-        enemyScript.Direction = direction;
-        return enemy;
-    }
-
-    private void Move()
-    {
-        transform.Translate(transform.right * _direction * _speed * Time.deltaTime);
-    }
-
-    protected void ChangeMovementDirection()
-    {
-        //  set direction to another
-        _direction = _direction == 1 ? -1 : 1;
-        //  rotate sprite according to direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
-    }
-
-    protected bool isEndPlatform()
-    {
-        //  return true if platform is ended
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlatformEndPoint.position, 0.3f, whatIsGround);
-        return colliders.Length == 0;
-    }
-
-    protected bool isGrounded()
-    {
-        //  return true if enemy is on ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, whatIsGround);
-        return colliders.Length > 0;
-    }
-
-    public void ApplyDamage(float damage)
-    {
-        _hp -= damage;
-        SoundMusicManager.instance.PunchPlay();
-        if (_hp - damage <= 0f)
-            _healthBar.value -= _hp;
-        else
-            _healthBar.value -= damage;
-
-        _healthStats.text = $"{_healthBar.value} / {_healthBar.maxValue}";
-
-        if (_hp <= 0f)
-            DestroySkull();
-
-        if (!_dead)
-        {
-            //  show particles
-            hurtParticles.Play();
-            //  play hurt animation
-            StartCoroutine(HurtAnimation());
-        }
-    }
-
-    private void DestroySkull()
-    {
-        _dead = true;
         SpawnSoul();
-        _healthBar.maxValue -= _maxHP;
-        _healthStats.text = $"{_healthBar.value} / {_healthBar.maxValue}";
-        if (chest != null)
-            Instantiate(chest, transform.position, Quaternion.identity);
+        _healthManager.healthBar.maxValue -= _healthManager.maxHP;
+        _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
+        SoundMusicManager.instance.DeathPlay();
+        DropChest();
 
-        if (_healthBar.value == 0)
+        if (_healthManager.healthBar.value <= 0f)
             bossUI.SetActive(false);
 
         GameSaving.instance.EnemyDead(gameObject);
@@ -186,19 +77,68 @@ public class AngrySkull : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void SpawnSoul()
+    protected override bool NeedToTurnAround()
     {
-        GameObject soul = Instantiate(soulPrefab, transform.position, Quaternion.identity);
-        Destroy(soul, 1.5f);
+        return IsEndPlatform() && IsGrounded();
     }
 
-    private IEnumerator HurtAnimation()
+    public override void TakeDamage(float damage, Vector2 pushBackDirection)
     {
-        // set sprite color to red         
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
-        //  wait 0.2 seconds
-        yield return new WaitForSeconds(0.2f);
-        //  set start color
-        GetComponentInChildren<SpriteRenderer>().material.color = _color;
+        if (_healthManager.dead)
+            return;
+
+        _healthManager.hp -= damage;
+
+        if (_healthManager.hp - damage <= 0f)
+            _healthManager.healthBar.value -= _healthManager.hp;
+        else
+            _healthManager.healthBar.value -= damage;
+
+        SoundMusicManager.instance.PunchPlay();
+
+        _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
+        if (_healthManager.hp <= 0f)
+        {
+            _healthManager.dead = true;
+            OnDead();
+        }
+
+        if (!_healthManager.dead)
+        {
+            if (hurtParticles != null)
+                hurtParticles.Play();
+
+            PushBack(pushBackDirection);
+
+            StartCoroutine(HurtAnimation());
+        }
+    }
+
+    public override void PlayAttackAnimation()
+    {
+        _anim.SetTrigger("Spawn");
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        PlayAttackAnimation();
+        yield return new WaitForSeconds(.3f);
+        Vector2 leftSpawnPoint = new Vector2(transform.position.x - 0.3f, transform.position.y);
+        Vector2 rightSpawnPoint = new Vector2(transform.position.x + 0.3f, transform.position.y);
+        Vector2 pushDirection = new Vector2(1f, .3f);
+
+        GameObject leftEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], leftSpawnPoint, Quaternion.identity);
+        leftEnemy.GetComponent<Rigidbody2D>().AddForce(-pushDirection * pushForce, ForceMode2D.Impulse);
+
+        GameObject rightEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], rightSpawnPoint, Quaternion.identity);
+        rightEnemy.GetComponent<Rigidbody2D>().AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+
+        GameObject centerEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], transform.position, Quaternion.identity);
+        centerEnemy.GetComponent<Rigidbody2D>().AddForce(transform.up * pushForce, ForceMode2D.Impulse);
+
+        leftEnemy.GetComponent<BaseEnemy>().ChangeToRandomDirection();
+        centerEnemy.GetComponent<BaseEnemy>().ChangeToRandomDirection();
+        rightEnemy.GetComponent<BaseEnemy>().ChangeToRandomDirection();
     }
 }
+

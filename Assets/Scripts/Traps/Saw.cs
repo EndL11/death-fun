@@ -26,7 +26,7 @@ public class Saw : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().ApplyDamage(currentDamage, transform.up * currentUpForce);
+            collision.gameObject.GetComponent<IDamagable>().TakeDamage(currentDamage, transform.up * currentUpForce);
         }
     }
 

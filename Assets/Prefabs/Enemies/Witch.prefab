@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 992325173289816137}
   - component: {fileID: 992325173289816138}
   - component: {fileID: 992325173289816139}
+  - component: {fileID: 1770755750295986098}
   - component: {fileID: 992325173289816140}
   m_Layer: 9
   m_Name: Witch
@@ -214,7 +215,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &992325173289816140
+--- !u!114 &1770755750295986098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,6 +223,48 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992325173289816136}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b289c477346a86459c945d459c7aeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthManager:
+    hp: 100
+    maxHP: 100
+    healthBar: {fileID: 5384802442746769661}
+    dead: 0
+  hurtParticles: {fileID: 6687151484848158847}
+  attackRange: 0.5
+  attackPoint: {fileID: 0}
+  damage: 0
+  whatToAttack:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyName: 18
+  soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
+    type: 3}
+  speed: 5
+  _direction: -1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  whatToAvoid:
+    serializedVersion: 2
+    m_Bits: 0
+  wallChecker: {fileID: 0}
+  endOfPlatformChecker: {fileID: 0}
+  leftBorder: {fileID: 0}
+  rightBorder: {fileID: 0}
+  bomberManPrefab: {fileID: 586821772844481444, guid: 6a7d23373aced6c4a83ae531182eaf37,
+    type: 3}
+  attackDelay: 3
+--- !u!114 &992325173289816140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992325173289816136}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01f92ccf5096c704484e7b353ab8d41c, type: 3}
   m_Name: 
@@ -445,6 +488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152077525315518929, guid: ec90ca73075749a4e82434fb5a86d301,
+        type: 3}
+      propertyPath: m_Value
+      value: 66.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec90ca73075749a4e82434fb5a86d301, type: 3}

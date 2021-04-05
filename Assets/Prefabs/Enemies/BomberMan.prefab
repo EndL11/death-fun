@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 586821772844481445}
   - component: {fileID: 586821772844481466}
   - component: {fileID: 586821772844481467}
-  - component: {fileID: 586821772844481464}
+  - component: {fileID: 2154296420522146944}
   m_Layer: 14
   m_Name: BomberMan
   m_TagString: Untagged
@@ -49,7 +49,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.22
 --- !u!50 &586821772844481467
 Rigidbody2D:
   serializedVersion: 4
@@ -71,7 +71,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &586821772844481464
+--- !u!114 &2154296420522146944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,24 +80,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 586821772844481444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9568fdf919680cc48bc6546202fa0824, type: 3}
+  m_Script: {fileID: 11500000, guid: d578aa9dc5c9f6541a373ec5b78a958d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthManager:
+    hp: 0
+    maxHP: 0
+    healthBar: {fileID: 0}
+    dead: 0
+  hurtParticles: {fileID: 0}
+  attackRange: 0.5
+  attackPoint: {fileID: 0}
   damage: 30
-  radius: 1.5
-  speed: 4
-  whatIsPlayer:
+  whatToAttack:
     serializedVersion: 2
     m_Bits: 1024
+  enemyName: 20
+  soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
+    type: 3}
+  speed: 4
+  _direction: -1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatToAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  direction: -1
-  checkGroundInFront: {fileID: 586821774572119332}
-  _name: 19
+  wallChecker: {fileID: 586821774572119332}
+  endOfPlatformChecker: {fileID: 0}
+  radius: 1.5
 --- !u!1 &586821774545717204
 GameObject:
   m_ObjectHideFlags: 0

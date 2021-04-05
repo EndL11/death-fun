@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 186586809906593368}
   - component: {fileID: 186586809906593447}
   - component: {fileID: 186586809906593446}
-  - component: {fileID: 2721999795759521673}
+  - component: {fileID: 2018719195200231782}
   m_Layer: 0
-  m_Name: DevilSprite
+  m_Name: SkeletonBossSprite
   m_TagString: EnemyTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,11 +29,11 @@ Transform:
   m_GameObject: {fileID: 186586809906593371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 186586811437035857}
   - {fileID: 186586811123811277}
-  - {fileID: 5869884398085198035}
+  - {fileID: 1331138010932216977}
   m_Father: {fileID: 186586810464884134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1457639649
   m_SortingLayer: -3
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7727bb07e98f50144b2eeddeea603d49, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 573ef35bb4a2e4c46b83be4ab46c2416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -112,20 +112,20 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.060819425, y: 0.24117252}
+  m_Offset: {x: -0.013770431, y: 0.32044274}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.54, y: 0.54}
+    oldSize: {x: 0.68, y: 0.88}
     newSize: {x: 0.48, y: 0.66}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24207775, y: 0.48234504}
+  m_Size: {x: 0.33617574, y: 0.6408855}
   m_EdgeRadius: 0
---- !u!95 &2721999795759521673
+--- !u!95 &2018719195200231782
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ Animator:
   m_GameObject: {fileID: 186586809906593371}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 8500cdccb5897f24dbd8449a5e461b4a, type: 2}
+  m_Controller: {fileID: 9100000, guid: ad1e6693b30f7104a8bed5b8f3512512, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -153,11 +153,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 186586810464884134}
+  - component: {fileID: 3479280491385672379}
   - component: {fileID: 186586810464884132}
   - component: {fileID: 186586810464884131}
-  - component: {fileID: 7049992008399074687}
   m_Layer: 9
-  m_Name: Devil
+  m_Name: SkeletonBoss
   m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,13 +172,60 @@ Transform:
   m_GameObject: {fileID: 186586810464884135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 186586809906593370}
   - {fileID: 6025280923701809428}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3479280491385672379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186586810464884135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69337e93320abf4c8d01a8ba1abdccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthManager:
+    hp: 1500
+    maxHP: 1500
+    healthBar: {fileID: 0}
+    dead: 0
+  hurtParticles: {fileID: 6025280923701809430}
+  attackRange: 1
+  attackPoint: {fileID: 186586811437035857}
+  damage: 35
+  whatToAttack:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyName: 16
+  soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
+    type: 3}
+  speed: 3
+  _direction: -1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  whatToAvoid:
+    serializedVersion: 2
+    m_Bits: 2304
+  wallChecker: {fileID: 186586811437035857}
+  endOfPlatformChecker: {fileID: 186586811123811277}
+  checkPlayerPoint: {fileID: 186586811437035857}
+  playerCheckZone: 1
+  attackDelay: 1.5
+  spawnableEnemy: {fileID: 186586810464884135, guid: 4bedeafabed69c54b8183d2cb9da2695,
+    type: 3}
+  upForce: 5
+  bossUI: {fileID: 0}
+  chest: {fileID: 463045951368222508, guid: d71aeca2ea3f8f844972dd34e69c9f62, type: 3}
+  blockingTime: 3
+  blockCollider: {fileID: 4673626874491143608}
 --- !u!61 &186586810464884132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -192,18 +239,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11580683, y: 0.4831867}
+  m_Offset: {x: -0.055808812, y: 1.2870088}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.68, y: 0.88}
+    newSize: {x: 0.48, y: 0.66}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.49358866, y: 0.96036106}
+  m_Size: {x: 1.3876171, y: 2.5740175}
   m_EdgeRadius: 0
 --- !u!50 &186586810464884131
 Rigidbody2D:
@@ -226,48 +273,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7049992008399074687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186586810464884135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6990a3f1d11759046808891a034e523c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hp: 100
-  _maxHP: 100
-  speed: 3
-  _direction: -1
-  damage: 25
-  attackDelay: 1
-  attackZone: 0.5
-  playerCheckZone: 0.3
-  hurtParticles: {fileID: 6025280923701809430}
-  soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
-    type: 3}
-  checkPlatformEndPoint: {fileID: 186586811123811277}
-  checkPlayerPoint: {fileID: 186586811437035857}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  whatAvoid:
-    serializedVersion: 2
-    m_Bits: 2304
-  enemyName: 20
-  healthBar: {fileID: 0}
-  _healthBarObject: {fileID: 0}
-  _chest: {fileID: 0}
-  fireballPrefab: {fileID: 7909662612946652072, guid: 1fda7b1d9a1dab54ab6c63717fc0afe1,
-    type: 3}
-  checkPlayerPointBack: {fileID: 5869884398085198035}
-  cage: {fileID: 0}
 --- !u!1 &186586811123811278
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,13 +327,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186586811437035858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39, y: 0.248, z: 0}
+  m_LocalPosition: {x: -0.45, y: 0.248, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 186586809906593370}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5190737340744147184
+--- !u!1 &2936068565590612931
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,28 +341,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5869884398085198035}
-  m_Layer: 0
-  m_Name: PlayerCheckBack
+  - component: {fileID: 1331138010932216977}
+  - component: {fileID: 4673626874491143608}
+  m_Layer: 13
+  m_Name: BlockCollider
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5869884398085198035
+--- !u!4 &1331138010932216977
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5190737340744147184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.355, y: 0.248, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 2936068565590612931}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 186586809906593370}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &4673626874491143608
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936068565590612931}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.72688216, y: 1.5991673}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7402741, y: 3.1837373}
+  m_EdgeRadius: 0
 --- !u!1001 &186586811511364396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,12 +405,12 @@ PrefabInstance:
     - target: {fileID: 5839192502435269176, guid: 3e1ed3a55f064c84fa5d98745f21fb3b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.158
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5839192502435269176, guid: 3e1ed3a55f064c84fa5d98745f21fb3b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.383
+      value: 0.528
       objectReference: {fileID: 0}
     - target: {fileID: 5839192502435269176, guid: 3e1ed3a55f064c84fa5d98745f21fb3b,
         type: 3}

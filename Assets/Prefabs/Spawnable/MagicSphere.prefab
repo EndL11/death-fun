@@ -66,7 +66,7 @@ MonoBehaviour:
   radius: 1.1
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16896
   boomEffect: {fileID: 1784380983712248808, guid: c4694a9c9697aec47bb4adbac2afb733,
     type: 3}
   destroyDelay: 5

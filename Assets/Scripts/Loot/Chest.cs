@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Chest : MonoBehaviour
+public class Chest : Lootable
 {
-    [SerializeField] private int _score = 500;
     private bool _opened = false;
     public Text scoreText;
 
@@ -16,8 +15,8 @@ public class Chest : MonoBehaviour
             if (_opened)
                 return;
 
-            GameSaving.instance.AddScore(_score);
-            scoreText.text = $"+{_score}";
+            AddScore();
+            scoreText.text = $"+{score}";
             GetComponent<Animator>().SetTrigger("Open");
             _opened = true;
         }

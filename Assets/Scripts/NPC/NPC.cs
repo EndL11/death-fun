@@ -23,10 +23,8 @@ public class NPC : MonoBehaviour
     //  notification of not enough money to buy something
     private GameObject _notification;
 
-    //  if has, play it before opening shop
-    [SerializeField] private bool _hasActionAnimation = false;
 
-    void Start()
+    protected virtual void Start()
     {
         //  hide hint text and menu
         hintText.SetActive(false);
@@ -44,17 +42,9 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowShopMenu()
+    protected virtual IEnumerator ShowShopMenu()
     {
-        //  play animation if has
-        if (_hasActionAnimation)
-        {
-            GetComponentInChildren<Animator>().ResetTrigger("Idle");
-            GetComponentInChildren<Animator>().SetTrigger("Action");
-            yield return new WaitForSeconds(1.8f);
-        }
         yield return null;
-
         //  hiding hint text and showing shop window
         shopMenu.SetActive(true);
         hintText.SetActive(false);
@@ -76,9 +66,9 @@ public class NPC : MonoBehaviour
         if(_selected.Identificator == UpgradeItem.STATS.HP)
             _player.AddHealth(_selected.Value);
         else if (_selected.Identificator == UpgradeItem.STATS.HP_HALF)
-            _player.AddHealth(_player.MAXHP/2);
+            _player.AddHealth(_player.maxHP()/2);
         else if (_selected.Identificator == UpgradeItem.STATS.HP_FULL)
-            _player.AddHealth(_player.MAXHP);
+            _player.AddHealth(_player.maxHP());
         else if(_selected.Identificator == UpgradeItem.STATS.MAXHP)
             _player.AddMaxHP(_selected.Value);
         else if(_selected.Identificator == UpgradeItem.STATS.DAMAGE)
@@ -86,7 +76,7 @@ public class NPC : MonoBehaviour
 
         else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DAMAGE)
             _player.IncreaseSphereDamage(_selected.Value);
-        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && _player.blackHoleDelay > 2f)
+        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && _player.blackHoleStats.delay > 2f)
             _player.DecreaseSphereDelay(_selected.Value);
         else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
             _player.IncreaseSphereRadius(_selected.Value);
@@ -94,12 +84,8 @@ public class NPC : MonoBehaviour
         GameSaving.instance.Buy(_selected.Cost);
     }
 
-    public void HideShopMenu()
+    public virtual void HideShopMenu()
     {
-        if (_hasActionAnimation)
-        {
-            GetComponentInChildren<Animator>().SetTrigger("Idle");
-        }
         _notification.SetActive(false);
         shopMenu.SetActive(false);
         hintText.SetActive(true);
@@ -123,14 +109,10 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            if (_hasActionAnimation)
-            {
-                GetComponentInChildren<Animator>().SetTrigger("Idle");
-            }
             //  if player exit from npc collider
             _playerInZone = false;
             shopMenu.SetActive(false);

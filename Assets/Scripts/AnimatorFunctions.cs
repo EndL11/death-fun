@@ -20,9 +20,9 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void Attack()
     {
-        GetComponentInParent<Player>()?.ApplyAttack();
+        GetComponentInParent<IAttackable>().MakeAttack();
         //  set trigger to start idle animation 
-        _anim.SetTrigger("AttackNull");
+        //  _anim.SetTrigger("AttackNull");
     }
 
     public void Destroy()
@@ -34,7 +34,7 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void EnemyAttack()
     {
-        GetComponentInParent<Enemy>().Attack();
+        GetComponentInParent<IAttackable>().MakeAttack();
     }
 
     public void EnableCollisions()
@@ -74,7 +74,7 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void BomberManDetonate()
     {
-        GetComponentInParent<BomberMan>().Detonate();
+        GetComponentInParent<IAttackable>().MakeAttack();
     }
 
     public void StartRunBomber()

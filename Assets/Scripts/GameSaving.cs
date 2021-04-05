@@ -5,14 +5,13 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 
-public struct PlayerStats
+[System.Serializable]
+public class PlayerStats
 {
     public float damage;
     public float hp;
     public float maxHp;
-    public float blackHoleDelay;
-    public float blackHoleDamage;
-    public float blackHoleRadius;
+    public BlackHoleStats blackHoleStats;
 }
 
 [System.Serializable]
@@ -20,7 +19,7 @@ public class EnemyAnalytics
 {
     public enum Names { spider, snake, scorpion,
         zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3,
-        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, angry_skull };
+        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, none };
     public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
@@ -45,6 +44,8 @@ public class GameSaving : MonoBehaviour
 
     [HideInInspector]
     public string[] _enemiesNames = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
+
+    public float difficultyCoefficient = 1f;
 
 
     void Awake()
@@ -80,10 +81,9 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(GameObject enemy)
     {
-        string name = GetEnemyName(enemy);
-
+        string name = enemy.GetComponent<BaseEnemy>().enemyName.ToString();
         bool deleted = enemies.Remove(enemy);
-        if(deleted && name != "")
+        if(deleted && name != "None")
                 deadEnemies += 1;
 
         OnEnemyDead();
@@ -206,38 +206,14 @@ public class GameSaving : MonoBehaviour
         OnBossDie();
     }
 
-    private string GetEnemyName(GameObject enemy)
-    {
-        string name = "";
-        Enemy script = enemy.GetComponent<Enemy>();
-        if (script == null)
-        {
-            Witch witch = enemy.GetComponent<Witch>();
-            if (witch != null)
-            {
-                name = witch.enemyName.ToString();
-            }
-            else
-            {
-                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
-                if (angrySkull != null)
-                    name = angrySkull.enemyName.ToString();
-            }
-        }
-        else
-            name = script.enemyName.ToString();
-
-        return name;
-    }
-
     private void LoadStats()
     {
         playerStats.hp = PlayerPrefs.GetFloat("@hp", 0);
         playerStats.maxHp = PlayerPrefs.GetFloat("@maxhp", 0);
         playerStats.damage = PlayerPrefs.GetFloat("@damage", 0);
-        playerStats.blackHoleDamage = PlayerPrefs.GetFloat("@spheredamage", 0);
-        playerStats.blackHoleDelay = PlayerPrefs.GetFloat("@spheredelay", 0);
-        playerStats.blackHoleRadius = PlayerPrefs.GetFloat("@sphereradius", 0);
+        playerStats.blackHoleStats.damage = PlayerPrefs.GetFloat("@spheredamage", 0);
+        playerStats.blackHoleStats.delay = PlayerPrefs.GetFloat("@spheredelay", 0);
+        playerStats.blackHoleStats.radius = PlayerPrefs.GetFloat("@sphereradius", 0);
     }
 
     public string ConvertGameTimeToString(float gameTime)

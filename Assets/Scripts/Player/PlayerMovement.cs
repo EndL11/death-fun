@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     //  force for jump
     [SerializeField] private float _jumpForce = 10f;
 
-    private Player _player;
+    private Character _player;
 
     //  transform of ground checker
     [SerializeField] private Transform groundChecker;
@@ -29,25 +29,25 @@ public class PlayerMovement : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
         //  get rigidbody component
         _rb = GetComponent<Rigidbody2D>();
-        _player = GetComponent<Player>();
+        _player = GetComponent<Character>();
     }
 
     private void Update()
     {
-        if (_player.Dead || !_canMove)
+        if (_player.IsDead() || !_canMove)
             return;
-        //  if pressed left mouse button,, player not dead and not interact with UI
-        if (Input.GetKey(KeyCode.Comma) && !_player.Dead && Time.timeScale == 1)        
+        //  if pressed left mouse button, player not dead and not interact with UI
+        if (Input.GetKey(KeyCode.Comma) && !_player.IsDead() && Time.timeScale == 1)        
             Attack();
 
-        if (isGrounded() && Input.GetKey(KeyCode.W))
+        if (isGrounded() && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)))
             Jump();
 
     }
 
     private void FixedUpdate()
     {
-        if (_player.Dead || !_canMove)
+        if (_player.IsDead() || !_canMove)
             return;
 
         if (Input.GetAxis("Horizontal") != 0)   //  if moving to somewhere
@@ -77,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
         _anim.SetBool("Attack", false);
         //  start new
         _anim.SetBool("Attack", true);
-		
     }
 
 

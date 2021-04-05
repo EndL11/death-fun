@@ -4242,16 +4242,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4448612712496690569, guid: 888eb23c820d1d549866dfab6058f54e,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448612712496690569, guid: 888eb23c820d1d549866dfab6058f54e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4448612712767379922, guid: 888eb23c820d1d549866dfab6058f54e,
         type: 3}
       propertyPath: m_RootOrder
@@ -4314,9 +4304,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8277013793797982578, guid: 888eb23c820d1d549866dfab6058f54e,
         type: 3}
-      propertyPath: healthBarObject
+      propertyPath: bossUI
       value: 
       objectReference: {fileID: 1664634246}
+    - target: {fileID: 8277013793797982578, guid: 888eb23c820d1d549866dfab6058f54e,
+        type: 3}
+      propertyPath: _healthManager.hp
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8277013793797982578, guid: 888eb23c820d1d549866dfab6058f54e,
+        type: 3}
+      propertyPath: _healthManager.maxHP
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 888eb23c820d1d549866dfab6058f54e, type: 3}
 --- !u!1001 &543086366

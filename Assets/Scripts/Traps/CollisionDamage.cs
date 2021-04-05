@@ -11,7 +11,7 @@ public class CollisionDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().ApplyDamage(damage, transform.up * upForce);
+            collision.gameObject.GetComponent<IDamagable>().TakeDamage(damage, transform.up * upForce);
         }
     }
 }

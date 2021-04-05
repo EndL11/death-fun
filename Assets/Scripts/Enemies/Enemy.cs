@@ -3,75 +3,182 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public interface IEnemyAnimator
 {
-    [SerializeField] protected float _hp = 100f;
-    [SerializeField] protected float _maxHP = 100f;
-    public float speed = 3f;
-    protected float _speed;
-    //  movement direction - 1 - right, -1 - left
-    [SerializeField] private int _direction = -1;
-    public float damage = 25f;
-    private bool _dead = false;
-    //  attack delay
-    public float attackDelay = 3f;
-    protected float _attackDelay;
+    void PlayAttackAnimation();
+    void StopAttackAnimation();
+    void PlayRunAnimation();
+    void StopRunAnimation();
+    void PlayDieAnimation();
+}
 
-    public float attackZone = 0.5f;
-    public float playerCheckZone = 0.3f;
+public interface IBossAnimator : IEnemyAnimator
+{
+    void PlayBlockAnimation();
+    void StopBlockAnimation();
+}
 
-    protected Rigidbody2D _rb;
-    protected Animator _anim;
-
-    public ParticleSystem hurtParticles;
+public abstract class BaseEnemy : Character, IEnemyAnimator
+{
+    public EnemyAnalytics.Names enemyName;
+    public enum MovementDirection { RIGHT = 1, LEFT = -1 };
     public GameObject soulPrefab;
 
-    [SerializeField] private Transform checkPlatformEndPoint;
-    [SerializeField] protected Transform checkPlayerPoint;
-
+    [Header("Movement")]
+    #region Movement
+    public float speed;
+    protected float _speed;
+    [SerializeField] protected MovementDirection _direction = MovementDirection.RIGHT;   //  -1 to left, 1 to right
     public LayerMask whatIsGround;
-    public LayerMask whatIsPlayer;
-    public LayerMask whatAvoid;
-
-    public EnemyAnalytics.Names enemyName;
-    public Slider healthBar = null;
-    //  start color
-    private Color _color;
-
-    public bool Dead
+    public LayerMask whatToAvoid;
+    public Transform wallChecker;
+    public Transform endOfPlatformChecker;
+    #endregion
+    
+    protected override void Start()
     {
-        get { return _dead; }
-    }
-
-    public int Direction
-    {
-        get { return _direction; }
-        set { _direction = value; }
-    }
-
-    protected virtual void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-        _anim = GetComponentInChildren<Animator>();
-        //  setting rotating to sprite based on direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
-        //  setting max hp to health bar
-        healthBar.maxValue = _maxHP;
-        healthBar.value = _hp;
-        _attackDelay = attackDelay;
-        //  save start color
-        _color = GetComponentInChildren<SpriteRenderer>().material.color;
+        _healthManager.hp *= GameSaving.instance.difficultyCoefficient;
+        _healthManager.maxHP = _healthManager.hp;
+        damage *= GameSaving.instance.difficultyCoefficient;
         _speed = speed;
+        base.Start();
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, ((int)_direction < 0 ? 0f : 180f), 0f);
     }
 
     protected virtual void Update()
     {
-        if (_dead)
+        if (IsDead())
             return;
 
-        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !_dead && !isWall())
+    }
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        SoundMusicManager.instance.PunchPlay();
+
+        if (IsDead())
+            OnDead();
+
+        if (hurtParticles != null)
+            hurtParticles.Play();
+
+        StartCoroutine(HurtAnimation());
+    }
+    public override void TakeDamage(float damage, Vector2 pushBackDirection)
+    {
+        SoundMusicManager.instance.PunchPlay();
+        base.TakeDamage(damage, pushBackDirection);
+    }
+    protected virtual bool NeedToTurnAround()
+    {
+        return IsGrounded() && (IsEndPlatform() || IsWall());
+    }
+
+    protected void ChangeMovementDirection()
+    {
+        //  set direction to another
+        _direction = _direction == MovementDirection.RIGHT ? MovementDirection.LEFT : MovementDirection.RIGHT;
+        //  rotate sprite according to direction
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
+    }
+
+    protected virtual void Move()
+    {
+        transform.Translate(speed * transform.right * (int)_direction * Time.deltaTime);
+    }
+
+    public void ChangeToRandomDirection()
+    {
+        int randNumber = UnityEngine.Random.Range(1, 3);
+        if (randNumber == 1)
+            _direction = MovementDirection.LEFT;
+        else
+            _direction = MovementDirection.RIGHT;
+
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, ((int)_direction < 0 ? 0f : 180f), 0f);
+    }
+
+    protected override void OnDead()
+    {
+        SoundMusicManager.instance.DeathPlay();
+        SpawnSoul();
+        GameSaving.instance.EnemyDead(gameObject);
+    }
+
+    protected void SpawnSoul()
+    {
+        GameObject soul = Instantiate(soulPrefab, transform.position, Quaternion.identity);
+        Destroy(soul, 1.5f);
+    }
+
+    protected bool IsGrounded()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f, whatIsGround);
+        return colliders.Length > 0;
+    }
+
+    protected bool IsWall()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(wallChecker.position, 0.1f, whatToAvoid);
+        return colliders.Length > 0;
+    }
+
+    protected bool IsEndPlatform()
+    {
+        //  return true if platform is ended
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(endOfPlatformChecker.position, 0.3f, whatIsGround);
+        return colliders.Length == 0;
+    }
+
+    public virtual void PlayAttackAnimation()
+    {
+        _anim.SetBool("Attack", true);
+    }
+
+    public virtual void StopAttackAnimation()
+    {
+        _anim.SetBool("Attack", false);
+    }
+
+    public virtual void PlayRunAnimation()
+    {
+        _anim.SetBool("Run", true);
+    }
+
+    public virtual void StopRunAnimation()
+    {
+        _anim.SetBool("Run", false);
+    }
+
+    public virtual void PlayDieAnimation()
+    {
+        _anim.SetTrigger("Die");
+    }
+}
+
+
+public class Enemy : BaseEnemy
+{
+    public Transform checkPlayerPoint;
+    public float playerCheckZone = 0.3f;
+
+    public float attackDelay = 3f;
+    protected float _attackDelay;
+
+    protected override void Start()
+    {
+        base.Start();
+        _attackDelay = attackDelay;
+    }
+
+    protected override void Update()
+    {
+        if(IsDead())
+            return;
+            
+        if (!IsPlayerNear() && IsGrounded() && !IsEndPlatform() && !IsWall())
             Move();
-        else if(!_dead && isGrounded() && (isEndPlatform() || isWall()))
+        else if (NeedToTurnAround())
             ChangeMovementDirection();
 
         //  if delay greater zero
@@ -80,111 +187,23 @@ public class Enemy : MonoBehaviour
             //  decrease delay
             _attackDelay -= Time.deltaTime;
             //  if player near, stop and wait (show idle anim)
-            if (isPlayerNear())
+            if (IsPlayerNear())
             {
                 speed = 0f;
-                _anim.SetBool("Run", false);
+                StopRunAnimation();
             }
         }
         else
         {
             //  if can attack and player in attack zone
-            if (isPlayerNear())
+            if (IsPlayerNear())
             {
-                //  attack
-                _anim.SetBool("Attack", true);
-                //  reset attack delay
-                _attackDelay = attackDelay;
+                Attack();
             }
-        } 
-    }
-
-    public virtual void ApplyDamage(float damage, Vector2 dir)
-    {
-        if (_dead)
-            return;
-
-        _hp -= damage;
-		SoundMusicManager.instance.PunchPlay();
-        //  update health bar
-        healthBar.value = _hp;
-        if (_hp <= 0)
-            DestroyEnemy();
-        if (!_dead)
-        {
-            //  show particles
-            hurtParticles.Play();
-            //  push enemy back
-            PushBack(dir);
-            //  play hurt animation
-            StartCoroutine(HurtAnimation());
         }
     }
 
-    protected virtual void PushBack(Vector2 dir)
-    {
-        //  reset velocity
-        _rb.velocity = Vector2.zero;
-        //  push back enemy
-        _rb.AddForce(dir, ForceMode2D.Impulse);
-    }
-
-
-    private IEnumerator HurtAnimation()
-    {
-        // set sprite color to red         
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
-        //  wait 0.2 seconds
-        yield return new WaitForSeconds(0.2f);
-        //  set start color
-        GetComponentInChildren<SpriteRenderer>().material.color = _color;
-    }
-
-    protected virtual void DestroyEnemy()
-    {
-        //  stop attack animation
-        _anim.SetBool("Attack", false);
-        _dead = true;
-		SoundMusicManager.instance.DeathPlay();
-        //  hide health bar (it's empty)
-        healthBar.gameObject.SetActive(false);
-        //  spawn soul
-        SpawnSoul();
-        if(GameSaving.instance != null)
-            GameSaving.instance.EnemyDead(gameObject);
-        //  show die animation
-        _anim.SetTrigger("Die");
-    }
-
-    private void SpawnSoul()
-    {
-        GameObject soul = Instantiate(soulPrefab, transform.position, Quaternion.identity);
-        Destroy(soul, 1.5f);
-    }
-
-    protected void ChangeMovementDirection()
-    {
-        //  set direction to another
-        _direction = _direction == 1 ? -1 : 1;
-        //  rotate sprite according to direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (_direction < 0 ? 0f : 180f), 0f);
-    }
-
-    protected bool isEndPlatform()
-    {
-        //  return true if platform is ended
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlatformEndPoint.position, 0.3f, whatIsGround);
-        return colliders.Length == 0;
-    }
-
-    protected bool isGrounded()
-    {
-        //  return true if enemy is on ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, whatIsGround);
-        return colliders.Length > 0;
-    }
-
-    protected virtual void Move()
+    protected override void Move()
     {
         //  if playing attack anim - return
         if (_anim.GetBool("Attack") || _anim.GetCurrentAnimatorStateInfo(0).IsName("AttackNull"))
@@ -192,41 +211,39 @@ public class Enemy : MonoBehaviour
         //  reset speed to normal
         speed = _speed;
         //  start run animation
-        _anim.SetBool("Run", true);
+        PlayRunAnimation();
         //  move enemy according to direction
-        transform.Translate(transform.right * _direction * speed * Time.deltaTime);
+        transform.Translate(transform.right * (int)_direction * speed * Time.deltaTime);
     }
 
-    public virtual void Attack()
+    public override void Attack()
     {
-        //  do not attack if dead
-        if (_dead) return;
-        //  get colliders of all players
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, attackZone, whatIsPlayer);
-        //  calculating push direction
-        Vector2 directionToPush = transform.position.x > checkPlayerPoint.position.x ? Vector2.left : Vector2.right;
-        foreach (var player in colliders)
-        {
-            //  damage all players
-            player.GetComponent<Player>().ApplyDamage(damage, directionToPush);
-        }
-        //  reset speed to normal
-        speed = _speed;
-        //  stop playing attack animation
-        //anim.SetBool("Attack", false);
+        //  attack
+        PlayAttackAnimation();
+        //  reset attack delay
+        _attackDelay = attackDelay;
     }
 
-    protected bool isPlayerNear()
+    public override void MakeAttack()
+    {
+        base.MakeAttack();
+        speed = _speed;
+        StopAttackAnimation();
+    }
+
+    protected override void OnDead()
+    {
+        _rb.velocity = Vector2.zero;
+        StopAttackAnimation();
+        base.OnDead();
+        PlayDieAnimation();
+    }
+
+    protected bool IsPlayerNear()
     {
         //  return true if in player check zone at least 1 player object
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, playerCheckZone, whatIsPlayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, playerCheckZone, whatToAttack);
         return colliders.Length != 0;
     }
-
-    protected bool isWall()
-    {
-        //  return true if in player check zone at least 1 avoid object
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPoint.position, 0.1f, whatAvoid);
-        return colliders.Length > 0;
-    }
 }
+

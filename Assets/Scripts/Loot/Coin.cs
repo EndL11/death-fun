@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Lootable: MonoBehaviour
 {
-    [SerializeField] private int _score = 1;
+    public int score = 1;
+    protected void AddScore()
+    {
+        if (GameSaving.instance != null)
+            GameSaving.instance.AddScore(score);
+    }
+}
+
+
+public class Coin : Lootable
+{
     public GameObject particles;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            if(GameSaving.instance != null)
-                GameSaving.instance.AddScore(_score);
+            AddScore();
             GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
             Destroy(spawnedParticles, 1.5f);
             SoundMusicManager.instance.TakeCoinSoundPlay();
