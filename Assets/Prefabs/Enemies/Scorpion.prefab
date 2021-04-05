@@ -241,11 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fac56d266fdf40a4335524572bbe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  _maxHP: 100
+  _hp: 75
+  _maxHP: 75
   speed: 3
   _direction: -1
-  damage: 5
+  damage: 3
   attackDelay: 2
   attackZone: 0.5
   playerCheckZone: 0.3
