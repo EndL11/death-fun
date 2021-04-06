@@ -8,24 +8,29 @@ using System.Linq;
 
 public class GameProcess : MonoBehaviour
 {
+#region Panels
     public GameObject pausePanel;        
     public GameObject gameOverPanel;
-
+#endregion
+#region Texts
     private Text _scoreText;
     private Text _enemiesText;
-
+    public Text timerText;
+#endregion
+#region Analytics wrappers
     public Transform enemiesStatsParent;
     public Transform enemiesStatsParent2;
-
+#endregion
     public GameObject bossUI = null;
 
+#region Level objects
     public GameObject finishPortal;
     public GameObject stairs;
-
     public GameObject flagpole;
-
-    public Text timerText;
+#endregion
     public float currectGameTime;
+
+    public AudioSource portalStartSFX;
 
     private void Awake()
     {
@@ -52,7 +57,7 @@ public class GameProcess : MonoBehaviour
     {
         if(!SoundMusicManager.instance.backgroundMusic.isPlaying)
 		    SoundMusicManager.instance.backgroundMusicPlay();
-		SoundMusicManager.instance.PortalPlay();
+		portalStartSFX.Play();
         //  set timeScale to 1
         Time.timeScale = 1;
         pausePanel.SetActive(false);

@@ -12,6 +12,7 @@ public class BlackHole : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
     public float destroyDelay = 5f;
     private bool particlesSpawned = false;
+    public AudioSource destroyBlackHoleSFX;
 
     void Start()
     {
@@ -51,7 +52,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
-        SoundMusicManager.instance.SquahPlay();
+        destroyBlackHoleSFX.Play();
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone

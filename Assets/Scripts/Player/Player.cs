@@ -77,6 +77,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
     protected Animator _anim;
     protected Rigidbody2D _rb;
     public ParticleSystem hurtParticles;
+    public AudioSource hurtSFX;
 
     #region AttackSettings
     public float attackRange = 0.5f;
@@ -106,6 +107,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
             return;
 
         _healthManager.ApplyDamage(damage);
+        hurtSFX.Play();
 
         if (_healthManager.dead)
             OnDead();
@@ -118,6 +120,8 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
 
         _healthManager.ApplyDamage(damage);
 
+        hurtSFX.Play();
+        
         if (_healthManager.dead)
             OnDead();
             
@@ -197,6 +201,9 @@ public class Player : Character
 
     private PlayerMovement _playerMovement;
 
+    public AudioSource attackSFX;
+    public AudioSource spawnBlackHoleSFX;
+
     protected void Awake()
     {
         _healthManager.healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
@@ -239,7 +246,6 @@ public class Player : Character
     }
     public override void TakeDamage(float damage, Vector2 pushBackDirection)
     {
-        SoundMusicManager.instance.ApplyDamagePlayerPlay();
         base.TakeDamage(damage, pushBackDirection);
         UpdateHealthText();
     }
@@ -264,6 +270,12 @@ public class Player : Character
         }
     }
 
+    public override void MakeAttack()
+    {
+        attackSFX.Play();
+        base.MakeAttack();
+    }
+
     private void UpdateHealthText()
     {
         healthStatsText.text = $"{_healthManager.hp} / {_healthManager.maxHP}";
@@ -271,7 +283,7 @@ public class Player : Character
 
     private void SpawnBlackHole()
     {
-        SoundMusicManager.instance.SpawnBlackHolePlay();
+        spawnBlackHoleSFX.Play();
         //  create gameobject based on 'blackHolePrefab'
         GameObject blackHole = Instantiate(blackHolePrefab, blackHoleSpawnPoint.position, transform.GetChild(0).rotation);
         BlackHole blackHoleInstance = blackHole.GetComponent<BlackHole>();

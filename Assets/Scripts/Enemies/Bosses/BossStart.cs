@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BossStart : MonoBehaviour
 {
+    public AudioSource triggerBossSFX;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            SoundMusicManager.instance.TriggerBossSoundPlay();
+            triggerBossSFX.Play();
             GameSaving.instance.BossStartFight();
             Destroy(gameObject);
         }

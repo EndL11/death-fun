@@ -8,7 +8,6 @@ public class AangrySkull : Boss
     public List<GameObject> enemyPrefabs = new List<GameObject>();
     public float pushForce = 10f;
 
-
     protected override void SpawnEnemyOnTakingDamage() { }
     protected override void Start()
     {
@@ -66,7 +65,7 @@ public class AangrySkull : Boss
         SpawnSoul();
         _healthManager.healthBar.maxValue -= _healthManager.maxHP;
         _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
-        SoundMusicManager.instance.DeathPlay();
+        dieSFX.Play();
         DropChest();
 
         if (_healthManager.healthBar.value <= 0f)
@@ -94,7 +93,7 @@ public class AangrySkull : Boss
         else
             _healthManager.healthBar.value -= damage;
 
-        SoundMusicManager.instance.PunchPlay();
+        takeDamageSFX.Play();
 
         _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
         if (_healthManager.hp <= 0f)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Lootable: MonoBehaviour
 {
     public int score = 1;
+    public AudioSource sfx;
     protected void AddScore()
     {
         if (GameSaving.instance != null)
@@ -23,7 +24,9 @@ public class Coin : Lootable
             AddScore();
             GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
             Destroy(spawnedParticles, 1.5f);
-            SoundMusicManager.instance.TakeCoinSoundPlay();
+            
+            if(sfx != null)
+                sfx.Play();
             Destroy(gameObject);
         }
     }

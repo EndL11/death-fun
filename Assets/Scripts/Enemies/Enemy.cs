@@ -35,6 +35,9 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     public Transform endOfPlatformChecker;
     #endregion
     
+    public AudioSource dieSFX;
+    public AudioSource takeDamageSFX;
+
     protected override void Start()
     {
         _healthManager.hp *= GameSaving.instance.difficultyCoefficient;
@@ -54,7 +57,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        SoundMusicManager.instance.PunchPlay();
+        takeDamageSFX.Play();
 
         if (IsDead())
             OnDead();
@@ -66,7 +69,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     }
     public override void TakeDamage(float damage, Vector2 pushBackDirection)
     {
-        SoundMusicManager.instance.PunchPlay();
+        takeDamageSFX.Play();
         base.TakeDamage(damage, pushBackDirection);
     }
     protected virtual bool NeedToTurnAround()
@@ -100,7 +103,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
 
     protected override void OnDead()
     {
-        SoundMusicManager.instance.DeathPlay();
+        dieSFX.Play();
         SpawnSoul();
         GameSaving.instance.EnemyDead(gameObject);
     }
