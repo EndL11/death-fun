@@ -11,30 +11,6 @@ public class SoundMusicManager : MonoBehaviour
 
     public AudioMixer mixer;
 	
-    private bool enableMusic = true;
-    private bool enableSounds = true;
-
-    public bool Music
-    {
-        get { return enableMusic; }
-        set {
-            enableMusic = value;
-            if (enableMusic)
-            {
-                backgroundMenuMusic.Play();
-            }
-            else
-            {
-                backgroundMenuMusic.Stop();
-            }
-        }
-    }
-
-    public bool Sound
-    {
-        get { return enableSounds; }
-        set { enableSounds = value;  }
-    }
 
     private void Awake()
     {
@@ -48,8 +24,8 @@ public class SoundMusicManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        enableMusic = PlayerPrefs.GetInt("@music", 1) == 1 ? true : false;
-        enableSounds = PlayerPrefs.GetInt("@sounds", 1) == 1 ? true : false;
+        mixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("@music", 0f));
+        mixer.SetFloat("SFXVolume", PlayerPrefs.GetFloat("@sounds", 0f));
     }
 
 
@@ -61,28 +37,32 @@ public class SoundMusicManager : MonoBehaviour
 	
 	public void backgroundMenuMusicPlay()
 	{
-        if (enableMusic) backgroundMenuMusic.Play();
+        backgroundMenuMusic.Play();
 	}
 	
 	public void backgroundMusicPlay()
 	{
-        if (enableMusic) backgroundMusic.Play();
+        backgroundMusic.Play();
 	}
 	
 	public void backgroundMenuMusicStop()
 	{
-        if (enableMusic) backgroundMenuMusic.Pause();
+        backgroundMenuMusic.Pause();
 	}
 	
 	public void backgroundMusicStop()
 	{
-        if (enableMusic) backgroundMusic.Pause();
+        backgroundMusic.Pause();
 	}
 	
 	
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt("@music", enableMusic ? 1 : 0);
-        PlayerPrefs.SetInt("@sounds", enableSounds ? 1 : 0);
+        float music = 0f;
+        float sound = 0f;
+        mixer.GetFloat("MusicVolume", out music);
+        mixer.GetFloat("SFXVolume", out sound);
+        PlayerPrefs.SetFloat("@music", music);
+        PlayerPrefs.SetFloat("@sounds", sound);
     }
 }

@@ -88,9 +88,9 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
 
     public bool IsDead()
     {
-        if(_healthManager != null)
+        if (_healthManager != null)
             return _healthManager.dead;
-        
+
         return false;
     }
 
@@ -121,10 +121,10 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
         _healthManager.ApplyDamage(damage);
 
         hurtSFX.Play();
-        
+
         if (_healthManager.dead)
             OnDead();
-            
+
         if (!_healthManager.dead)
         {
             if (hurtParticles != null)
@@ -149,7 +149,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
         //  playing hurt animation
         GetComponentInChildren<SpriteRenderer>().material.color = new Color(255f, 0, 0, .3f);
         yield return new WaitForSeconds(0.2f);
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(1,1,1,1);
+        GetComponentInChildren<SpriteRenderer>().material.color = new Color(1, 1, 1, 1);
     }
 
     public virtual void Attack()
@@ -212,7 +212,8 @@ public class Player : Character
         _healthManager.Init();
     }
 
-    public float maxHP(){
+    public float maxHP()
+    {
         return _healthManager.maxHP;
     }
 

@@ -20,14 +20,15 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void Attack()
     {
-        GetComponentInParent<IAttackable>().MakeAttack();
+        IAttackable attackable = GetComponentInParent<IAttackable>();
+        if (attackable != null) { attackable.MakeAttack(); return; }
         //  set trigger to start idle animation 
-        //  _anim.SetTrigger("AttackNull");
+        _anim.SetTrigger("AttackNull");
     }
 
     public void Destroy()
     {
-        if(transform.parent.gameObject.CompareTag("Player"))
+        if (transform.parent.gameObject.CompareTag("Player"))
             GameSaving.instance.GameOver();
         Destroy(transform.parent.gameObject);
     }

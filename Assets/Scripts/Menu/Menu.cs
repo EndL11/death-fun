@@ -4,13 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public struct SoundMenuItem{
+    public Slider slider;
+    public Toggle toggle;
+
+}
+
 public class Menu : MonoBehaviour
 {
-    #region Toggles
     public Toggle toggleMode;
-    public Toggle toggleMusic;
-    public Toggle toggleSound;
-    #endregion
+    
+#region SoundSettingItems
+    public SoundMenuItem sound;
+    public SoundMenuItem music;
+#endregion
+
     public GameObject mainPanel;
     public GameObject optionsPanel;
 
@@ -27,6 +36,8 @@ public class Menu : MonoBehaviour
 
     private float _playerAttackLength = 0.6f;
 
+    private const float miniVolumeLevel = -60f;
+
     private void Start()
     {
         SoundMusicManager.instance.backgroundMenuMusicPlay();
@@ -39,8 +50,17 @@ public class Menu : MonoBehaviour
         }
         toggleMode.isOn = mode == "Hard Mode";
 
-        toggleMusic.isOn = SoundMusicManager.instance.Music;
-        toggleSound.isOn = SoundMusicManager.instance.Sound;
+        float savedMusicVolume = PlayerPrefs.GetFloat("@music", 0f);
+        float savedSoundVolume = PlayerPrefs.GetFloat("@sound", 0f);
+
+        music.toggle.isOn = savedMusicVolume != miniVolumeLevel;
+        music.slider.minValue = miniVolumeLevel;
+        music.slider.value = savedMusicVolume;
+
+        sound.toggle.isOn = savedSoundVolume != miniVolumeLevel;
+        sound.slider.minValue = miniVolumeLevel;
+        sound.slider.value = savedSoundVolume;
+
         loadTutorialButton.SetActive(false);
         continueButton.SetActive(false);
 
@@ -130,18 +150,6 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Tutorial");
     }
 
-    public void ToggleMusic()
-    {
-        toggleMusic.isOn = !toggleMusic.isOn;
-        SoundMusicManager.instance.Music = toggleMusic.isOn;
-    }
-
-    public void ToggleSound()
-    {
-        toggleSound.isOn = !toggleSound.isOn;
-        SoundMusicManager.instance.Sound = toggleSound.isOn;
-    }
-
     public void ContinueClick()
     {
         SoundMusicManager.instance.backgroundMenuMusicStop();
@@ -165,5 +173,23 @@ public class Menu : MonoBehaviour
         int seconds = timeValue;
         time += seconds > 0 ? seconds >= 10 ? $"{seconds}" : $"0{seconds}" : "00";
         return time;
+    }
+
+    public void MusicVolumeChange(Slider slider)
+    {
+        SoundMusicManager.instance.mixer.SetFloat("MusicVolume", slider.value);
+        PlayerPrefs.SetFloat("@music", slider.value);
+        CheckToToggleSoundSettings(music.toggle, slider.value);
+    }
+
+    public void SoundVolumeChange(Slider slider)
+    {
+        SoundMusicManager.instance.mixer.SetFloat("SFXVolume", slider.value);
+        PlayerPrefs.SetFloat("@sound", slider.value);
+        CheckToToggleSoundSettings(sound.toggle, slider.value);
+    }
+
+    private void CheckToToggleSoundSettings(Toggle toggle, float value){
+        toggle.isOn = value != miniVolumeLevel;
     }
 }
