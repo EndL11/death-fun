@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AangrySkull : Boss
+public class AngrySkull : Boss
 {
     public List<GameObject> enemyPrefabs = new List<GameObject>();
     public float pushForce = 10f;
@@ -93,7 +93,7 @@ public class AangrySkull : Boss
         else
             _healthManager.healthBar.value -= damage;
 
-        takeDamageSFX.Play();
+        hurtSFX.Play();
 
         _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
         if (_healthManager.hp <= 0f)

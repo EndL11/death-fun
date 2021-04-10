@@ -28,7 +28,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     #region Movement
     public float speed;
     protected float _speed;
-    [SerializeField] protected MovementDirection _direction = MovementDirection.RIGHT;   //  -1 to left, 1 to right
+    [SerializeField] protected MovementDirection _direction = MovementDirection.LEFT;   //  -1 to left, 1 to right
     public LayerMask whatIsGround;
     public LayerMask whatToAvoid;
     public Transform wallChecker;
@@ -36,7 +36,6 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     #endregion
     
     public AudioSource dieSFX;
-    public AudioSource takeDamageSFX;
 
     protected override void Start()
     {
@@ -57,7 +56,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        takeDamageSFX.Play();
+        hurtSFX.Play();
 
         if (IsDead())
             OnDead();
@@ -69,7 +68,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     }
     public override void TakeDamage(float damage, Vector2 pushBackDirection)
     {
-        takeDamageSFX.Play();
+        hurtSFX.Play();
         base.TakeDamage(damage, pushBackDirection);
     }
     protected virtual bool NeedToTurnAround()

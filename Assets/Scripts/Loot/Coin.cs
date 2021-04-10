@@ -25,9 +25,15 @@ public class Coin : Lootable
             GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
             Destroy(spawnedParticles, 1.5f);
             
-            if(sfx != null)
-                sfx.Play();
-            Destroy(gameObject);
+            sfx.Play();
+
+            Destroy(gameObject, 1f);
+            Hide();
         }
+    }
+
+    private void Hide(){
+        transform.localScale = Vector2.zero;
+        GetComponent<Collider2D>().enabled = false;
     }
 }

@@ -52,12 +52,12 @@ public class BomberMan : BaseEnemy
         if (_isDetonating)
             return;
 
+        explosionSFX.Play();
         PlayDieAnimation();
         speed = 0f;
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.velocity = Vector3.zero;
 
-        explosionSFX.Play();
         
         _isDetonating = true;
         Vector2 point = new Vector2(transform.position.x, transform.position.y + .3f);

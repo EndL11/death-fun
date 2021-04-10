@@ -12,6 +12,7 @@ public class BlackHole : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
     public float destroyDelay = 5f;
     private bool particlesSpawned = false;
+    private bool soundPlayed = false;
     public AudioSource destroyBlackHoleSFX;
 
     void Start()
@@ -25,11 +26,17 @@ public class BlackHole : MonoBehaviour
         if (destroyDelay > 0.1f)
         {
             destroyDelay -= Time.deltaTime;
+            if(destroyDelay > .15f && destroyDelay < .25f && !soundPlayed){
+                destroyBlackHoleSFX.Play();
+                soundPlayed = true;
+            }
+
         }
         else
         {
-            if (!particlesSpawned)
+            if (!particlesSpawned){
                 Particles();
+            }
 
             particlesSpawned = true;
         }
@@ -52,7 +59,6 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
-        destroyBlackHoleSFX.Play();
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
@@ -80,6 +86,10 @@ public class BlackHole : MonoBehaviour
 
     public void Collision(Collider2D collision)
     {
+        if(!soundPlayed){
+            destroyBlackHoleSFX.Play();
+            soundPlayed = true;
+        }
         if (collision.CompareTag("EnemyTrigger"))
         {
             Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
@@ -89,6 +99,16 @@ public class BlackHole : MonoBehaviour
             Particles();
             particlesSpawned = true;
         }
-        Destroy(gameObject);
+        Hide();
+        Destroy(gameObject, 1.5f);
     }
+
+    private void Hide(){
+        transform.localScale = Vector2.zero;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponentInChildren<Collider2D>().enabled = false;
+        GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
+    }
+
 }
+

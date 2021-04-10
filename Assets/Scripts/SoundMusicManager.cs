@@ -9,6 +9,8 @@ public class SoundMusicManager : MonoBehaviour
 	public AudioSource backgroundMusic;
 	public AudioSource backgroundMenuMusic;
 
+    public AudioSource pickUpCoin;
+
     public AudioMixer mixer;
 	
 
@@ -28,12 +30,6 @@ public class SoundMusicManager : MonoBehaviour
         mixer.SetFloat("SFXVolume", PlayerPrefs.GetFloat("@sounds", 0f));
     }
 
-
-    //  test
-    private void Start() {
-        //mixer.SetFloat("MusicVolume", -80f);
-        //mixer.SetFloat("SFXVolume", -80f);
-    }
 	
 	public void backgroundMenuMusicPlay()
 	{
@@ -54,6 +50,10 @@ public class SoundMusicManager : MonoBehaviour
 	{
         backgroundMusic.Pause();
 	}
+
+    public void PickUpCoin(){
+        pickUpCoin.Play();
+    }
 	
 	
     private void OnDestroy()
