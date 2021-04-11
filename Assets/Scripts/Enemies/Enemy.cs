@@ -28,14 +28,12 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     #region Movement
     public float speed;
     protected float _speed;
-    [SerializeField] protected MovementDirection _direction = MovementDirection.LEFT;   //  -1 to left, 1 to right
+    [SerializeField] protected MovementDirection _direction = MovementDirection.RIGHT;   //  -1 to left, 1 to right
     public LayerMask whatIsGround;
     public LayerMask whatToAvoid;
     public Transform wallChecker;
     public Transform endOfPlatformChecker;
     #endregion
-    
-    public AudioSource dieSFX;
 
     protected override void Start()
     {
@@ -56,7 +54,8 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        hurtSFX.Play();
+        SoundMusicManager.instance.PunchPlay();
+
 
         if (IsDead())
             OnDead();
@@ -68,7 +67,7 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     }
     public override void TakeDamage(float damage, Vector2 pushBackDirection)
     {
-        hurtSFX.Play();
+        SoundMusicManager.instance.PunchPlay();
         base.TakeDamage(damage, pushBackDirection);
     }
     protected virtual bool NeedToTurnAround()
@@ -102,12 +101,12 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
 
     protected override void OnDead()
     {
-        dieSFX.Play();
+        SoundMusicManager.instance.DeathPlay();
         SpawnSoul();
         GameSaving.instance.EnemyDead(gameObject);
     }
 
-    protected void SpawnSoul()
+    protected virtual void SpawnSoul()
     {
         GameObject soul = Instantiate(soulPrefab, transform.position, Quaternion.identity);
         Destroy(soul, 1.5f);
@@ -175,9 +174,9 @@ public class Enemy : BaseEnemy
 
     protected override void Update()
     {
-        if(IsDead())
+        if (IsDead())
             return;
-            
+
         if (!IsPlayerNear() && IsGrounded() && !IsEndPlatform() && !IsWall())
             Move();
         else if (NeedToTurnAround())

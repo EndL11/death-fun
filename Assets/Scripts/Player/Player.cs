@@ -77,7 +77,6 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
     protected Animator _anim;
     protected Rigidbody2D _rb;
     public ParticleSystem hurtParticles;
-    public AudioSource hurtSFX;
 
     #region AttackSettings
     public float attackRange = 0.5f;
@@ -107,7 +106,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
             return;
 
         _healthManager.ApplyDamage(damage);
-        hurtSFX.Play();
+        SoundMusicManager.instance.ApplyDamagePlayerPlay();
 
         if (_healthManager.dead)
             OnDead();
@@ -120,7 +119,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
 
         _healthManager.ApplyDamage(damage);
 
-        hurtSFX.Play();
+        SoundMusicManager.instance.ApplyDamagePlayerPlay();
 
         if (_healthManager.dead)
             OnDead();
@@ -201,8 +200,6 @@ public class Player : Character
 
     private PlayerMovement _playerMovement;
 
-    public AudioSource attackSFX;
-    public AudioSource spawnBlackHoleSFX;
 
     protected void Awake()
     {
@@ -273,7 +270,7 @@ public class Player : Character
 
     public override void MakeAttack()
     {
-        attackSFX.Play();
+        SoundMusicManager.instance.WooahPlay();
         base.MakeAttack();
     }
 
@@ -284,7 +281,7 @@ public class Player : Character
 
     private void SpawnBlackHole()
     {
-        spawnBlackHoleSFX.Play();
+        SoundMusicManager.instance.SpawnBlackHolePlay();
         //  create gameobject based on 'blackHolePrefab'
         GameObject blackHole = Instantiate(blackHolePrefab, blackHoleSpawnPoint.position, transform.GetChild(0).rotation);
         BlackHole blackHoleInstance = blackHole.GetComponent<BlackHole>();

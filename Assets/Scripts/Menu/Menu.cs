@@ -36,7 +36,7 @@ public class Menu : MonoBehaviour
 
     private float _playerAttackLength = 0.6f;
 
-    private const float miniVolumeLevel = -60f;
+    private const float miniVolumeLevel = 0f;
 
     private void Start()
     {
@@ -64,7 +64,7 @@ public class Menu : MonoBehaviour
         loadTutorialButton.SetActive(false);
         continueButton.SetActive(false);
 
-        if (PlayerPrefs.HasKey("@level"))
+        if (PlayerPrefs.HasKey("@level") && PlayerPrefs.GetInt("@level", 0) >= 4)
             continueButton.SetActive(true);
 
         if (PlayerPrefs.GetInt("@history", 0) == 1)
@@ -177,14 +177,14 @@ public class Menu : MonoBehaviour
 
     public void MusicVolumeChange(Slider slider)
     {
-        SoundMusicManager.instance.mixer.SetFloat("MusicVolume", slider.value);
+        SoundMusicManager.instance.ChangeMusicVolume(slider.value);
         PlayerPrefs.SetFloat("@music", slider.value);
         CheckToToggleSoundSettings(music.toggle, slider.value);
     }
 
     public void SoundVolumeChange(Slider slider)
     {
-        SoundMusicManager.instance.mixer.SetFloat("SFXVolume", slider.value);
+        SoundMusicManager.instance.ChangeSFXVolume(slider.value);
         PlayerPrefs.SetFloat("@sound", slider.value);
         CheckToToggleSoundSettings(sound.toggle, slider.value);
     }

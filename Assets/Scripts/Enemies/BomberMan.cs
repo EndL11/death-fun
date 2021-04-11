@@ -6,7 +6,6 @@ public class BomberMan : BaseEnemy
 {
     [SerializeField] private float radius = 2f;
     private bool _isDetonating = false;
-    public AudioSource explosionSFX;
 
     protected override void Start()
     {
@@ -52,12 +51,12 @@ public class BomberMan : BaseEnemy
         if (_isDetonating)
             return;
 
-        explosionSFX.Play();
         PlayDieAnimation();
         speed = 0f;
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.velocity = Vector3.zero;
 
+        SoundMusicManager.instance.ExplosionPlay();
         
         _isDetonating = true;
         Vector2 point = new Vector2(transform.position.x, transform.position.y + .3f);

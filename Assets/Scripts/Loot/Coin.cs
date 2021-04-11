@@ -5,7 +5,6 @@ using UnityEngine;
 public class Lootable: MonoBehaviour
 {
     public int score = 1;
-    public AudioSource sfx;
     protected void AddScore()
     {
         if (GameSaving.instance != null)
@@ -21,19 +20,11 @@ public class Coin : Lootable
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
+            SoundMusicManager.instance.TakeCoinSoundPlay();
             AddScore();
             GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
             Destroy(spawnedParticles, 1.5f);
-            
-            sfx.Play();
-
-            Destroy(gameObject, 1f);
-            Hide();
+            Destroy(gameObject);
         }
-    }
-
-    private void Hide(){
-        transform.localScale = Vector2.zero;
-        GetComponent<Collider2D>().enabled = false;
     }
 }

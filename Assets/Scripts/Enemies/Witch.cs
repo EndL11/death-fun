@@ -78,6 +78,8 @@ public class Witch : BaseEnemy
         PlayDieAnimation();
     }
 
+    protected override void SpawnSoul()    {}
+
     private IEnumerator SpawnBomberMan()
     {
         _isSpawning = true;

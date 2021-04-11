@@ -14,9 +14,6 @@ public class Boss : Enemy
     public GameObject bossUI;
     public GameObject chest;
 
-    protected void Awake()
-    {
-    }
     protected override void Start()
     {
         _healthManager.healthBar = bossUI.GetComponentInChildren<Slider>();

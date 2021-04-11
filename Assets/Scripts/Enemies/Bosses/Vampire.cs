@@ -6,7 +6,7 @@ public class Vampire : Boss
 {
     public float bloodLust = 100f;
     public float spawnDelay = 10f;
-    public float _spawnDelay;
+    private float _spawnDelay;
     public ParticleSystem healingParticles;
 
     protected override void Start()

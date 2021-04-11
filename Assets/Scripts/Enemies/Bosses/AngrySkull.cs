@@ -65,7 +65,7 @@ public class AngrySkull : Boss
         SpawnSoul();
         _healthManager.healthBar.maxValue -= _healthManager.maxHP;
         _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
-        dieSFX.Play();
+        SoundMusicManager.instance.DeathPlay();
         DropChest();
 
         if (_healthManager.healthBar.value <= 0f)
@@ -93,7 +93,7 @@ public class AngrySkull : Boss
         else
             _healthManager.healthBar.value -= damage;
 
-        hurtSFX.Play();
+        SoundMusicManager.instance.PunchPlay();
 
         _healthStatsText.text = $"{_healthManager.healthBar.value} / {_healthManager.healthBar.maxValue}";
         if (_healthManager.hp <= 0f)

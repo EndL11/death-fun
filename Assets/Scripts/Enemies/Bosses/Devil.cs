@@ -8,7 +8,6 @@ public class Devil : Boss
     public GameObject fireballPrefab;
     public Transform checkPlayerBack;
     public GameObject cage;
-    public AudioSource fireballSFX;
 
     protected override void DropChest() { }
     protected override void SpawnEnemyOnTakingDamage() { }
@@ -75,7 +74,7 @@ public class Devil : Boss
 
     private void SpawnFireball()
     {
-        fireballSFX.Play();
+        SoundMusicManager.instance.FlameBossPlay();
         GameObject fireball = Instantiate(fireballPrefab, checkPlayerPoint.position, transform.GetChild(0).rotation);
         fireball.GetComponent<Fireball>().Damage = damage;
     }

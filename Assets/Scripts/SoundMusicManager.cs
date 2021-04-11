@@ -1,22 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+
 
 public class SoundMusicManager : MonoBehaviour
 {
     public static SoundMusicManager instance;
-	public AudioSource backgroundMusic;
-	public AudioSource backgroundMenuMusic;
 
-    public AudioSource pickUpCoin;
-
-    public AudioMixer mixer;
-	
+    private List<AudioSource> _sfx = new List<AudioSource>();
+    private List<AudioSource> _musics = new List<AudioSource>();
+#region SFX
+    public AudioSource triggerBoss;
+    public AudioSource coin;
+    public AudioSource sphere;
+    public AudioSource wooah;
+    public AudioSource punch;
+    public AudioSource flameBoss;
+    public AudioSource damagePlayer;
+    public AudioSource portal;
+    public AudioSource explosion;
+    public AudioSource death;
+    public AudioSource squash;
+#endregion
+#region Music
+    public AudioSource backgroundMusic;
+    public AudioSource backgroundMenuMusic;
+#endregion
+    private float _musicVolume = 1f;
+    private float _sfxVolume = 1f;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this);
@@ -26,43 +41,124 @@ public class SoundMusicManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        mixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("@music", 0f));
-        mixer.SetFloat("SFXVolume", PlayerPrefs.GetFloat("@sounds", 0f));
+        _musicVolume = PlayerPrefs.GetFloat("@music", 1f);
+        _sfxVolume = PlayerPrefs.GetFloat("@sounds", 1f);
+
+        SetUpMusicsList();
+        SetUpSFXList();
+
+        ChangeMusicVolume(_musicVolume);
+        ChangeSFXVolume(_sfxVolume);
     }
 
-	
-	public void backgroundMenuMusicPlay()
-	{
+    private void SetUpMusicsList(){
+        _musics.Add(backgroundMenuMusic);
+        _musics.Add(backgroundMusic);
+    }
+
+    private void SetUpSFXList(){
+        IEnumerable<AudioSource> list = new List<AudioSource>(){triggerBoss, coin, sphere, wooah, punch, 
+        flameBoss, damagePlayer, portal, explosion, death, squash};
+        _sfx.AddRange(list);
+    }
+
+    public void TriggerBossSoundPlay()
+    {
+        triggerBoss.Play();
+    }
+
+    public void TakeCoinSoundPlay()
+    {
+        coin.Play();
+    }
+
+    public void SpawnBlackHolePlay()
+    {
+        sphere.Play();
+    }
+
+    public void WooahPlay()
+    {
+        wooah.Play();
+    }
+
+    public void FlameBossPlay()
+    {
+        flameBoss.Play();
+    }
+
+    public void PunchPlay()
+    {
+        punch.Play();
+    }
+
+    public void ApplyDamagePlayerPlay()
+    {
+        damagePlayer.Play();
+    }
+
+    public void PortalPlay()
+    {
+        portal.Play();
+    }
+
+    public void ExplosionPlay()
+    {
+        explosion.Play();
+    }
+
+    public void DeathPlay()
+    {
+        death.Play();
+    }
+
+    public void SquahPlay()
+    {
+        squash.Play();
+    }
+
+    public void backgroundMenuMusicPlay()
+    {
         backgroundMenuMusic.Play();
-	}
-	
-	public void backgroundMusicPlay()
-	{
-        backgroundMusic.Play();
-	}
-	
-	public void backgroundMenuMusicStop()
-	{
-        backgroundMenuMusic.Pause();
-	}
-	
-	public void backgroundMusicStop()
-	{
-        backgroundMusic.Pause();
-	}
-
-    public void PickUpCoin(){
-        pickUpCoin.Play();
     }
-	
-	
+
+    public void backgroundMusicPlay()
+    {
+        backgroundMusic.Play();
+    }
+
+    public void backgroundMenuMusicStop()
+    {
+        backgroundMenuMusic.Pause();
+    }
+
+    public void backgroundMusicStop()
+    {
+        backgroundMusic.Pause();
+    }
+
+    public void ChangeMusicVolume(float volume)
+    {
+        _musicVolume = volume;
+        foreach (var item in _musics)
+        {
+            item.volume = volume;
+        }
+    }
+
+    public void ChangeSFXVolume(float volume)
+    {
+        _sfxVolume = volume;
+        foreach (var item in _sfx)
+        {
+            item.volume = volume;
+        }
+    }
+
+
     private void OnDestroy()
     {
-        float music = 0f;
-        float sound = 0f;
-        mixer.GetFloat("MusicVolume", out music);
-        mixer.GetFloat("SFXVolume", out sound);
-        PlayerPrefs.SetFloat("@music", music);
-        PlayerPrefs.SetFloat("@sounds", sound);
+        PlayerPrefs.SetFloat("@music", _musicVolume);
+        PlayerPrefs.SetFloat("@sounds", _sfxVolume );
     }
 }
