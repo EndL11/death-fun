@@ -77,6 +77,8 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.enemies = GameObject.FindGameObjectsWithTag("Enemies").ToList();
             GameSaving.instance.enemiesCount = GameSaving.instance.enemies.Count;
             GameSaving.instance.deadEnemies = 0;
+            if(GameSaving.instance.enemiesCount == 0)
+                OnEndLevelHandler();
         }
         _enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
         _scoreText.text = GameSaving.instance.score.ToString();
