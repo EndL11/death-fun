@@ -781,8 +781,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statsIdentificator: 1
   _value: 0
-  _description: Get HP 50$
-  _cost: 50
+  _description: Get 50% to HP
+  _cost: 75
 --- !u!1 &8186495354340026253
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.8603005, y: 0.76600003}
-  m_AnchoredPosition: {x: 1.0200043, y: 6.25}
+  m_AnchoredPosition: {x: 0.40000153, y: 3.5}
   m_SizeDelta: {x: 2.04953, y: -1.2497559}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8186495354491948931
@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statsIdentificator: 0
   _value: 10
-  _description: Get HP 50$
+  _description: Get 10 to HP
   _cost: 50
 --- !u!1 &8513194426213911134
 GameObject:
@@ -1491,8 +1491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statsIdentificator: 2
   _value: 0
-  _description: Get HP $$%
-  _cost: 50
+  _description: Get full HP
+  _cost: 100
 --- !u!1 &8893006270349796545
 GameObject:
   m_ObjectHideFlags: 0
