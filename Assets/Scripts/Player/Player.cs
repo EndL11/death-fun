@@ -170,7 +170,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IAttackable
 
             collider.GetComponent<IDamagable>().TakeDamage(damage, pushBack);
         }
-        _anim.SetTrigger("AttackNull");
+        //_anim.SetTrigger("AttackNull");
     }
 
     protected abstract void OnDead();
