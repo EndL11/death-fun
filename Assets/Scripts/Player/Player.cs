@@ -231,6 +231,7 @@ public class Player : Character
             damage = GameSaving.instance.playerStats.damage;
             _healthManager.hp = GameSaving.instance.playerStats.hp;
             _healthManager.maxHP = GameSaving.instance.playerStats.maxHp;
+            _healthManager.Init();
 
             blackHoleStats = GameSaving.instance.playerStats.blackHoleStats;
         }
