@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthManager:
-    hp: 100
-    maxHP: 100
+    hp: 3000
+    maxHP: 3000
     healthBar: {fileID: 0}
     dead: 0
   hurtParticles: {fileID: 4448612712901771944}
@@ -263,7 +263,6 @@ MonoBehaviour:
   chest: {fileID: 463045951368222508, guid: 2c57fac90204e59469850c26f8905ea3, type: 3}
   bloodLust: 100
   spawnDelay: 10
-  _spawnDelay: 0
   healingParticles: {fileID: 4477204539045977518}
 --- !u!1 &4448612712825659442
 GameObject:

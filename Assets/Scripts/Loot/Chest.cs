@@ -14,7 +14,6 @@ public class Chest : Lootable
         {
             if (_opened)
                 return;
-
             AddScore();
             scoreText.text = $"+{score}";
             GetComponent<Animator>().SetTrigger("Open");

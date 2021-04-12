@@ -192,14 +192,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthManager:
-    hp: 100
-    maxHP: 100
+    hp: 250
+    maxHP: 250
     healthBar: {fileID: 5037619785915095361}
     dead: 0
   hurtParticles: {fileID: 6025280923701809430}
   attackRange: 0.5
   attackPoint: {fileID: 186586811437035857}
-  damage: 25
+  damage: 20
   whatToAttack:
     serializedVersion: 2
     m_Bits: 1024

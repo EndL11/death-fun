@@ -9,6 +9,7 @@ public class Lootable: MonoBehaviour
     {
         if (GameSaving.instance != null)
             GameSaving.instance.AddScore(score);
+        SoundMusicManager.instance.TakeCoinSoundPlay();
     }
 }
 
@@ -20,7 +21,6 @@ public class Coin : Lootable
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            SoundMusicManager.instance.TakeCoinSoundPlay();
             AddScore();
             GameObject spawnedParticles = Instantiate(particles, transform.position, Quaternion.identity);
             Destroy(spawnedParticles, 1.5f);

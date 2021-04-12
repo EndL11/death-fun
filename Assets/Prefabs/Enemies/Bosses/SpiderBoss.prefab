@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthManager:
-    hp: 1000
-    maxHP: 1000
+    hp: 1500
+    maxHP: 1500
     healthBar: {fileID: 0}
     dead: 0
   hurtParticles: {fileID: 2688846638068848569}
