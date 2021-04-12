@@ -101,7 +101,7 @@ public class GameSaving : MonoBehaviour
             _enemiesDeadList[name] += 1;
             return;
         }
-        if(name != "")
+        if(name != "None")
             _enemiesDeadList.Add(name, 1);
     }
 
