@@ -779,10 +779,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 1
-  value: 0
-  description: Get HALF of HP
-  cost: 49
+  _statsIdentificator: 1
+  _value: 0
+  _description: Get HP 50$
+  _cost: 50
 --- !u!1 &8186495354340026253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,10 +1342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 0
-  value: 25
-  description: Get 25% of HP
-  cost: 24
+  _statsIdentificator: 0
+  _value: 10
+  _description: Get HP 50$
+  _cost: 50
 --- !u!1 &8513194426213911134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,10 +1489,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 2
-  value: 0
-  description: Get FULL HP
-  cost: 99
+  _statsIdentificator: 2
+  _value: 0
+  _description: Get HP $$%
+  _cost: 50
 --- !u!1 &8893006270349796545
 GameObject:
   m_ObjectHideFlags: 0
