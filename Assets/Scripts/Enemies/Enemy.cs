@@ -229,7 +229,7 @@ public class Enemy : BaseEnemy
     {
         base.MakeAttack();
         speed = _speed;
-        StopAttackAnimation();
+        //StopAttackAnimation();
     }
 
     protected override void OnDead()
