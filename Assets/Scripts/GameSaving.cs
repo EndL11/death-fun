@@ -17,9 +17,12 @@ public class PlayerStats
 [System.Serializable]
 public class EnemyAnalytics
 {
-    public enum Names { spider, snake, scorpion,
+    public enum Names
+    {
+        spider, snake, scorpion,
         zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3,
-        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, none };
+        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, none
+    };
     public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
@@ -53,15 +56,19 @@ public class GameSaving : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            if (SceneManager.GetActiveScene().name != "Tutorial")
+            if (SceneManager.GetActiveScene().name != "Tutorial"){
                 DontDestroyOnLoad(this);
+                difficultyCoefficient = PlayerPrefs.GetFloat("@koef", 1f);
+            }
         }
         else
         {
             Destroy(gameObject);
         }
 
-        if(SceneManager.GetActiveScene().name != "Tutorial" && PlayerPrefs.GetInt("@complete", 0) == 1 && PlayerPrefs.GetInt("@level", 1) != 1)
+        if (SceneManager.GetActiveScene().name != "Tutorial"
+            && PlayerPrefs.GetInt("@complete", 0) == 1
+            && PlayerPrefs.GetInt("@level", 1) != 1)
         {
             LoadStats();
             PlayerPrefs.SetInt("@complete", 0);
@@ -70,7 +77,7 @@ public class GameSaving : MonoBehaviour
 
     private void Start()
     {
-        LoadDeadEnemies();        
+        LoadDeadEnemies();
     }
 
     public void AddScore(int value)
@@ -83,8 +90,8 @@ public class GameSaving : MonoBehaviour
     {
         string name = enemy.GetComponent<BaseEnemy>().enemyName.ToString();
         bool deleted = enemies.Remove(enemy);
-        if(deleted && name != "None")
-                deadEnemies += 1;
+        if (deleted && name != "None")
+            deadEnemies += 1;
 
         OnEnemyDead();
 
@@ -101,7 +108,7 @@ public class GameSaving : MonoBehaviour
             _enemiesDeadList[name] += 1;
             return;
         }
-        if(name != "None")
+        if (name != "None")
             _enemiesDeadList.Add(name, 1);
     }
 

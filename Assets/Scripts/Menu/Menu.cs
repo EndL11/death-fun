@@ -34,6 +34,8 @@ public class Menu : MonoBehaviour
     public Sprite normalModeSprite;
     public Sprite hardModeSprite;
 
+    public Text difficultyButtonText;
+
     private float _playerAttackLength = 0.6f;
 
     private const float miniVolumeLevel = 0f;
@@ -50,6 +52,8 @@ public class Menu : MonoBehaviour
         }
         toggleMode.isOn = mode == "Hard Mode";
 
+        string difficultyMode = PlayerPrefs.GetString("@difficulty", "Easy");
+
         float savedMusicVolume = PlayerPrefs.GetFloat("@music", 0f);
         float savedSoundVolume = PlayerPrefs.GetFloat("@sound", 0f);
 
@@ -60,6 +64,8 @@ public class Menu : MonoBehaviour
         sound.toggle.isOn = savedSoundVolume != miniVolumeLevel;
         sound.slider.minValue = miniVolumeLevel;
         sound.slider.value = savedSoundVolume;
+
+        difficultyButtonText.text = difficultyMode;
 
         loadTutorialButton.SetActive(false);
         continueButton.SetActive(false);
@@ -191,5 +197,23 @@ public class Menu : MonoBehaviour
 
     private void CheckToToggleSoundSettings(Toggle toggle, float value){
         toggle.isOn = value != miniVolumeLevel;
+    }
+
+    public void ChangeDifficulty(){
+        string current = difficultyButtonText.text;
+        if(current == "Easy"){
+            current = "Medium";
+            PlayerPrefs.SetFloat("@koef", 1.5f);
+        }
+        else if(current == "Medium"){
+            current = "Hard";
+            PlayerPrefs.SetFloat("@koef", 2f);
+        }
+        else{
+            current = "Easy";
+            PlayerPrefs.SetFloat("@koef", 1f);
+        }
+        difficultyButtonText.text = current;
+        PlayerPrefs.SetString("@difficulty", current);
     }
 }
