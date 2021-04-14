@@ -11,7 +11,9 @@ public class Witch : BaseEnemy
 
     #region SpawnBomberSettings
     public GameObject bomberManPrefab;
-    public float attackDelay;
+    [Header("Min/Max attack delay")]
+    public float min = 3f;
+    public float max = 5f;
     private float _attackDelay;
     #endregion
 
@@ -20,12 +22,13 @@ public class Witch : BaseEnemy
     protected override void Start()
     {
         base.Start();
-        _attackDelay = attackDelay;
+        _attackDelay = GetAttackDelay();
     }
 
     protected override void Update()
     {
-        base.Update();
+        if(IsDead())
+            return;
 
         if (NeedToTurnAround())
             ChangeMovementDirection();
@@ -33,15 +36,19 @@ public class Witch : BaseEnemy
         if (!IsDead() && !_isSpawning)
             Move();
 
-        if (attackDelay > 0f)
+        if (_attackDelay > 0f)
         {
-            attackDelay -= Time.deltaTime;
+            _attackDelay -= Time.deltaTime;
         }
         else
         {
             Attack();
-            attackDelay = _attackDelay;
+            _attackDelay = GetAttackDelay();
         }
+    }
+
+    private float GetAttackDelay(){
+        return Random.Range(min, max);
     }
 
     protected override bool NeedToTurnAround()

@@ -5303,13 +5303,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 1666944756}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
@@ -25713,13 +25723,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
@@ -26336,13 +26356,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 523803878}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
@@ -39753,13 +39783,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 1765941497}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
@@ -42907,13 +42947,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 34002528}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
@@ -46019,13 +46069,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 899256663}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
@@ -48118,13 +48178,23 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: max
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: min
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 1500968391}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: attackDelay
-      value: 4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
