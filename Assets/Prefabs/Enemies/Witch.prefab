@@ -255,7 +255,8 @@ MonoBehaviour:
   rightBorder: {fileID: 0}
   bomberManPrefab: {fileID: 586821772844481444, guid: 6a7d23373aced6c4a83ae531182eaf37,
     type: 3}
-  attackDelay: -2
+  min: 3
+  max: 5
 --- !u!1001 &992325172748808773
 PrefabInstance:
   m_ObjectHideFlags: 0
