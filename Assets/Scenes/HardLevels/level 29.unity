@@ -5308,6 +5308,11 @@ PrefabInstance:
       objectReference: {fileID: 1666944756}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: rightBorder
       value: 
       objectReference: {fileID: 523803878}
@@ -25713,6 +25718,11 @@ PrefabInstance:
       objectReference: {fileID: 65872707}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: rightBorder
       value: 
       objectReference: {fileID: 1500968391}
@@ -26329,6 +26339,11 @@ PrefabInstance:
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 523803878}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: rightBorder
@@ -39743,6 +39758,11 @@ PrefabInstance:
       objectReference: {fileID: 1765941497}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: rightBorder
       value: 
       objectReference: {fileID: 1666944756}
@@ -42892,6 +42912,11 @@ PrefabInstance:
       objectReference: {fileID: 34002528}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: rightBorder
       value: 
       objectReference: {fileID: 1215531405}
@@ -45999,6 +46024,11 @@ PrefabInstance:
       objectReference: {fileID: 899256663}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
       propertyPath: rightBorder
       value: 
       objectReference: {fileID: 65872707}
@@ -48091,6 +48121,11 @@ PrefabInstance:
       propertyPath: leftBorder
       value: 
       objectReference: {fileID: 1500968391}
+    - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
+        type: 3}
+      propertyPath: attackDelay
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1770755750295986098, guid: 67c6ee58805a152459d4172efce52662,
         type: 3}
       propertyPath: rightBorder
