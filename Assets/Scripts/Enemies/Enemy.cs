@@ -39,7 +39,6 @@ public abstract class BaseEnemy : Character, IEnemyAnimator
     {
         _healthManager.hp *= GameSaving.instance.difficultyCoefficient;
         _healthManager.maxHP = _healthManager.hp;
-        damage *= GameSaving.instance.difficultyCoefficient;
         _speed = speed;
         base.Start();
         transform.GetChild(0).rotation = Quaternion.Euler(0f, ((int)_direction < 0 ? 0f : 180f), 0f);
