@@ -4933,7 +4933,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   blackHoleStats:
-    delay: 1
+    delay: 7
     damage: 0
     radius: 0
   blackHoleSpawnPoint: {fileID: 406160650}
