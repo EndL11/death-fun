@@ -25,6 +25,7 @@ public class FinishPortal : MonoBehaviour
                 SceneManager.LoadScene("Menu");
             }
             Destroy(collision.transform.parent.gameObject);
+            StopAllCoroutines();
             StartCoroutine(WaitToEndAnimation());            
         }
     }

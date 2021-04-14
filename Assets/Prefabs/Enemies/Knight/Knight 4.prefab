@@ -246,7 +246,7 @@ MonoBehaviour:
   hurtParticles: {fileID: 6025280923701809430}
   attackRange: 0.5
   attackPoint: {fileID: 186586811437035857}
-  damage: 20
+  damage: 17
   whatToAttack:
     serializedVersion: 2
     m_Bits: 1024
