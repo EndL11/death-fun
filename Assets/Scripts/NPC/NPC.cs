@@ -76,12 +76,13 @@ public class NPC : MonoBehaviour
 
         else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DAMAGE)
             _player.IncreaseSphereDamage(_selected.Value);
-        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && _player.blackHoleStats.delay > 2f){
+        else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_DELAY && _player.blackHoleStats.delay > 2f)
             _player.DecreaseSphereDelay(_selected.Value);
-            return;
-        }
         else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
             _player.IncreaseSphereRadius(_selected.Value);
+        else {
+            return;
+        }
 
         GameSaving.instance.Buy(_selected.Cost);
     }
