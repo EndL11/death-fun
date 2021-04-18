@@ -29261,6 +29261,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1414310100 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8154243664617816556, guid: 4e4a8616b8cb208408a425e9b2673db5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1810655094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89fec0d9fbb6554086fbf4ce7ca73e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1419012771
 GameObject:
   m_ObjectHideFlags: 0
@@ -29905,7 +29917,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: -5, y: -3, z: 0}
+  - first: {x: -5, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 4
@@ -29914,7 +29926,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: -4, y: -3, z: 0}
+  - first: {x: -4, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 4
@@ -29923,7 +29935,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: -3, y: -3, z: 0}
+  - first: {x: -3, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 4
@@ -30391,14 +30403,30 @@ CompositeCollider2D:
         Y: -15000100
       - X: 615000041
         Y: -15000100
-    - - X: 5000000
-        Y: -10000000
-      - X: -25000000
-        Y: -10000000
-      - X: -25000000
+    - - X: -9999900
+        Y: -20000041
+      - X: -9999900
         Y: -15000000
       - X: 5000000
         Y: -15000000
+      - X: 5000000
+        Y: -10000000
+      - X: -9999900
+        Y: -10000000
+      - X: -9999900
+        Y: -14999959
+      - X: -9999959
+        Y: -14999900
+      - X: -25000041
+        Y: -14999900
+      - X: -25000100
+        Y: -14999959
+      - X: -25000100
+        Y: -20000041
+      - X: -25000041
+        Y: -20000100
+      - X: -9999959
+        Y: -20000100
     - - X: 550000000
         Y: -20000000
       - X: 510000000
@@ -30427,8 +30455,12 @@ CompositeCollider2D:
       - {x: 57.500027, y: -1.50001}
     - - {x: 0.4999707, y: -1.5}
       - {x: 0.4999707, y: -1}
-      - {x: -2.5, y: -1.0000293}
-      - {x: -2.499971, y: -1.5}
+      - {x: -0.99999, y: -1.0000293}
+      - {x: -0.9999666, y: -1.5}
+    - - {x: -1.0000252, y: -2.00001}
+      - {x: -1.0000193, y: -1.49999}
+      - {x: -2.50001, y: -1.5000253}
+      - {x: -2.4999747, y: -2.00001}
     - - {x: 54.99997, y: -2.5}
       - {x: 54.99997, y: -2}
       - {x: 51, y: -2.0000293}
@@ -30688,6 +30720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1414310100}
+    - target: {fileID: 1416238288642197941, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPressItem
       objectReference: {fileID: 0}
     - target: {fileID: 2419372801349344153, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
@@ -30918,7 +30955,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1414310100}
     - target: {fileID: 3268525636119885319, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -30928,12 +30965,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1414310100}
+    - target: {fileID: 3613470696717489086, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ApplyItem
       objectReference: {fileID: 0}
     - target: {fileID: 4786487206250293577, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1414310100}
     - target: {fileID: 4786487206250293577, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -30953,7 +30995,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1414310100}
     - target: {fileID: 7188170681527081862, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -30988,16 +31030,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1414310100}
+    - target: {fileID: 8616797873683133740, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPressItem
       objectReference: {fileID: 0}
     - target: {fileID: 8616797874593428018, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1414310100}
+    - target: {fileID: 8616797874593428018, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideShopMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8861325202081417845, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1414310100}
+    - target: {fileID: 8861325202081417845, guid: 01b76115880def64ba79e4cb2f02b13b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPressItem
       objectReference: {fileID: 0}
     - target: {fileID: 8869190078122120004, guid: 01b76115880def64ba79e4cb2f02b13b,
         type: 3}

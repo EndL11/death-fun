@@ -2232,4 +2232,4 @@ MonoBehaviour:
   _statsIdentificator: 6
   _value: 0.2
   _description: Get 0.2 to sphere radius
-  _cost: 30
+  _cost: 100

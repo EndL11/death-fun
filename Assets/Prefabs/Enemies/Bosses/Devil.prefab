@@ -264,8 +264,8 @@ MonoBehaviour:
   wallChecker: {fileID: 186586811437035857}
   endOfPlatformChecker: {fileID: 186586811123811277}
   checkPlayerPoint: {fileID: 186586811437035857}
-  playerCheckZone: 0.3
-  attackDelay: 2
+  playerCheckZone: 0.5
+  attackDelay: 4
   spawnableEnemy: {fileID: 0}
   upForce: 5
   bossUI: {fileID: 0}
