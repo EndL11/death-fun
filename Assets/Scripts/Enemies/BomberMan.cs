@@ -12,6 +12,7 @@ public class BomberMan : BaseEnemy
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponentInChildren<Animator>();
         transform.GetChild(0).rotation = Quaternion.Euler(0f, ((int)_direction < 0 ? 0f : 180f), 0f);
+        damage *= GameSaving.instance.difficultyCoefficient;
     }
 
     protected override void Update() {

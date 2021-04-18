@@ -30,8 +30,6 @@ public class GameProcess : MonoBehaviour
 #endregion
     public float currectGameTime;
 
-    public AudioSource portalStartSFX;
-
     private void Awake()
     {
         _scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
@@ -57,7 +55,7 @@ public class GameProcess : MonoBehaviour
     {
         if(!SoundMusicManager.instance.backgroundMusic.isPlaying)
 		    SoundMusicManager.instance.backgroundMusicPlay();
-		portalStartSFX.Play();
+		SoundMusicManager.instance.PortalPlay();
         //  set timeScale to 1
         Time.timeScale = 1;
         pausePanel.SetActive(false);

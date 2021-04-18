@@ -40,6 +40,11 @@ public class Menu : MonoBehaviour
 
     private const float miniVolumeLevel = 0f;
 
+    [Header("Coefficient")]
+    public float easy = 1f;
+    public float medium = 2f;
+    public float hard = 3f;
+
     private void Start()
     {
         SoundMusicManager.instance.backgroundMenuMusicPlay();
@@ -203,15 +208,15 @@ public class Menu : MonoBehaviour
         string current = difficultyButtonText.text;
         if(current == "Easy"){
             current = "Medium";
-            PlayerPrefs.SetFloat("@koef", 1.5f);
+            PlayerPrefs.SetFloat("@koef", medium);
         }
         else if(current == "Medium"){
             current = "Hard";
-            PlayerPrefs.SetFloat("@koef", 2f);
+            PlayerPrefs.SetFloat("@koef", hard);
         }
         else{
             current = "Easy";
-            PlayerPrefs.SetFloat("@koef", 1f);
+            PlayerPrefs.SetFloat("@koef", easy);
         }
         difficultyButtonText.text = current;
         PlayerPrefs.SetString("@difficulty", current);
