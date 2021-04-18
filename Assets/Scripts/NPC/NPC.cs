@@ -80,6 +80,9 @@ public class NPC : MonoBehaviour
             _player.DecreaseSphereDelay(_selected.Value);
         else if (_selected.Identificator == UpgradeItem.STATS.SPHERE_RADIUS)
             _player.IncreaseSphereRadius(_selected.Value);
+        else {
+            return;
+        }
 
         GameSaving.instance.Buy(_selected.Cost);
     }
