@@ -39,6 +39,7 @@ public class Menu : MonoBehaviour
     private float _playerAttackLength = 0.6f;
 
     private const float miniVolumeLevel = 0f;
+    private const float maxVolumeLevel = 1f;
 
     [Header("Coefficient")]
     public float easy = 1f;
@@ -59,15 +60,17 @@ public class Menu : MonoBehaviour
 
         string difficultyMode = PlayerPrefs.GetString("@difficulty", "Easy");
 
-        float savedMusicVolume = PlayerPrefs.GetFloat("@music", 0f);
-        float savedSoundVolume = PlayerPrefs.GetFloat("@sound", 0f);
+        float savedMusicVolume = PlayerPrefs.GetFloat("@music", maxVolumeLevel);
+        float savedSoundVolume = PlayerPrefs.GetFloat("@sound", maxVolumeLevel);
 
         music.toggle.isOn = savedMusicVolume != miniVolumeLevel;
         music.slider.minValue = miniVolumeLevel;
+        music.slider.maxValue = maxVolumeLevel;
         music.slider.value = savedMusicVolume;
 
         sound.toggle.isOn = savedSoundVolume != miniVolumeLevel;
         sound.slider.minValue = miniVolumeLevel;
+        sound.slider.maxValue = maxVolumeLevel;
         sound.slider.value = savedSoundVolume;
 
         difficultyButtonText.text = difficultyMode;
