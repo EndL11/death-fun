@@ -4881,7 +4881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2792860823825365592}
-  - component: {fileID: 4663997771933494302}
+  - component: {fileID: 2903516203082756445}
   - component: {fileID: 2792860823825365607}
   - component: {fileID: 1855108783}
   - component: {fileID: 801093793363208985}
@@ -4908,7 +4908,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4663997771933494302
+--- !u!114 &2903516203082756445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4917,21 +4917,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2792860823825365593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f52642d7c3ff01245b0370d655e4f049, type: 3}
+  m_Script: {fileID: 11500000, guid: 63206795afdfe0149b2211aab25468e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
-  damage: 30
-  blackHoleDelay: 8
-  blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
-    type: 3}
-  spawnPosition: {fileID: 406160650}
+  _healthManager:
+    hp: 100
+    maxHP: 100
+    healthBar: {fileID: 0}
+    dead: 0
+  hurtParticles: {fileID: 8499532352386146135}
   attackRange: 0.5
-  enemiesMask:
+  attackPoint: {fileID: 406160650}
+  damage: 25
+  whatToAttack:
     serializedVersion: 2
     m_Bits: 512
-  hurtPatricles: {fileID: 8499532352386146135}
+  blackHoleStats:
+    delay: 7
+    damage: 0
+    radius: 0
+  blackHoleSpawnPoint: {fileID: 406160650}
+  blackHolePrefab: {fileID: 4333714545537566052, guid: 01b1c7f3664b15d4da46466cb0013a03,
+    type: 3}
+  healthStatsText: {fileID: 0}
 --- !u!114 &2792860823825365607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4944,8 +4952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac291e92b267ad24b8ce1ab6c69d371e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 9
+  _speed: 5
+  _jumpForce: 9
   groundChecker: {fileID: 1029261704}
   whatIsGround:
     serializedVersion: 2

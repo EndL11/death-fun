@@ -188,33 +188,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 186586810464884135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998fac56d266fdf40a4335524572bbe4, type: 3}
+  m_Script: {fileID: 11500000, guid: dc1e3a9486fb8b641bf0ff8592251de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
-  speed: 3
-  direction: -1
-  damage: 15
-  attackDelay: 0.5
-  attackZone: 0.5
-  playerCheckZone: 0.3
+  _healthManager:
+    hp: 150
+    maxHP: 150
+    healthBar: {fileID: 5037619785915095361}
+    dead: 0
   hurtParticles: {fileID: 6025280923701809430}
+  attackRange: 0.5
+  attackPoint: {fileID: 186586811437035857}
+  damage: 12
+  whatToAttack:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyName: 16
   soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
     type: 3}
-  checkPlatformEndPoint: {fileID: 186586811123811277}
-  checkPlayerPoint: {fileID: 186586811437035857}
+  speed: 3
+  _direction: -1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  whatAvoid:
+  whatToAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 16
-  healthBar: {fileID: 5037619785915095361}
+  wallChecker: {fileID: 186586811437035857}
+  endOfPlatformChecker: {fileID: 186586811123811277}
+  checkPlayerPoint: {fileID: 186586811437035857}
+  playerCheckZone: 0.5
+  attackDelay: 1
 --- !u!61 &186586810464884132
 BoxCollider2D:
   m_ObjectHideFlags: 0

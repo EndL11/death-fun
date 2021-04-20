@@ -5,29 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class AnimatorFunctions : MonoBehaviour
 {
+    private Animator _anim;
+
+    private void Start()
+    {
+        _anim = GetComponent<Animator>();
+    }
+
     public void StopAttack()
     {
-        GetComponent<Animator>().SetBool("Attack", false);
-        GetComponent<Animator>().SetTrigger("AttackNull");
+        _anim.SetBool("Attack", false);
+        _anim.SetTrigger("AttackNull");
     }
 
     public void Attack()
     {
-        GetComponentInParent<Player>()?.ApplyAttack();
+        IAttackable attackable = GetComponentInParent<IAttackable>();
+        if (attackable != null) { attackable.MakeAttack(); return; }
         //  set trigger to start idle animation 
-        GetComponent<Animator>().SetTrigger("AttackNull");
+        _anim.SetTrigger("AttackNull");
     }
 
     public void Destroy()
     {
-        if(transform.parent.gameObject.CompareTag("Player"))
+        if (transform.parent.gameObject.CompareTag("Player"))
             GameSaving.instance.GameOver();
         Destroy(transform.parent.gameObject);
     }
 
     public void EnemyAttack()
     {
-        GetComponentInParent<Enemy>().Attack();
+        GetComponentInParent<IAttackable>().MakeAttack();
     }
 
     public void EnableCollisions()
@@ -67,7 +75,7 @@ public class AnimatorFunctions : MonoBehaviour
 
     public void BomberManDetonate()
     {
-        GetComponentInParent<BomberMan>().Detonate();
+        GetComponentInParent<IAttackable>().MakeAttack();
     }
 
     public void StartRunBomber()

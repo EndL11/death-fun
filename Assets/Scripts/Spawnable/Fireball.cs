@@ -46,8 +46,11 @@ public class Fireball : MonoBehaviour
 
     public void Collision(GameObject collision)
     {
-        Vector2 pushBackDirection = transform.position.x > collision.transform.position.x ? Vector2.left : Vector2.right;
-        collision.GetComponentInParent<Player>()?.ApplyDamage(damage, pushBackDirection);
+        if (collision.CompareTag("PlayerTrigger"))
+        {
+            Vector2 pushBackDirection = transform.position.x > collision.transform.position.x ? Vector2.left : Vector2.right;
+            collision.GetComponentInParent<IDamagable>().TakeDamage(damage, pushBackDirection);
+        }
         Particles();
         Destroy(gameObject);
     }

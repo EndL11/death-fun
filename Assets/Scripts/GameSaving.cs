@@ -5,22 +5,24 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 
-public struct PlayerStats
+[System.Serializable]
+public class PlayerStats
 {
     public float damage;
     public float hp;
     public float maxHp;
-    public float blackHoleDelay;
-    public float blackHoleDamage;
-    public float blackHoleRadius;
+    public BlackHoleStats blackHoleStats;
 }
 
 [System.Serializable]
 public class EnemyAnalytics
 {
-    public enum Names { spider, snake, scorpion,
+    public enum Names
+    {
+        spider, snake, scorpion,
         zombie_1, zombie_2, zombie_3, zombie_4, knight_1, knight_2, knight_3,
-        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, angry_skull };
+        knight_4, ninja_1, ninja_2, ninja_3, ninja_4, ninja_5, skeleton, barbarian, witch, vampire, none
+    };
     public GameObject prefab = null;
     public Names name;
     [HideInInspector] public bool show = false;
@@ -40,11 +42,13 @@ public class GameSaving : MonoBehaviour
     public int deadEnemies = 0;
     public int enemiesCount = 0;
     public List<GameObject> enemies = new List<GameObject>();
-    private Dictionary<string, int> enemiesDeadList = new Dictionary<string, int>();
-    [SerializeField] private List<EnemyAnalytics> analiticsPrefabs;
+    private Dictionary<string, int> _enemiesDeadList = new Dictionary<string, int>();
+    [SerializeField] private List<EnemyAnalytics> _analiticsPrefabs;
 
     [HideInInspector]
-    public string[] ENEMIES = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
+    public string[] _enemiesNames = System.Enum.GetNames(typeof(EnemyAnalytics.Names));
+
+    public float difficultyCoefficient = 1f;
 
 
     void Awake()
@@ -52,15 +56,19 @@ public class GameSaving : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            if (SceneManager.GetActiveScene().name != "Tutorial")
+            if (SceneManager.GetActiveScene().name != "Tutorial"){
                 DontDestroyOnLoad(this);
+                difficultyCoefficient = PlayerPrefs.GetFloat("@koef", 1f);
+            }
         }
         else
         {
             Destroy(gameObject);
         }
 
-        if(SceneManager.GetActiveScene().name != "Tutorial" && PlayerPrefs.GetInt("@complete", 0) == 1 && PlayerPrefs.GetInt("@level", 1) != 1)
+        if (SceneManager.GetActiveScene().name != "Tutorial"
+            && PlayerPrefs.GetInt("@complete", 0) == 1
+            && PlayerPrefs.GetInt("@level", 1) != 1)
         {
             LoadStats();
             PlayerPrefs.SetInt("@complete", 0);
@@ -69,7 +77,7 @@ public class GameSaving : MonoBehaviour
 
     private void Start()
     {
-        LoadDeadEnemies();        
+        LoadDeadEnemies();
     }
 
     public void AddScore(int value)
@@ -80,11 +88,10 @@ public class GameSaving : MonoBehaviour
 
     public void EnemyDead(GameObject enemy)
     {
-        string name = GetEnemyName(enemy);
-
+        string name = enemy.GetComponent<BaseEnemy>().enemyName.ToString();
         bool deleted = enemies.Remove(enemy);
-        if(deleted && name != "")
-                deadEnemies += 1;
+        if (deleted && name != "None")
+            deadEnemies += 1;
 
         OnEnemyDead();
 
@@ -96,24 +103,24 @@ public class GameSaving : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Tutorial")
             return;
 
-        if (enemiesDeadList.ContainsKey(name))
+        if (_enemiesDeadList.ContainsKey(name))
         {
-            enemiesDeadList[name] += 1;
+            _enemiesDeadList[name] += 1;
             return;
         }
-        if(name != "")
-            enemiesDeadList.Add(name, 1);
+        if (name != "None")
+            _enemiesDeadList.Add(name, 1);
     }
 
     public void GameOver()
     {
-        foreach (var item in analiticsPrefabs)
+        foreach (var item in _analiticsPrefabs)
         {
             item.show = false;
         }
 
         OnGameOver();
-        enemiesDeadList.Clear();
+        _enemiesDeadList.Clear();
     }
 
     public void SaveCompleteTutorial()
@@ -124,7 +131,7 @@ public class GameSaving : MonoBehaviour
 
     public void SaveDeadEnemies()
     {
-        foreach (var item in enemiesDeadList)
+        foreach (var item in _enemiesDeadList)
         {
             if (item.Value > 0)
                 PlayerPrefs.SetInt($"@{item.Key}", item.Value);
@@ -133,32 +140,32 @@ public class GameSaving : MonoBehaviour
 
     private void LoadDeadEnemies()
     {
-        foreach (string name in ENEMIES)
+        foreach (string name in _enemiesNames)
         {
-            enemiesDeadList.Add(name, PlayerPrefs.GetInt($"@{name}", 0));
+            _enemiesDeadList.Add(name, PlayerPrefs.GetInt($"@{name}", 0));
         }
     }
 
     public void ClearPlayerPrefs()
     {
-        enemiesDeadList.Clear();
+        _enemiesDeadList.Clear();
         int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
-        int music = PlayerPrefs.GetInt("@music", 1);
-        int sound = PlayerPrefs.GetInt("@sounds", 1);
+        float music = PlayerPrefs.GetFloat("@music", 0f);
+        float sound = PlayerPrefs.GetFloat("@sounds", 0f);
         int history = PlayerPrefs.GetInt("@history", 0);
         float hardModeTime = PlayerPrefs.GetFloat("@awardHard", 0f);
         float normalModeTime = PlayerPrefs.GetFloat("@awardNormal", 0f);
 
-        foreach (var item in analiticsPrefabs)
+        foreach (var item in _analiticsPrefabs)
         {
             item.show = false;
         }
 
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("@tutor", tutorComplete);
-        PlayerPrefs.SetInt("@music", music);
-        PlayerPrefs.SetInt("@sounds", sound);
+        PlayerPrefs.SetFloat("@music", music);
+        PlayerPrefs.SetFloat("@sounds", sound);
         PlayerPrefs.SetInt("@history", history);
 
         PlayerPrefs.SetFloat("@awardHard", hardModeTime);
@@ -170,12 +177,12 @@ public class GameSaving : MonoBehaviour
 
     private void SetDeadCountToPrefabs()
     {
-        foreach (var item in enemiesDeadList)
+        foreach (var item in _enemiesDeadList)
         {
             if (item.Value == 0)
                 continue;
 
-            EnemyAnalytics _tmp = analiticsPrefabs.Find(x => x.name.ToString() == item.Key);
+            EnemyAnalytics _tmp = _analiticsPrefabs.Find(x => x.name.ToString() == item.Key);
             if (_tmp?.prefab == null)
                 return;
             GameObject prefab = _tmp.prefab;
@@ -187,7 +194,7 @@ public class GameSaving : MonoBehaviour
     public List<GameObject> GetAnalyticsObjects()
     {
         SetDeadCountToPrefabs();
-        return analiticsPrefabs.FindAll(x => x.show && x.prefab != null).ConvertAll(x => x.prefab);
+        return _analiticsPrefabs.FindAll(x => x.show && x.prefab != null).ConvertAll(x => x.prefab);
     }
 
     public void Buy(int cost)
@@ -206,38 +213,14 @@ public class GameSaving : MonoBehaviour
         OnBossDie();
     }
 
-    private string GetEnemyName(GameObject enemy)
-    {
-        string name = "";
-        Enemy script = enemy.GetComponent<Enemy>();
-        if (script == null)
-        {
-            Witch witch = enemy.GetComponent<Witch>();
-            if (witch != null)
-            {
-                name = witch._name.ToString();
-            }
-            else
-            {
-                AngrySkull angrySkull = enemy.GetComponent<AngrySkull>();
-                if (angrySkull != null)
-                    name = angrySkull._name.ToString();
-            }
-        }
-        else
-            name = script._name.ToString();
-
-        return name;
-    }
-
     private void LoadStats()
     {
         playerStats.hp = PlayerPrefs.GetFloat("@hp", 0);
         playerStats.maxHp = PlayerPrefs.GetFloat("@maxhp", 0);
         playerStats.damage = PlayerPrefs.GetFloat("@damage", 0);
-        playerStats.blackHoleDamage = PlayerPrefs.GetFloat("@spheredamage", 0);
-        playerStats.blackHoleDelay = PlayerPrefs.GetFloat("@spheredelay", 0);
-        playerStats.blackHoleRadius = PlayerPrefs.GetFloat("@sphereradius", 0);
+        playerStats.blackHoleStats.damage = PlayerPrefs.GetFloat("@spheredamage", 0);
+        playerStats.blackHoleStats.delay = PlayerPrefs.GetFloat("@spheredelay", 0);
+        playerStats.blackHoleStats.radius = PlayerPrefs.GetFloat("@sphereradius", 0);
     }
 
     public string ConvertGameTimeToString(float gameTime)

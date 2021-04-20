@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1
+  sfx: {fileID: 0}
   particles: {fileID: 99188847600638105, guid: b2f67e9d114a6c74ca66d5f7c5253ee6, type: 3}
 --- !u!58 &3381495899918247754
 CircleCollider2D:

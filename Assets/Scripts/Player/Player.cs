@@ -1,210 +1,52 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public interface IDamagable
 {
-    [Header("Player Stats")]
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float maxHP = 100f;
-    [SerializeField] private float damage = 15f;
-    [SerializeField] private float attackRange = 0.5f;
-    //  sphere stats
-    public float blackHoleDelay = 7f;
-    private float _blackHoleDelay;
-    private float sphereDamage;
-    private float sphereRadius;
-    [Space]
-    //  gameobject to spawn (blackhole)
-    [SerializeField] private GameObject blackHolePrefab;
-    //  position for spawning black holes
-    [SerializeField] private Transform spawnPosition;
+    void TakeDamage(float damage);
+    void TakeDamage(float damage, Vector2 pushBack);
+}
 
-    public LayerMask enemiesMask;
+public interface IAttackable
+{
+    void Attack();
+    void MakeAttack();
+}
 
-    private Animator anim;
-    private Rigidbody2D rb;
-    //  player UI
-    private Slider healthBar;
-    private Text healthBarHP;
-    private Slider blackholeDelaySlider;
+[System.Serializable]
+public class HealthManager
+{
+    public float hp = 100f;
+    public float maxHP = 100f;
+    public Slider healthBar;
+    [HideInInspector] public bool dead = false;
 
-    private PlayerMovement playerMovement;
-
-    public ParticleSystem hurtPatricles;
-
-    private bool dead = false;
-    //  starting color (need for hurt animation)
-    Color c;
-
-    public bool Dead
+    public void Init()
     {
-        get { return dead; }
-    }
-
-    public float MAXHP
-    {
-        get { return maxHP; }
-    }
-
-    public float HP
-    {
-        get { return hp; }
-    }
-
-    void Start()
-    {
-        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
-        healthBarHP = healthBar.GetComponentInChildren<Text>();
-        blackholeDelaySlider = GameObject.FindGameObjectWithTag("BlackHoleDelay").GetComponent<Slider>();
-        //  get animator component
-        anim = GetComponentInChildren<Animator>();
-        //  get rigidbody component
-        rb = GetComponent<Rigidbody2D>();
-
-        playerMovement = GetComponent<PlayerMovement>();
-        //  set standard sphere stats
-        sphereRadius = blackHolePrefab.GetComponent<BlackHole>().radius;
-        sphereDamage = blackHolePrefab.GetComponent<BlackHole>().damage;
-        //  load saved player stats
-        if(GameSaving.instance.playerStats.hp != 0 && PlayerPrefs.GetInt("@saved", 0) == 1 && !GameSaving.instance.IsTutorial())
-        {
-            damage = GameSaving.instance.playerStats.damage;
-            hp = GameSaving.instance.playerStats.hp;
-            maxHP = GameSaving.instance.playerStats.maxHp;
-
-            blackHoleDelay = GameSaving.instance.playerStats.blackHoleDelay;
-            sphereDamage = GameSaving.instance.playerStats.blackHoleDamage;
-            sphereRadius = GameSaving.instance.playerStats.blackHoleRadius;
-        }
-
-        //  set healthbar start stats
         healthBar.maxValue = maxHP;
         healthBar.value = hp;
-
-        healthBarHP.text = $"{hp} / {maxHP}";
-        //  get start color
-        c = GetComponentInChildren<SpriteRenderer>().material.color;
-        //  set blackhole delay on start game to 0
-        _blackHoleDelay = 0f;
-        //  setting sphere delay for slider
-        blackholeDelaySlider.maxValue = blackHoleDelay;
-        blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
     }
 
-    void Update()
+    public void UpdateHealth()
     {
-        if (!playerMovement.CanMove)
-            return;
-
-        if (_blackHoleDelay > 0f)
-        {
-            _blackHoleDelay -= Time.deltaTime;
-            blackholeDelaySlider.value = blackHoleDelay - _blackHoleDelay;
-        }
-        else
-        {
-            //  if pressed right mouse button
-            if (Input.GetKeyDown(KeyCode.Period) && !dead)
-            {
-                SpawnBlackHole();
-                _blackHoleDelay = blackHoleDelay;
-            }
-        }
-
+        healthBar.value = hp;
     }
 
-    private void SpawnBlackHole()
-    {
-        SoundMusicManager.instance.SpawnBlackHolePlay();
-		//  create gameobject based on 'blackHolePrefab'
-        GameObject blackHole = Instantiate(blackHolePrefab, spawnPosition.position, transform.GetChild(0).rotation);
-        blackHole.GetComponent<BlackHole>().damage = sphereDamage;
-        blackHole.GetComponent<BlackHole>().radius = sphereRadius;
-    }
-
-    public void ApplyAttack()
+    public void ApplyDamage(float damage)
     {
         if (dead)
             return;
 
-        //  get all enemy object
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition.position, attackRange, enemiesMask);
-        //  calculating push direction
-        Vector2 directionToPush = transform.position.x > spawnPosition.position.x ? Vector2.left : Vector2.right;
-		SoundMusicManager.instance.WooahPlay();
-        foreach (var enemy in colliders)
-        {
-            Enemy enemyScript = enemy.GetComponent<Enemy>();
-            if(enemyScript == null)
-            {
-                Witch witch = enemy.GetComponent<Witch>();
-                if(witch == null)
-                {
-                    enemy.GetComponent<AngrySkull>().ApplyDamage(damage);
-                    continue;
-                }
-                enemy.GetComponent<Witch>().ApplyDamage(damage);
-                continue;
-            }
-            //  damage each enemy
-            enemy.GetComponent<Enemy>().ApplyDamage(damage, directionToPush);
-        }
-    }
-
-    public void ApplyDamage(float damage, Vector2 dir)
-    {
         hp -= damage;
-		SoundMusicManager.instance.ApplyDamagePlayerPlay();
-        //  update health bar
-        healthBar.value = hp;
-        healthBarHP.text = $"{hp} / {maxHP}";
-        if (hp <= 0)
-            DestroyObject();
-        if (!dead)
+        if (hp <= 0f)
         {
-            hurtPatricles.Play();
-            //  push player back
-            PushBack(dir);
-            //  play hurt animation
-            StartCoroutine(HurtAnimation());
+            dead = true;
+            healthBar.gameObject.SetActive(false);
         }
-    }
 
-    private void PushBack(Vector2 dir)
-    {
-        //  reset velocity
-        rb.velocity = Vector2.zero;
-        //  push player to direction
-        rb.AddForce(dir, ForceMode2D.Impulse);
-    }
-
-
-    private IEnumerator HurtAnimation()
-    {
-        //  playing hurt animation
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
-        yield return new WaitForSeconds(0.2f);
-        GetComponentInChildren<SpriteRenderer>().material.color = c;
-    }
-
-    private void DestroyObject()
-    {
-        //  hide health bar
-        healthBar.gameObject.SetActive(false);
-        dead = true;
-        //  reset layer from 'player' to default in order not to stop enemies
-        gameObject.layer = 0;
-        //  set rigidbody to static - not to fall player down
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        //  set player to not solid object
-        GetComponent<Collider2D>().isTrigger = true;
-
-        if(PlayerPrefs.GetString("@mode") == "Hard Mode")
-            PlayerPrefs.SetInt("@saved", 0);
-
-        //  play die animation
-        anim.SetTrigger("Die");
+        UpdateHealth();
     }
 
     public void AddHealth(float value)
@@ -212,19 +54,253 @@ public class Player : MonoBehaviour
         hp += value;
         if (hp > maxHP)
             hp = maxHP;
-        //  update healthbar 
-        healthBar.value = hp;
-        healthBarHP.text = $"{hp} / {maxHP}";
+
+        UpdateHealth();
     }
 
     public void AddMaxHP(float value)
     {
         maxHP += value;
         hp += value;
-        //  update healthbar 
+
         healthBar.maxValue = maxHP;
-        healthBar.value = hp;
-        healthBarHP.text = $"{hp} / {maxHP}";
+        UpdateHealth();
+    }
+}
+
+
+
+public abstract class Character : MonoBehaviour, IDamagable, IAttackable
+{
+    [Header("Health Managing")]
+    [SerializeField] protected HealthManager _healthManager;
+    protected Animator _anim;
+    protected Rigidbody2D _rb;
+    public ParticleSystem hurtParticles;
+
+    #region AttackSettings
+    public float attackRange = 0.5f;
+    public Transform attackPoint;
+    public float damage;
+    public LayerMask whatToAttack;
+    #endregion
+
+    public bool IsDead()
+    {
+        if (_healthManager != null)
+            return _healthManager.dead;
+
+        return false;
+    }
+
+    protected virtual void Start()
+    {
+        _healthManager.Init();
+        _anim = GetComponentInChildren<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+        if (_healthManager.dead)
+            return;
+
+        _healthManager.ApplyDamage(damage);
+        SoundMusicManager.instance.ApplyDamagePlayerPlay();
+
+        if (_healthManager.dead)
+            OnDead();
+    }
+
+    public virtual void TakeDamage(float damage, Vector2 pushBackDirection)
+    {
+        if (_healthManager.dead)
+            return;
+
+        _healthManager.ApplyDamage(damage);
+
+        SoundMusicManager.instance.ApplyDamagePlayerPlay();
+
+        if (_healthManager.dead)
+            OnDead();
+
+        if (!_healthManager.dead)
+        {
+            if (hurtParticles != null)
+                hurtParticles.Play();
+
+            PushBack(pushBackDirection);
+
+            StartCoroutine(HurtAnimation());
+        }
+    }
+
+    protected virtual void PushBack(Vector2 dir)
+    {
+        //  reset velocity
+        _rb.velocity = Vector2.zero;
+        //  push player to direction
+        _rb.AddForce(dir, ForceMode2D.Impulse);
+    }
+
+    protected IEnumerator HurtAnimation()
+    {
+        //  playing hurt animation
+        GetComponentInChildren<SpriteRenderer>().material.color = new Color(255f, 0, 0, .3f);
+        yield return new WaitForSeconds(0.2f);
+        GetComponentInChildren<SpriteRenderer>().material.color = new Color(1, 1, 1, 1);
+    }
+
+    public virtual void Attack()
+    {
+        _anim.SetBool("Attack", false);
+        _anim.SetBool("Attack", true);
+    }
+
+    public virtual void MakeAttack()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, whatToAttack);
+        Vector2 pushBack = transform.position.x < attackPoint.position.x ? Vector2.right : Vector2.left;
+        foreach (var collider in colliders)
+        {
+            if (collider.isTrigger)
+                continue;
+            else if (collider.GetComponent<Character>().IsDead())
+                continue;
+
+            collider.GetComponent<IDamagable>().TakeDamage(damage, pushBack);
+        }
+        //_anim.SetTrigger("AttackNull");
+    }
+
+    protected abstract void OnDead();
+}
+
+[System.Serializable]
+public struct BlackHoleStats
+{
+    public float delay;
+    public float damage;
+    public float radius;
+}
+
+
+public class Player : Character
+{
+
+    #region SphereAttackSettings
+    public BlackHoleStats blackHoleStats;
+    private float _blackHoleDelay;
+    public Transform blackHoleSpawnPoint;
+    public GameObject blackHolePrefab;
+    private Slider _blackholeDelaySlider;
+    #endregion
+
+    public Text healthStatsText;
+
+    private PlayerMovement _playerMovement;
+
+
+    protected void Awake()
+    {
+        _healthManager.healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
+        healthStatsText = _healthManager.healthBar.GetComponentInChildren<Text>();
+        _blackholeDelaySlider = GameObject.FindGameObjectWithTag("BlackHoleDelay").GetComponent<Slider>();
+        _healthManager.Init();
+    }
+
+    public float maxHP()
+    {
+        return _healthManager.maxHP;
+    }
+
+    protected override void Start()
+    {
+        //  get animator component
+        _anim = GetComponentInChildren<Animator>();
+        //  get rigidbody component
+        _rb = GetComponent<Rigidbody2D>();
+
+        _playerMovement = GetComponent<PlayerMovement>();
+        //  set standard sphere stats
+        blackHoleStats.radius = blackHolePrefab.GetComponent<BlackHole>().radius;
+        blackHoleStats.damage = blackHolePrefab.GetComponent<BlackHole>().damage;
+        //  load saved player stats
+        if (GameSaving.instance.playerStats.hp != 0 && PlayerPrefs.GetInt("@saved", 0) == 1 && !GameSaving.instance.IsTutorial())
+        {
+            damage = GameSaving.instance.playerStats.damage;
+            _healthManager.hp = GameSaving.instance.playerStats.hp;
+            _healthManager.maxHP = GameSaving.instance.playerStats.maxHp;
+            _healthManager.Init();
+
+            blackHoleStats = GameSaving.instance.playerStats.blackHoleStats;
+        }
+
+        //  set blackhole delay on start game to 0
+        _blackHoleDelay = 0f;
+        //  setting sphere delay for slider
+        _blackholeDelaySlider.maxValue = blackHoleStats.delay;
+        _blackholeDelaySlider.value = blackHoleStats.delay - _blackHoleDelay;
+        UpdateHealthText();
+    }
+    public override void TakeDamage(float damage, Vector2 pushBackDirection)
+    {
+        base.TakeDamage(damage, pushBackDirection);
+        UpdateHealthText();
+    }
+    protected void Update()
+    {
+        if (!_playerMovement.CanMove)
+            return;
+
+        if (_blackHoleDelay > 0f)
+        {
+            _blackHoleDelay -= Time.deltaTime;
+            _blackholeDelaySlider.value = blackHoleStats.delay - _blackHoleDelay;
+        }
+        else
+        {
+            //  if pressed '>' button
+            if (Input.GetKeyDown(KeyCode.Period) && !IsDead())
+            {
+                SpawnBlackHole();
+                _blackHoleDelay = blackHoleStats.delay;
+            }
+        }
+    }
+
+    public override void MakeAttack()
+    {
+        SoundMusicManager.instance.WooahPlay();
+        base.MakeAttack();
+    }
+
+    private void UpdateHealthText()
+    {
+        healthStatsText.text = $"{_healthManager.hp} / {_healthManager.maxHP}";
+    }
+
+    private void SpawnBlackHole()
+    {
+        SoundMusicManager.instance.SpawnBlackHolePlay();
+        //  create gameobject based on 'blackHolePrefab'
+        GameObject blackHole = Instantiate(blackHolePrefab, blackHoleSpawnPoint.position, transform.GetChild(0).rotation);
+        BlackHole blackHoleInstance = blackHole.GetComponent<BlackHole>();
+        blackHoleInstance.damage = blackHoleStats.damage;
+        blackHoleInstance.radius = blackHoleStats.radius;
+    }
+
+    #region UpgradesMethods
+    public void AddHealth(float value)
+    {
+        _healthManager.AddHealth(value);
+        UpdateHealthText();
+    }
+
+    public void AddMaxHP(float value)
+    {
+        _healthManager.AddMaxHP(value);
+        UpdateHealthText();
     }
 
     public void AddDamage(float value)
@@ -234,42 +310,58 @@ public class Player : MonoBehaviour
 
     public void DecreaseSphereDelay(float value)
     {
-        if (blackHoleDelay <= 2f)
+        if (blackHoleStats.delay <= 2f)
             return;
-        blackHoleDelay -= value;
-        blackholeDelaySlider.maxValue = blackHoleDelay;
+        blackHoleStats.delay -= value;
+        _blackholeDelaySlider.maxValue = blackHoleStats.delay;
     }
 
     public void IncreaseSphereDamage(float value)
     {
-        sphereDamage += value; 
+        blackHoleStats.damage += value;
     }
 
     public void IncreaseSphereRadius(float value)
     {
-        sphereRadius += value;
+        blackHoleStats.radius += value;
     }
-
+    #endregion
     public void SavePlayerStats()
     {
         //  save player stats
         PlayerPrefs.SetInt("@saved", 1);
-        GameSaving.instance.playerStats.hp = hp;
-        GameSaving.instance.playerStats.maxHp = maxHP;
+        GameSaving.instance.playerStats.hp = _healthManager.hp;
+        GameSaving.instance.playerStats.maxHp = _healthManager.maxHP;
         GameSaving.instance.playerStats.damage = damage;
-        GameSaving.instance.playerStats.blackHoleDamage = sphereDamage;
-        GameSaving.instance.playerStats.blackHoleDelay = blackHoleDelay;
-        GameSaving.instance.playerStats.blackHoleRadius = sphereRadius;
+        GameSaving.instance.playerStats.blackHoleStats = blackHoleStats;
         SaveToPlayerPrefs();
     }
 
     private void SaveToPlayerPrefs()
     {
-        PlayerPrefs.SetFloat("@hp", hp);
-        PlayerPrefs.SetFloat("@maxhp", maxHP);
+        PlayerPrefs.SetFloat("@hp", _healthManager.hp);
+        PlayerPrefs.SetFloat("@maxhp", _healthManager.maxHP);
         PlayerPrefs.SetFloat("@damage", damage);
-        PlayerPrefs.SetFloat("@spheredamage", sphereDamage);
-        PlayerPrefs.SetFloat("@spheredelay", blackHoleDelay);
-        PlayerPrefs.SetFloat("@sphereradius", sphereRadius);
+        PlayerPrefs.SetFloat("@spheredamage", blackHoleStats.damage);
+        PlayerPrefs.SetFloat("@spheredelay", blackHoleStats.delay);
+        PlayerPrefs.SetFloat("@sphereradius", blackHoleStats.radius);
+    }
+
+    protected override void OnDead()
+    {
+        //  hide health bar
+        _healthManager.healthBar.gameObject.SetActive(false);
+        //  reset layer from 'player' to default in order not to stop enemies
+        gameObject.layer = 0;
+        //  set rigidbody to static - not to fall player down
+        _rb.bodyType = RigidbodyType2D.Static;
+        //  set player to not solid object
+        GetComponent<Collider2D>().isTrigger = true;
+
+        if (PlayerPrefs.GetString("@mode") == "Hard Mode")
+            PlayerPrefs.SetInt("@saved", 0);
+
+        //  play die animation
+        _anim.SetTrigger("Die");
     }
 }

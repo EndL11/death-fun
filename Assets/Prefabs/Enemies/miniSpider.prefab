@@ -523,33 +523,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 7850079578593036288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998fac56d266fdf40a4335524572bbe4, type: 3}
+  m_Script: {fileID: 11500000, guid: dc1e3a9486fb8b641bf0ff8592251de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 50
-  maxHP: 50
-  speed: 3.5
-  direction: -1
-  damage: 3
-  attackDelay: 0.5
-  attackZone: 0.5
-  playerCheckZone: 0.3
+  _healthManager:
+    hp: 20
+    maxHP: 20
+    healthBar: {fileID: 1860779903}
+    dead: 0
   hurtParticles: {fileID: 7013418330516687436}
+  attackRange: 0.3
+  attackPoint: {fileID: 2121401448}
+  damage: 1
+  whatToAttack:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyName: 0
   soulPrefab: {fileID: 7257253402768864998, guid: 14e785c57425e4c4f973a82e6736eeff,
     type: 3}
-  checkPlatformEndPoint: {fileID: 667626503}
-  checkPlayerPoint: {fileID: 2121401448}
+  speed: 3
+  _direction: -1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  whatAvoid:
+  whatToAvoid:
     serializedVersion: 2
     m_Bits: 2304
-  _name: 0
-  healthBar: {fileID: 1860779903}
+  wallChecker: {fileID: 2121401448}
+  endOfPlatformChecker: {fileID: 667626503}
+  checkPlayerPoint: {fileID: 2121401448}
+  playerCheckZone: 0.3
+  attackDelay: 0.5
 --- !u!1 &7850079579777830136
 GameObject:
   m_ObjectHideFlags: 0

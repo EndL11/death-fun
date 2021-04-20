@@ -503,10 +503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 7
-  value: 10
-  description: Get 10 to Sphere Damage
-  cost: 150
+  _statsIdentificator: 7
+  _value: 10
+  _description: Get 10 to sphere damage
+  _cost: 50
 --- !u!1 &4548846658301330944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,10 +1217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 4
-  value: 10
-  description: Get 10 to MAXHP
-  cost: 190
+  _statsIdentificator: 4
+  _value: 10
+  _description: Get 10 to max HP
+  _cost: 50
 --- !u!1 &6631218406906423981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,10 +1364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 3
-  value: 10
-  description: Get 10 to Damage
-  cost: 289
+  _statsIdentificator: 3
+  _value: 10
+  _description: Get 10 to max damage
+  _cost: 75
 --- !u!1 &6769919927814706684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,10 +1605,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 5
-  value: 0.1
-  description: Decrease sphere delay on 0.1
-  cost: 150
+  _statsIdentificator: 5
+  _value: 0.1
+  _description: Minus 0.1 to sphere delay
+  _cost: 30
 --- !u!1 &7610761569187356834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,10 +1934,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 3
-  value: 5
-  description: Get 5 to DAMAGE
-  cost: 150
+  _statsIdentificator: 3
+  _value: 5
+  _description: Get 5 to max damage
+  _cost: 50
 --- !u!1 &8646783108018715549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,7 +2229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d216b6bc9322a5418dd2cb96d26337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsIdentificator: 6
-  value: 0.2
-  description: Get 0.2 to Sphere Radius
-  cost: 150
+  _statsIdentificator: 6
+  _value: 0.2
+  _description: Get 0.2 to sphere radius
+  _cost: 100

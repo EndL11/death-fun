@@ -8,29 +8,32 @@ using System.Linq;
 
 public class GameProcess : MonoBehaviour
 {
+#region Panels
     public GameObject pausePanel;        
     public GameObject gameOverPanel;
-
-    private Text scoreText;
-    private Text enemiesText;
-
+#endregion
+#region Texts
+    private Text _scoreText;
+    private Text _enemiesText;
+    public Text timerText;
+#endregion
+#region Analytics wrappers
     public Transform enemiesStatsParent;
     public Transform enemiesStatsParent2;
-
+#endregion
     public GameObject bossUI = null;
 
+#region Level objects
     public GameObject finishPortal;
     public GameObject stairs;
-
     public GameObject flagpole;
-
-    public Text timerText;
+#endregion
     public float currectGameTime;
 
     private void Awake()
     {
-        scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-        enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
+        _scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+        _enemiesText = GameObject.FindGameObjectWithTag("EnemiesText").GetComponent<Text>();
         if (finishPortal != null)
             finishPortal.SetActive(false);
         if (flagpole != null)
@@ -72,9 +75,11 @@ public class GameProcess : MonoBehaviour
             GameSaving.instance.enemies = GameObject.FindGameObjectsWithTag("Enemies").ToList();
             GameSaving.instance.enemiesCount = GameSaving.instance.enemies.Count;
             GameSaving.instance.deadEnemies = 0;
+            if(GameSaving.instance.enemiesCount == 0)
+                OnEndLevelHandler();
         }
-        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
-        scoreText.text = GameSaving.instance.score.ToString();
+        _enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
+        _scoreText.text = GameSaving.instance.score.ToString();
         if(PlayerPrefs.GetString("@mode") == "Normal Mode" && SceneManager.GetActiveScene().name != "Tutorial")
             PlayerPrefs.SetInt("@level", SceneManager.GetActiveScene().buildIndex);
 
@@ -131,12 +136,12 @@ public class GameProcess : MonoBehaviour
 
     private void UpdateDeadCounter()
     {
-        enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
+        _enemiesText.text = $"{GameSaving.instance.deadEnemies} / {GameSaving.instance.enemiesCount}";
     }
 
     private void UpdateScore()
     {
-        scoreText.text = GameSaving.instance.score.ToString();
+        _scoreText.text = GameSaving.instance.score.ToString();
     }
 
     private void GameOverHandler()

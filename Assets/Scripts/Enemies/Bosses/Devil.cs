@@ -2,33 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Devil : Boss
 {
-    [SerializeField] private GameObject fireballPrefab;
-    [SerializeField] protected Transform checkPlayerPointBack;
+    public GameObject fireballPrefab;
+    public Transform checkPlayerBack;
     public GameObject cage;
-    public override void Attack()
-    {
-        //  do not attack if dead
-        if (Dead) return;
-        //  reset speed to normal
-        speed = _speed;
-    }
 
-    private void SpawnFireball()
+    protected override void DropChest() { }
+    protected override void SpawnEnemyOnTakingDamage() { }
+    protected override bool NeedToTurnAround()
     {
-		SoundMusicManager.instance.FlameBossPlay();
-        GameObject fireball = Instantiate(fireballPrefab, checkPlayerPoint.position, transform.GetChild(0).rotation);
-        fireball.GetComponent<Fireball>().Damage = damage;
+        return IsGrounded() && (IsEndPlatform() || IsWall() || IsPlayerBack());
+    }
+    protected override void OnDead()
+    {
+        base.OnDead();
+        cage.SetActive(false);
     }
 
     protected override void Update()
     {
-        if (!canMove || Dead)
+        if (IsDead() || !_canMove)
             return;
-        if (!isPlayerNear() && isGrounded() && !isEndPlatform() && !Dead && !isWall() && !isPlayerBack())
+
+        if (!IsPlayerNear() && IsGrounded() && !IsEndPlatform() && !IsWall() && !IsPlayerBack())
             Move();
-        else if (!Dead && isGrounded() && (isEndPlatform() || isWall() || isPlayerBack()))
+        else if (NeedToTurnAround())
             ChangeMovementDirection();
 
         //  if delay greater zero
@@ -37,44 +37,59 @@ public class Devil : Boss
             //  decrease delay
             _attackDelay -= Time.deltaTime;
             //  if player near, stop and wait (show idle anim)
-            if (isPlayerNear())
+            if (IsPlayerNear())
             {
                 speed = 0f;
-                anim.SetBool("Run", false);
+                StopRunAnimation();
             }
         }
         else
         {
-            StartCoroutine(SpawnLineFireballs());
-            //  attack
-            anim.SetBool("Attack", true);
-            //  reset attack delay
-            _attackDelay = attackDelay;
+            Attack();
         }
+    }
+
+    protected bool IsPlayerBack()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerBack.position, playerCheckZone, whatToAttack);
+        return colliders.Length != 0;
+    }
+
+    public override void MakeAttack()
+    {
+        if(IsDead())
+            return;
+
+        speed = _speed;
+    }
+
+    public override void Attack()
+    {
+        StartCoroutine(SpawnLineFireballs());
+        //  attack
+        PlayAttackAnimation();
+        //  reset attack delay
+        _attackDelay = attackDelay;
+    }
+
+    private void SpawnFireball()
+    {
+        SoundMusicManager.instance.FlameBossPlay();
+        GameObject fireball = Instantiate(fireballPrefab, checkPlayerPoint.position, transform.GetChild(0).rotation);
+        fireball.GetComponent<Fireball>().Damage = damage;
     }
 
     private IEnumerator SpawnLineFireballs()
     {
         speed = 0f;
-        anim.SetBool("Run", false);
+        StopRunAnimation();
         for (int i = 0; i < 3; i++)
         {
             SpawnFireball();
             yield return new WaitForSeconds(0.3f);
         }
         speed = _speed;
-        anim.SetBool("Run", true);
-    }
-
-    protected bool isPlayerBack()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPlayerPointBack.position, playerCheckZone, whatIsPlayer);
-        return colliders.Length != 0;
-    }
-
-    protected override void DestroyEnemy()
-    {
-        base.DestroyEnemy();
-        cage.SetActive(false);
+        PlayRunAnimation();
     }
 }
+

@@ -2,87 +2,73 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BomberMan : MonoBehaviour
+public class BomberMan : BaseEnemy
 {
-    [SerializeField] private float damage = 30f;
     [SerializeField] private float radius = 2f;
-    [SerializeField] private float speed = 4f;
+    private bool _isDetonating = false;
 
-    public LayerMask whatIsPlayer;
-    public LayerMask whatIsGround;
-    public LayerMask whatToAvoid;
-
-    [SerializeField] private int direction = -1;
-
-    public Transform checkGroundInFront;
-
-    private bool detonating = false;
-
-    public int Direction
+    protected override void Start()
     {
-        get { return direction; }
-        set { direction = value; }
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponentInChildren<Animator>();
+        transform.GetChild(0).rotation = Quaternion.Euler(0f, ((int)_direction < 0 ? 0f : 180f), 0f);
+        damage *= GameSaving.instance.difficultyCoefficient;
     }
 
-    void Start()
-    {
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction > 0 ? 0f : 180f), 0f);
-    }
-
-
-    void Update()
-    {
-        if (IsGrounded() && !IsWall())
+    protected override void Update() {
+        base.Update();
+         if (IsGrounded() && !IsWall())
             Move();
-        else if (IsGrounded() && IsWall())
+        else if (NeedToTurnAround())
             ChangeMovementDirection();
     }
 
-    public void Detonate()
+    protected override bool NeedToTurnAround()
     {
-        if (detonating)
+        return IsGrounded() && IsWall();
+    }
+
+    protected override void Move()
+    {
+        transform.Translate(-transform.right * (int)_direction * speed * Time.deltaTime);
+    }
+
+    public override void MakeAttack()
+    {
+        Detonate();
+    }
+
+    public override void PlayDieAnimation()
+    {
+        _anim.SetTrigger("Boom");
+    }
+
+    public override void PlayAttackAnimation()  { }
+    public override void StopAttackAnimation() { }
+    public override void PlayRunAnimation()  { }
+    public override void StopRunAnimation() { }
+    private void Detonate()
+    {
+        if (_isDetonating)
             return;
 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.velocity = Vector3.zero;
-        SoundMusicManager.instance.ExplosionPlay();
-        detonating = true;
+        PlayDieAnimation();
         speed = 0f;
-        GetComponentInChildren<Animator>().SetTrigger("Boom");
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+        _rb.velocity = Vector3.zero;
+
+        SoundMusicManager.instance.ExplosionPlay();
+        
+        _isDetonating = true;
         Vector2 point = new Vector2(transform.position.x, transform.position.y + .3f);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(point, radius, whatIsPlayer);
-        if(colliders.Length > 0)
+        Collider2D collider = Physics2D.OverlapCircle(point, radius, whatToAttack);
+        if (collider)
         {
-            //  calculating push direction
-            Vector2 directionToPush = transform.position.x > colliders[0].transform.position.x ? Vector2.left : Vector2.right;
-            colliders[0].GetComponent<Player>().ApplyDamage(damage, directionToPush);
+            Vector2 directionToPush = transform.position.x > collider.transform.position.x ? Vector2.left : Vector2.right;
+            collider.GetComponent<IDamagable>().TakeDamage(damage, directionToPush);
         }
-    }
 
-    private void ChangeMovementDirection()
-    {
-        direction = direction > 0 ? -1 : 1;
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction > 0 ? 0f : 180f), 0f);
     }
-
-    private void Move()
-    {
-        transform.Translate(transform.right * direction * speed * Time.deltaTime);
-    }
-
-    private bool IsGrounded()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f, whatIsGround);
-        return colliders.Length > 0;
-    }
-
-    private bool IsWall()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkGroundInFront.position, 0.25f, whatToAvoid);
-        return colliders.Length > 0;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -90,4 +76,15 @@ public class BomberMan : MonoBehaviour
             Detonate();
         }
     }
+
+    public override void TakeDamage(float damage)
+    {
+        Detonate();
+    }
+    public override void TakeDamage(float damage, Vector2 pushBackDir)
+    {
+        Detonate();
+    }
 }
+
+

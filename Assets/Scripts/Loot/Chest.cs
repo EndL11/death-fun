@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Chest : MonoBehaviour
+public class Chest : Lootable
 {
-    [SerializeField] private int score = 500;
-    private bool opened = false;
-    [SerializeField] private Text scoreText;
+    private bool _opened = false;
+    public Text scoreText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerTrigger"))
         {
-            if (opened)
+            if (_opened)
                 return;
-
-            GameSaving.instance.AddScore(score);
+            AddScore();
             scoreText.text = $"+{score}";
             GetComponent<Animator>().SetTrigger("Open");
-            opened = true;
+            _opened = true;
         }
     }
 }

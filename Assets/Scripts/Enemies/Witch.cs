@@ -1,142 +1,101 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Witch : MonoBehaviour
+public class Witch : BaseEnemy
 {
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float maxHP = 100f;
+    #region MovementBorders
+    public Transform leftBorder;
+    public Transform rightBorder;
+    #endregion
 
-    [SerializeField] private float speed = 5f;
+    #region SpawnBomberSettings
+    public GameObject bomberManPrefab;
+    [Header("Min/Max attack delay")]
+    public float min = 3f;
+    public float max = 5f;
+    private float _attackDelay;
+    #endregion
 
-    public float spawnDelay = 3f;
-    private float _spawnDelay;
+    private bool _isSpawning = false;
 
-    [SerializeField] private GameObject bomberManPrefab;
-
-    [SerializeField] private Slider healthBar;
-
-    private bool dead = false;
-
-    private Animator anim;
-    private Rigidbody2D rb;
-
-    [SerializeField] private Transform leftPoint;
-    [SerializeField] private Transform rightPoint;
-
-    [SerializeField] private int direction = -1;
-
-    private Color c;
-
-    [SerializeField] private ParticleSystem hurtParticles;
-
-    private bool isSpawning = false;
-
-    public EnemyAnalytics.Names _name;
-
-    public bool Dead
+    protected override void Start()
     {
-        get { return dead; }
+        base.Start();
+        _attackDelay = GetAttackDelay();
     }
 
-    private void Start()
+    protected override void Update()
     {
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        healthBar.maxValue = maxHP;
-        healthBar.value = hp;
-
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
-        _spawnDelay = spawnDelay;
-
-        c = GetComponentInChildren<SpriteRenderer>().material.color;
-    }
-
-    private void Update()
-    {
-        if (dead)
+        if(IsDead())
             return;
 
-        if (_spawnDelay > 0f)
+        if (NeedToTurnAround())
+            ChangeMovementDirection();
+
+        if (!IsDead() && !_isSpawning)
+            Move();
+
+        if (_attackDelay > 0f)
         {
-            _spawnDelay -= Time.deltaTime;
+            _attackDelay -= Time.deltaTime;
         }
         else
         {
-            StopAllCoroutines();
-            StartCoroutine(SpawnRandomEnemy());
-            _spawnDelay = spawnDelay;
-        }
-
-        if (!dead && !isSpawning)
-            Move();
-    }
-
-    public void ApplyDamage(float damage)
-    {
-        if (dead)
-            return;
-
-        hp -= damage;
-        healthBar.value = hp;
-        if (hp <= 0f)
-            DestroyWitch();
-        if (!dead)
-        {
-            StartCoroutine(HurtAnimation());
-            hurtParticles.Play();
+            Attack();
+            _attackDelay = GetAttackDelay();
         }
     }
 
-    private void DestroyWitch()
-    {
-        anim.SetBool("Fly", false);
-        healthBar.gameObject.SetActive(false);
-        dead = true;
-        anim.SetTrigger("Die");
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        GameSaving.instance.EnemyDead(gameObject);
+    private float GetAttackDelay(){
+        return Random.Range(min, max);
     }
 
-    private void Move()
+    protected override bool NeedToTurnAround()
     {
-        anim.SetBool("Fly", true);
-        transform.Translate(transform.right * direction * Time.deltaTime * speed);
-        if ((direction == 1 && transform.position.x > rightPoint.position.x) || (direction == -1 && transform.position.x < leftPoint.position.x))
-        {
-            ChangeMovementDirection();
-        }
+        return ((int)_direction == 1 && transform.position.x > rightBorder.position.x)
+        || ((int)_direction == -1 && transform.position.x < leftBorder.position.x);
     }
 
-    private IEnumerator SpawnRandomEnemy()
+    protected override void Move()
     {
-        isSpawning = true;
-        anim.SetBool("Fly", false);
-        yield return new WaitForSeconds(0.3f);
-        GameObject enemy = Instantiate(bomberManPrefab, transform.position, Quaternion.identity);
-        int rand = UnityEngine.Random.Range(1, 3);
-        BomberMan bomber = enemy.GetComponent<BomberMan>();
-        int direction = bomber.Direction == -1 ? 1 : -1;
-        bomber.Direction = direction;
-        isSpawning = false;
+        PlayRunAnimation();
+        base.Move();
     }
 
-    private void ChangeMovementDirection()
+    public override void PlayRunAnimation()
     {
-        //  set direction to another
-        direction = direction == 1 ? -1 : 1;
-        //  rotate sprite according to direction
-        transform.GetChild(0).rotation = Quaternion.Euler(0f, (direction < 0 ? 0f : 180f), 0f);
+        _anim.SetBool("Fly", true);
     }
 
-    private IEnumerator HurtAnimation()
+    public override void StopRunAnimation()
     {
-        // set sprite color to red         
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(255, 0, 0, .3f);
-        //  wait 0.2 seconds
-        yield return new WaitForSeconds(0.2f);
-        //  set start color
-        GetComponentInChildren<SpriteRenderer>().material.color = c;
+        _anim.SetBool("Fly", false);
     }
+
+    public override void Attack()
+    {
+        StartCoroutine(SpawnBomberMan());
+    }
+
+    protected override void OnDead()
+    {
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        base.OnDead();
+        PlayDieAnimation();
+    }
+
+    protected override void SpawnSoul()    {}
+
+    private IEnumerator SpawnBomberMan()
+    {
+        _isSpawning = true;
+        StopRunAnimation();
+        yield return new WaitForSeconds(.3f);
+        GameObject bombMan = Instantiate(bomberManPrefab, transform.position, Quaternion.identity);
+        bombMan.GetComponent<BaseEnemy>().ChangeToRandomDirection();
+        _isSpawning = false;
+    }
+
 }
+

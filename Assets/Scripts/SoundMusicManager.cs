@@ -2,51 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SoundMusicManager : MonoBehaviour
 {
     public static SoundMusicManager instance;
+
+    private List<AudioSource> _sfx = new List<AudioSource>();
+    private List<AudioSource> _musics = new List<AudioSource>();
+#region SFX
     public AudioSource triggerBoss;
     public AudioSource coin;
-	public AudioSource sphere;
-	public AudioSource wooah;
-	public AudioSource punch;
-	public AudioSource flameBoss;
-	public AudioSource damagePlayer;
-	public AudioSource portal;
-	public AudioSource explosion;
-	public AudioSource death;
-	public AudioSource squash;
-	public AudioSource backgroundMusic;
-	public AudioSource backgroundMenuMusic;
-	
-    private bool enableMusic = true;
-    private bool enableSounds = true;
-
-    public bool Music
-    {
-        get { return enableMusic; }
-        set {
-            enableMusic = value;
-            if (enableMusic)
-            {
-                backgroundMenuMusic.Play();
-            }
-            else
-            {
-                backgroundMenuMusic.Stop();
-            }
-        }
-    }
-
-    public bool Sound
-    {
-        get { return enableSounds; }
-        set { enableSounds = value;  }
-    }
+    public AudioSource sphere;
+    public AudioSource wooah;
+    public AudioSource punch;
+    public AudioSource flameBoss;
+    public AudioSource damagePlayer;
+    public AudioSource portal;
+    public AudioSource explosion;
+    public AudioSource death;
+    public AudioSource squash;
+#endregion
+#region Music
+    public AudioSource backgroundMusic;
+    public AudioSource backgroundMenuMusic;
+#endregion
+    private float _musicVolume = 1f;
+    private float _sfxVolume = 1f;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this);
@@ -56,90 +41,124 @@ public class SoundMusicManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        enableMusic = PlayerPrefs.GetInt("@music", 1) == 1 ? true : false;
-        enableSounds = PlayerPrefs.GetInt("@sounds", 1) == 1 ? true : false;
+        _musicVolume = PlayerPrefs.GetFloat("@music", 1f);
+        _sfxVolume = PlayerPrefs.GetFloat("@sounds", 1f);
+
+        SetUpMusicsList();
+        SetUpSFXList();
+
+        ChangeMusicVolume(_musicVolume);
+        ChangeSFXVolume(_sfxVolume);
+    }
+
+    private void SetUpMusicsList(){
+        _musics.Add(backgroundMenuMusic);
+        _musics.Add(backgroundMusic);
+    }
+
+    private void SetUpSFXList(){
+        IEnumerable<AudioSource> list = new List<AudioSource>(){triggerBoss, coin, sphere, wooah, punch, 
+        flameBoss, damagePlayer, portal, explosion, death, squash};
+        _sfx.AddRange(list);
     }
 
     public void TriggerBossSoundPlay()
     {
-        if(enableSounds)
-            triggerBoss.Play();
+        triggerBoss.Play();
     }
 
     public void TakeCoinSoundPlay()
     {
-        if (enableSounds) coin.Play();
+        coin.Play();
     }
-	
-	public void SpawnBlackHolePlay()
+
+    public void SpawnBlackHolePlay()
     {
-        if (enableSounds) sphere.Play();
+        sphere.Play();
     }
-	
-	public void WooahPlay()
-	{
-        if (enableSounds) wooah.Play();
-	}
-	
-	public void FlameBossPlay()
-	{
-        if (enableSounds) flameBoss.Play();
-	}
-	
-	public void PunchPlay()
-	{
-        if (enableSounds) punch.Play();
-	}
-	
-	public void ApplyDamagePlayerPlay()
-	{
-        if (enableSounds) damagePlayer.Play();
-	}
-		
-	public void PortalPlay()
-	{
-        if (enableSounds) portal.Play();
-	}
-	
-	public void ExplosionPlay()
-	{
-        if (enableSounds) explosion.Play();
-	}
-	
-	public void DeathPlay()
-	{
-        if (enableSounds) death.Play();
-	}
-	
-	public void SquahPlay()
-	{
-        if (enableSounds) squash.Play();
-	}
-	
-	public void backgroundMenuMusicPlay()
-	{
-        if (enableMusic) backgroundMenuMusic.Play();
-	}
-	
-	public void backgroundMusicPlay()
-	{
-        if (enableMusic) backgroundMusic.Play();
-	}
-	
-	public void backgroundMenuMusicStop()
-	{
-        if (enableMusic) backgroundMenuMusic.Pause();
-	}
-	
-	public void backgroundMusicStop()
-	{
-        if (enableMusic) backgroundMusic.Pause();
-	}
-	
-	
+
+    public void WooahPlay()
+    {
+        wooah.Play();
+    }
+
+    public void FlameBossPlay()
+    {
+        flameBoss.Play();
+    }
+
+    public void PunchPlay()
+    {
+        punch.Play();
+    }
+
+    public void ApplyDamagePlayerPlay()
+    {
+        damagePlayer.Play();
+    }
+
+    public void PortalPlay()
+    {
+        portal.Play();
+    }
+
+    public void ExplosionPlay()
+    {
+        explosion.Play();
+    }
+
+    public void DeathPlay()
+    {
+        death.Play();
+    }
+
+    public void SquahPlay()
+    {
+        squash.Play();
+    }
+
+    public void backgroundMenuMusicPlay()
+    {
+        backgroundMenuMusic.Play();
+    }
+
+    public void backgroundMusicPlay()
+    {
+        backgroundMusic.Play();
+    }
+
+    public void backgroundMenuMusicStop()
+    {
+        backgroundMenuMusic.Pause();
+    }
+
+    public void backgroundMusicStop()
+    {
+        backgroundMusic.Pause();
+    }
+
+    public void ChangeMusicVolume(float volume)
+    {
+        _musicVolume = volume;
+        foreach (var item in _musics)
+        {
+            item.volume = volume;
+        }
+    }
+
+    public void ChangeSFXVolume(float volume)
+    {
+        _sfxVolume = volume;
+        foreach (var item in _sfx)
+        {
+            item.volume = volume;
+        }
+    }
+
+
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt("@music", enableMusic ? 1 : 0);
-        PlayerPrefs.SetInt("@sounds", enableSounds ? 1 : 0);
+        PlayerPrefs.SetFloat("@music", _musicVolume);
+        PlayerPrefs.SetFloat("@sounds", _sfxVolume );
     }
 }

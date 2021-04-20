@@ -21,14 +21,16 @@ public class BlackHole : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.right * 3f * Time.deltaTime);
-        if(destroyDelay > 0.1f)
+        if (destroyDelay > 0.1f)
         {
             destroyDelay -= Time.deltaTime;
         }
         else
         {
-            if(!particlesSpawned)
+            if (!particlesSpawned)
+            {
                 Particles();
+            }
 
             particlesSpawned = true;
         }
@@ -38,7 +40,7 @@ public class BlackHole : MonoBehaviour
     {
         if (collision.CompareTag("EnemyTrigger"))
         {
-            Collision(collision.gameObject);
+            Collision(collision);
         }
     }
 
@@ -51,7 +53,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
-		SoundMusicManager.instance.SquahPlay();
+        SoundMusicManager.instance.SquahPlay();
         //  calculating direction to push enemy
         Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
         //  get enemies at damage zone
@@ -59,53 +61,39 @@ public class BlackHole : MonoBehaviour
         foreach (var enemy in colliders)
         {
             //  if enemy doesn't damaged and it's not trigger collider, add it to damaged enemies and damage
-            if (!enemies.Contains(enemy.gameObject) && !enemy.isTrigger)
+            if (!enemies.Contains(enemy.gameObject) && !enemy.isTrigger && !enemy.GetComponent<Character>().IsDead())
             {
-                enemies.Add(enemy.gameObject);
-                Enemy enemyScript = enemy.GetComponent<Enemy>();
-                if(enemyScript == null)
-                {
-                    Witch witch = enemy.GetComponent<Witch>();
-                    if (witch == null)
-                    {
-                        BomberMan bomber = enemy.GetComponent<BomberMan>();
-                        if (bomber == null)
-                            enemy.GetComponent<AngrySkull>().ApplyDamage(damage);
-                        else
-                            bomber.Detonate();
-                    }
-                    else if (witch.Dead)
-                        return;
-                    else
-                        enemy.GetComponent<Witch>().ApplyDamage(damage);
-                    continue;
-                }
-                else
-                    enemyScript.ApplyDamage(damage, pushDirection);
+                Damage(enemy, pushDirection);
             }
         }
         enemies.Clear();
     }
 
-    public void Collision(GameObject collision)
+    private void Damage(Collider2D enemy, Vector2 pushDirection)
     {
-        Enemy enemy = collision.GetComponentInParent<Enemy>();
-        if (enemy == null)
+        //  if enemy doesn't damaged and it's not trigger collider, add it to damaged enemies and damage
+        if (!enemies.Contains(enemy.gameObject) && !enemy.isTrigger && !enemy.GetComponent<Character>().IsDead())
         {
-            Witch witch = collision.GetComponentInParent<Witch>();
-            if (witch == null)
-            {
-                BomberMan bomber = collision.transform.parent.gameObject.GetComponent<BomberMan>();
-                if(bomber != null)
-                    bomber.Detonate();
-            }
-            else if (witch.Dead)
-                return;
+            enemies.Add(enemy.gameObject);
+            enemy.GetComponent<IDamagable>().TakeDamage(damage, pushDirection);
         }
-        else if (enemy.Dead)
-            return;
+    }
 
-        Particles();
+    public void Collision(Collider2D collision)
+    {
+        if (collision.CompareTag("EnemyTrigger"))
+        {
+            if (collision.GetComponentInParent<Character>().IsDead())
+                return;
+            Vector2 pushDirection = transform.rotation.y < 90f ? Vector2.right : Vector2.left;
+            Damage(collision, pushDirection);
+        }
+        if (!particlesSpawned)
+        {
+            Particles();
+            particlesSpawned = true;
+        }
         Destroy(gameObject);
     }
 }
+

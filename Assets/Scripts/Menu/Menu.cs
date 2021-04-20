@@ -4,11 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public struct SoundMenuItem{
+    public Slider slider;
+    public Toggle toggle;
+
+}
+
 public class Menu : MonoBehaviour
 {
     public Toggle toggleMode;
-    public Toggle toggleMusic;
-    public Toggle toggleSound;
+    
+#region SoundSettingItems
+    public SoundMenuItem sound;
+    public SoundMenuItem music;
+#endregion
+
     public GameObject mainPanel;
     public GameObject optionsPanel;
 
@@ -23,7 +34,16 @@ public class Menu : MonoBehaviour
     public Sprite normalModeSprite;
     public Sprite hardModeSprite;
 
-    private float playerAttackLength = 0.6f;
+    public Text difficultyButtonText;
+
+    private float _playerAttackLength = 0.6f;
+
+    private const float miniVolumeLevel = 0f;
+
+    [Header("Coefficient")]
+    public float easy = 1f;
+    public float medium = 2f;
+    public float hard = 3f;
 
     private void Start()
     {
@@ -37,12 +57,25 @@ public class Menu : MonoBehaviour
         }
         toggleMode.isOn = mode == "Hard Mode";
 
-        toggleMusic.isOn = SoundMusicManager.instance.Music;
-        toggleSound.isOn = SoundMusicManager.instance.Sound;
+        string difficultyMode = PlayerPrefs.GetString("@difficulty", "Easy");
+
+        float savedMusicVolume = PlayerPrefs.GetFloat("@music", 0f);
+        float savedSoundVolume = PlayerPrefs.GetFloat("@sound", 0f);
+
+        music.toggle.isOn = savedMusicVolume != miniVolumeLevel;
+        music.slider.minValue = miniVolumeLevel;
+        music.slider.value = savedMusicVolume;
+
+        sound.toggle.isOn = savedSoundVolume != miniVolumeLevel;
+        sound.slider.minValue = miniVolumeLevel;
+        sound.slider.value = savedSoundVolume;
+
+        difficultyButtonText.text = difficultyMode;
+
         loadTutorialButton.SetActive(false);
         continueButton.SetActive(false);
 
-        if (PlayerPrefs.HasKey("@level"))
+        if (PlayerPrefs.HasKey("@level") && PlayerPrefs.GetInt("@level", 0) >= 4)
             continueButton.SetActive(true);
 
         if (PlayerPrefs.GetInt("@history", 0) == 1)
@@ -66,7 +99,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator WaitForAnimation()
     {
-        yield return new WaitForSeconds(playerAttackLength);
+        yield return new WaitForSeconds(_playerAttackLength);
         if (PlayerPrefs.GetInt("@history", 0) == 0)
             SceneManager.LoadScene("StartHistory");
         else if (PlayerPrefs.GetInt("@tutor", 0) == 0)
@@ -87,7 +120,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator ExitWithAnimnation()
     {
-        yield return new WaitForSeconds(playerAttackLength);
+        yield return new WaitForSeconds(_playerAttackLength);
         Application.Quit();
 
     }
@@ -98,7 +131,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator OptionsWithAnimation()
     {
-        yield return new WaitForSeconds(playerAttackLength);
+        yield return new WaitForSeconds(_playerAttackLength);
         optionsPanel.SetActive(true);
         mainPanel.SetActive(false);
         playerMainMenu.SetActive(false);
@@ -128,18 +161,6 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Tutorial");
     }
 
-    public void ToggleMusic()
-    {
-        toggleMusic.isOn = !toggleMusic.isOn;
-        SoundMusicManager.instance.Music = toggleMusic.isOn;
-    }
-
-    public void ToggleSound()
-    {
-        toggleSound.isOn = !toggleSound.isOn;
-        SoundMusicManager.instance.Sound = toggleSound.isOn;
-    }
-
     public void ContinueClick()
     {
         SoundMusicManager.instance.backgroundMenuMusicStop();
@@ -163,5 +184,41 @@ public class Menu : MonoBehaviour
         int seconds = timeValue;
         time += seconds > 0 ? seconds >= 10 ? $"{seconds}" : $"0{seconds}" : "00";
         return time;
+    }
+
+    public void MusicVolumeChange(Slider slider)
+    {
+        SoundMusicManager.instance.ChangeMusicVolume(slider.value);
+        PlayerPrefs.SetFloat("@music", slider.value);
+        CheckToToggleSoundSettings(music.toggle, slider.value);
+    }
+
+    public void SoundVolumeChange(Slider slider)
+    {
+        SoundMusicManager.instance.ChangeSFXVolume(slider.value);
+        PlayerPrefs.SetFloat("@sound", slider.value);
+        CheckToToggleSoundSettings(sound.toggle, slider.value);
+    }
+
+    private void CheckToToggleSoundSettings(Toggle toggle, float value){
+        toggle.isOn = value != miniVolumeLevel;
+    }
+
+    public void ChangeDifficulty(){
+        string current = difficultyButtonText.text;
+        if(current == "Easy"){
+            current = "Medium";
+            PlayerPrefs.SetFloat("@koef", medium);
+        }
+        else if(current == "Medium"){
+            current = "Hard";
+            PlayerPrefs.SetFloat("@koef", hard);
+        }
+        else{
+            current = "Easy";
+            PlayerPrefs.SetFloat("@koef", easy);
+        }
+        difficultyButtonText.text = current;
+        PlayerPrefs.SetString("@difficulty", current);
     }
 }

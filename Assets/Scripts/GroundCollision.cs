@@ -8,7 +8,7 @@ public class GroundCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Sphere"))
         {
-            collision.gameObject.GetComponentInParent<BlackHole>().Collision(gameObject);
+            collision.gameObject.GetComponentInParent<BlackHole>().Collision(GetComponent<Collider2D>());
         }
         else if (collision.gameObject.CompareTag("Fireball"))
         {

@@ -5,63 +5,77 @@ using UnityEngine.UI;
 
 public class Boss : Enemy
 {
-    [SerializeField] protected GameObject healthBarObject;
-    protected Text healthStats;
-    protected bool canMove = false;
-    [SerializeField] private GameObject chest;
+    protected Text _healthStatsText;
 
-    protected void Awake()
-    {
-        healthBar = healthBarObject.GetComponentInChildren<Slider>();
-        healthStats = healthBar.GetComponentInChildren<Text>();
-        healthBarObject.SetActive(false);
-        healthStats.text = $"{hp} / {maxHP}";
-    }
+    [Header("Spawnable enemy on taking damage")]
+    public GameObject spawnableEnemy;
+    public float upForce = 5f;
+    protected bool _canMove = false;
+    public GameObject bossUI;
+    public GameObject chest;
 
     protected override void Start()
     {
+        _healthManager.healthBar = bossUI.GetComponentInChildren<Slider>();
+        _healthStatsText = _healthManager.healthBar.GetComponentInChildren<Text>();
         base.Start();
-        GameSaving.instance.OnBossStart += StartFight;        
+        _healthStatsText.text = $"{_healthManager.hp} / {_healthManager.maxHP}";
+        GameSaving.instance.OnBossStart += StartFight;
+    }
+
+    public override void TakeDamage(float damage, Vector2 pushBackDirection)
+    {
+        base.TakeDamage(damage, pushBackDirection);
+        _healthStatsText.text = $"{_healthManager.hp} / {_healthManager.maxHP}";
+        SpawnEnemyOnTakingDamage();
+        if (IsDead())
+            bossUI.SetActive(false);
+    }
+
+    protected override void OnDead()
+    {
+        DropChest();
+        base.OnDead();
+        GameSaving.instance.BossEndFight();
+        transform.GetChild(0).GetComponent<Collider2D>().enabled = false;
     }
 
     protected override void PushBack(Vector2 dir) { }
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        _healthStatsText.text = $"{_healthManager.hp} / {_healthManager.maxHP}";
+    }
+
     protected override void Move()
     {
-        if (!canMove)
+        if (!_canMove)
             return;
 
         base.Move();
     }
 
-    public override void ApplyDamage(float damage, Vector2 dir)
+    protected virtual void SpawnEnemyOnTakingDamage()
     {
-        if (Dead)
-            return;
-        base.ApplyDamage(damage, dir);
-        healthBar.value = hp;
-        healthStats.text = $"{hp} / {maxHP}";
-        if (hp <= 0f)
-        {
-            healthBarObject.SetActive(false);
-        }
+        GameObject enemy = Instantiate(spawnableEnemy, transform.position, Quaternion.identity);
+        enemy.GetComponent<BaseEnemy>().ChangeToRandomDirection();
+        enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * upForce, ForceMode2D.Impulse);
     }
 
-    private void StartFight()
+    protected void StartFight()
     {
-        canMove = true;
+        _canMove = true;
     }
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         GameSaving.instance.OnBossStart -= StartFight;
     }
 
-    protected override void DestroyEnemy()
+    protected virtual void DropChest()
     {
-        if(chest != null)
-            Instantiate(chest, transform.position, Quaternion.identity);
-        base.DestroyEnemy();
-        GameSaving.instance.BossEndFight();
+        Instantiate(chest, transform.position, Quaternion.identity);
     }
-} 
+}
+
