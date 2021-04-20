@@ -151,8 +151,8 @@ public class GameSaving : MonoBehaviour
         _enemiesDeadList.Clear();
         int tutorComplete = PlayerPrefs.GetInt("@tutor", 0);
         string mode = PlayerPrefs.GetString("@mode", "Normal Mode");
-        float music = PlayerPrefs.GetFloat("@music", 0f);
-        float sound = PlayerPrefs.GetFloat("@sounds", 0f);
+        float music = PlayerPrefs.GetFloat("@music", 1f);
+        float sound = PlayerPrefs.GetFloat("@sounds", 1f);
         int history = PlayerPrefs.GetInt("@history", 0);
         float hardModeTime = PlayerPrefs.GetFloat("@awardHard", 0f);
         float normalModeTime = PlayerPrefs.GetFloat("@awardNormal", 0f);
