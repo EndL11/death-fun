@@ -66,12 +66,12 @@ public class Menu : MonoBehaviour
         music.toggle.isOn = savedMusicVolume != minVolumeLevel;
         music.slider.minValue = minVolumeLevel;
         music.slider.value = savedMusicVolume;
-        music.slider.minValue = maxVolumeLevel;
+        music.slider.maxValue = maxVolumeLevel;
 
         sound.toggle.isOn = savedSoundVolume != minVolumeLevel;
         sound.slider.minValue = minVolumeLevel;
         sound.slider.value = savedSoundVolume;
-        sound.slider.minValue = maxVolumeLevel;
+        sound.slider.maxValue = maxVolumeLevel;
 
         difficultyButtonText.text = difficultyMode;
 
